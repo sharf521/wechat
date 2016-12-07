@@ -134,7 +134,7 @@ class WxOpenController extends Controller
             $chatTicket->ComponentVerifyTicket=$msg['ComponentVerifyTicket'];
             $chatTicket->save();
             //token
-            if($chatTicket->token_expires_in!=time()){
+            if($chatTicket->token_expires_in<time()){
                 $arr=array(
                     'component_appid'=>$this->component_appid,
                     'component_appsecret'=>$this->component_appsecret,
