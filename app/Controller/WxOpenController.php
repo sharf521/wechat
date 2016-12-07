@@ -47,6 +47,7 @@ class WxOpenController extends Controller
         );
         $this->log($url,'auth_code');
         $this->log(json_encode($arr),'auth_code');
+
         $html=$this->weChat->curl_url($url,json_encode($arr));
         $json=json_decode($html);
         if(isset($json->authorization_info)){
@@ -133,7 +134,7 @@ class WxOpenController extends Controller
             $chatTicket->ComponentVerifyTicket=$msg['ComponentVerifyTicket'];
             $chatTicket->save();
             //token
-            if($chatTicket->token_expires_in<time()){
+            if($chatTicket->token_expires_in!=time()){
                 $arr=array(
                     'component_appid'=>$this->component_appid,
                     'component_appsecret'=>$this->component_appsecret,
