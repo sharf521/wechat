@@ -1,0 +1,20 @@
+{
+    "require": {
+        "phpmailer/phpmailer": "^5.2",
+        "aferrandini/phpqrcode": "1.0.1",
+        "overtrue/wechat": "^3.1",
+        "pimple/pimple": "~3.0",
+        "sharf/myphp": "dev-master"
+    },
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}
