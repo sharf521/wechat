@@ -45,6 +45,8 @@ class WxOpenController extends Controller
             'component_appid'=>$this->component_appid,
             'authorization_code'=>$auth_code
         );
+        $this->log($url,'auth_code');
+        $this->log(json_encode($arr),'auth_code');
         $html=$this->weChat->curl_url($url,json_encode($arr));
         $json=json_decode($html);
         if(isset($json->authorization_info)){
@@ -149,13 +151,6 @@ class WxOpenController extends Controller
             $this->log($redirect_uri);
             $html=$this->weChat->curl_url($redirect_uri);
             $this->log("BBB".$html,'ticket');
-
-            $str=$AuthorizationCode."_from_api";
-            //发送消息
-            $staff = $this->app->staff; // 客服管理
-            $_message=new Text(['content' =>$str]);
-            $staff->message($_message)->to($msg['FromUserName'])->send();
-
         }
         echo 'success';
     }
