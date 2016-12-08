@@ -49,8 +49,7 @@ class WxOpenController extends Controller
             'component_appid'=>$this->component_appid,
             'authorization_code'=>$auth_code
         );
-        $this->log($url,'auth_code');
-        $this->log(json_encode($arr),'auth_code');
+        $this->log($url.json_encode($arr),'auth_code');
 
         $html=$this->weChat->curl_url($url,json_encode($arr));
         $json=json_decode($html);
