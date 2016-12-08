@@ -220,7 +220,7 @@ class WxOpenController extends Controller
             $component_access_token= $chatTicket->component_access_token;
             //$component_access_token=$this->getComponentAccessToken();
 
-            $url="https:// api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token={$component_access_token}";
+            $url="https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token={$component_access_token}";
             $arr=array(
                 'component_appid'=>$this->component_appid,
                 'authorizer_appid'=>$auth->authorizer_appid,
