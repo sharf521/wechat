@@ -101,6 +101,11 @@ class WxOpenController extends Controller
         if($message->Content=='TESTCOMPONENT_MSG_TYPE_TEXT'){
             return new Text(['content' => 'TESTCOMPONENT_MSG_TYPE_TEXT_callback']);
         }
+        if($message->Content=='abcd'){
+            $staff = $this->app->staff; // 客服管理
+            $_message=new Text(['content' =>'abcd']);
+            $staff->message($_message)->to($message->FromUserName)->send();
+        }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
             $query_auth_code=substr($message->Content,16);
 /*            $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$query_auth_code}");
