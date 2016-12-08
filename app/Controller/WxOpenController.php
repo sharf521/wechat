@@ -196,6 +196,21 @@ class WxOpenController extends Controller
     private function getPreAuthCode()
     {
         $chatTicket=(new WeChatTicket())->first();
+
+        $arr=array(
+            'component_appid'=>$this->component_appid,
+            'component_appsecret'=>$this->component_appsecret,
+            'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
+        );
+        $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
+        $html=json_decode($html);
+
+        $chatTicket->component_access_token=$html->component_access_token;
+        $chatTicket->token_expires_in=time()+6000;
+        $chatTicket->save();
+
+
+
         $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$chatTicket->component_access_token}";
         $arr=array("component_appid"=>$this->component_appid);
         echo $url.'<br>';
