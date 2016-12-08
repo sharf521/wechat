@@ -75,6 +75,8 @@ class WxOpenController extends Controller
         $app_id=$request->get(2);
         $this->app['access_token']->setToken($this->getAccessToken($app_id));
         $server=$this->weChat->app->server;
+        $msg=$server->getMessage();
+        $msg=json_encode($msg);
         $server->setMessageHandler(function ($message) {
             switch ($message->MsgType) {
                 case 'event':
@@ -90,9 +92,6 @@ class WxOpenController extends Controller
             }
         });
         $server->serve()->send();
-
-        $msg=$server->getMessage();
-        $msg=json_encode($msg);
         $this->log($msg,'event');
     }
 
