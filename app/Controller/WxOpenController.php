@@ -205,7 +205,9 @@ class WxOpenController extends Controller
                 'authorizer_appid'=>$auth->authorizer_appid,
                 'authorizer_refresh_token'=>$auth->authorizer_refresh_token
             );
+            $this->log($url.json_encode($arr),'token');
             $html=$this->weChat->curl_url($url,json_encode($arr));
+            $this->log($html,'token');
             $json=json_decode($html);
             if(isset($json->authorizer_access_token)){
                 $auth->authorizer_access_token=$json->authorizer_access_token;
