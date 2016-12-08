@@ -86,7 +86,6 @@ class WxOpenController extends Controller
                     //return $this->event($message);
                     break;
                 case 'text':
-                    $this->app['access_token']->setToken($this->getAccessToken($app_id));
                     return $this->text($message);
                     break;
                 default:
