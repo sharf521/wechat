@@ -228,7 +228,7 @@ class WxOpenController extends Controller
             );
             $this->log($url.json_encode($arr),'token');
             $html=$this->weChat->curl_url($url,json_encode($arr));
-            $this->log("内容2".$html,'token');
+            $this->log("内容2".$html.'aa','token');
             $json=json_decode($html);
             if(isset($json->authorizer_access_token)){
                 $auth->authorizer_access_token=$json->authorizer_access_token;
