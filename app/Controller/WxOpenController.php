@@ -66,7 +66,6 @@ class WxOpenController extends Controller
             echo $html;
         }
         $this->log($html,'auth_code');
-        echo 'ok';
     }
 
     //wxOpen/event/wx02560f146a566747
@@ -77,6 +76,7 @@ class WxOpenController extends Controller
         $server=$this->weChat->app->server;
         $msg=$server->getMessage();
         $msg=json_encode($msg);
+        $this->log($msg,'event');
         $server->setMessageHandler(function ($message) {
             switch ($message->MsgType) {
                 case 'event':
@@ -92,7 +92,6 @@ class WxOpenController extends Controller
             }
         });
         $server->serve()->send();
-        $this->log($msg,'event');
     }
 
     private function text($message)
@@ -163,7 +162,7 @@ class WxOpenController extends Controller
         if (!is_dir($file_path)) {
             mkdir($file_path, 0777, true);
         }
-        $filename = $file_path . date("Ym") . "{$file}.log";
+        $filename = $file_path . date("Ym") . "log.log";
         $fp = fopen($filename, "a+");
         $time = date('Y-m-d H:i:s');
         $file = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER["REQUEST_URI"];
