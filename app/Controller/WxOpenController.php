@@ -37,6 +37,14 @@ class WxOpenController extends Controller
     public function test()
     {
         $openid="on0aqs51hEudNQsGESP3GWEMYe78";
+
+        $this->app['access_token']->setToken($this->getAccessToken('wx02560f146a566747'));
+        $staff = $this->app->staff; // 客服管理
+        $_message=new Text(['content' =>'asdfdfd']);
+       echo  $staff->message($_message)->to($openid)->send();
+
+
+        exit;
         $tick=(new WeChatTicket())->first();
         $token=$this->getAccessToken('wx02560f146a566747');
         $arr=array(
