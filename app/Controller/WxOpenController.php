@@ -34,6 +34,19 @@ class WxOpenController extends Controller
         echo "<a href='{$url}'>授权</a>";
     }
 
+    public function test()
+    {
+        $openid="on0aqs51hEudNQsGESP3GWEMYe78";
+        $tick=(new WeChatTicket())->first();
+        $token=$this->getAccessToken('wx02560f146a566747');
+        $arr=array(
+            'touser'=>$openid,
+            'msgtype'=>'text',
+            'text'=>array('content'=>'asdfasdf')
+        );
+        echo $this->weChat->curl_url("https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token={$token}",json_encode($arr));
+    }
+
     //授权返回
     public function auth_code(Request $request)
     {
@@ -212,7 +225,7 @@ class WxOpenController extends Controller
     protected function getAccessToken($app_id)
     {
         $auth=(new WeChatAuth())->findOrFail($app_id);
-        if($auth->authorizer_expires_in >=time()){
+        if($auth->authorizer_expires_in ==time()){
             return $auth->authorizer_expires_in;
         }else{
             $chatTicket=(new WeChatTicket())->first();
@@ -224,6 +237,8 @@ class WxOpenController extends Controller
             );
             $this->log($url,json_encode($arr).'getAccessToken()='.$app_id);
             $html=$this->weChat->curl_url($url,json_encode($arr));
+            echo $html;
+            exit;
             $json=json_decode($html);
             if(isset($json->authorizer_access_token)){
                 $auth->authorizer_access_token=$json->authorizer_access_token;
