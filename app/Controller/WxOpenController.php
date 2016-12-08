@@ -216,9 +216,9 @@ class WxOpenController extends Controller
         if($auth->authorizer_expires_in >=time() && false){
             return $auth->authorizer_access_token;
         }else{
-            $chatTicket=(new WeChatTicket())->first();
-            $component_access_token= $chatTicket->component_access_token;
-            //$component_access_token=$this->getComponentAccessToken();
+            //$chatTicket=(new WeChatTicket())->first();
+            //$component_access_token= $chatTicket->component_access_token;
+            $component_access_token=$this->getComponentAccessToken();
 
             $url="https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token={$component_access_token}";
             $arr=array(
