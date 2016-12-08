@@ -213,7 +213,7 @@ class WxOpenController extends Controller
     private function getAccessToken($app_id)
     {
         $auth=(new WeChatAuth())->findOrFail($app_id);
-        if($auth->authorizer_expires_in >=time()){
+        if($auth->authorizer_expires_in >=time() && false){
             return $auth->authorizer_access_token;
         }else{
             //$chatTicket=(new WeChatTicket())->first();
