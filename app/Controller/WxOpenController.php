@@ -202,8 +202,8 @@ class WxOpenController extends Controller
         );
         $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
         $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token'.json_encode($arr),'token');
+        $this->log("内容".$html,'token');
         $html=json_decode($html);
-        $this->log($html,'token');
         $chatTicket->component_access_token=$html->component_access_token;
         $chatTicket->token_expires_in=time()+5000;
         $chatTicket->save();
@@ -228,7 +228,7 @@ class WxOpenController extends Controller
             );
             $this->log($url.json_encode($arr),'token');
             $html=$this->weChat->curl_url($url,json_encode($arr));
-            $this->log($html,'token');
+            $this->log("内容2".$html,'token');
             $json=json_decode($html);
             if(isset($json->authorizer_access_token)){
                 $auth->authorizer_access_token=$json->authorizer_access_token;
