@@ -149,7 +149,7 @@ class WxOpenController extends Controller
                 $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
                 $html=json_decode($html);
                 $chatTicket->component_access_token=$html->component_access_token;
-                $chatTicket->token_expires_in=time()+6000;
+                $chatTicket->token_expires_in=time()+5000;
                 $chatTicket->save();
             }
         }elseif($msg['InfoType']=='authorized'){
@@ -192,14 +192,33 @@ class WxOpenController extends Controller
         }
     }
 
+    private function getComponentAccessToken()
+    {
+        $chatTicket=(new WeChatTicket())->first();
+        $arr=array(
+            'component_appid'=>$this->component_appid,
+            'component_appsecret'=>$this->component_appsecret,
+            'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
+        );
+        $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
+        $html=json_decode($html);
+        $chatTicket->component_access_token=$html->component_access_token;
+        $chatTicket->token_expires_in=time()+5000;
+        $chatTicket->save();
+        return $chatTicket->component_access_token;
+    }
+
     private function getAccessToken($app_id)
     {
         $auth=(new WeChatAuth())->findOrFail($app_id);
         if($auth->authorizer_expires_in >=time()){
             return $auth->authorizer_access_token;
         }else{
-            $chatTicket=(new WeChatTicket())->first();
-            $url="https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token={$chatTicket->component_access_token}";
+            //$chatTicket=(new WeChatTicket())->first();
+            //$chatTicket->component_access_token
+            $component_access_token=$this->getComponentAccessToken();
+
+            $url="https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token={$component_access_token}";
             $arr=array(
                 'component_appid'=>$this->weChat->options['app_id'],
                 'authorizer_appid'=>$auth->authorizer_appid,
