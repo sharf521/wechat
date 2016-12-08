@@ -79,7 +79,7 @@ class WxOpenController extends Controller
 
         $ticket=(new WeChatTicket())->first();
 
-/*        $arr=array(
+        $arr=array(
             'component_appid'=>$this->component_appid,
             'component_appsecret'=>$this->component_appsecret,
             'component_verify_ticket'=>$ticket->ComponentVerifyTicket
@@ -90,14 +90,14 @@ class WxOpenController extends Controller
         $this->log($html,'ticket');
         $ticket->component_access_token=$html->component_access_token;
         $ticket->token_expires_in=time()+6000;
-        $ticket->save();*/
+        $ticket->save();
 
-        $this->app['access_token']->setToken($ticket->component_access_token);
-        //$this->app['access_token']->setToken($this->getAccessToken($app_id));
+        //$this->app['access_token']->setToken($ticket->component_access_token);
+        $this->app['access_token']->setToken($this->getAccessToken($app_id));
         $server=$this->weChat->app->server;
-        $msg=$server->getMessage();
-        $msg=json_encode($msg);
-        $this->log($msg,'event');
+        $html=$server->getMessage();
+        $msg=json_encode($html);
+        $this->log($html,'event');
         $server->setMessageHandler(function ($message) {
             switch ($message->MsgType) {
                 case 'event':
