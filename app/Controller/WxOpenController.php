@@ -70,10 +70,10 @@ class WxOpenController extends Controller
     public function event(Request $request)
     {
         $app_id=$request->get(2);
-        //$this->app['access_token']->setToken($this->getAccessToken($app_id));
+        $this->app['access_token']->setToken($this->getAccessToken($app_id));
 
-        $auth=(new WeChatAuth())->findOrFail($app_id);
-        $this->app['access_token']->setToken($auth->authorizer_access_token);
+        //$auth=(new WeChatAuth())->findOrFail($app_id);
+        //$this->app['access_token']->setToken($auth->authorizer_access_token);
 
         $server=$this->weChat->app->server;
         $server->setMessageHandler(function ($message) {
@@ -187,11 +187,11 @@ class WxOpenController extends Controller
         }
     }
 
-    protected function getAccessToken($app_id)
+    private function getAccessToken($app_id)
     {
         $auth=(new WeChatAuth())->findOrFail($app_id);
         if($auth->authorizer_expires_in >=time()){
-            return $auth->authorizer_expires_in;
+            return $auth->authorizer_access_token;
         }else{
             $chatTicket=(new WeChatTicket())->first();
             $url="https:// api.weixin.qq.com /cgi-bin/component/api_authorizer_token?component_access_token={$chatTicket->component_access_token}";
