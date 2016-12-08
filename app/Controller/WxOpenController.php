@@ -75,30 +75,13 @@ class WxOpenController extends Controller
     public function event(Request $request)
     {
         $app_id=$request->get(2);
-
-        $ticket=(new WeChatTicket())->first();
-
-        $arr=array(
-            'component_appid'=>$this->component_appid,
-            'component_appsecret'=>$this->component_appsecret,
-            'component_verify_ticket'=>$ticket->ComponentVerifyTicket
-        );
-        $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token'.json_encode($arr),'ticket');
-        $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
-        $this->log($html,'ticket');
-
-        $html=json_decode($html);
-
-        $ticket->component_access_token=$html->component_access_token;
-        $ticket->token_expires_in=time()+6000;
-        $ticket->save();
-
-        //$this->app['access_token']->setToken($ticket->component_access_token);
-        $this->app['access_token']->setToken($this->getAccessToken($app_id));
         $server=$this->weChat->app->server;
         $html=$server->getMessage();
         $msg=json_encode($html);
         $this->log($msg,'event');
+
+        //$this->app['access_token']->setToken($ticket->component_access_token);
+        $this->app['access_token']->setToken($this->getAccessToken($app_id));
         $server->setMessageHandler(function ($message) {
             switch ($message->MsgType) {
                 case 'event':
