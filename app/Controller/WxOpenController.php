@@ -236,6 +236,7 @@ class WxOpenController extends Controller
             }else{
                 echo $html;
             }
+            return $auth->authorizer_access_token;
         }
     }
 }
