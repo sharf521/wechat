@@ -139,8 +139,10 @@ class WxOpenController extends Controller
                     'component_appsecret'=>$this->component_appsecret,
                     'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
                 );
+                $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token'.json_encode($arr),'ticket');
                 $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
                 $html=json_decode($html);
+                $this->log($html,'ticket');
                 $chatTicket->component_access_token=$html->component_access_token;
                 $chatTicket->token_expires_in=time()+6000;
                 $chatTicket->save();
@@ -148,7 +150,7 @@ class WxOpenController extends Controller
         }elseif($msg['InfoType']=='authorized'){
             $AuthorizationCode=$msg['AuthorizationCode'];
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/auth_code/?auth_code={$AuthorizationCode}");
-            $this->log($redirect_uri);
+            $this->log($redirect_uri,'ticket');
             $html=$this->weChat->curl_url($redirect_uri);
             $this->log("BBB".$html,'ticket');
         }
