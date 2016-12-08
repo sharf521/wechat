@@ -39,8 +39,7 @@ class WxOpenController extends Controller
     {
         //?auth_code=queryauthcode@@@9QJDTmdBO731Nz9_I-DyLgb-EOygA8WedAmM_h4LaXSxebJODjNYAWRVL9x-OKRzEOQQGSAzkOAaB5vkd-Po9A&expires_in=3600
         $auth_code=$request->get('auth_code');
-        $ticket=(new WeChatTicket())->first();
-        $url="https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token={$ticket->component_access_token}";
+        $url="https://api.weixin.qq.com/cgi-bin/component/api_query_auth?component_access_token={$this->getComponentAccessToken()}";
         $arr=array(
             'component_appid'=>$this->component_appid,
             'authorization_code'=>$auth_code
@@ -179,8 +178,7 @@ class WxOpenController extends Controller
 
     private function getPreAuthCode()
     {
-        $chatTicket=(new WeChatTicket())->first();
-        $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$chatTicket->component_access_token}";
+        $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$this->getComponentAccessToken()}";
         $arr=array("component_appid"=>$this->component_appid);
         $html=$this->weChat->curl_url($url,json_encode($arr));
         $json=json_decode($html);
@@ -194,51 +192,48 @@ class WxOpenController extends Controller
 
     private function getComponentAccessToken()
     {
-        $chatTicket=(new WeChatTicket())->first();
-        $arr=array(
-            'component_appid'=>$this->component_appid,
-            'component_appsecret'=>$this->component_appsecret,
-            'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
-        );
-        $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
-        $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token'.json_encode($arr),'token');
-        $this->log("内容".$html,'token');
-        $html=json_decode($html);
-        $chatTicket->component_access_token=$html->component_access_token;
-        $chatTicket->token_expires_in=time()+5000;
-        $chatTicket->save();
+        $chatTicket = (new WeChatTicket())->first();
+        if ($chatTicket->token_expires_in < time()){
+            $arr = array(
+                'component_appid' => $this->component_appid,
+                'component_appsecret' => $this->component_appsecret,
+                'component_verify_ticket' => $chatTicket->ComponentVerifyTicket
+            );
+            $html = $this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token', json_encode($arr));
+            $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token' . json_encode($arr), 'token');
+            $this->log("内容" . $html, 'token');
+            $html = json_decode($html);
+            $chatTicket->component_access_token = $html->component_access_token;
+            $chatTicket->token_expires_in = time() + 4000;
+            $chatTicket->save();
+        }
         return $chatTicket->component_access_token;
     }
 
     private function getAccessToken($app_id)
     {
-        $auth=(new WeChatAuth())->findOrFail($app_id);
-        if($auth->authorizer_expires_in >=time() && false){
-            return $auth->authorizer_access_token;
-        }else{
-            //$chatTicket=(new WeChatTicket())->first();
-            //$component_access_token= $chatTicket->component_access_token;
-            $component_access_token=$this->getComponentAccessToken();
-
-            $url="https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token={$component_access_token}";
-            $arr=array(
-                'component_appid'=>$this->component_appid,
-                'authorizer_appid'=>$auth->authorizer_appid,
-                'authorizer_refresh_token'=>$auth->authorizer_refresh_token
+        $auth = (new WeChatAuth())->findOrFail($app_id);
+        if ($auth->authorizer_expires_in < time()) {
+            $url = "https://api.weixin.qq.com/cgi-bin/component/api_authorizer_token?component_access_token={$this->getComponentAccessToken()}";
+            $arr = array(
+                'component_appid' => $this->component_appid,
+                'authorizer_appid' => $auth->authorizer_appid,
+                'authorizer_refresh_token' => $auth->authorizer_refresh_token
             );
-            $this->log($url.json_encode($arr),'token');
-            $html=$this->weChat->curl_url($url,json_encode($arr));
-            $this->log("内容2".$html,'token');
-            $json=json_decode($html);
-            if(isset($json->authorizer_access_token)){
-                $auth->authorizer_access_token=$json->authorizer_access_token;
-                $auth->authorizer_refresh_token=$json->authorizer_refresh_token;
-                $auth->authorizer_expires_in=time()+7000;
+            $this->log($url . json_encode($arr), 'token');
+            $html = $this->weChat->curl_url($url, json_encode($arr));
+            $this->log("内容2" . $html, 'token');
+            $json = json_decode($html);
+            if (isset($json->authorizer_access_token)) {
+                $auth->authorizer_access_token = $json->authorizer_access_token;
+                $auth->authorizer_refresh_token = $json->authorizer_refresh_token;
+                $auth->authorizer_expires_in = time() + 7000;
                 $auth->save();
-            }else{
+            } else {
                 echo $html;
+                $this->log("ERROR:" . $html, 'token');
             }
-            return $auth->authorizer_access_token;
         }
+        return $auth->authorizer_access_token;
     }
 }
