@@ -98,7 +98,7 @@ class WxOpenController extends Controller
         $server=$this->weChat->app->server;
         $html=$server->getMessage();
         $msg=json_encode($html);
-        $this->log($html,'event');
+        $this->log($msg,'event');
         $server->setMessageHandler(function ($message) {
             switch ($message->MsgType) {
                 case 'event':
@@ -130,6 +130,7 @@ class WxOpenController extends Controller
 
             $str=$query_auth_code."_from_api";
             //发送消息
+            $this->app['access_token']->setToken($this->getAccessToken('wx570bc396a51b8ff8'));
             $staff = $this->app->staff; // 客服管理
             $_message=new Text(['content' =>$str]);
             $staff->message($_message)->to($message->FromUserName)->send();
