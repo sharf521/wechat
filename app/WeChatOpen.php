@@ -17,14 +17,14 @@ class WeChatOpen
     {
         $this->options = [
             'debug' => true,
-//            'app_id' => app('System')->getCode('appid'),
-//            'secret' => app('System')->getCode('appsecret'),
-//            'token' => app('System')->getCode('token'),
-//            'aes_key' => app('System')->getCode('aes_key'),
-            'app_id' => 'wx0453db85b190df07',
-            'secret' => 'a0845f7bca562a55aa47a07f1b043dcd',
-            'token' => 'jaskdfjqweir234934jkzxc8asdfdf',
-            'aes_key' => '12345678jddsdjaskdfjqweir234934jkzxc8asdfdf', // 可选
+            'app_id' => app('System')->getCode('appid'),
+            'secret' => app('System')->getCode('appsecret'),
+            'token' => app('System')->getCode('token'),
+            'aes_key' => app('System')->getCode('aes_key'),
+//            'app_id' => 'wx0453db85b190df07',
+//            'secret' => 'a0845f7bca562a55aa47a07f1b043dcd',
+//            'token' => 'jaskdfjqweir234934jkzxc8asdfdf',
+//            'aes_key' => '12345678jddsdjaskdfjqweir234934jkzxc8asdfdf', // 可选
             'log' => [
                 'level' => 'debug',
                 'file' => ROOT.'/public/data/easywechatopen.log', // XXX: 绝对路径！！！！
