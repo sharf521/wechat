@@ -201,7 +201,9 @@ class WxOpenController extends Controller
             'component_verify_ticket'=>$chatTicket->ComponentVerifyTicket
         );
         $html=$this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token',json_encode($arr));
+        $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token'.json_encode($arr),'token');
         $html=json_decode($html);
+        $this->log($html,'token');
         $chatTicket->component_access_token=$html->component_access_token;
         $chatTicket->token_expires_in=time()+5000;
         $chatTicket->save();
