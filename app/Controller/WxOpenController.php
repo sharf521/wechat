@@ -139,6 +139,9 @@ class WxOpenController extends Controller
             }
             $user->save();
             $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
+            if($return===true){
+                $return=$this->weChat->shorten('http://wechat.yuantuwang.com/member');
+            }
             return new Text(['content' => $return]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
