@@ -138,7 +138,8 @@ class WxOpenController extends Controller
                 $user->type_id=1;
             }
             $user->save();
-            return new Text(['content' => $user->nickname]);
+            $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
+            return new Text(['content' => $return]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
             $query_auth_code=substr($message->Content,16);

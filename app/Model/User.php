@@ -30,6 +30,8 @@ class User extends Model
                 $user = DB::table('user')->where("id=?")->bindValues($data['id'])->row();
             } elseif (isset($data['openid'])) {
                 $user = DB::table('user')->where("openid=?")->bindValues($data['openid'])->row();
+            } elseif (isset($data['unionid'])) {
+                $user = DB::table('user')->where("openid=?")->bindValues($data['unionid'])->row();
             }
         } else {
             $user = DB::table('user')->where("username=?")->bindValues($data['username'])->row();
