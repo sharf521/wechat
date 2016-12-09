@@ -18,7 +18,6 @@ class CartController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->template='shop_wap';
     }
     
     public function index(Cart $cart)

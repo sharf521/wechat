@@ -22,7 +22,6 @@ class OrderController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->template='shop_wap';
     }
 
     //确认订单

@@ -22,7 +22,6 @@ class GoodsController extends Controller
     public function __construct()
     {
         parent::__construct();
-        $this->template='shop_wap';
     }
 
     public function detail(Goods $goods,Request $request)
