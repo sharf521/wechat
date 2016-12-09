@@ -170,7 +170,8 @@ class WxOpenController extends Controller
             $oauth->redirect()->send();
             exit;
         }else{
-            redirect($url);
+            echo $url;
+            //redirect($url);
         }
     }
 
