@@ -21,7 +21,7 @@ class OrderController extends MemberController
 
     public function index(Order $order,Request $request)
     {
-        $data['orders']=$order->where('buyer_id=?')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
+        $data['orders']=$order->where('buyer_id=?')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'),2);
         $this->view('order',$data);
     }
 

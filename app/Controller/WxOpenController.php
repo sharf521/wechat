@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Model\UserWx;
 use App\Model\WeChatAuth;
 use App\Model\WeChatTicket;
 use App\WeChatOpen;
@@ -105,6 +106,28 @@ class WxOpenController extends Controller
             $staff = $this->app->staff; // 客服管理
             $_message=new Text(['content' =>'1234']);
             $staff->message($_message)->to($message->FromUserName)->send();
+        }
+        if($message->Content=='shop'){
+            $openid=$message->FromUserName;
+            $userServer=$this->app->user;
+            $userInfo=$userServer->get($openid);
+            $user_wx=(new UserWx())->where("unionid=?")->bindValues($userInfo->unionid)->first();
+            $user_wx->subscribe = $userInfo->subscribe;
+            $user_wx->openid = $userInfo->openid;
+            $user_wx->nickname = addslashes($userInfo->nickname);
+            $user_wx->sex = $userInfo->sex;
+            $user_wx->city = $userInfo->city;
+            $user_wx->country = $userInfo->country;
+            $user_wx->province = $userInfo->province;
+            $user_wx->language = $userInfo->language;
+            $user_wx->headimgurl = $userInfo->headimgurl;
+            $user_wx->subscribe_time = $userInfo->subscribe_time;
+            $user_wx->unionid = $userInfo->unionid;
+            $user_wx->remark = $userInfo->remark;
+            $user_wx->groupid = $userInfo->groupid;
+            $user_wx->tagid_list =json_encode($userInfo->tagid_list);
+            $user_wx->save();
+            return new Text(['content' => $user_wx->nickname]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
             $query_auth_code=substr($message->Content,16);

@@ -18,8 +18,15 @@
             <a href="<?=url('order/status4')?>">待收货</a>
         </div>
     </div>
-
-
+<? if($orders['total']==0) : ?>
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">没有任何记录。。</h2>
+            <p class="weui-msg__desc"></p>
+        </div>
+    </div>
+<? endif;?>
 <? foreach ($orders['list'] as $order) :
     $goods=$order->OrderGoods();
     ?>
@@ -43,16 +50,7 @@
         <? endforeach;?>
     </div>
 <? endforeach;?>
-
-<? if($orders['total']==0) : ?>
-    <div class="weui-msg">
-        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
-        <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">没有任何记录。。</h2>
-            <p class="weui-msg__desc"></p>
-        </div>
-    </div>
-<? endif;?>
+<?=$orders['page']?>
     <script type="text/javascript">
         function showMenu(id) {
             var $androidActionSheet = $('#androidActionsheet');
