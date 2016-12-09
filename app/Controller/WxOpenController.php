@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Model\User;
 use App\Model\UserWx;
 use App\Model\WeChatAuth;
 use App\Model\WeChatTicket;
@@ -127,7 +128,17 @@ class WxOpenController extends Controller
             $user_wx->groupid = $userInfo->groupid;
             $user_wx->tagid_list =json_encode($userInfo->tagid_list);
             $user_wx->save();
-            return new Text(['content' => $user_wx->nickname]);
+
+
+            $user=(new User())->where("unionid=?")->bindValues($userInfo->unionid)->first();
+            $user->unionid=$userInfo->unionid;
+            $user->headimgurl=$userInfo->headimgurl;
+            $user->nickname=addslashes($userInfo->nickname);
+            if(intval($user->type_id)==0){
+                $user->type_id=1;
+            }
+            $user->save();
+            return new Text(['content' => $user->nickname]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
             $query_auth_code=substr($message->Content,16);
