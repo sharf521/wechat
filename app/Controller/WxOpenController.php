@@ -158,6 +158,40 @@ class WxOpenController extends Controller
             $staff->message($_message)->to($message->FromUserName)->send();
         }
     }
+    
+    public function oauth(Request $request)
+    {
+        $url=$request->get('url');
+        //没有登陆时去授权
+        if (empty($this->user_id)) {
+            session()->set('target_url',$url);
+            $oauth = $this->app->oauth;
+            $oauth->redirect()->send();
+            exit;
+        }else{
+            redirect($url);
+        }
+    }
+
+    public function oauth_callback(User $user)
+    {
+        $oauth = $this->app->oauth;
+        $oUser = $oauth->user()->toArray();
+        print_r($oUser);
+        $arr=array(
+            'direct'=>1,
+            'openid'=>$oUser['id']
+        );
+        $result=$user->login($arr);
+        if($result===true){
+            echo 'login';
+            //$user->addWeChatUser($oUser['id']);
+            //$target_url=session('target_url');
+            //redirect($target_url); // 跳转
+        }else{
+            echo '请关注页面';
+        }
+    }
 
     //平台接收消息
     public function ticket(WeChatTicket $chatTicket,Request $request)
