@@ -30,7 +30,7 @@ class MemberController extends BaseController
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
                 //redirect("/login?url={$url}");
-                redirect("wxOpen/oauth/?url={$url}");
+                redirect("/wxOpen/oauth/?url={$url}");
                 exit;
             }
         }
