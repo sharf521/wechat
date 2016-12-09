@@ -140,7 +140,8 @@ class WxOpenController extends Controller
             $user->save();
             $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
             if($return===true){
-                $return=$this->weChat->shorten('http://wechat.yuantuwang.com/member');
+                //$return=$this->weChat->shorten('http://wechat.yuantuwang.com/member');
+                $return='http://wechat.yuantuwang.com/member';
             }
             return new Text(['content' => $return]);
         }
