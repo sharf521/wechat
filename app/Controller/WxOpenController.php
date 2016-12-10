@@ -109,8 +109,9 @@ class WxOpenController extends Controller
             $staff->message($_message)->to($message->FromUserName)->send();
         }
         if($message->Content=='shop'){
-            $return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
+            //$return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
             //$return=$this->weChat->shorten($return);
+            $return='http://wx02560f146a566747.wechat.yuantuwang.com/member';
             return new Text(['content' => $return]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
@@ -133,7 +134,7 @@ class WxOpenController extends Controller
     {
         $url=$request->get('url');
         //没有登陆时去授权
-        if ($this->user_id=='' && $this->user_id==0) {
+        if ($this->user_id=='' || $this->user_id==0) {
             session()->set('target_url',$url);
 
             $host_arr=explode('.',$_SERVER['HTTP_HOST']);
