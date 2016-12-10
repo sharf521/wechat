@@ -185,7 +185,7 @@ class WxOpenController extends Controller
         $openid=$this->getWebOpenId($appid,$code);
 
         $userServer=$this->app->user;
-        $userInfo=$userServer->get(appid);
+        $userInfo=$userServer->get($openid);
         var_dump($userInfo);
         exit;
         $oauth = $this->app->oauth;
