@@ -192,6 +192,7 @@ class WxOpenController extends Controller
             echo $target_url;
             //redirect($target_url); // 跳转
         }else{
+            echo 222;
             echo $request;
         }
     }
