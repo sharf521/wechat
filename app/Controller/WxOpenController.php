@@ -110,7 +110,7 @@ class WxOpenController extends Controller
         }
         if($message->Content=='shop'){
             $return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
-            $return=$this->weChat->shorten($return);
+            //$return=$this->weChat->shorten($return);
             return new Text(['content' => $return]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
@@ -183,7 +183,7 @@ class WxOpenController extends Controller
 
         $arr=array(
             'direct'=>1,
-            'unionid'=>$request->get('unionid')
+            'unionid'=>$user->unionid
         );
         $result=$user->login($arr);
         if($result===true){
