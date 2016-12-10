@@ -141,7 +141,7 @@ class WxOpenController extends Controller
             $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
             if($return===true){
                 //$return=$this->weChat->shorten('http://wechat.yuantuwang.com/member');
-                $return='//'.$message->ToUserName.".".$_SERVER['HTTP_HOST'].url("wxOpen/oauth_callback/?unionid={$userInfo->unionid}");
+                $return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
                 //$return='http://wechat.yuantuwang.com/member';
             }
             return new Text(['content' => $return]);
@@ -181,6 +181,10 @@ class WxOpenController extends Controller
     }
     public function oauth_callback(User $user,Request $request)
     {
+        $oauth = $this->app->oauth;
+        $oUser = $oauth->user()->toArray();
+        print_r($oUser);
+        exit;
         $arr=array(
             'direct'=>1,
             'unionid'=>$request->get('unionid')
