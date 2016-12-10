@@ -15,7 +15,15 @@ em, i {
     font-style: normal;
 }
 .hide{display: none}
-
+.clear{ clear:both}
+.clearFix:after{
+    clear:both;
+    display:block;
+    visibility:hidden;
+    height:0;
+    line-height:0;
+    content:'';
+}
 @font-face {
     font-family: 'iconfont';
     src: url('../images/iconfont/iconfont.eot');

@@ -77,7 +77,7 @@
                 </dd>
             </dl>
             <div class="buy_box_opts">
-                <a href="javascript:;" class="opt1">加入购物车</a>
+                <a href="javascript:;" class="opt1">加入购   /a>
                 <a href="javascript:;" class="opt2">立即购买</a>
             </div>
         </form>
