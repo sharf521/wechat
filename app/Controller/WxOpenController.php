@@ -180,7 +180,13 @@ class WxOpenController extends Controller
     }
     public function oauth_callback(User $user,Request $request)
     {
-        print_r($request);
+        $code=$request->get('code');
+        $appid=$request->get('appid');
+        $openid=$this->getWebOpenId($appid,$code);
+
+        $userServer=$this->app->user;
+        $userInfo=$userServer->get(appid);
+        var_dump($userInfo);
         exit;
         $oauth = $this->app->oauth;
         $oUser = $oauth->user()->toArray();
@@ -301,4 +307,40 @@ class WxOpenController extends Controller
         }
         return $auth->authorizer_access_token;
     }
+
+    private function getWebOpenId($appid,$code)
+    {
+        $auth = (new WeChatAuth())->findOrFail($appid);
+        if($auth->web_refresh_token==''){
+            $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
+            $html=$this->weChat->curl_url($url);
+            $json=json_decode($html);
+            if(isset($json->access_token)){
+                $auth->web_access_token=$json->access_token;
+                $auth->web_expires_in=$json->web_expires_in;
+                $auth->web_refresh_token=$json->refresh_token;
+                $auth->save();
+                return $json->openid;
+            }else{
+                echo $html;
+                exit;
+            }
+        }elseif($auth->web_expires_in < time()){
+            $url="https://api.weixin.qq.com/sns/oauth2/component/refresh_token?appid={$appid}&grant_type=refresh_token&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}&refresh_token={$auth->web_refresh_token}";
+            $html=$this->weChat->curl_url($url);
+            $json=json_decode($html);
+            if(isset($json->access_token)){
+                $auth->web_access_token=$json->access_token;
+                $auth->web_expires_in=$json->web_expires_in;
+                $auth->web_refresh_token=$json->refresh_token;
+                $auth->save();
+                return $json->openid;
+            }else{
+                echo $html;
+                exit;
+            }
+        }
+    }
+
+
 }
