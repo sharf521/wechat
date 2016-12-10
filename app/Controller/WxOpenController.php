@@ -183,7 +183,7 @@ class WxOpenController extends Controller
 
         $arr=array(
             'direct'=>1,
-            'unionid'=>$user->unionid
+            'unionid'=>$request->get('unionid')
         );
         $result=$user->login($arr);
         if($result===true){

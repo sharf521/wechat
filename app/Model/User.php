@@ -42,7 +42,9 @@ class User extends Model
                 return '用户名或密码错误！';
             }
         }
+        var_dump($user);
         if (!empty($user)) {
+            echo 'empty';
             if ($data['admin'] == true) {
                 $usertype = DB::table('usertype')->select('id,permission_id,is_admin')->where("id={$user['type_id']}")->row();
                 if ($usertype['is_admin'] != 1) {
