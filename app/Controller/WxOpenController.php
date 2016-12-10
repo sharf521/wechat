@@ -36,7 +36,7 @@ class WxOpenController extends Controller
         echo "<a href='{$url}'>授权</a>";
     }
 
-    //授权返回
+    //公众号授权返回
     public function auth_code(Request $request)
     {
         //?auth_code=queryauthcode@@@9QJDTmdBO731Nz9_I-DyLgb-EOygA8WedAmM_h4LaXSxebJODjNYAWRVL9x-OKRzEOQQGSAzkOAaB5vkd-Po9A&expires_in=3600
@@ -161,6 +161,24 @@ class WxOpenController extends Controller
         }
     }
 
+    //用户授权
+    public function oauth(Request $request)
+    {
+        $url=$request->get('url');
+        //没有登陆时去授权
+        if (empty($this->user_id)) {
+            session()->set('target_url',$url);
+
+            $host_arr=explode('.'.$_SERVER['HTTP_HOST']);
+            $appid=$host_arr[0];
+            $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/oauth_callback/");
+            $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_base&state=STATE&component_appid={$this->component_appid}#wechat_redirect";
+            redirect($url);
+            exit;
+        }else{
+            redirect($url);
+        }
+    }
     public function oauth_callback(User $user,Request $request)
     {
         $arr=array(
