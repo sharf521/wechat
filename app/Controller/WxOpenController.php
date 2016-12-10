@@ -59,6 +59,27 @@ class WxOpenController extends Controller
             $auth->authorizer_refresh_token=$json->authorizer_refresh_token;
             $auth->authorizer_expires_in=time()+7000;
             $auth->func_info=serialize($json->func_info);
+            //公众号帐号基本信息
+            $url="https://api.weixin.qq.com/cgi-bin/component/api_get_authorizer_info?component_access_token={$this->getComponentAccessToken()}";
+            $arr=array(
+                'component_appid'=>$this->component_appid,
+                'authorizer_appid'=>$auth->authorizer_appid
+            );
+            $html=$this->weChat->curl_url($url,json_encode($arr));
+            $json=json_decode($html);
+            if(isset($json->authorizer_info)){
+                $json=$json->authorizer_info;
+                $auth->nick_name=addslashes($json->nick_name);
+                $auth->head_img=$json->head_img;
+                $auth->service_type_info=$json->service_type_info;
+                $auth->verify_type_info=$json->verify_type_info;
+                $auth->user_name=$json->user_name;
+                $auth->principal_name=addslashes($json->principal_name);
+                $auth->business_info=serialize($json->business_info);
+                $auth->authorization_info=serialize($json->authorization_info);
+            }else{
+                echo $html;
+            }
             $auth->save();
         }else{
             echo $html;
