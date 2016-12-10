@@ -193,7 +193,7 @@ class WxOpenController extends Controller
             //redirect($target_url); // 跳转
         }else{
             echo 222;
-            echo $request;
+            echo $result;
         }
     }
 
@@ -305,8 +305,6 @@ class WxOpenController extends Controller
         $auth = (new WeChatAuth())->findOrFail($appid);
         if($auth->web_expires_in < time()){
             $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
-            echo 'BB';
-            echo $url;
             $html=$this->weChat->curl_url($url);
             $json=json_decode($html);
             if(isset($json->access_token)){
