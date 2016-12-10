@@ -166,6 +166,7 @@ class WxOpenController extends Controller
         //没有登陆时去授权
         if (empty($this->user_id)) {
             session()->set('target_url',$url);
+            $this->app['access_token']->setToken($this->getAccessToken($request->get('appid')));
             $oauth = $this->app->oauth;
             $oauth->redirect()->send();
             exit;
@@ -175,8 +176,9 @@ class WxOpenController extends Controller
         }
     }
 
-    public function oauth_callback(User $user)
+    public function oauth_callback(User $user,Request $request)
     {
+        $this->app['access_token']->setToken($this->getAccessToken($request->get('appid')));
         $oauth = $this->app->oauth;
         $oUser = $oauth->user()->toArray();
         print_r($oUser);
