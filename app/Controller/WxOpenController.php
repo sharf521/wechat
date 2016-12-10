@@ -187,8 +187,10 @@ class WxOpenController extends Controller
         );
         $result=$user->login($arr);
         if($result===true){
+            echo 11;
             $target_url=session('target_url');
-            redirect($target_url); // 跳转
+            echo $target_url;
+            //redirect($target_url); // 跳转
         }else{
             echo $request;
         }
