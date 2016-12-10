@@ -153,6 +153,9 @@ class WxOpenController extends Controller
         $appid=$request->get('appid');
         $openid=$this->getWebOpenId($appid,$code);
 
+        echo $openid;
+        exit;
+
         $userServer=$this->app->user;
         $userInfo=$userServer->get($openid);
         $user_wx=(new UserWx())->where("unionid=?")->bindValues($userInfo->unionid)->first();
@@ -180,13 +183,7 @@ class WxOpenController extends Controller
             $user->type_id=1;
         }
         $user->save();
-
-
-        $arr=array(
-            'direct'=>1,
-            'unionid'=>$user->unionid
-        );
-        $result=$user->login($arr);
+        $result=$user->login(array('direct'=>1, 'unionid'=>$user->unionid));
         if($result===true){
             $target_url=session('target_url');
             redirect($target_url); // 跳转
@@ -302,6 +299,7 @@ class WxOpenController extends Controller
     {
         $auth = (new WeChatAuth())->findOrFail($appid);
         if($auth->web_expires_in < time()){
+            echo '<<<<<<';
             $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
             $html=$this->weChat->curl_url($url);
             $json=json_decode($html);
@@ -315,14 +313,13 @@ class WxOpenController extends Controller
                 echo $html;
                 exit;
             }
-        }/*elseif($auth->web_expires_in < time()){
-            $url="https://api.weixin.qq.com/sns/oauth2/component/refresh_token?appid={$appid}&grant_type=refresh_token&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}&refresh_token={$auth->web_refresh_token}";
+        }/*else{
+            $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
             $html=$this->weChat->curl_url($url);
-            echo 'AAA';
             $json=json_decode($html);
             if(isset($json->access_token)){
                 $auth->web_access_token=$json->access_token;
-                $auth->web_expires_in=$json->web_expires_in+4000;
+                $auth->web_expires_in=$json->web_expires_in+6000;
                 $auth->web_refresh_token=$json->refresh_token;
                 $auth->save();
                 return $json->openid;
@@ -331,7 +328,6 @@ class WxOpenController extends Controller
                 exit;
             }
         }*/
+        echo '>>>>';
     }
-
-
 }
