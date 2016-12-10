@@ -109,40 +109,8 @@ class WxOpenController extends Controller
             $staff->message($_message)->to($message->FromUserName)->send();
         }
         if($message->Content=='shop'){
-            $openid=$message->FromUserName;
-            $userServer=$this->app->user;
-            $userInfo=$userServer->get($openid);
-            $user_wx=(new UserWx())->where("unionid=?")->bindValues($userInfo->unionid)->first();
-            $user_wx->subscribe = $userInfo->subscribe;
-            $user_wx->openid = $userInfo->openid;
-            $user_wx->nickname = addslashes($userInfo->nickname);
-            $user_wx->sex = $userInfo->sex;
-            $user_wx->city = $userInfo->city;
-            $user_wx->country = $userInfo->country;
-            $user_wx->province = $userInfo->province;
-            $user_wx->language = $userInfo->language;
-            $user_wx->headimgurl = $userInfo->headimgurl;
-            $user_wx->subscribe_time = $userInfo->subscribe_time;
-            $user_wx->unionid = $userInfo->unionid;
-            $user_wx->remark = $userInfo->remark;
-            $user_wx->groupid = $userInfo->groupid;
-            $user_wx->tagid_list =json_encode($userInfo->tagid_list);
-            $user_wx->save();
-
-
-            $user=(new User())->where("unionid=?")->bindValues($userInfo->unionid)->first();
-            $user->unionid=$userInfo->unionid;
-            $user->headimgurl=$userInfo->headimgurl;
-            $user->nickname=addslashes($userInfo->nickname);
-            if(intval($user->type_id)==0){
-                $user->type_id=1;
-            }
-            $user->save();
-            $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
-            if($return===true){
-                $return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
-                $return=$this->weChat->shorten($return);
-            }
+            $return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
+            $return=$this->weChat->shorten($return);
             return new Text(['content' => $return]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
@@ -178,7 +146,7 @@ class WxOpenController extends Controller
             redirect($url);
         }
     }
-    public function oauth_callback(User $user,Request $request)
+    public function oauth_callback(Request $request)
     {
         $code=$request->get('code');
         $appid=$request->get('appid');
@@ -186,12 +154,33 @@ class WxOpenController extends Controller
 
         $userServer=$this->app->user;
         $userInfo=$userServer->get($openid);
-        var_dump($userInfo);
-        exit;
-        $oauth = $this->app->oauth;
-        $oUser = $oauth->user()->toArray();
-        print_r($oUser);
-        exit;
+        $user_wx=(new UserWx())->where("unionid=?")->bindValues($userInfo->unionid)->first();
+        $user_wx->subscribe = $userInfo->subscribe;
+        $user_wx->openid = $userInfo->openid;
+        $user_wx->nickname = addslashes($userInfo->nickname);
+        $user_wx->sex = $userInfo->sex;
+        $user_wx->city = $userInfo->city;
+        $user_wx->country = $userInfo->country;
+        $user_wx->province = $userInfo->province;
+        $user_wx->language = $userInfo->language;
+        $user_wx->headimgurl = $userInfo->headimgurl;
+        $user_wx->subscribe_time = $userInfo->subscribe_time;
+        $user_wx->unionid = $userInfo->unionid;
+        $user_wx->remark = $userInfo->remark;
+        $user_wx->groupid = $userInfo->groupid;
+        $user_wx->tagid_list =json_encode($userInfo->tagid_list);
+        $user_wx->save();
+
+        $user=(new User())->where("unionid=?")->bindValues($userInfo->unionid)->first();
+        $user->unionid=$userInfo->unionid;
+        $user->headimgurl=$userInfo->headimgurl;
+        $user->nickname=addslashes($userInfo->nickname);
+        if(intval($user->type_id)==0){
+            $user->type_id=1;
+        }
+        $user->save();
+
+
         $arr=array(
             'direct'=>1,
             'unionid'=>$request->get('unionid')
