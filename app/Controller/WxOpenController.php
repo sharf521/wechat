@@ -305,7 +305,7 @@ class WxOpenController extends Controller
             $json=json_decode($html);
             if(isset($json->access_token)){
                 $auth->web_access_token=$json->access_token;
-                $auth->web_expires_in=$json->web_expires_in+6000;
+                $auth->web_expires_in=$json->expires_in+6000;
                 $auth->web_refresh_token=$json->refresh_token;
                 $auth->save();
                 return $json->openid;
@@ -319,7 +319,7 @@ class WxOpenController extends Controller
             $json=json_decode($html);
             if(isset($json->access_token)){
                 $auth->web_access_token=$json->access_token;
-                $auth->web_expires_in=$json->web_expires_in+6000;
+                $auth->web_expires_in=$json->expires_in+6000;
                 $auth->web_refresh_token=$json->refresh_token;
                 $auth->save();
                 return $json->openid;
