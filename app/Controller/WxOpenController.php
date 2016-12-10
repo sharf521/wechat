@@ -180,6 +180,8 @@ class WxOpenController extends Controller
     }
     public function oauth_callback(User $user,Request $request)
     {
+        print_r($request);
+        exit;
         $oauth = $this->app->oauth;
         $oUser = $oauth->user()->toArray();
         print_r($oUser);
