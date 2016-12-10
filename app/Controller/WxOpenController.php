@@ -153,9 +153,6 @@ class WxOpenController extends Controller
         $appid=$request->get('appid');
         $openid=$this->getWebOpenId($appid,$code);
 
-        echo $openid;
-        exit;
-
         $userServer=$this->app->user;
         $userInfo=$userServer->get($openid);
         $user_wx=(new UserWx())->where("unionid=?")->bindValues($userInfo->unionid)->first();
@@ -189,6 +186,19 @@ class WxOpenController extends Controller
             redirect($target_url); // 跳转
         }else{
             echo $result;
+        }
+    }
+
+    private function getWebOpenId($appid,$code)
+    {
+        $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
+        $html=$this->weChat->curl_url($url);
+        $json=json_decode($html);
+        if(isset($json->access_token)){
+            return $json->openid;
+        }else{
+            echo $html;
+            exit;
         }
     }
 
@@ -293,41 +303,5 @@ class WxOpenController extends Controller
             }
         }
         return $auth->authorizer_access_token;
-    }
-
-    private function getWebOpenId($appid,$code)
-    {
-        $auth = (new WeChatAuth())->findOrFail($appid);
-        if($auth->web_expires_in < time()){
-            echo '<<<<<<';
-            $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
-            $html=$this->weChat->curl_url($url);
-            $json=json_decode($html);
-            if(isset($json->access_token)){
-                $auth->web_access_token=$json->access_token;
-                $auth->web_expires_in=time()+6000;
-                $auth->web_refresh_token=$json->refresh_token;
-                $auth->save();
-                return $json->openid;
-            }else{
-                echo $html;
-                exit;
-            }
-        }/*else{
-            $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
-            $html=$this->weChat->curl_url($url);
-            $json=json_decode($html);
-            if(isset($json->access_token)){
-                $auth->web_access_token=$json->access_token;
-                $auth->web_expires_in=$json->expires_in+6000;
-                $auth->web_refresh_token=$json->refresh_token;
-                $auth->save();
-                return $json->openid;
-            }else{
-                echo $html;
-                exit;
-            }
-        }*/
-        echo '>>>>';
     }
 }
