@@ -129,9 +129,11 @@ class WxOpenController extends Controller
             $staff->message($_message)->to($message->FromUserName)->send();
         }
         if($message->Content=='shop'){
-            //$return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
+
+            $ID=(new WeChatAuth())->where('user_name=?')->bindValues($message->ToUserName)->value('user_name');
+            $return="http://{$ID}.{$_SERVER['HTTP_HOST']}/member";
             //$return=$this->weChat->shorten($return);
-            $return='http://wx02560f146a566747.wechat.yuantuwang.com/member';
+            //$return='http://wx02560f146a566747.wechat.yuantuwang.com/member';
             return new Text(['content' => $return]);
         }
         if(substr($message->Content,0,16)=='QUERY_AUTH_CODE:'){
