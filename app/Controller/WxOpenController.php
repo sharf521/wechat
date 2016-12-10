@@ -168,7 +168,7 @@ class WxOpenController extends Controller
         if ($this->user_id=='' && $this->user_id==0) {
             session()->set('target_url',$url);
 
-            $host_arr=explode('.'.$_SERVER['HTTP_HOST']);
+            $host_arr=explode('.',$_SERVER['HTTP_HOST']);
             $appid=$host_arr[0];
             $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/oauth_callback/");
             $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_base&state=STATE&component_appid={$this->component_appid}#wechat_redirect";
