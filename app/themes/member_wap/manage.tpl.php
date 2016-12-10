@@ -22,6 +22,12 @@
             </div>
             <p class="weui-grid__label">我的订单</p>
         </a>
+        <a href="<?=url('logout')?>" class="weui-grid">
+            <div class="weui-grid__icon">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe643;</i>
+            </div>
+            <p class="weui-grid__label">退出</p>
+        </a>
     </div>
 
 <br><br>

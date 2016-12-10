@@ -140,9 +140,8 @@ class WxOpenController extends Controller
             $user->save();
             $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
             if($return===true){
-                //$return=$this->weChat->shorten('http://wechat.yuantuwang.com/member');
                 $return="http://{$message->ToUserName}.{$_SERVER['HTTP_HOST']}/member";
-                //$return='http://wechat.yuantuwang.com/member';
+                $return=$this->weChat->shorten($return);
             }
             return new Text(['content' => $return]);
         }
@@ -166,7 +165,7 @@ class WxOpenController extends Controller
     {
         $url=$request->get('url');
         //没有登陆时去授权
-        if (empty($this->user_id)) {
+        if ($this->user_id=='' && $this->user_id==0) {
             session()->set('target_url',$url);
 
             $host_arr=explode('.'.$_SERVER['HTTP_HOST']);
