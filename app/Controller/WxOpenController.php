@@ -303,7 +303,7 @@ class WxOpenController extends Controller
     private function getWebOpenId($appid,$code)
     {
         $auth = (new WeChatAuth())->findOrFail($appid);
-        if($auth->web_refresh_token==''){
+        if($auth->web_expires_in < time()){
             $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
             $html=$this->weChat->curl_url($url);
             $json=json_decode($html);
@@ -317,7 +317,7 @@ class WxOpenController extends Controller
                 echo $html;
                 exit;
             }
-        }elseif($auth->web_expires_in < time()){
+        }/*elseif($auth->web_expires_in < time()){
             $url="https://api.weixin.qq.com/sns/oauth2/component/refresh_token?appid={$appid}&grant_type=refresh_token&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}&refresh_token={$auth->web_refresh_token}";
             $html=$this->weChat->curl_url($url);
             echo 'AAA';
@@ -332,7 +332,7 @@ class WxOpenController extends Controller
                 echo $html;
                 exit;
             }
-        }
+        }*/
     }
 
 
