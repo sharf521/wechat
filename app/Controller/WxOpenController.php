@@ -141,7 +141,7 @@ class WxOpenController extends Controller
             $return=$user->login(array('direct'=>1,'unionid'=>$userInfo->unionid));
             if($return===true){
                 //$return=$this->weChat->shorten('http://wechat.yuantuwang.com/member');
-                $return='http://'.$_SERVER['HTTP_HOST'].url("wxOpen/oauth_callback/?unionid={$userInfo->unionid}");
+                $return='http://'.$message->ToUserName.$_SERVER['HTTP_HOST'].url("wxOpen/oauth_callback/?unionid={$userInfo->unionid}");
                 //$return='http://wechat.yuantuwang.com/member';
             }
             return new Text(['content' => $return]);
