@@ -130,9 +130,9 @@ class WxOpenController extends Controller
         }
         if($message->Content=='shop'){
 
-            $ID=(new WeChatAuth())->where('user_name=?')->bindValues($message->ToUserName)->value('user_name');
-            $return="http://{$ID}.{$_SERVER['HTTP_HOST']}/member";
-            //$return=$this->weChat->shorten($return);
+            $appid=(new WeChatAuth())->where('user_name=?')->bindValues($message->ToUserName)->value('authorizer_appid');
+            $return="http://{$appid}.{$_SERVER['HTTP_HOST']}/member";
+            $return=$this->weChat->shorten($return);
             //$return='http://wx02560f146a566747.wechat.yuantuwang.com/member';
             return new Text(['content' => $return]);
         }
