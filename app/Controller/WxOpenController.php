@@ -71,12 +71,11 @@ class WxOpenController extends Controller
                 $json=$json->authorizer_info;
                 $auth->nick_name=addslashes($json->nick_name);
                 $auth->head_img=$json->head_img;
-                $auth->service_type_info=$json->service_type_info;
-                $auth->verify_type_info=$json->verify_type_info;
+                $auth->service_type_info=serialize($json->service_type_info);
+                $auth->verify_type_info=serialize($json->verify_type_info);
                 $auth->user_name=$json->user_name;
                 $auth->principal_name=addslashes($json->principal_name);
                 $auth->business_info=serialize($json->business_info);
-                $auth->authorization_info=serialize($json->authorization_info);
             }else{
                 echo $html;
             }
