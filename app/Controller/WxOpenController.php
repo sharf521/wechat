@@ -32,7 +32,6 @@ class WxOpenController extends Controller
         $redirect_uri='http://'.$_SERVER['HTTP_HOST'].url('wxOpen/auth_code');
         $code=$this->getPreAuthCode();
         $url="https://mp.weixin.qq.com/cgi-bin/componentloginpage?component_appid={$this->component_appid}&pre_auth_code={$code}&redirect_uri={$redirect_uri}";
-        echo $url;
         echo "<a href='{$url}'>授权</a>";
     }
 
