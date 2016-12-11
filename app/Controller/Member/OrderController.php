@@ -10,6 +10,7 @@ namespace App\Controller\Member;
 
 
 use App\Model\Order;
+use App\Model\User;
 use App\WeChat;
 use System\Lib\Request;
 
@@ -54,7 +55,7 @@ class OrderController extends MemberController
             echo '异常';exit;
         }
 
-        $openid=DB::table('user')->where('id=?')->bindValues($this->user_id)->value('unionid');
+        $openid=(new User())->where('id=?')->bindValues($this->user_id)->value('unionid');
         $weChat=new WeChat();
         $app=$weChat->app;
         $payment = $app->payment;
