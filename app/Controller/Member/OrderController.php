@@ -73,7 +73,7 @@ echo 33;
         $input = new \WxPayUnifiedOrder();
         $input->SetBody("test");
         $input->SetAttach("test");
-        $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
+        $input->SetOut_trade_no(\WxPayConfig::MCHID.date("YmdHis"));
         $input->SetTotal_fee("1");
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
