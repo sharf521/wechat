@@ -95,6 +95,28 @@ class WeChatOpen
         fclose($fp);
     }
 
+    public function getOpenid()
+    {
+        $host_arr=explode('.',$_SERVER['HTTP_HOST']);
+        $appid=$host_arr[0];
+        $component_appid=$this->options['app_id'];
+        //通过code获得openid
+        if (!isset($_GET['code'])){
+            //触发微信返回code码
+            $redirect_uri = urlencode('http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'].$_SERVER['QUERY_STRING']);
+            $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_base&state=STATE&component_appid={$component_appid}#wechat_redirect";
+            redirect($url);
+            exit();
+        } else {
+            //获取code码，以获取openid
+            $code = $_GET['code'];
+            $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$component_appid}&component_access_token={$this->getComponentAccessToken()}";
+            $html=$this->curl_url($url);
+            $json=json_decode($html);
+            return $json->openid;
+        }
+    }
+
     public function getPreAuthCode()
     {
         $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$this->getComponentAccessToken()}";

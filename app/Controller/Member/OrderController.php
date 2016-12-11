@@ -12,6 +12,7 @@ namespace App\Controller\Member;
 use App\Model\Order;
 use App\Model\User;
 use App\WeChat;
+use App\WeChatOpen;
 use System\Lib\Request;
 
 class OrderController extends MemberController
@@ -65,9 +66,10 @@ echo 33;
         echo 111;
         //①、获取用户openid
         $tools = new \JsApiPay();
+        session()->set('target_url','http://'.$_SERVER['HTTP_HOST'].$this->self_url);
         //$openId = $tools->GetOpenid();
-
-        echo 222;
+        echo (new WeChatOpen())->getOpenid();
+        echo '<hr>'.'222';
 
         //②、统一下单
         $input = new \WxPayUnifiedOrder();
