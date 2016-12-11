@@ -172,10 +172,7 @@ class WxOpenController extends Controller
     {
         $code=$request->get('code');
         $appid=$request->get('appid');
-        $openid=$this->getWebOpenId($appid,$code);
-
-        $userServer=$this->app->user;
-        $userInfo=$userServer->get($openid);
+        $userInfo=$this->getWebUserInfo($appid,$code);
         $user_wx=(new UserWx())->where("unionid=?")->bindValues($userInfo->unionid)->first();
         $user_wx->subscribe = $userInfo->subscribe;
         $user_wx->openid = $userInfo->openid;
@@ -210,13 +207,21 @@ class WxOpenController extends Controller
         }
     }
 
-    private function getWebOpenId($appid,$code)
+    private function getWebUserInfo($appid,$code)
     {
         $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$this->component_appid}&component_access_token={$this->getComponentAccessToken()}";
         $html=$this->weChat->curl_url($url);
         $json=json_decode($html);
         if(isset($json->access_token)){
-            return $json->openid;
+            $url="https://api.weixin.qq.com/sns/userinfo?access_token={$json->access_token}&openid={$json->openid}&lang=zh_CN";
+            $html=$this->weChat->curl_url($url);
+            $json=json_encode($html);
+            if(isset($json->nickname)){
+                return $json;
+            }else{
+                echo $html;
+                exit;
+            }
         }else{
             echo $html;
             exit;
