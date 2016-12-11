@@ -37,22 +37,63 @@
         <a href="javascript:;" id="pay_btn" class="pay_btn">立即支付</a>
     </div>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" charset="utf-8">
-        wx.config(<?=$config?>);
-        wx.ready(function () {
-            $("#pay_btn").click(function () {
-                wx.chooseWXPay({
-                    timestamp: '<?=$pay['timestamp']?>',
-                    nonceStr: '<?=$pay['nonceStr']?>',
-                    package: '<?=$pay['package']?>',
-                    signType: 'MD5',
-                    paySign: '<?=$pay['paySign']?>',
-                    success: function (res) {
-                        alert('支付成功！');
-                        //window.location = "/index.php/weixin/orderShow/?task_id=<?=$task->id?>";
-                    }
-                });
-            });
-        });
+    <script type="text/javascript">
+        //调用微信JS api 支付
+        function jsApiCall()
+        {
+            WeixinJSBridge.invoke(
+                'getBrandWCPayRequest',
+                <?php echo $jsApiParameters; ?>,
+                function(res){
+                    WeixinJSBridge.log(res.err_msg);
+                    alert(res.err_code+res.err_desc+res.err_msg);
+                }
+            );
+        }
+
+        function callpay()
+        {
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', jsApiCall);
+                    document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+                }
+            }else{
+                jsApiCall();
+            }
+        }
+        //获取共享地址
+        function editAddress()
+        {
+            WeixinJSBridge.invoke(
+                'editAddress',
+                <?php echo $editAddress; ?>,
+                function(res){
+                    var value1 = res.proviceFirstStageName;
+                    var value2 = res.addressCitySecondStageName;
+                    var value3 = res.addressCountiesThirdStageName;
+                    var value4 = res.addressDetailInfo;
+                    var tel = res.telNumber;
+
+                    alert(value1 + value2 + value3 + value4 + ":" + tel);
+                }
+            );
+        }
+
+        window.onload = function(){
+            if (typeof WeixinJSBridge == "undefined"){
+                if( document.addEventListener ){
+                    document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+                }else if (document.attachEvent){
+                    document.attachEvent('WeixinJSBridgeReady', editAddress);
+                    document.attachEvent('onWeixinJSBridgeReady', editAddress);
+                }
+            }else{
+                editAddress();
+            }
+        };
+
     </script>
 <?php require 'footer.php';?>
