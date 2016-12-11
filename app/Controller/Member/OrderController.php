@@ -65,7 +65,7 @@ echo 33;
         echo 111;
         //①、获取用户openid
         $tools = new \JsApiPay();
-        $openId = $tools->GetOpenid();
+        //$openId = $tools->GetOpenid();
 
         echo 222;
 
