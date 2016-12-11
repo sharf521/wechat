@@ -61,9 +61,12 @@ class OrderController extends MemberController
 
         require_once ROOT."/wxpay/lib/WxPay.Api.php";
         require_once ROOT."/wxpay/example/WxPay.JsApiPay.php";
+        echo 111;
         //①、获取用户openid
         $tools = new JsApiPay();
         //$openId = $tools->GetOpenid();
+
+        echo 222;
 
         //②、统一下单
         $input = new \WxPayUnifiedOrder();
