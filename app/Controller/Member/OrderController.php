@@ -59,7 +59,7 @@ echo 222;
         $openid=(new User())->where('id=?')->bindValues($this->user_id)->value('unionid');
         $weChat=new WeChat();
         $app=$weChat->app;
-
+echo 33;
         require_once ROOT."/wxpay/lib/WxPay.Api.php";
         require_once ROOT."/wxpay/example/WxPay.JsApiPay.php";
         echo 111;
