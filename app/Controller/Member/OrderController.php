@@ -64,8 +64,8 @@ echo 33;
         require_once ROOT."/wxpay/example/WxPay.JsApiPay.php";
         echo 111;
         //①、获取用户openid
-        $tools = new JsApiPay();
-        //$openId = $tools->GetOpenid();
+        $tools = new \JsApiPay();
+        $openId = $tools->GetOpenid();
 
         echo 222;
 
