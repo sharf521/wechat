@@ -36,14 +36,14 @@
                 <p class="pState"><span>状<i></i>态：</span><em class="co_blue">已签收</em></p>
                 <p><span>总<i></i>价：</span><em class="co_red">¥<?=$order->order_money?></em></p>
             </div>
-            <a href="javascript:void(0);" class="oh_btn">再次购买</a>
+            <a href="<?=url("order/pay/?id={$order->id}")?>" class="oh_btn">支付</a>
         </div>
         <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
         <? foreach ($goods as $g) : ?>
         <div class="order_item">
             <img class="image" src="<?=$g->goods_image?>">
             <div class="oi_content">
-                <a><?=$g->goods_name?></a>
+                <a><?=$g->goods_name?> <?=$g->spec_1?> <?=$g->spec_2?></a>
                 <p><span class="count"><?=$g->quantity?> 件</span></p>
             </div>
         </div>

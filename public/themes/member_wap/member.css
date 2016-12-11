@@ -258,6 +258,13 @@ form label.error {   color: red;    margin-left: 5px;    position:absolute; bott
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
 .order_item .image{float:left;margin-right:10px;height:50px;}
 
+/*order pay*/
+.order_address{padding: 10px 10px 10px 3em; position: relative; border-bottom: 2px dashed #c3c3c3;}
+.order_address h4{position: absolute;    top: 12px;    left: 10px;    width: 2em;    font-weight: 400;    font-size: 14px;    color: #999;}
+.order_address p{ line-height: 22px; padding-right: 40px; font-size: 14px;}
+.order_address p strong{font-weight: 400; margin-right: 10px;}
+.pay_footer{ border-top: 1px solid #d5d5d5;line-height: 50px; height: 50px; color: #f00; position: fixed; bottom: 0; left: 0; background: #fff; width: 100%; font-size: 18px; font-weight: 400; padding-left: 1rem}
+.pay_footer .pay_btn{float: right; background-color: #f44; color: #fff; font-size: 16px; display: block; width: 180px; text-align: center; cursor: pointer}
 
 /* address */
 .address_list{ background:#fff;}

@@ -70,4 +70,9 @@ class Order extends Model
     {
         return $this->hasMany('\App\Model\OrderGoods','order_sn','order_sn');
     }
+
+    public function OrderShipping()
+    {
+        return $this->hasOne('\App\Model\OrderShipping','order_sn','order_sn');
+    }
 }

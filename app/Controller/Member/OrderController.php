@@ -10,6 +10,7 @@ namespace App\Controller\Member;
 
 
 use App\Model\Order;
+use App\WeChat;
 use System\Lib\Request;
 
 class OrderController extends MemberController
@@ -42,6 +43,46 @@ class OrderController extends MemberController
     {
         $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
+    }
+
+    public function pay(Order $order,Request $request)
+    {
+        $user_id=$this->user_id;
+        $id=$request->get('id');
+        $order=$order->findOrFail($id);
+        if($order->buyer_id!=$user_id){
+            echo '异常';exit;
+        }
+
+        $openid=DB::table('user')->where('id=?')->bindValues($this->user_id)->value('unionid');
+        $weChat=new WeChat();
+        $app=$weChat->app;
+        $payment = $app->payment;
+        $attributes = [
+            'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body'             => '支付订单',
+            'out_trade_no'     => time().rand(10000,99999),
+            'total_fee'        => math($order->order_money,100,'*',2),
+            'attach'=>$order->id,
+            'openid'=>$openid,
+            'notify_url'       => "http://{$_SERVER['HTTP_HOST']}/index.php/wxapi/payNotify/"
+        ];
+        $_order=new \EasyWeChat\Payment\Order($attributes);
+        $result = $payment->prepare($_order);
+        if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+            $js = $app->js;
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi'), false);
+            $pay=$weChat->getPayParams($result->prepay_id);
+            $data['pay']=$pay;
+            $order->out_trade_no=$attributes['out_trade_no'];
+            $order->save();
+        }
+        $data['title_herder']='支付中。。';
+
+        $data['order']=$order;
+        $data['orderGoods']=$order->OrderGoods();
+        $data['shipping']=$order->OrderShipping();
+        $this->view('order_pay',$data);
     }
 
 

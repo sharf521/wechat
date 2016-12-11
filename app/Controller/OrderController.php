@@ -13,6 +13,7 @@ use App\Model\Cart;
 use App\Model\Goods;
 use App\Model\Order;
 use App\Model\OrderGoods;
+use App\Model\OrderShipping;
 use App\Model\UserAddress;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -34,9 +35,9 @@ class OrderController extends Controller
         }
         $address_id=(int)$request->get('address_id');
         if($address_id==0){
-            $data['address']=$address->where('user_id=? and is_default=1')->bindValues($this->user_id)->first();
+            $address=$address->where('user_id=? and is_default=1')->bindValues($this->user_id)->first();
         }else{
-            $data['address']=$address->where('user_id=? and id='.$address_id)->bindValues($this->user_id)->first();
+            $address=$address->where('user_id=? and id='.$address_id)->bindValues($this->user_id)->first();
         }
         $arr=array(
             'buyer_id'=>$this->user_id,
@@ -78,11 +79,20 @@ class OrderController extends Controller
                         $orderGoods->spec_2=$goods->spec_2;
                         $orderGoods->save();
                         $order_money=math($order_money,math($goods->price,$cart->quantity,'*',2),'+',2);
+                        $cart->delete();
                     }
                     $order->goods_money=$order_money;
                     $order->order_money=$order->goods_money;
                     $order->status=1;
                     $order->save();
+                    
+                    $shipping=new OrderShipping();
+                    $shipping->order_sn=$order_sn;
+                    $shipping->name=$address->name;
+                    $shipping->phone=$address->phone;
+                    $shipping->region_name=$address->region_name;
+                    $shipping->address=$address->address;
+                    $shipping->save();
                 }
 
                 DB::commit();
@@ -93,6 +103,7 @@ class OrderController extends Controller
             }
             redirect('/member/order')->with('msg','己ok！');
         }else{
+            $data['address']=$address;
             $this->view('order',$data);
         }
     }
