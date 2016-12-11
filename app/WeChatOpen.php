@@ -99,7 +99,7 @@ class WeChatOpen
     {
         $url="https://api.weixin.qq.com/cgi-bin/component/api_create_preauthcode?component_access_token={$this->getComponentAccessToken()}";
         $arr=array("component_appid"=>$this->options['app_id']);
-        $html=$this->weChat->curl_url($url,json_encode($arr));
+        $html=$this->curl_url($url,json_encode($arr));
         $json=json_decode($html);
         if(isset($json->pre_auth_code)){
             return $json->pre_auth_code;
@@ -117,7 +117,7 @@ class WeChatOpen
                 'component_appsecret' => $this->options['secret'],
                 'component_verify_ticket' => $chatTicket->ComponentVerifyTicket
             );
-            $html = $this->weChat->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token', json_encode($arr));
+            $html = $this->curl_url('https://api.weixin.qq.com/cgi-bin/component/api_component_token', json_encode($arr));
             $this->log('https://api.weixin.qq.com/cgi-bin/component/api_component_token' . json_encode($arr), 'token');
             $this->log("内容" . $html, 'token');
             $html = json_decode($html);
@@ -139,7 +139,7 @@ class WeChatOpen
                 'authorizer_refresh_token' => $auth->authorizer_refresh_token
             );
             $this->log($url . json_encode($arr), 'token');
-            $html = $this->weChat->curl_url($url, json_encode($arr));
+            $html = $this->curl_url($url, json_encode($arr));
             $this->log("内容2" . $html, 'token');
             $json = json_decode($html);
             if (isset($json->authorizer_access_token)) {
