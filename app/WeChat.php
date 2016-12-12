@@ -16,7 +16,7 @@ class WeChat
     public function __construct()
     {
         $this->options = [
-            'debug' => false,
+            'debug' => true,
             'app_id' => 'wx02560f146a566747',
             'secret' => '3268b3e05cab87ce697f188dfeecd4e7',
             'token' => 'nqalkw1389334597',
@@ -27,7 +27,7 @@ class WeChat
             ],
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],
-                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/wxapi/oauth_callback',
+                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/wxOpen/pay_callback',
             ],
             'guzzle' => [
                 'timeout' => 4.0, // 超时时间（秒）

@@ -71,8 +71,7 @@ class OrderController extends MemberController
         ];
         $_order=new \EasyWeChat\Payment\Order($attributes);
         $result = $payment->prepare($_order);
-        var_dump($result);
-        exit;
+
         if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
             $js = $app->js;
             $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi'), false);
