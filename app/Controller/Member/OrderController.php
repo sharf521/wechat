@@ -66,7 +66,7 @@ class OrderController extends MemberController
             'out_trade_no'     => time().rand(10000,99999),
             'total_fee'        => math(1,100,'*',2),
             'attach'=>$id,
-            'openid'=>'o8S1Yt8XuY5GzLycS5aS4lgemEGo',
+            'openid'=>'on0aqs51hEudNQsGESP3GWEMYe78',
             'notify_url'       => "http://{$_SERVER['HTTP_HOST']}/index.php/wxapi/payNotify/"
         ];
         $_order=new \EasyWeChat\Payment\Order($attributes);
