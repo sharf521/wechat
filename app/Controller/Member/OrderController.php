@@ -55,8 +55,8 @@ class OrderController extends MemberController
         if($order->buyer_id!=$user_id){
             echo '异常';exit;
         }
-        $openid=(new User())->where('id=?')->bindValues($this->user_id)->value('unionid');
-
+        //$openid=(new User())->where('id=?')->bindValues($this->user_id)->value('unionid');
+        $openid=(new WeChatOpen())->getOpenid();
         $weChat=new WeChat();
         $app=$weChat->app;
         $payment = $app->payment;
@@ -66,9 +66,10 @@ class OrderController extends MemberController
             'out_trade_no'     => time().rand(10000,99999),
             'total_fee'        => math($order->order_money,100,'*',2),
             'attach'=>$id,
-            'openid'=>'on0aqs51hEudNQsGESP3GWEMYe78',
+            'openid'=>$openid,
             'notify_url'       => "http://{$_SERVER['HTTP_HOST']}/index.php/wxOpen/payNotify/"
         ];
+        print_r($attributes);
         $_order=new \EasyWeChat\Payment\Order($attributes);
         $result = $payment->prepare($_order);
 

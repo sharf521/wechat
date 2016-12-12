@@ -114,7 +114,8 @@ class WeChatOpen
             $html=$this->curl_url($url);
             $json=json_decode($html);
             if(isset($json->access_token)){
-                $url="https://api.weixin.qq.com/sns/userinfo?access_token={$json->access_token}&openid={$json->openid}&lang=zh_CN";
+                return $json->openid;
+                /*$url="https://api.weixin.qq.com/sns/userinfo?access_token={$json->access_token}&openid={$json->openid}&lang=zh_CN";
                 $html=$this->curl_url($url);
                 $json=json_decode($html);
                 if(isset($json->unionid)){
@@ -122,7 +123,7 @@ class WeChatOpen
                 }else{
                     echo $html.'BB';
                     exit;
-                }
+                }*/
             }else{
                 echo $html.'AA';
                 exit;
