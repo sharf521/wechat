@@ -51,16 +51,13 @@ class OrderController extends MemberController
     {
         $user_id=$this->user_id;
         $id=$request->get('id');
-        echo $id;
         $order=$order->findOrFail($id);
         if($order->buyer_id!=$user_id){
             echo '异常';exit;
         }
-echo 222;
         $openid=(new User())->where('id=?')->bindValues($this->user_id)->value('unionid');
         $weChat=new WeChat();
         $app=$weChat->app;
-echo 33;
         require_once ROOT."/wxpay/lib/WxPay.Api.php";
         require_once ROOT."/wxpay/example/WxPay.JsApiPay.php";
         echo 111;
