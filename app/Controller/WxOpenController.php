@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Order;
 use App\Model\User;
 use App\Model\UserWx;
 use App\Model\WeChatAuth;
@@ -252,6 +253,51 @@ class WxOpenController extends Controller
             $this->weChat->log("BBB".$html,'ticket');
         }
         echo 'success';
+    }
+
+    public function payNotify()
+    {
+        $response = $this->app->payment->handleNotify(function($notify, $successful){
+            // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
+            $id=(int)$notify->attach;
+            $out_trade_no=$notify->out_trade_no;
+            $order=new Order();
+            $order =$order->find($id);
+            if (!$order) { // 如果订单不存在
+                return 'Order not exist.'; // 告诉微信，我已经处理完了，订单没找到，别再通知我了
+            }
+            // 如果订单存在
+            // 检查订单是否已经更新过支付状态
+//            if ($order->status!=3 || $order->out_trade_no !=$out_trade_no) {
+//                return true; // 已经支付成功了就不再更新了
+//            }
+            // 用户是否支付成功
+            if ($successful) {
+                $order->payed_at = time();
+                $order->payed_money=(float)math($notify->total_fee,100,'/',2);
+                $order->status = 4;
+                $order->save(); // 保存
+/*                //消息start
+                $notice = $this->app->notice;
+                $templateId = 'tmGk3uxIeNke-tG7zBbHVzrxuHI_zB_cdKm69ZWfmm4';
+                $url = "http://{$_SERVER['HTTP_HOST']}/index.php/weixin/orderShow/?task_id={$task->id}";
+                $data = array(
+                    "first"  => "您好，您的订单【{$task->print_type}】已付款成功！",
+                    "keyword1"   => $out_trade_no,
+                    "keyword2"  => date('Y-m-d H:i'),
+                    "keyword3"  => $task->paymoney,
+                    "keyword4"  => '微信支付',
+                    "remark" => "感谢您的惠顾。",
+                );
+                $openid=$task->User()->openid;
+                $notice->uses($templateId)->withUrl($url)->andData($data)->andReceiver($openid)->send();
+                //消息end*/
+            } else {
+                // 用户支付失败
+            }
+            return true; // 返回处理完成
+        });
+        $response->send();
     }
 
 
