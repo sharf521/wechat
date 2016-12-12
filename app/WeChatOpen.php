@@ -113,7 +113,20 @@ class WeChatOpen
             $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$component_appid}&component_access_token={$this->getComponentAccessToken()}";
             $html=$this->curl_url($url);
             $json=json_decode($html);
-            return $json->openid;
+            if(isset($json->access_token)){
+                $url="https://api.weixin.qq.com/sns/userinfo?access_token={$json->access_token}&openid={$json->openid}&lang=zh_CN";
+                $html=$this->curl_url($url);
+                $json=json_decode($html);
+                if(isset($json->unionid)){
+                    return $json->unionid;
+                }else{
+                    echo $html;
+                    exit;
+                }
+            }else{
+                echo $html;
+                exit;
+            }
         }
     }
 
