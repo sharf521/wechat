@@ -17,9 +17,9 @@ class WeChat
     {
         $this->options = [
             'debug' => false,
-            'app_id' => app('System')->getCode('appid'),
-            'secret' => app('System')->getCode('appsecret'),
-            'token' => 'print',
+            'app_id' => 'wx02560f146a566747',
+            'secret' => '3268b3e05cab87ce697f188dfeecd4e7',
+            'token' => 'nqalkw1389334597',
             // 'aes_key' => null, // 可选
             'log' => [
                 'level' => 'debug',
