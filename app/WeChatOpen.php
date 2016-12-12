@@ -120,11 +120,11 @@ class WeChatOpen
                 if(isset($json->unionid)){
                     return $json->unionid;
                 }else{
-                    echo $html;
+                    echo $html.'BB';
                     exit;
                 }
             }else{
-                echo $html;
+                echo $html.'AA';
                 exit;
             }
         }
