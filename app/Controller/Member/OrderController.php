@@ -76,6 +76,7 @@ class OrderController extends MemberController
             $js = $app->js;
             $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi'), true);
             $pay=$weChat->getPayParams($result->prepay_id);
+            print_r($pay);
             $data['pay']=$pay;
             $order->out_trade_no=$attributes['out_trade_no'];
             $order->save();
