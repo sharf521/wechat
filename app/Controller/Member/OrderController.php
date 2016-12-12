@@ -65,7 +65,8 @@ class OrderController extends MemberController
         $tools = new \JsApiPay();
         session()->set('target_url','http://'.$_SERVER['HTTP_HOST'].$this->self_url);
         //$openId = $tools->GetOpenid();
-        echo (new WeChatOpen())->getOpenid();
+        $openid= (new WeChatOpen())->getOpenid();
+        echo $openid;
         echo '<hr>'.'222';
 
         //②、统一下单
