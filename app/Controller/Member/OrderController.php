@@ -68,7 +68,7 @@ class OrderController extends MemberController
             'openid'=>$openid,
             'notify_url'       => "http://{$_SERVER['HTTP_HOST']}/index.php/wxapi/payNotify/"
         ];
-        $order=new Order($attributes);
+        $_order=new \EasyWeChat\Payment\Order($attributes);
         $result = $payment->prepare($order);
         var_dump($result);
         exit;
