@@ -62,6 +62,7 @@ class WxPayApi
 		$startTimeStamp = self::getMillisecond();//请求开始时间
 		echo '<hr>f';
 		$response = self::postXmlCurl($xml, $url, false, $timeOut);
+		var_dump($response);
 		echo '<hr>g';
 		$result = \WxPayResults::Init($response);
 		echo '<hr>h';
