@@ -58,7 +58,29 @@ class OrderController extends MemberController
         $openid=(new User())->where('id=?')->bindValues($this->user_id)->value('unionid');
         $weChat=new WeChat();
         $app=$weChat->app;
-        require_once ROOT."/wxpay/lib/WxPay.Api.php";
+        $payment = $app->payment;
+        $attributes = [
+            'trade_type'       => 'JSAPI', // JSAPI，NATIVE，APP...
+            'body'             => '支付订单',
+            'out_trade_no'     => time().rand(10000,99999),
+            'total_fee'        => math(1,100,'*',2),
+            'attach'=>$id,
+            'openid'=>$openid,
+            'notify_url'       => "http://{$_SERVER['HTTP_HOST']}/index.php/wxapi/payNotify/"
+        ];
+        $order=new Order($attributes);
+        $result = $payment->prepare($order);
+        var_dump($result);
+        exit;
+        if ($result->return_code == 'SUCCESS' && $result->result_code == 'SUCCESS'){
+            $js = $app->js;
+            $data['config']=$js->config(array('chooseWXPay','openAddress','checkJsApi'), false);
+            $pay=$weChat->getPayParams($result->prepay_id);
+            $data['pay']=$pay;
+            $order->out_trade_no=$attributes['out_trade_no'];
+            $order->save();
+        }
+        /*require_once ROOT."/wxpay/lib/WxPay.Api.php";
         require_once ROOT."/wxpay/example/WxPay.JsApiPay.php";
         echo 111;
         //①、获取用户openid
@@ -91,7 +113,7 @@ class OrderController extends MemberController
 
         //③、在支持成功回调通知中处理成功之后的事宜，见 notify.php
 
-        $data['jsApiParameters']=$jsApiParameters;
+        $data['jsApiParameters']=$jsApiParameters;*/
 
         $data['title_herder']='支付中。。';
 

@@ -35,10 +35,10 @@ class WeChat
             ],
             // payment
             'payment' => [
-                'merchant_id'        => '1373665102',
-                'key'                => 'kfjakdfjakldsfjkasdq1234123411as',
-                'cert_path'          => '/etc/ca/weixin/apiclient_cert.pem', // XXX: 绝对路径！！！！
-                'key_path'           => '/etc/ca/weixin/apiclient_cert.p12',      // XXX: 绝对路径！！！！
+                'merchant_id'        => '1231811902',
+                'key'                => 'jnjgyurtyrtrhgbh678967tyghghghgh',
+                'cert_path'          => '/etc/ca/jifuss/apiclient_cert.pem', // XXX: 绝对路径！！！！
+                'key_path'           => '/etc/ca/jifuss/apiclient_cert.p12',      // XXX: 绝对路径！！！！
                 'notify_url'         => '',       // 你也可以在下单时单独设置来想覆盖它
                 // 'device_info'     => '013467007045764',
                 // 'sub_app_id'      => '',
