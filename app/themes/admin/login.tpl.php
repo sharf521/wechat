@@ -18,7 +18,7 @@
             <table cellpadding="0" cellspacing="0">
                 <tr>
                     <th><label for="username">管理员账号：</label></th>
-                    <td><span class="input"><input name="username" type="text"/></span></td>
+                    <td><span class="input"><input name="username" id="username" type="text"/></span></td>
                 </tr>
                 <tr>
                     <th><label for="password">密码：</label></th>
@@ -41,5 +41,11 @@
         </form>
     </div>
 </div>
+<script language="javascript">
+    if (self != window.top) {
+        window.top.location.href = '<?=url('login')?>';
+    }
+    document.getElementById('username').focus();
+</script>
 <?php require 'footer.php'; ?>
 

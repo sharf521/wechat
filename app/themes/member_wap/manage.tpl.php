@@ -54,7 +54,7 @@
     </div>
 
     <div class="weui-tabbar">
-        <a href="javascript:;" class="weui-tabbar__item weui-bar__item_on">
+        <a href="/" class="weui-tabbar__item">
             <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
             <p class="weui-tabbar__label">首页</p>
         </a>
@@ -66,7 +66,7 @@
             <i class="iconfont weui-tabbar__icon">&#xe89d;</i>
             <p class="weui-tabbar__label">我的订单</p>
         </a>
-        <a href="javascript:;" class="weui-tabbar__item">
+        <a href="<?=url('')?>" class="weui-tabbar__item weui-bar__item_on">
             <i class="iconfont weui-tabbar__icon">&#xe6fc;</i>
             <p class="weui-tabbar__label">我</p>
         </a>
