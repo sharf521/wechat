@@ -103,7 +103,7 @@ class OrderController extends Controller
                 redirect()->back()->with('error',$error);
                 DB::rollBack();
             }
-            redirect('/member/order')->with('msg','己ok！');
+            redirect('/member/order')->with('msg','提交成功，请支付！');
         }else{
             $data['address']=$address;
             $this->view('order',$data);
