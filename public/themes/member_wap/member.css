@@ -141,7 +141,7 @@ form label.error {   color: red;    margin-left: 5px;    position:absolute; bott
 .address_list li p{line-height:20px; padding:4px 80px 4px 0px;}
 .address_list li span,.address_list li a{position:absolute; right:10px; font-size:12px; border:1px solid #008aff; color:#008aff; padding:3px 8px; text-align:center; border-radius:4px;}
 .address_list li .madres{ top:10px;}
-.address_list li .maddel{ top:48px;position:absolute; right:35px;}
+.address_list li .maddel{ top:48px;position:absolute; right:35px; color: #999}
 .address_list li .madrati{border:1px solid #f60; color:#f60}
 
 
