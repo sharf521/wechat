@@ -60,6 +60,15 @@ class Cart extends Model
         }
     }
 
+    ////更新Cart里未登陆时添加的商品
+    public function refresh($user_id)
+    {
+        if($user_id!=0 && $user_id!=''){
+            $session_id=session_id();
+            $this->where("buyer_id=0 and session_id='$session_id'")->update(array('buyer_id'=>$user_id));
+        }
+    }
+
     public function getList($data=array())
     {
         $buyer_id=(int)$data['buyer_id'];

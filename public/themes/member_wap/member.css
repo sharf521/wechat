@@ -138,11 +138,12 @@ form label.error {   color: red;    margin-left: 5px;    position:absolute; bott
 .address_list{ background:#fff;}
 .address_list .noadres{ width:100%; text-align:center; padding:30px 0; font-size:16px; color:#999;border-bottom:1px solid #eee;}
 .address_list li{ padding:14px 10px; font-size:13px; position:relative; border-bottom:1px solid #eee;}
-.address_list li p{line-height:20px; padding:4px 0;}
-.address_list li span,.address_list li a{position:absolute; top:16px; font-size:12px; border:1px solid #008aff; color:#008aff; padding:3px 8px; text-align:center; border-radius:4px;}
-.address_list li .madres{ right:60px;}
+.address_list li p{line-height:20px; padding:4px 80px 4px 0px;}
+.address_list li span,.address_list li a{position:absolute; right:10px; font-size:12px; border:1px solid #008aff; color:#008aff; padding:3px 8px; text-align:center; border-radius:4px;}
+.address_list li .madres{ top:10px;}
+.address_list li .maddel{ top:48px;position:absolute; right:35px;}
 .address_list li .madrati{border:1px solid #f60; color:#f60}
-.address_list li .maddel{ right:10px;}
+
 
 .address_form{ background:#fff; margin-top:8px; padding:10px;}
 .address_form .mad_fmtab{ font-size:14px; border-collapse:collapse; box-sizing:border-box;}

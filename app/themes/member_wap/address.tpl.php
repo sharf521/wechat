@@ -32,7 +32,7 @@
                         <? else : ?>
                             <a class="madres" href="<?=url("address/setDefault/?id={$adds->id}")?>">设为默认</a>
                         <? endif;?>
-                        <span class="maddel" onclick="address_del(<?=$adds->id?>)">删除</span>
+                        <i class="iconfont maddel" onclick="address_del(<?=$adds->id?>)">&#xe69d;</i>
                         <p><?=$adds->region_name?> <?=$adds->address?></p>
                         <p><?=$adds->name?> <?=$adds->phone?></p>
                     </li>

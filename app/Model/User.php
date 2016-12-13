@@ -56,6 +56,9 @@ class User extends Model
             }
             session()->set('user_id', $user->id);
             session()->set('username', $user->username);
+            
+            (new Cart())->refresh($user->id);//更新Cart里未登陆时添加的商品
+            
             return true;
         } else {
             return '未知错误!';
