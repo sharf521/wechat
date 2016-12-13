@@ -48,7 +48,9 @@ class OrderController extends Controller
         if($_POST){
             try{
                 DB::beginTransaction();
-
+                if(!$address->is_exist){
+                    throw  new \Exception("请填写收货地址！");
+                }
                 $goods=new Goods();
                 foreach ($carts_result as $seller_id=>$carts){
                     $order=new Order();

@@ -35,12 +35,14 @@ class OrderController extends MemberController
         $this->view('order',$data);
     }
 
+    //待发货
     public function status3(Order $order,Request $request)
     {
         $data['orders']=$order->where('buyer_id=? and status=3')->bindValues($this->user_id)->orderBy("id desc")->pager($request->get('page'));
         $this->view('order',$data);
     }
 
+    //待收货
     public function status4(Order $order,Request $request)
     {
         $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));

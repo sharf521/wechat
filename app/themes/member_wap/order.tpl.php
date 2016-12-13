@@ -33,7 +33,7 @@
     <div class="order_box">
         <div class="order_head">
             <div class="oh_content">
-                <p class="pState"><span>状<i></i>态：</span><em class="co_blue">已签收</em></p>
+                <p class="pState"><span>状<i></i>态：</span><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
                 <p><span>总<i></i>价：</span><em class="co_red">¥<?=$order->order_money?></em></p>
             </div>
             <a href="<?=url("order/pay/?id={$order->id}")?>" class="oh_btn">支付</a>

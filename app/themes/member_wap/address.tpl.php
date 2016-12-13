@@ -97,7 +97,7 @@
                 <tr>
                     <td>联系电话：</td>
                     <td>
-                        <input name="phone" type="tel" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="手机号码必须填" value=""><span></span></td>
+                        <input name="phone" type="number" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="手机号码必须填" value=""><span></span></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="添加" class="adctbuton"></td>
