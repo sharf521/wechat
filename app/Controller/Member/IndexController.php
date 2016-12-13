@@ -22,7 +22,7 @@ class IndexController extends MemberController
     public function logout(User $user)
     {
         $user->logout();
-        redirect('/login');
+        redirect('/');
         exit;
     }
 }
