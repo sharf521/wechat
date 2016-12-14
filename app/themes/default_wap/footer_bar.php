@@ -1,4 +1,4 @@
-<div class="weui-tabbar">
+<div class="weui-tabbar" style="position: fixed">
     <a href="/" class="weui-tabbar__item <? if($this->func=='index'){echo 'weui-bar__item_on';}?>">
         <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
         <p class="weui-tabbar__label">首页</p>
@@ -16,3 +16,4 @@
         <p class="weui-tabbar__label">我</p>
     </a>
 </div>
+

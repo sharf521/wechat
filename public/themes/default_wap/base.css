@@ -63,6 +63,7 @@ body{background:#f8f8f8;}
 .margin_header{margin-top: 50px;}
 
 .weui-tabbar{left:0}
+.weui-tabbar i{font-size: 20px; margin-top: -5px;}
 .my-navbar{display:-webkit-box;display:-webkit-flex;display:flex;z-index:500;top:0;width:100%;background-color:#fafafa}
 .my-navbar:after{content:" ";position:absolute;left:0;bottom:0;right:0;height:1px;border-bottom:1px solid #CCC;color:#CCC;-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transform:scaleY(.5);transform:scaleY(.5)}
 .my-navbar__item{position:relative;display:block;-webkit-box-flex:1;-webkit-flex:1;flex:1;padding:5px 0;text-align:center;font-size:15px;-webkit-tap-highlight-color:transparent}
