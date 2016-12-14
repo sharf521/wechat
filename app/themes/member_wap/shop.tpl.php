@@ -4,42 +4,42 @@
         <a class="m_header_r" href=""></a>
         <h1>申请开店</h1>
     </div>
-<br><br>
-    <form method="post">
+    <form method="post" class="margin_header">
+        <?
+        if($shop->is_exist){
+
+        }else{
+            echo '填写申请';
+        }
+        ?>
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">店铺名称</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="name"  placeholder="请输入店铺名称"/>
+                    <input class="weui-input" type="text" name="name" value="<?=$shop->name?>"  placeholder="请输入店铺名称"/>
                 </div>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">联系人</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" name="contacts" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="联系人姓名"/>
+                    <input class="weui-input" type="text" name="contacts" value="<?=$shop->contacts?>"  placeholder="联系人姓名"/>
                 </div>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">电话</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" name="tel" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入手机号"/>
+                    <input class="weui-input" type="number" name="tel" value="<?=$shop->tel?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入手机号"/>
                 </div>
             </div>
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">QQ</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" name="qq" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入QQ号"/>
+                    <input class="weui-input" type="number" name="qq" value="<?=$shop->qq?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入QQ号"/>
                 </div>
             </div>
-        </div>
-        <div class="weui-cells__title">店铺介绍</div>
-        <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" name="content" id="content" placeholder="请输入详细介绍" rows="3"><?=$GoodsData->content?></textarea>
-                </div>
-                <div class="weui-cell__ft">
-                    <i class="weui-icon-warn"></i>
+                    <textarea class="weui-textarea" name="remark" placeholder="详细介绍" rows="3"><?=$shop->remark?></textarea>
                 </div>
             </div>
         </div>

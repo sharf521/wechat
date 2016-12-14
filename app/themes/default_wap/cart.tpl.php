@@ -8,7 +8,7 @@
     <? if(count($result_carts)==0) : ?>
     <div class="cart_empty margin_header">
         购物车内还没有商品！<br>
-        <a href="/" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
+        <a href="<?=url('goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
     </div>
     <? else : ?>
     <div class="margin_header" style="margin-bottom: 60px">

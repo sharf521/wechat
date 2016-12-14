@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('/')?>"><i class="iconfont">&#xe64f;</i></a>
+        <a class="m_header_l" href="<?=url('/')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1>用户中心</h1>
     </div>
@@ -20,25 +20,19 @@
             </div>
             <div class="weui-cell__ft"></div>
         </a>
+    </div>
+
+<? if($this->user->is_shop==0) : ?>
+    <div class="weui-cells">
         <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
             <div class="weui-cell__bd">
                 <p>申请开店</p>
             </div>
             <div class="weui-cell__ft"></div>
         </a>
-        <a class="weui-cell weui-cell_access" href="<?=url('logout')?>">
-            <div class="weui-cell__bd">
-                <p>退出</p>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </a>
     </div>
-
-
-
-
-
-<br><br>
+<? else: ?>
+    <br><br>
     <div class="weui-cells__title">卖家管理</div>
     <div class="weui-flex margin_header">
         <div class="weui-flex__item">
@@ -60,6 +54,13 @@
             </a>
         </div>
     </div>
+<? endif;?>
+
+    <div class="weui-btn-area">
+        <a class="weui-btn weui-btn_primary" href="<?=url('logout')?>">
+            安全退出
+        </a>
+    </div>
 
     <div class="weui-tabbar">
         <a href="/" class="weui-tabbar__item">
@@ -70,20 +71,9 @@
             <i class="iconfont weui-tabbar__icon">&#xe698;</i>
             <p class="weui-tabbar__label">购物车</p>
         </a>
-        <a href="javascript:;" class="weui-tabbar__item">
-            <i class="iconfont weui-tabbar__icon">&#xe89d;</i>
-            <p class="weui-tabbar__label">我的订单</p>
-        </a>
         <a href="<?=url('')?>" class="weui-tabbar__item weui-bar__item_on">
             <i class="iconfont weui-tabbar__icon">&#xe6fc;</i>
             <p class="weui-tabbar__label">我</p>
         </a>
     </div>
-    <script type="text/javascript">
-        $(function(){
-            $('.weui-tabbar__item').on('click', function () {
-                $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
-            });
-        });
-    </script>
 <?php require 'footer.php';?>

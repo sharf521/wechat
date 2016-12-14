@@ -24,6 +24,12 @@ class GoodsController extends Controller
         parent::__construct();
     }
 
+    public function lists(Goods $goods,Request $request)
+    {
+        $data['result']=$goods->where("status=1 and stock_count>0")->orderBy('id desc')->pager($request->get('page'),10);
+        $this->view('goods_lists',$data);
+    }
+
     public function detail(Goods $goods,Request $request)
     {
         $goods=$goods->findOrFail($request->get('id'));
