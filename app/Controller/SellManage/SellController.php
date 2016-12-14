@@ -17,7 +17,7 @@ class SellController extends BaseController
                 }*/
         if (strpos($host, 'wap.') === false) {
             $this->is_wap = false;
-            $this->template = 'sell';
+            $this->template = 'seller';
         } else {
             $this->is_wap = true;
             $this->template = 'sell_wap';
@@ -27,7 +27,8 @@ class SellController extends BaseController
         if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
-                redirect("/login?url={$url}");
+                //redirect("/login?url={$url}");
+                redirect("/wxOpen/oauth/?url={$url}");
                 exit;
             }
         }
