@@ -44,7 +44,7 @@
         <? endforeach;?>
         <div class="order_footer">
             <? if($order->status==1) : ?>
-                <a href="javascript:;" id="order_cancel" data-id="<?=$order->id?>" class="weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
+                <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
                 <a href="<?=url("order/pay/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>
             <? endif;?>
         </div>
@@ -66,7 +66,7 @@
 
     <script type="text/javascript">
         $(function () {
-            $('#order_cancel').on('click',function () {
+            $('.order_footer').find('.cancel').on('click',function () {
                 var id=$(this).attr('data-id');
                 layer.open({
                     content: '您确定要删除吗？'
