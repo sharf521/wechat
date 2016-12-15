@@ -9,7 +9,7 @@
         if($shop->is_exist){
 
         }else{
-            echo '填写申请';
+            echo '<div class="weui-cells__title">填写申请</div>';
         }
         ?>
         <div class="weui-cells weui-cells_form">
