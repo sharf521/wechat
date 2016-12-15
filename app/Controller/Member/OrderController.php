@@ -58,7 +58,7 @@ class OrderController extends MemberController
         if($order->buyer_id!=$user_id){
             echo '异常';exit;
         }
-        if($order->status!==1){
+        if($order->status!=1){
             redirect()->back()->with('msg','状态异常');
         }else{
             try{
