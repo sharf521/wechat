@@ -13,57 +13,35 @@ class Order extends Model
         parent::__construct();
     }
 
-    public function Add($user_id,Goods $goods,$spec_id=0,$quantity=1)
+
+    public function cancel($user_id)
     {
-        if(empty($user_id)){
-            throw new \Exception('您还没有登陆！');
-        }
-        if($quantity==0){
-            throw  new \Exception('购买数量不能为空！');
-        }
-        if($goods->is_have_spec==1 && $spec_id==0){
-            throw  new \Exception('请选择规格！');
-        }
-        $stock_count=$goods->stock_count;
-        $goods_price=$goods->price;
-        if($spec_id!=0){
-            $Spec=(new GoodsSpec())->findOrFail($spec_id);
-            if($Spec->goods_id!=$goods->id){
-                throw  new \Exception("规格异常！");
+        if($this->status==1){        //未支付
+            if($user_id==$this->buyer_id){
+                $orderGoods=$this->OrderGoods();
+                foreach ($orderGoods as $oGoods){
+                    //添加库存
+                    $goods=(new Goods())->find($oGoods->goods_id);
+                    if($goods->is_exist){
+                        $num=$oGoods->quantity;
+                        $goods->stock_count=$goods->stock_count+$num;
+                        $goods->sale_count=$goods->sale_count-$num;
+                        $goods->save();
+                        if($goods->is_have_spec){
+                            $spec=(new GoodsSpec())->find($oGoods->spec_id);
+                            $spec->stock_count=$spec->stock_count+$num;
+                            $spec->save();
+                        }
+                    }
+                }
+                $this->status=2;
+                $this->save();
+            }else{
+                throw new \Exception('异常');
             }
-            $goods_price=$Spec->price;
-            $stock_count=$Spec->stock_count;
-        }
+        }elseif($this->status==3){//己支付
 
-        if($stock_count<$quantity){
-            throw  new \Exception("库存不足，仅剩{$stock_count}件！");
         }
-
-        $order=new Order();
-        $order_sn=time().rand(10000,99999);
-        $order->order_sn=$order_sn;
-        $order->buyer_id=$user_id;
-        $order->buyer_name=$this->username;
-        $order->seller_id=$goods->user_id;
-        $order->goods_money=math($goods_price,$quantity,'*',2);
-        $order->order_money=$order->goods_money;
-        $order->status=1;
-        $order->save();
-        $orderGoods=new OrderGoods();
-        $orderGoods->order_sn=$order_sn;
-        $orderGoods->goods_id=$goods->id;
-        $orderGoods->goods_name=$goods->name;
-        $orderGoods->quantity=$quantity;
-        $orderGoods->goods_image=$goods->image_url;
-        $orderGoods->price=$goods_price;
-        $orderGoods->spec_id=$spec_id;
-        $orderGoods->spec_1='';
-        $orderGoods->spec_2='';
-        if($spec_id!=0){
-            $orderGoods->spec_1=$Spec->spec_1;
-            $orderGoods->spec_2=$Spec->spec_2;
-        }
-        $orderGoods->save();
     }
 
     public function OrderGoods()

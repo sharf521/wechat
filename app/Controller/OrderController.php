@@ -61,13 +61,35 @@ class OrderController extends Controller
                     $order->seller_id=$seller_id;
                     $order_money=0;
                     foreach ($carts as $cart){
-                        $goods=$goods->findOrFail($cart->goods_id);
-                        $goods=$goods->addSpec($cart->spec_id);
-                        if($goods->stock_count==0){
+                        $goods=$goods->find($cart->goods_id);
+                        $stock_count=$goods->stock_count;
+                        $price=$goods->price;
+                        //减少库存
+                        if($goods->is_exist){
+                            $goods->stock_count=$goods->stock_count-$cart->quantity;
+                            $goods->sale_count=$goods->sale_count+$cart->quantity;
+                            $goods->save();
+                        }
+                        if($goods->is_have_spec){
+                            $spec=(new GoodsSpec())->find($cart->spec_id);
+                            if($spec->goods_id==$goods->id){
+                                $spec_1=$spec->spec_1;
+                                $spec_2=$spec->spec_2;
+                                $stock_count=$spec->stock_count;
+                                $price=$spec->price;
+                                //规格的库存
+                                $spec->stock_count=$spec->stock_count-$cart->quantity;
+                                $spec->save();
+                            }else{
+                                $stock_count=0;
+                                $price=0;
+                            }
+                        }
+                        if($stock_count==0){
                             throw  new \Exception("己卖完了！");
                         }
-                        if($cart->quantity > $goods->stock_count){
-                            throw  new \Exception("库存不足，仅剩{$goods->stock_count}件！");
+                        if($cart->quantity > $stock_count){
+                            throw  new \Exception("库存不足，仅剩{$stock_count}件！");
                         }
                         $orderGoods=new OrderGoods();
                         $orderGoods->order_sn=$order_sn;
@@ -76,11 +98,12 @@ class OrderController extends Controller
                         $orderGoods->goods_image=$goods->image_url;
                         $orderGoods->spec_id=$cart->spec_id;
                         $orderGoods->quantity=$cart->quantity;
-                        $orderGoods->price=$goods->price;
-                        $orderGoods->spec_1=$goods->spec_1;
-                        $orderGoods->spec_2=$goods->spec_2;
+                        $orderGoods->price=$price;
+                        $orderGoods->spec_1=$spec_1;
+                        $orderGoods->spec_2=$spec_2;
                         $orderGoods->save();
                         $order_money=math($order_money,math($goods->price,$cart->quantity,'*',2),'+',2);
+
                         $cart->delete();
                     }
                     $order->goods_money=$order_money;

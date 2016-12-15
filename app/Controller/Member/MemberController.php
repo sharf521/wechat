@@ -8,9 +8,18 @@ use System\Lib\DB;
 class MemberController extends BaseController
 {
     protected $user;
+    protected $is_inWeChat=false;
     public function __construct()
     {
         parent::__construct();
+        $agent = addslashes($_SERVER['HTTP_USER_AGENT']);
+        if(strpos($agent, 'MicroMessenger') === false && strpos($agent, 'Windows Phone') === false)
+        {
+            //echo '非微信浏览器不能访问';
+            //die('Sorry！非微信浏览器不能访问');
+        }else{
+            $this->is_inWeChat=true;
+        }
         $host = strtolower($_SERVER['HTTP_HOST']);
 /*        $this->site=DB::table('subsite')->where("domain like '%{$host}|%'")->row();
         if(empty($this->site)){

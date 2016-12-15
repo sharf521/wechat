@@ -259,7 +259,9 @@ class WxOpenController extends Controller
     {
         $response = $this->app->payment->handleNotify(function($notify, $successful){
             // 使用通知里的 "微信支付订单号" 或者 "商户订单号" 去自己的数据库找到订单
-            $id=(int)$notify->attach;
+            $arr=explode('[#]',$notify->attach);
+            $id=(int)$arr[0];
+            $user_id=(int)$arr[1];
             $out_trade_no=$notify->out_trade_no;
             $order=new Order();
             $order =$order->find($id);

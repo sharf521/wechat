@@ -90,6 +90,7 @@
 
 /*确认订单*/
 .order_address{padding: 10px 10px 10px 3em; position: relative; border-bottom: 2px dashed #c3c3c3;}
+.order_address a{color: #333}
 .order_address:after{content:'\20';display:block;right:15px;position:absolute;top:50%;width:12px;height:12px;border-top:1px solid #7d7d7d;border-left:1px solid #7d7d7d;background:0 0;margin-top:-6px;transform:rotate(135deg);-webkit-transform:rotate(135deg)}
 .order_address h4{position: absolute;    top: 12px;    left: 10px;    width: 2em;    font-weight: 400;    font-size: 14px;    color: #999;}
 .order_address p{ line-height: 22px; padding-right: 40px; font-size: 14px;}

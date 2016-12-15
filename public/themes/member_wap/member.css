@@ -51,6 +51,7 @@
 .order_head p{color:#999;font-size:9pt;line-height:1.7em}
 .order_head span{color:#666}
 .order_head span i{display:inline-block;width:24px}
+.order_head .time{position: absolute; right: 5px; top:15px;}
 .co_blue,.co_blue a{color:#3985ff}
 .co_red{color:#e4393c}
 .order_head .oh_btn{position:absolute;top:14px;right:0;z-index:1;display:block;width:5pc;height:30px;border-radius:2px;background:#e4393c;color:#fff;text-align:center;line-height:30px}
@@ -59,6 +60,7 @@
 .order_shopBar em:after{content:'\20';display:block;right:15px;position:absolute;top:50%;width:12px;height:12px;border-top:1px solid #7d7d7d;border-left:1px solid #7d7d7d;background:0 0;margin-top:-6px;transform:rotate(135deg);-webkit-transform:rotate(135deg)}
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
 .order_item .image{float:left;margin-right:10px;height:50px;}
+.order_footer{border-top:1px solid #eee; padding-top: 5px; text-align: right}
 
 /*order pay*/
 .order_address{padding: 10px 10px 10px 3em; position: relative; border-bottom: 2px dashed #c3c3c3;}
