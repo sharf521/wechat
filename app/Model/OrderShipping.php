@@ -13,6 +13,7 @@ class OrderShipping extends Model
 {
     protected $table="order_shipping";
     protected $primaryKey="order_sn";
+    protected $dates=array('created_at','shipping_at');
     public function __construct()
     {
         parent::__construct();

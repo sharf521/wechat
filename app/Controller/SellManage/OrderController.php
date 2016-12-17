@@ -68,6 +68,68 @@ class OrderController extends SellController
             }
         }
     }
+    //修改
+    public function editMoney(Order $order,Request $request)
+    {
+        $user_id=$this->user_id;
+        $id=$request->get('id');
+        $order=$order->findOrFail($id);
+        if($order->seller_id!=$user_id){
+            echo '异常';exit;
+        }
+        if($order->status!=1){
+            redirect()->back()->with('msg','状态异常');
+        }
+        if($_POST){
+            $order->order_money=(float)$request->post('money');
+            $order->save();
+            redirect("order")->with('msg','操作成功');
+        }else{
+            $data['order']=$order;
+            $this->view('order_edit',$data);
+        }
+    }
+    
+    public function editShipping(Order $order,Request $request)
+    {
+        $user_id=$this->user_id;
+        $id=$request->get('id');
+        $order=$order->findOrFail($id);
+        if($order->seller_id!=$user_id){
+            echo '异常';exit;
+        }
+        if($order->status!=3){
+            redirect()->back()->with('msg','状态异常');
+        }
+        $shipping=$order->OrderShipping();
+        if($_POST){
+            $shipping->shipping_name=$request->post('shipping_name');
+            $shipping->shipping_no=$request->post('shipping_no');
+            $shipping->shipping_fee=$request->post('shipping_fee');
+            $shipping->shopping_at=time();
+            $shipping->save();
+            $order->status=4;
+            $order->shipping_at=time();
+            $order->save();
+            redirect("order")->with('msg','操作成功');
+        }else{
+            $data['order']=$order;
+            $data['shipping']=$shipping;
+            $this->view('order_edit',$data);
+        }
+    }
 
+    public function show(Order $order,Request $request)
+    {
+        $user_id=$this->user_id;
+        $id=$request->get('id');
+        $order=$order->findOrFail($id);
+        if($order->seller_id!=$user_id){
+            echo '异常';exit;
+        }
+        $data['order']=$order;
+        $data['shipping']=$order->OrderShipping();
+        $this->view('order_show',$data);
+    }
 
 }

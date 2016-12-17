@@ -61,10 +61,12 @@ class OrderController extends Controller
                     $order->seller_id=$seller_id;
                     $order->buyer_remark=$request->post('buyer_remark');
                     $order_money=0;
+                    $shipping_fee=0;
                     foreach ($carts as $cart){
                         $goods=$goods->find($cart->goods_id);
                         $stock_count=$goods->stock_count;
                         $price=$goods->price;
+                        $shipping_fee=math($shipping_fee,$goods->shipping_fee,'+',2);
                         //减少库存
                         if($goods->is_exist){
                             $goods->stock_count=$goods->stock_count-$cart->quantity;
@@ -108,7 +110,8 @@ class OrderController extends Controller
                         $cart->delete();
                     }
                     $order->goods_money=$order_money;
-                    $order->order_money=$order->goods_money;
+                    $order->shipping_fee=$shipping_fee;
+                    $order->order_money=math($order->goods_money,$order->shipping_fee,'+',2);
                     $order->status=1;
                     $order->save();
                     

@@ -43,10 +43,13 @@
         <div class="remark">备注：<?=nl2br($order->buyer_remark)?></div>
         <div class="order_footer">
             <p>总价：<em class="co_red">¥<?=$order->order_money?></em></p>
-            <? if($order->status==3) : ?>
+            <? if($order->status==1) : ?>
+                <a href="<?=url("order/editMoney/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">修改价格</a>
+            <? elseif ($order->status==3) : ?>
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
-                <a href="<?=url("order/pay/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
+                <a href="<?=url("order/editShipping/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
             <? endif;?>
+            <a href="<?=url("order/show/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">详细</a>
         </div>
     </div>
 <? endforeach;?>

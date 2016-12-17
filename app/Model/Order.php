@@ -2,12 +2,10 @@
 
 namespace App\Model;
 
-
-use System\Lib\Request;
-
 class Order extends Model
 {
     protected $table='order';
+    protected $dates=array('created_at','payed_at','shipping_at','finished_at');
     public function __construct()
     {
         parent::__construct();
@@ -48,6 +46,7 @@ class Order extends Model
         }elseif($this->status==3){  //己支付
             if($user_id==$this->seller_id){
                 $this->backStock();
+                //退款
                 $this->status=2;
                 $this->save();
             }else{
@@ -61,6 +60,9 @@ class Order extends Model
         return $this->hasMany('\App\Model\OrderGoods','order_sn','order_sn');
     }
 
+    /**
+     * @return OrderShipping
+     */
     public function OrderShipping()
     {
         return $this->hasOne('\App\Model\OrderShipping','order_sn','order_sn');
