@@ -37,7 +37,7 @@
                     </div>
                 </div>
             <? endforeach;?>
-            <textarea name="buyer_remark" class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="请输入文本" rows="2">订单备注,选填.</textarea>
+            <textarea name="buyer_remark" class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="订单备注,选填" rows="2"></textarea>
         </div>
     <? endforeach;?>
     <div class="weui-btn-area">

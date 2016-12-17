@@ -108,23 +108,10 @@ class OrderController extends MemberController
                 $order->save();
             }
         }
-
-
         $data['title_herder']='支付';
-
         $data['order']=$order;
         $data['orderGoods']=$order->OrderGoods();
         $data['shipping']=$order->OrderShipping();
         $this->view('order_pay',$data);
-    }
-
-
-}
-
-//打印输出数组信息
-function printf_info($data)
-{
-    foreach($data as $key=>$value){
-        echo "<font color='#00ff55;'>$key</font> : $value <br/>";
     }
 }

@@ -10,6 +10,7 @@ namespace App\Controller\SellManage;
 
 
 use App\Model\Order;
+use System\Lib\DB;
 use System\Lib\Request;
 
 class OrderController extends SellController
@@ -42,6 +43,30 @@ class OrderController extends SellController
     {
         $data['orders']=$order->where('seller_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
+    }
+
+    public function cancel(Order $order,Request $request)
+    {
+        $user_id=$this->user_id;
+        $id=$request->get('id');
+        $order=$order->findOrFail($id);
+        if($order->seller_id!=$user_id){
+            echo '异常';exit;
+        }
+        if($order->status!=3){
+            redirect()->back()->with('msg','状态异常');
+        }else{
+            try{
+                DB::beginTransaction();
+                $order->cancel($this->user_id);
+                DB::commit();
+                redirect()->back()->with('msg','订单取消成功！');
+            }catch (\Exception $e){
+                $error=$e->getMessage();
+                redirect()->back()->with('error',$error);
+                DB::rollBack();
+            }
+        }
     }
 
 

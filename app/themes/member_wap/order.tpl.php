@@ -24,11 +24,8 @@
     ?>
     <div class="order_box">
         <div class="order_head">
-            <div class="oh_content">
-                <p class="pState"><span>状<i></i>态：</span><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
-                <p><span>总<i></i>价：</span><em class="co_red">¥<?=$order->order_money?></em></p>
-                <span class="time"><?=$order->created_at?></span>
-            </div>
+            <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
+            <span class="time"><?=$order->created_at?></span>
         </div>
         <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
         <? foreach ($goods as $g) : ?>
@@ -42,7 +39,9 @@
                 </div>
             </a>
         <? endforeach;?>
+        <div class="remark">备注：<?=nl2br($order->buyer_remark)?></div>
         <div class="order_footer">
+            <p>总价：<em class="co_red">¥<?=$order->order_money?></em></p>
             <? if($order->status==1) : ?>
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
                 <a href="<?=url("order/pay/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>
@@ -56,21 +55,19 @@
         <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
         <div class="weui-msg__text-area">
             <h2 class="weui-msg__title">没有任何记录。。</h2>
-            <p class="weui-msg__desc"></p>
+            <a href="<?=url('/goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
         </div>
     </div>
 <? else: ?>
     <?=$orders['page']?>
 <? endif;?>
-
-
     <script type="text/javascript">
         $(function () {
             $('.order_footer').find('.cancel').on('click',function () {
                 var id=$(this).attr('data-id');
                 layer.open({
-                    content: '您确定要删除吗？'
-                    ,btn: ['删除', '取消']
+                    content: '确定要取消该订单吗？'
+                    ,btn: ['是', '否']
                     ,yes: function(index){
                         location.href='<?=url("order/cancel/?id=")?>'+id;
                         layer.close(index);

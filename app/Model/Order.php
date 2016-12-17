@@ -13,34 +13,46 @@ class Order extends Model
         parent::__construct();
     }
 
+    //退回库存
+    private function backStock()
+    {
+        $orderGoods=$this->OrderGoods();
+        foreach ($orderGoods as $oGoods){
+            //添加库存
+            $goods=(new Goods())->find($oGoods->goods_id);
+            if($goods->is_exist){
+                $num=$oGoods->quantity;
+                $goods->stock_count=$goods->stock_count+$num;
+                $goods->sale_count=$goods->sale_count-$num;
+                $goods->save();
+                if($goods->is_have_spec){
+                    $spec=(new GoodsSpec())->find($oGoods->spec_id);
+                    $spec->stock_count=$spec->stock_count+$num;
+                    $spec->save();
+                }
+            }
+        }
+    }
+
 
     public function cancel($user_id)
     {
-        if($this->status==1){        //未支付
+        if($this->status==1){    //未支付
             if($user_id==$this->buyer_id){
-                $orderGoods=$this->OrderGoods();
-                foreach ($orderGoods as $oGoods){
-                    //添加库存
-                    $goods=(new Goods())->find($oGoods->goods_id);
-                    if($goods->is_exist){
-                        $num=$oGoods->quantity;
-                        $goods->stock_count=$goods->stock_count+$num;
-                        $goods->sale_count=$goods->sale_count-$num;
-                        $goods->save();
-                        if($goods->is_have_spec){
-                            $spec=(new GoodsSpec())->find($oGoods->spec_id);
-                            $spec->stock_count=$spec->stock_count+$num;
-                            $spec->save();
-                        }
-                    }
-                }
+                $this->backStock();
                 $this->status=2;
                 $this->save();
             }else{
                 throw new \Exception('异常');
             }
-        }elseif($this->status==3){//己支付
-
+        }elseif($this->status==3){  //己支付
+            if($user_id==$this->seller_id){
+                $this->backStock();
+                $this->status=2;
+                $this->save();
+            }else{
+                throw new \Exception('异常');
+            }
         }
     }
 

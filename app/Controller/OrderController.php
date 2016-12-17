@@ -59,6 +59,7 @@ class OrderController extends Controller
                     $order->buyer_id=$user_id;
                     $order->buyer_name=$this->username;
                     $order->seller_id=$seller_id;
+                    $order->buyer_remark=$request->post('buyer_remark');
                     $order_money=0;
                     foreach ($carts as $cart){
                         $goods=$goods->find($cart->goods_id);

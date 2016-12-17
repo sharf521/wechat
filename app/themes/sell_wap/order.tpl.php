@@ -25,22 +25,29 @@
     ?>
     <div class="order_box">
         <div class="order_head">
-            <div class="oh_content">
-                <p class="pState"><span>状<i></i>态：</span><em class="co_blue">已签收</em></p>
-                <p><span>总<i></i>价：</span><em class="co_red">¥<?=$order->order_money?></em></p>
-            </div>
-            <a href="javascript:void(0);" class="oh_btn">再次购买</a>
+            <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
+            <span class="time"><?=$order->created_at?></span>
         </div>
         <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
         <? foreach ($goods as $g) : ?>
-        <div class="order_item">
-            <img class="image" src="<?=$g->goods_image?>">
-            <div class="oi_content">
-                <a><?=$g->goods_name?></a>
-                <p><span class="count"><?=$g->quantity?> 件</span></p>
-            </div>
-        </div>
+            <a href="<?=url("/goods/detail/?id={$g->goods_id}")?>">
+                <div class="order_item">
+                    <img class="image" src="<?=$g->goods_image?>">
+                    <div class="oi_content">
+                        <?=$g->goods_name?> <?=$g->spec_1?> <?=$g->spec_2?>
+                        <p><span class="count"><?=$g->quantity?> 件</span></p>
+                    </div>
+                </div>
+            </a>
         <? endforeach;?>
+        <div class="remark">备注：<?=nl2br($order->buyer_remark)?></div>
+        <div class="order_footer">
+            <p>总价：<em class="co_red">¥<?=$order->order_money?></em></p>
+            <? if($order->status==3) : ?>
+                <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
+                <a href="<?=url("order/pay/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
+            <? endif;?>
+        </div>
     </div>
 <? endforeach;?>
 
@@ -54,29 +61,18 @@
     </div>
 <? endif;?>
     <script type="text/javascript">
-        function showMenu(id) {
-            var $androidActionSheet = $('#androidActionsheet');
-            $androidActionSheet.show();
-            $androidActionSheet.find('.weui-mask').on('click',function () {
-                $androidActionSheet.hide();
-            });
-            $androidActionSheet.find('.change').on('click',function () {
-                location.href='<?=url("goods/change/?id=")?>'+id;
-            });
-            $androidActionSheet.find('.edit').on('click',function () {
-                location.href='<?=url("goods/edit/?id=")?>'+id;
-            });
-            $androidActionSheet.find('.del').on('click',function () {
+        $(function () {
+            $('.order_footer').find('.cancel').on('click',function () {
+                var id=$(this).attr('data-id');
                 layer.open({
-                    content: '您确定要删除吗？'
-                    ,btn: ['删除', '取消']
+                    content: '确定要取消该订单吗？'
+                    ,btn: ['是', '否']
                     ,yes: function(index){
-                        location.href='<?=url("goods/del/?id=")?>'+id;
+                        location.href='<?=url("order/cancel/?id=")?>'+id;
                         layer.close(index);
                     }
                 });
-                $androidActionSheet.fadeOut(200);
             });
-        }
+        });
     </script>
 <?php require 'footer.php';?>
