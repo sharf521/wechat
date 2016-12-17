@@ -57,4 +57,5 @@
         cart_js();
     });
 </script>
+<?php require 'footer_bar.php';?>
 <?php require 'footer.php';?>

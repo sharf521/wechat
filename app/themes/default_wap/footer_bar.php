@@ -7,7 +7,7 @@
         <i class="iconfont weui-tabbar__icon">&#xe600;</i>
         <p class="weui-tabbar__label">商品列表</p>
     </a>
-    <a href="<?=url('/cart')?>" class="weui-tabbar__item">
+    <a href="<?=url('/cart')?>" class="weui-tabbar__item <? if($this->control=='cart'){echo 'weui-bar__item_on';}?>">
         <i class="iconfont weui-tabbar__icon">&#xe698;</i>
         <p class="weui-tabbar__label">购物车</p>
     </a>
