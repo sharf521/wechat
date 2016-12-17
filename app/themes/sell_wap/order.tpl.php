@@ -35,14 +35,14 @@
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
                         <?=$g->goods_name?> <?=$g->spec_1?> <?=$g->spec_2?>
-                        <p><span class="count"><?=$g->quantity?> 件</span></p>
+                        <p><span class="count price">¥<?=$g->price?> x<?=$g->quantity?></span></p>
                     </div>
                 </div>
             </a>
         <? endforeach;?>
         <div class="remark">备注：<?=nl2br($order->buyer_remark)?></div>
         <div class="order_footer">
-            <p>总价：<em class="co_red">¥<?=$order->order_money?></em></p>
+            <p>总价：<em class="co_red price">¥<?=$order->order_money?></em></p>
             <? if($order->status==1) : ?>
                 <a href="<?=url("order/editMoney/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">修改价格</a>
             <? elseif ($order->status==3) : ?>

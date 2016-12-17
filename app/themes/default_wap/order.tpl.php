@@ -16,8 +16,10 @@
     </a>
 </div>
 
-<form method="post">
-    <?  foreach ($result_carts as $i=>$carts) : ?>
+<form method="post" id="form_order">
+    <?
+    foreach ($result_carts as $i=>$carts) :
+        ?>
         <div class="order_box">
             <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>
             <? foreach($carts as $cart): ?>
@@ -33,15 +35,25 @@
                                 echo "<span class='spec'>{$cart->spec_2}</span>";
                             }
                             ?>
-                            <span class="count">数量：<?=$cart->quantity?></span></p>
+                            <span class="count price">¥<?=$cart->price?> x<?=$cart->quantity?></span></p>
                     </div>
                 </div>
             <? endforeach;?>
             <textarea name="buyer_remark" class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="订单备注,选填" rows="2"></textarea>
+            <div class="foot">小计：<em>¥<span class="shop_total" shop_id="<?=$i?>"></span></em></div>
         </div>
     <? endforeach;?>
-    <div class="weui-btn-area">
-        <input class="weui-btn weui-btn_primary" type="submit" value="提交订单">
+</form><br><br><br>
+
+    <div class="order_bottom">
+        <div class="total">
+            <p>总计：<strong id="totalPrice">¥<span></span></strong><small>(不含运费)</small></p>
+            <a href="javascript:;" class="btn">提交订单<em id="totalNum">(<span></span>件)</em></a>
+        </div>
     </div>
-</form>
+<script>
+    $(function () {
+        order_js('<?=$cart_id?>');
+    })
+</script>
 <?php require 'footer.php';?>

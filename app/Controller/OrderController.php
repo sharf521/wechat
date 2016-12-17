@@ -60,7 +60,7 @@ class OrderController extends Controller
                     $order->buyer_name=$this->username;
                     $order->seller_id=$seller_id;
                     $order->buyer_remark=$request->post('buyer_remark');
-                    $order_money=0;
+                    $goods_money=0;
                     $shipping_fee=0;
                     foreach ($carts as $cart){
                         $goods=$goods->find($cart->goods_id);
@@ -105,11 +105,11 @@ class OrderController extends Controller
                         $orderGoods->spec_1=$spec_1;
                         $orderGoods->spec_2=$spec_2;
                         $orderGoods->save();
-                        $order_money=math($order_money,math($goods->price,$cart->quantity,'*',2),'+',2);
+                        $goods_money=math($goods_money,math($goods->price,$cart->quantity,'*',2),'+',2);
 
                         $cart->delete();
                     }
-                    $order->goods_money=$order_money;
+                    $order->goods_money=$goods_money;
                     $order->shipping_fee=$shipping_fee;
                     $order->order_money=math($order->goods_money,$order->shipping_fee,'+',2);
                     $order->status=1;
@@ -132,6 +132,7 @@ class OrderController extends Controller
             }
             redirect('/member/order')->with('msg','提交成功，请支付！');
         }else{
+            $data['cart_id']=implode(',',$cart_id);
             $data['address']=$address;
             $this->view('order',$data);
         }

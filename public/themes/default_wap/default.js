@@ -1,3 +1,27 @@
+/* 确认订单*/
+function order_js(cart_ids) {
+    $('.order_bottom .btn').on('click',function () {
+        $('#form_order').submit();
+    });
+    $.get("/index.php/cart/getSelectedMoney?cart_ids="+cart_ids, function (data) {
+        if (data != "") {
+            var data = eval('(' + data + ")");
+            $("#totalPrice span").html(data.total);
+            $("#totalNum span").html(data.nums);
+            $('.foot .shop_total').each(function(){
+                var shop_id=$(this).attr('shop_id');
+                if(data[shop_id]){
+                    $(this).html(data[shop_id]);
+                }else{
+                    $(this).html(0);
+                }
+            });
+        } else {
+            $("#totalPrice span").html(0);
+            $("#totalNum span").html(0);
+        }
+    });
+}
 /* 购物车 start*/
 function getCartedMoney() {
     var cart_id = "";

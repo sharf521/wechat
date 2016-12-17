@@ -6,10 +6,11 @@
     </div>
 
     <? if(count($result_carts)==0) : ?>
-    <div class="cart_empty margin_header">
-        购物车内还没有商品！<br>
-        <a href="<?=url('goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
-    </div>
+        <div class="cart_empty margin_header">
+            购物车内还没有商品！<br>
+            <a href="<?=url('goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
+        </div>
+        <?php require 'footer_bar.php';?>
     <? else : ?>
     <div class="margin_header" style="margin-bottom: 60px">
         <?  foreach ($result_carts as $i=>$carts) : ?>
@@ -57,5 +58,4 @@
         cart_js();
     });
 </script>
-<?php require 'footer_bar.php';?>
 <?php require 'footer.php';?>
