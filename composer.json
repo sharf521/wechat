@@ -4,7 +4,8 @@
         "aferrandini/phpqrcode": "1.0.1",
         "overtrue/wechat": "^3.1",
         "pimple/pimple": "~3.0",
-        "sharf/myphp": "dev-master"
+        "sharf/myphp": "dev-master",
+        "qiniu/php-sdk": "^7.1"
     },
     "repositories": {
         "packagist": {

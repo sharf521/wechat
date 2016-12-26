@@ -6,6 +6,9 @@ use App\Model\GoodsImage;
 use App\Model\UploadLog;
 use System\Lib\Request;
 
+use Qiniu\Auth;
+use Qiniu\Storage\UploadManager;
+
 class UploadController extends Controller
 {
     public function __construct()
@@ -97,6 +100,35 @@ class UploadController extends Controller
                 );
             }
             echo json_encode($data);
+            //$this->toQiniu($path);
+        }
+    }
+
+    private function toQiniu($path)
+    {
+        // 需要填写你的 Access Key 和 Secret Key
+        $accessKey = 'eumnKSaYPKOvuZyFvUrXxKNm6DpJ4HJ6Vn9QqzLZ';
+        $secretKey = 'ICO6OwtICQbq_XcPGJxqJSEJ-yKHF458CuqyT89E';
+
+        // 构建鉴权对象
+        $auth = new Auth($accessKey, $secretKey);
+        // 要上传的空间
+        $bucket = 'wuluan';
+        // 生成上传 Token
+        $token = $auth->uploadToken($bucket);
+        // 要上传文件的本地路径
+        $filePath = ROOT . '/public' . $path;
+        // 上传到七牛后保存的文件名
+        $key = $path;
+        // 初始化 UploadManager 对象并进行文件的上传
+        $uploadMgr = new UploadManager();
+        // 调用 UploadManager 的 putFile 方法进行文件的上传
+        list($ret, $err) = $uploadMgr->putFile($token, $key, $filePath);
+        if ($err !== null) {
+            var_dump($err);
+        } else {
+            //var_dump($ret);
+            return true;
         }
     }
 

@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Model\Goods;
+use Qiniu\Auth;
+use Qiniu\Storage\UploadManager;
 
 class IndexController extends Controller
 {
@@ -14,5 +16,11 @@ class IndexController extends Controller
     {
         $data['goods_result']=$goods->where("status=1 and stock_count>0")->orderBy('id desc')->limit("0,10")->get();
         $this->view('index',$data);
+    }
+
+    public function up()
+    {
+       
+
     }
 }
