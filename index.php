@@ -44,7 +44,8 @@ $pager = app('\System\Lib\Page');
 $routes=array(
     'chat'=>'Chat',
     'member'=>'Member',
-    'sellManage'=>'SellManage'
+    'sellManage'=>'SellManage',
+    'supplyManage'=>'SupplyManage'
 );
 \System\Lib\Application::start($routes);
 $t2 = microtime(true);

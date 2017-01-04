@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\GoodsImage;
+use App\Model\SupplyGoodsImage;
 use App\Model\UploadLog;
 use System\Lib\Request;
 
@@ -32,6 +33,8 @@ class UploadController extends Controller
             $path = "/data/upload/" . ceil($user_id / 2000) . "/" . $user_id . "/article/" . date('Ym') . '/';
         } elseif ($type == 'goods') {
             $path = "/data/upload/" . ceil($user_id / 2000) . "/" . $user_id . "/goods/" . date('Ym') . '/';
+        } elseif ($type == 'supply') {
+            $path = "/data/upload/" . ceil($user_id / 2000) . "/" . $user_id . "/supply/" . date('Ym') . '/';
         } elseif ($type == 'headimgurl') {
             $name = 'face';
         } elseif ($type == 'card1' || $type == 'card2') {
@@ -69,6 +72,13 @@ class UploadController extends Controller
             $path=$path . $filename;
             if($type=='goods'){
                 $goodsImg=new GoodsImage();
+                $goodsImg->user_id=$user_id;
+                $goodsImg->image_url=$path;
+                $goodsImg->goods_id=0;
+                $goodsImg->status=1;
+                $id=$goodsImg->save(true);
+            }elseif ($type=='supply'){
+                $goodsImg=new SupplyGoodsImage();
                 $goodsImg->user_id=$user_id;
                 $goodsImg->image_url=$path;
                 $goodsImg->goods_id=0;
@@ -138,6 +148,8 @@ class UploadController extends Controller
         $type=$request->get('type');
         if($type=='goods'){
             $Log=new GoodsImage();
+        }elseif($type=='supply'){
+            $Log=new SupplyGoodsImage();
         }else{
             $Log=new UploadLog();
         }

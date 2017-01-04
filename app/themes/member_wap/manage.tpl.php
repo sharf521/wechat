@@ -56,6 +56,34 @@
     </div>
 <? endif;?>
 
+<? if($this->user->is_supply==0) : ?>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
+            <div class="weui-cell__bd">
+                <p>申请供货商</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+    </div>
+<? else: ?>
+    <br><br>
+    <div class="weui-cells__title">供货商中心</div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/category')?>">
+            <div class="weui-cell__bd">
+                <p>分类管理</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/goods')?>">
+            <div class="weui-cell__bd">
+                <p>商品管理</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+    </div>
+<? endif;?>
+
     <div class="weui-btn-area">
         <a class="weui-btn weui-btn_primary" href="<?=url('logout')?>">
             安全退出

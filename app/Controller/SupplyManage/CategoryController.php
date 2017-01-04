@@ -6,26 +6,27 @@
  * Time: 15:31
  */
 
-namespace App\Controller\SellManage;
+namespace App\Controller\SupplyManage;
 
 
 use App\Model\ShopCategory;
+use App\Model\SupplyCategory;
 use System\Lib\Request;
 
-class CategoryController extends SellController
+class CategoryController extends SupplyController
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function index(ShopCategory $category)
+    public function index(SupplyCategory $category)
     {
         $data['cates']=$category->getListTree($this->user_id);
         $this->view('category',$data);
     }
 
-    public function add(ShopCategory $category,Request $request)
+    public function add(SupplyCategory $category,Request $request)
     {
         if($_POST){
             $pid=(int)$request->post('pid');
@@ -35,7 +36,7 @@ class CategoryController extends SellController
             }
             $path='';
             if($pid!=0){
-                $path=(new ShopCategory())->find($pid)->path;
+                $path=(new SupplyCategory())->find($pid)->path;
             }
             $category->user_id=$this->user_id;
             $category->pid=$pid;
@@ -53,7 +54,7 @@ class CategoryController extends SellController
         }
     }
 
-    public function edit(ShopCategory $category,Request $request)
+    public function edit(SupplyCategory $category,Request $request)
     {
         $id=(int)$request->get('id');
         $cate=$category->findOrFail($id);
@@ -71,7 +72,7 @@ class CategoryController extends SellController
         }
     }
 
-    public function del(ShopCategory $category,Request $request)
+    public function del(SupplyCategory $category,Request $request)
     {
         $category=$category->findOrFail($request->get('id'));
         if($category->user_id==$this->user_id){
