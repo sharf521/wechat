@@ -90,7 +90,7 @@
         </a>
     </div>
 
-    <div class="weui-tabbar">
+    <div class="weui-tabbar" style="position: fixed">
         <a href="/" class="weui-tabbar__item">
             <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
             <p class="weui-tabbar__label">首页</p>
