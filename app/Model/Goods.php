@@ -28,7 +28,7 @@ class Goods extends Model
 
     public function GoodsData()
     {
-        return $this->hasOne('\App\Model\GoodsData','id','id');
+        return $this->hasOne('\App\Model\GoodsData','goods_id','id');
     }
 
     public function GoodsImage()

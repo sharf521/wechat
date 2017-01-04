@@ -28,7 +28,7 @@ class SupplyGoods extends Model
 
     public function GoodsData()
     {
-        return $this->hasOne('\App\Model\SupplyGoodsData','id','id');
+        return $this->hasOne('\App\Model\SupplyGoodsData','goods_id','id');
     }
 
     public function GoodsImage()
