@@ -53,6 +53,12 @@
                 <p class="weui-grid__label">我的订单</p>
             </a>
         </div>
+        <div class="weui-flex__item">
+            <a href="<?=url('/sellManage/supply')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe89d;</i>
+                <p class="weui-grid__label">我要采购</p>
+            </a>
+        </div>
     </div>
 <? endif;?>
 

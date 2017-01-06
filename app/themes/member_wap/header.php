@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/themes/base_wap.css?<?=rand(1000,9999)?>"/>
     <link rel="stylesheet" href="/themes/member_wap/member.css?<?=rand(1000,9999)?>"/>
     <script src="/plugin/js/jquery.js"></script>
+    <script type="text/javascript" src="/plugin/js/jquery.validation.min.js"></script>
     <script src="/themes/member_wap/member.js?<?=rand(1000,9999)?>"></script>
 </head>
 <body ontouchstart>
