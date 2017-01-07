@@ -2,7 +2,7 @@
     <div class="m_header">
         <a class="m_header_l" href="<?=url('/member')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r" href="<?=url('goods/add')?>">添加</a>
-        <h1>商品管理</h1>
+        <h1>供应商品管理</h1>
     </div>
     <div class="my-navbar margin_header">
         <div class="my-navbar__item <? if($this->func=='index'){echo 'my-navbar__item_on';}?>">
