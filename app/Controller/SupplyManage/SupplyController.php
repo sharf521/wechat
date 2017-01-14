@@ -10,15 +10,13 @@ class SupplyController extends BaseController
     {
         parent::__construct();
         $host = strtolower($_SERVER['HTTP_HOST']);
-        if (strpos($host, 'wap.') === false) {
+        if (strpos($host, '.wechat.') === false) {
             $this->is_wap = false;
             $this->template = 'supply';
         } else {
             $this->is_wap = true;
             $this->template = 'supply_wap';
         }
-        $this->is_wap = true;
-        $this->template = 'supply_wap';
         if ($this->control != 'login' && $this->control != 'logout') {
             if (empty($this->user_id)) {
                 $url = urlencode($_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']);

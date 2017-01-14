@@ -9,9 +9,9 @@ class Controller extends BaseController
     {
         parent::__construct();
         $host = strtolower($_SERVER['HTTP_HOST']);
-        if (strpos($host, 'wap.') === false) {
+        if (strpos($host, '.wechat.') === false) {
             $this->is_wap = false;
-            $this->template = 'default_wap';
+            $this->template = 'default';
         } else {
             $this->is_wap = true;
             $this->template = 'default_wap';

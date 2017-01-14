@@ -15,15 +15,13 @@ class SellController extends BaseController
                     echo 'The site was not found！';
                     exit;
                 }*/
-        if (strpos($host, 'wap.') === false) {
+        if (strpos($host, '.wechat.') === false) {
             $this->is_wap = false;
             $this->template = 'seller';
         } else {
             $this->is_wap = true;
             $this->template = 'sell_wap';
         }
-        $this->is_wap = true;
-        $this->template = 'sell_wap';
         if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
