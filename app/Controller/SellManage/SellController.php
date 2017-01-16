@@ -1,33 +1,27 @@
 <?php
 namespace App\Controller\SellManage;
+use App\Controller\Controller;
 use App\Model\User;
-use System\Lib\Controller as BaseController;
 
-class SellController extends BaseController
+class SellController extends Controller
 {
     protected $user;
     public function __construct()
     {
         parent::__construct();
-        $host = strtolower($_SERVER['HTTP_HOST']);
-        /*        $this->site=DB::table('subsite')->where("domain like '%{$host}|%'")->row();
-                if(empty($this->site)){
-                    echo 'The site was not found！';
-                    exit;
-                }*/
-        if (strpos($host, '.wechat.') === false) {
-            $this->is_wap = false;
-            $this->template = 'seller';
-        } else {
-            $this->is_wap = true;
+        if($this->is_wap){
             $this->template = 'sell_wap';
+        }else{
+            $this->template = 'seller';
         }
         if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
-                //redirect("/login?url={$url}");
-                redirect("/wxOpen/oauth/?url={$url}");
-                exit;
+                if($this->is_inWeChat){
+                    redirect("/wxOpen/oauth/?url={$url}");
+                }else{
+                    redirect(url("/user/login/?url={$url}"));
+                }
             }
         }
         $this->user=(new User())->findOrFail($this->user_id);

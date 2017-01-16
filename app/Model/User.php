@@ -188,17 +188,6 @@ class User extends Model
         return $user->save();
     }
 
-    //实名认证显示信息
-    function userinfoone($data)
-    {
-        $select = "u.*,i.*,b.account";
-        $where = "where u.id=" . $data['id'];
-        $sql = "select {$select} from {$this->dbfix}user u 
-left join {$this->dbfix}userinfo i on u.id=i.user_id 
-left join {$this->dbfix}account_bank b on u.id=b.user_id {$where}";
-        return $this->mysql->get_one($sql);
-    }
-
     //用户管理编辑
     function edit($data = array())
     {

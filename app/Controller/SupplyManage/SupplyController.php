@@ -1,33 +1,32 @@
 <?php
 namespace App\Controller\SupplyManage;
 
+use App\Controller\Controller;
 use App\Model\User;
-use System\Lib\Controller as BaseController;
 
-class SupplyController extends BaseController
+class SupplyController extends Controller
 {
     public function __construct()
     {
         parent::__construct();
-        $host = strtolower($_SERVER['HTTP_HOST']);
-        if (strpos($host, '.wechat.') === false) {
-            $this->is_wap = false;
-            $this->template = 'supply';
-        } else {
-            $this->is_wap = true;
+        if($this->is_wap){
             $this->template = 'supply_wap';
+        }else{
+            $this->template = 'supply';
         }
-        if ($this->control != 'login' && $this->control != 'logout') {
-            if (empty($this->user_id)) {
-                $url = urlencode($_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']);
-                //redirect("/login?url={$url}");
-                redirect("/wxOpen/oauth/?url={$url}");
-                exit;
+        if($this->control !='login' && $this->control !='logout'){
+            if(empty($this->user_id)){
+                $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+                if($this->is_inWeChat){
+                    redirect("/wxOpen/oauth/?url={$url}");
+                }else{
+                    redirect(url("/user/login/?url={$url}"));
+                }
             }
         }
-        $this->user = (new User())->findOrFail($this->user_id);
-        if (trim($this->user->headimgurl) == '') {
-            $this->user->headimgurl = '/themes/member/images/no-img.jpg';
+        $this->user=(new User())->findOrFail($this->user_id);
+        if(trim($this->user->headimgurl)==''){
+            $this->user->headimgurl='/themes/member/images/no-img.jpg';
         }
     }
 

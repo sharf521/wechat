@@ -48,7 +48,7 @@ class IndexController extends AdminController
     function logout(User $user)
     {
         $user->logout();
-        $this->redirect('login');
+        //$this->redirect('login');
         exit;
     }
 

@@ -1,7 +1,9 @@
 <?php
 namespace App\Controller\Admin;
 
+use App\Model\User;
 use System\Lib\Controller as BaseController;
+use System\Lib\DB;
 
 class AdminController extends BaseController
 {
@@ -13,14 +15,36 @@ class AdminController extends BaseController
         $this->user_typeid	=session('usertype');
         $this->permission_id=session('permission_id');
 
-        if($this->control !='login' && $this->control !='logout'){
+
+        if(empty($this->user_id)){
+            $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+            redirect(url("/user/login/?url={$url}"));
+            exit;
+        }
+
+        $user=(new User())->find($this->user_id);
+        if(!$user->is_exist){
+            $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+            redirect(url("/user/login/?url={$url}"));
+            exit;
+        }
+        $usertype = DB::table('usertype')->select('id,permission_id,is_admin')->where("id={$user->type_id}")->row();
+        if ($usertype['is_admin'] != 1) {
+            echo  '会员禁止登陆！';exit;
+        }
+        session()->set('usertype', $usertype['id']);
+        session()->set('permission_id', $usertype['permission_id']);
+        $this->user_typeid	=session('usertype');
+        $this->permission_id=session('permission_id');
+
+
+/*        if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id) || empty($this->permission_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
                 $this->redirect("login?url={$url}");
                 exit;
             }
-            // $this->user=m('user/one',array('user_id'=>$this->user_id));
-        }
+        }*/
         ////主界面不验证权限
         if(!in_array($this->control,array('index','login','logout','changepwd'))){
             /*if(! check_cmvalue($class.'_'.$func)){

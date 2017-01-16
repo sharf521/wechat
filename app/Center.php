@@ -19,18 +19,20 @@ class Center
     public function __construct()
     {
         $system=new System();
-        $this->url=trim($system->getCode('pay_url'),'/');
-        $this->appid=$system->getCode('pay_appid');
-        $this->appsecret=$system->getCode('pay_appsecret');
+        $this->url=trim($system->getCode('center_url'),'/');
+        $this->appid=$system->getCode('center_appid');
+        $this->appsecret=$system->getCode('center_appsecret');
     }
 
-    public function loginUrl()
+    public function loginUrl($redirect_uri='')
     {
         ///?appid=shop&redirect_uri=http://www.yuantuwang.com/ation/autho&sign=F5A720117F1A50D1281147ADF8BAF48E
-//        if($redirect_uri==null){
-//            $redirect_uri=$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
-//        }
-        session()->set('target_url',$_SERVER["HTTP_REFERER"]);
+        if(empty($redirect_uri)){
+            $target_url=$_SERVER["HTTP_REFERER"];//$_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING'];
+        }else{
+            $target_url=$redirect_uri;
+        }
+        session()->set('target_url',$target_url);
         $data=array(
             'appid'=>$this->appid,
             'redirect_uri'=>'http://'.$_SERVER['HTTP_HOST'].'/user/auth'

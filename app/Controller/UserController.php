@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Center;
+use App\Model\User;
 use System\Lib\Request;
 
 class UserController extends Controller
@@ -19,11 +20,15 @@ class UserController extends Controller
         parent::__construct();
     }
 
-    public function login()
+    public function login(Request $request)
     {
         $center=new Center();
-        $url=$center->loginUrl();
-        $url='http://center.test.cn:800/'.$url;
+        $url=$center->loginUrl($request->get('url'));
+        if($this->is_wap){
+            $url=$this->site->center_url_wap.'/'.$url;
+        }else{
+            $url=$this->site->center_url.'/'.$url;
+        }
         redirect($url);
     }
 
@@ -35,15 +40,30 @@ class UserController extends Controller
         redirect($url);
     }
 
-    public function auth(Request $request,Center $center)
+    public function auth(Request $request,Center $center,User $user)
     {
         $target_url=session('target_url');
         if(empty($target_url)){
             $target_url='/';
         }
         $openid=$request->get('openid');
-        
-        print_r($center->getUserInfo($openid));
-        echo $target_url;
+        $uInfo=$center->getUserInfo($openid);
+        if($uInfo->return_code=='success'){
+            $user=$user->where("openid='{$openid}'")->first();
+            if(!$user->is_exist){
+                $user->openid=$openid;
+                $user->type_id=1;
+            }
+            $user->username=$uInfo->username;
+            $user->headimgurl=$uInfo->headimgurl;
+            $user->nickname=$uInfo->nickname;
+            $user->email=$uInfo->email;
+            $user->save();
+            $user->login(array('direct'=>1,'openid'=>$openid));
+            redirect($target_url);
+        }else{
+            echo 'openid error !';
+            exit;
+        }
     }
 }
