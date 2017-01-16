@@ -36,7 +36,11 @@ class UserController extends Controller
     {
         $center=new Center();
         $url=$center->registerUrl();
-        $url='http://center.test.cn:800/'.$url;
+        if($this->is_wap){
+            $url=$this->site->center_url_wap.'/'.$url;
+        }else{
+            $url=$this->site->center_url.'/'.$url;
+        }
         redirect($url);
     }
 
