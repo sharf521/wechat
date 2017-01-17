@@ -1,13 +1,20 @@
 <?php require 'header.php';?>
-<?
-echo $this->control;
-echo $this->func;
-?>
 
-    <div class="weui-btn-area">
-        <a class="weui-btn weui-btn_primary" href="<?=url('logout')?>">
-            安全退出
-        </a>
+<div class="warpcon">
+    <?php require 'left.php'; ?>
+    <div class="warpright">
+        <div class="jiben">
+            <div class="jbtx">
+                <div class="touxiang">
+                    <img src="<?= $this->user->headimgurl; ?>">
+                </div>
+                <div class="toutext">
+                    <h2><?= $this->username ?></h2>
+                    <p><?= $this->user->name ?></p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 <?php require 'footer.php';?>

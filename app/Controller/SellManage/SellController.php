@@ -12,7 +12,7 @@ class SellController extends Controller
         if($this->is_wap){
             $this->template = 'sell_wap';
         }else{
-            $this->template = 'seller';
+            $this->template = 'sell';
         }
         if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id)){

@@ -41,14 +41,20 @@ class Center
         return $url;
     }
 
-    public function registerUrl()
+    public function registerUrl($data=array())
     {
         session()->set('target_url',$_SERVER["HTTP_REFERER"]);
-        $data=array(
+        $params=array(
             'appid'=>$this->appid,
             'redirect_uri'=>'http://'.$_SERVER['HTTP_HOST'].'/user/auth'
         );
-        $url="auth/register/?appid={$data['appid']}&redirect_uri={$data['redirect_uri']}&sign={$this->getSign($data)}";
+        if(isset($data['r'])){
+            $params['r']=$data['r'];
+        }
+        $url="auth/register/?appid={$params['appid']}&redirect_uri={$params['redirect_uri']}&sign={$this->getSign($params)}";
+        if(isset($data['r'])){
+            $url.="&r={$data['r']}";
+        }
         return $url;
     }
 
