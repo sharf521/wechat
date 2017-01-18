@@ -26,8 +26,8 @@
                                 <td><?=$cate['name']?></td>
                                 <td><?=date('Y-m-d H:i:s',$cate['created_at'])?></td>
                                 <td><a href="<?=url("category/add/?pid={$cate['id']}")?>"></a>
-                                    <a href="<?=url("category/edit/?id={$cate['id']}")?>">编辑</a>
-                                    <a href="javascript:cateDel(<?=$cate['id']?>)">删除</a></td>
+                                    <a href="<?=url("category/edit/?id={$cate['id']}")?>" class="layui-btn layui-btn-mini">编辑</a>
+                                    <a href="javascript:cateDel(<?=$cate['id']?>)" class="layui-btn layui-btn-mini">删除</a></td>
                             </tr>
                             <? /* if(isset($cate['son']) && is_array($cate['son'])) :
                 echo '<ul>';

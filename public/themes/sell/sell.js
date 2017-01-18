@@ -50,6 +50,22 @@ function category_js() {
     });
 }
 
+function shipping_js() {
+    $(function () {
+        layui.form('radio').render();
+        layui.form().on('submit(*)', function(data){
+            var form=data.form;
+            var fields=data.field;
+            var name=$(form).find('input[name=name]');
+            if(name.val()==''){
+                layer.tips('不能为空！', name);
+                name.focus();
+                return false;
+            }
+        });
+    });
+}
+
 //上传图片
 function upload_image(id,type)
 {

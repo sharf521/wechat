@@ -22,7 +22,12 @@ class ShippingController extends SellController
 
     public function index(Shipping $shipping)
     {
-        $data['ships']=$shipping->where("user_id=?")->bindValues($this->user_id)->get();
+        $ships=$shipping->where("user_id=?")->bindValues($this->user_id)->get();
+        foreach($ships as $key=>$ship)
+        {
+            $ships[$key]->areas=unserialize($ship->code_areas);
+        }
+        $data['ships']=$ships;
         $this->view('shipping',$data);
     }
 
@@ -32,29 +37,25 @@ class ShippingController extends SellController
         $ships=array();
         $data['v_val_tr0']='default';
         $data['v_txt_tr0']='全国';
-        foreach($data['one'] as $i=>$v)
-        {
-            $t=trim($data['v_val_tr'.$i]);
-            $tt=$data['v_txt_tr'.$i];
-            if($t!='')
-            {
-                if($data['one'][$i]<=0)
-                {
-                    $data['one'][$i]=1;
+        foreach ($data['one'] as $i => $v) {
+            $t = trim($data['v_val_tr' . $i]);
+            $tt = $data['v_txt_tr' . $i];
+            if ($t != '') {
+                if ($data['one'][$i] <= 0) {
+                    $data['one'][$i] = 1;
                 }
-                if($data['next'][$i]<=0)
-                {
-                    $data['next'][$i]=1;
+                if ($data['next'][$i] <= 0) {
+                    $data['next'][$i] = 1;
                 }
-                $ship=array(
-                    'areaid'	=>$t,
-                    'areaname'	=>$tt,
-                    'one'	=>abs((int)$data['one'][$i]),
-                    'price'	=>abs((float)$data['price'][$i]),
-                    'next'	=>abs((int)$data['next'][$i]),
-                    'nprice'=>abs((float)$data['nprice'][$i])
+                $ship = array(
+                    'areaid' => $t,
+                    'areaname' => $tt,
+                    'one' => abs((int)$data['one'][$i]),
+                    'price' => abs((float)$data['price'][$i]),
+                    'next' => abs((int)$data['next'][$i]),
+                    'nprice' => abs((float)$data['nprice'][$i])
                 );
-                array_push($ships,$ship);
+                array_push($ships, $ship);
             }
         }
         $data['code_areas']=serialize($ships);//转换成字符串
@@ -78,7 +79,7 @@ class ShippingController extends SellController
             $shipping->save();
             redirect('shipping')->with('msg','添加成功！');
         }else{
-            $data['area']=(new Region())->getShippingRegion();
+            $data['regions']=(new Region())->getShippingRegion();
             $this->view('shipping_form',$data);
         }
     }
@@ -87,14 +88,26 @@ class ShippingController extends SellController
     {
         $id=(int)$request->get('id');
         $shipping=$shipping->findOrFail($id);
+        if($shipping->user_id!=$this->user_id){
+            redirect()->back()->with('error','异常！');
+        }
         if($_POST){
             $name=$request->post('name');
             if(empty($name)){
                 redirect()->back()->with('error','名称不能为空！');
             }
-
-            redirect('category')->with('msg','修改成功！');
+            $data=$this->setData($_POST);
+            $shipping->code_areas=$data['code_areas'];
+            $shipping->name=$name;
+            $shipping->user_id=$this->user_id;
+            $shipping->typeid=1;
+            $shipping->status=1;
+            $shipping->updated_at=time();
+            $shipping->save();
+            redirect('shipping')->with('msg','修改成功！');
         }else{
+            $data['regions']=(new Region())->getShippingRegion();
+            $shipping->areas=unserialize($shipping->code_areas);
             $data['shipping']=$shipping;
             $this->view('shipping_form',$data);
         }

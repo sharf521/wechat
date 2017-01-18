@@ -58,6 +58,9 @@ class CategoryController extends SupplyController
     {
         $id=(int)$request->get('id');
         $cate=$category->findOrFail($id);
+        if($cate->user_id!=$this->user_id){
+            redirect()->back()->with('error','异常！');
+        }
         if($_POST){
             $name=$request->post('name');
             if(empty($name)){

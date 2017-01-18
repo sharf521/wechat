@@ -5,46 +5,63 @@
     <div class="warpright">
         <div class="box">
             <br>
-            <?php if($this->func=='index') : ?>
-                <fieldset class="layui-elem-field layui-field-title">
-                    <legend>配送方式管理</legend>
-                </fieldset>
-                <a href="<?=url('shipping/add')?>" class="layui-btn layui-btn-small">新增</a><br><br>
-                <?
-                if(count($cates)==0) {
-                    echo '<blockquote class="layui-elem-quote">暂无添加</blockquote>';
-                }else{?>
-                    <table class="layui-table"  lay-skin="line">
-                        <thead>
-                        <tr>
-                            <th>分类名称</th><th>添加时间</th><th></th>
+            <fieldset class="layui-elem-field layui-field-title">
+                <legend>配送方式管理</legend>
+            </fieldset>
+            <a href="<?=url('shipping/add')?>" class="layui-btn layui-btn-small">新增</a><br>
+            <?
+            if(count($ships)==0) {
+                echo '<blockquote class="layui-elem-quote">暂无添加</blockquote>';
+            }else{?>
+                <? foreach($ships as $ship) : ?>
+                    <table class="layui-table">
+                        <tr style="background-color: #f5f5f5;">
+                            <td style="width: 60%;">
+                                <?=$ship->name?>
+                                ( <?if($ship->typeid==1){?>按件计算<?}?>
+                                <?if($ship->typeid==2){?>按重量计算<?}?>
+                                <?if($ship->typeid==3){?>按体积计算<?}?>)</td>
+                            <td colspan="3">最后编辑时间：<?=$ship->updated_at?></td>
+                            <td>
+                                <a href="<?=url("shipping/edit/?id={$ship->id}")?>" class="layui-btn layui-btn-mini">编辑</a><a href="javascript:shippingDel(<?=$ship->id?>)" class="layui-btn layui-btn-mini">删除</a></td>
                         </tr>
-                        </thead>
-                        <tbody>
-                        <? foreach($cates as $cate) : ?>
-                            <tr>
-                                <td><?=$cate['name']?></td>
-                                <td><?=date('Y-m-d H:i:s',$cate['created_at'])?></td>
-                                <td><a href="<?=url("category/add/?pid={$cate['id']}")?>"></a>
-                                    <a href="<?=url("category/edit/?id={$cate['id']}")?>">编辑</a>
-                                    <a href="javascript:cateDel(<?=$cate['id']?>)">删除</a></td>
-                            </tr>
-                        <? endforeach;?>
-                        </tbody>
+                        <tr>
+                            <td >运送到</td>
+                            <td>
+                                <?if($ship->typeid==1){?>首件(件)<?}?>
+                                <?if($ship->typeid==2){?>首重(kg)<?}?>
+                                <?if($ship->typeid==3){?>首体积(m3)<?}?></td>
+                            <td>运费(元)</td>
+                            <td>
+                                <?if($ship->typeid==1){?>续件(件)<?}?>
+                                <?if($ship->typeid==2){?>续重(kg)<?}?>
+                                <?if($ship->typeid==3){?>续体积(m3)<?}?></td>
+                            <td>运费(元)</td>
+                        </tr>
+                        <? if(is_array($ship->areas)){
+                            foreach($ship->areas as $key_r=>$value_r){?>
+                                <tr>
+                                    <td><?=$value_r['areaname']?></td>
+                                    <td><?=$value_r['one']?></td>
+                                    <td><?=$value_r['price']?></td>
+                                    <td><?=$value_r['next']?></td>
+                                    <td><?=$value_r['nprice']?></td>
+                                </tr>
+                            <? }}?>
                     </table>
-                <?php }?>
-            <? endif;?>
+                <? endforeach;?>
+            <?php }?>
+        </div>
     </div>
 </div>
     <script>
-        category_js();
-        function cateDel(id)
+        function shippingDel(id)
         {
             layer.open({
                 content: '您确定要删除吗？'
                 ,btn: ['删除', '取消']
                 ,yes: function(index){
-                    location.href='<?=url("category/del/?id=")?>'+id;
+                    location.href='<?=url("shipping/del/?id=")?>'+id;
                     layer.close(index);
                 }
             });

@@ -1,17 +1,16 @@
 /*���*/
 img{ border:0}
-.tablebox{ border:1px solid #B2D1FF; margin:5px 0 0 20px; padding:5px; width:730px; font-size:12px; color:#333}
-.entity{ float:left; width:720px;}
-.default{ background:#F3FEED; line-height:32px; margin-top:5px; padding-left:10px; float:left; height:32px; width:720px;}
+.tablebox{ border:1px solid #B2D1FF; margin:5px 0 0 20px; padding:5px; font-size:12px; color:#333}
+.default{ background:#F3FEED; line-height:32px; margin:5px 0px; padding-left:10px; height:32px;}
 .inputtext,.textcss{ width:80px; text-align:left; height:24px; border: 1px solid #7F9DB9; line-height:24px; margin-right:4px; display:inline}
 .delete{height:24px; line-height:24px;}
 .textcss{ width:60px; text-align:right}
-.yfbox{ width:720px; float:left; padding-top:15px;}
+
 .yfbox table{ text-align:center; border:1px solid #bbb; border-left:none; border-bottom:none;border-spacing:0}
 .yfbox table td{ border-color:#ccc;  border-style:solid; line-height:30px; border-width:0 0px 1px 1px; text-align:center; }
 .yfbox table b{ font-weight:normal; float:left; padding-left:3px;}
 
-.yfbox table  a{color:#3366CC; float:right;text-decoration:none; padding-right:5px;}
+
 
 .wuliucss{ width:150px; height:18px; border:1px solid #ccc}
 
