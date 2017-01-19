@@ -8,10 +8,12 @@
 
 namespace App\Controller\SellManage;
 
+use App\Model\Category;
 use App\Model\Goods;
 use App\Model\GoodsData;
 use App\Model\GoodsImage;
 use App\Model\GoodsSpec;
+use App\Model\Shipping;
 use App\Model\ShopCategory;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -39,6 +41,28 @@ class GoodsController extends SellController
     {
         $data['result']=$goods->where("user_id=? and status=2")->bindValues($this->user_id)->orderBy('id desc')->pager();
         $this->view('goods_list',$data);
+    }
+
+    public function selCategory(Category $category,Request $request)
+    {
+        if($_POST){
+            //分类start
+            $arr_category = $request->post('categoryid');
+            $categoryid = $arr_category[count($arr_category) - 1];
+            if (empty($categoryid)) {
+                //最后一个元素为空取末第二个
+                $categoryid = $arr_category[count($arr_category) - 2];
+            }
+            $categoryid = (int)$categoryid;
+            if ($categoryid != 0) {
+                $categorypath = $category->find($categoryid)->path;
+            }
+            //分类end
+            redirect("goods/add/?cid={$categoryid}&cpath={$categorypath}");
+        }else{
+            $data['cates'] = $category->getlist(array('pid' => 2));
+            $this->view('goods_category',$data);
+        }
     }
 
     public function add(Goods $goods,GoodsData $goodsData,GoodsImage $goodsImage,Request $request)
@@ -112,6 +136,7 @@ class GoodsController extends SellController
             }
         }else{
             $data['cates']=(new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
+            $data['shippings']=(new Shipping())->where('user_id=?')->bindValues($this->user_id)->get();
             $this->view('goods_form',$data);
         }
     }
@@ -205,6 +230,7 @@ class GoodsController extends SellController
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
             $data['cates']=(new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
+            $data['shippings']=(new Shipping())->where('user_id=?')->bindValues($this->user_id)->get();
             $this->view('goods_form',$data);
         }
     }

@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
 
-    <div class="warpcon">
+<div class="layui-main">
 <?php require 'left.php'; ?>
     <div class="warpright">
         <div class="box">
@@ -95,6 +95,7 @@
     <script>
         shipping_js();
     </script>
+</div>
         <div class="aqbox" id="divArea">
             <div class="aqalbox">
                 <div class="topdq"><div class="title-wuliu">选择地区</div><a href="javascript:hideArea()">x</a></div>

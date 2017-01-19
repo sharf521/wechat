@@ -3,37 +3,68 @@ $(function () {
         ,util = layui.util
         ,laydate = layui.laydate;
     util.fixbar();
-    var element = layui.element();
-    element.init();
+    layui.element().init();
     //上传文件
     if ($('.layui-upload-file').length>0){
-        layui.use(['upload'], function(){
-            var index;
-            $('.layui-upload-file').each(function(index,obj){
-                var id=obj.getAttribute('upload_id');
-                var type=obj.getAttribute('upload_type');
-                layui.upload({
-                    url: '/index.php/upload/save?type='+type
-                    ,elem:obj
-                    ,before: function(input){
-                        index=layer.msg('上传中', {icon: 16,time:1000000});
+        var index;
+        $('.layui-upload-file').each(function(index,obj){
+            var id=obj.getAttribute('upload_id');
+            var type=obj.getAttribute('upload_type');
+            if(id==null){
+                return;
+            }
+            layui.upload({
+                url: '/index.php/upload/save?type='+type
+                ,elem:obj
+                ,before: function(input){
+                    index=layer.msg('上传中', {icon: 16,time:1000000});
+                }
+                ,success: function(res){
+                    layer.close(index);
+                    if(res.code=='0'){
+                        var path=res.url+'?'+Math.random();
+                        $('#'+id).val(path);
+                        var _str="<a href='"+path+"' target='_blank'><img src='"+path+"' height='50'/></a>";
+                        $('#upload_span_'+id).html(_str);
+                    }else{
+                        alert(res.msg);
                     }
-                    ,success: function(res){
-                        layer.close(index);
-                        if(res.code=='0'){
-                            var path=res.url+'?'+Math.random();
-                            $('#'+id).val(path);
-                            var _str="<a href='"+path+"' target='_blank'><img src='"+path+"' height='50'/></a>";
-                            $('#upload_span_'+id).html(_str);
-                        }else{
-                            alert(res.msg);
-                        }
-                    }
-                });
+                }
             });
         });
     }
 });
+
+//goods start
+function goodsAdd_js() {
+    var index;
+    layui.upload({
+        url: '/index.php/upload/save?type=goods'
+        ,before: function(input){
+            index=layer.msg('上传中', {icon: 16,time:1000000});
+        }
+        ,success: function(res){
+            layer.close(index);
+            if(res.code=='0'){
+                var imgId=res.id;
+                var path=res.url+'?'+Math.random();
+                $('#imgids').val($('#imgids').val()+imgId+',');
+                var _str='<li><img src="'+path+'">' +
+                    "<i class='iconfont' onclick=delGoodsImg(this,'"+imgId+"')>&#xe642;</i></li>";
+                $("#uploaderFiles").append(_str);
+            }else{
+                alert(res.msg);
+            }
+        }
+    });
+}
+function delGoodsImg(o,id) {
+    $.get("/index.php/upload/del?type=goods&id=" + id, {}, function (str) { });
+    var ids = $('#imgids').val();
+    $('#imgids').val(ids.replace(','+id+',',','));
+    $(o).parents('li').remove();
+}
+//goods end
 
 function category_js() {
     $(function () {
