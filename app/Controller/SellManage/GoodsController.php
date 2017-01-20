@@ -53,27 +53,36 @@ class GoodsController extends SellController
                 //最后一个元素为空取末第二个
                 $categoryid = $arr_category[count($arr_category) - 2];
             }
-            $categoryid = (int)$categoryid;
-            if ($categoryid != 0) {
-                $categorypath = $category->find($categoryid)->path;
-            }
             //分类end
-            redirect("goods/add/?cid={$categoryid}&cpath={$categorypath}");
+            redirect("goods/add/?cid={$categoryid}");
         }else{
-            $data['cates'] = $category->getlist(array('pid' => 2));
+            $data['cates']=$this->getCates();
+            $data['shippings']=$this->getShippings();
+            $data['categorys'] = $category->getlist(array('pid' => 2));
             $this->view('goods_category',$data);
         }
     }
 
     public function add(Goods $goods,GoodsData $goodsData,GoodsImage $goodsImage,Request $request)
     {
+        $cid=(int)$request->get('cid');
+        if($cid!=0){
+            $category=(new Category())->findOrFail($cid);
+            $cpath=$category->path;
+        }
         if($_POST){
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');
+            $g_price=(float)$request->post('g_price');
+            $g_stock_count=(int)$request->post('g_stock_count');
+            //规格
             $price=$request->post('price');
             $stock_count=$request->post('stock_count');
             $spec_1=$request->post('spec_1');
+            $spec_2=$request->post('spec_2');
+            //规格
             $shipping_fee=(float)$request->post('shipping_fee');
+            $shipping_id=(int)$request->post('shipping_id');
             $content=$request->post('content');
             $shop_cateid=(int)$request->post('shop_category');
             $is_have_spec=(int)$request->post('is_have_spec');
@@ -90,16 +99,23 @@ class GoodsController extends SellController
                 DB::beginTransaction();
                 $goods->user_id=$this->user_id;
                 $goods->supply_goods_id=0;
-                $goods->category_id=0;
-                $goods->category_path='';
+                $goods->category_id=$cid;
+                $goods->category_path=$cpath;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';
                 $goods->name=$name;
-                $goods->price=(float)$price;
-                $goods->stock_count=(int)$stock_count;
+                $goods->price=$g_price;
+                $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
+                if($goods->is_have_spec){
+                    $spec_name1=$request->post('spec_name1');
+                    $spec_name2=$request->post('spec_name2');
+                    $goods->spec_name1=$spec_name1;
+                    $goods->spec_name2=$spec_name2;
+                }
                 $goods->shipping_fee=(float)$shipping_fee;
+                $goods->shipping_id=$shipping_id;
                 $goods->sale_count=0;
                 $goods->status=2;
                 $goods_id=$goods->save(true);
@@ -108,7 +124,6 @@ class GoodsController extends SellController
                 $goodsData->save();
                 $goodsImage->where("user_id=? and id in({$imgids})")->bindValues($this->user_id)->update(array('goods_id'=>$goods_id));
                 $goods=$goods->find($goods_id);
-                //$goods->image_url=$goodsImage->where("goods_id=?")->bindValues($goods_id)->first()->image_url;
                 $goods->image_url=$goods->GoodsImage()[0]->image_url;
                 if($is_have_spec==1 && is_array($spec_1)){
                     $stock_total=0;
@@ -116,6 +131,7 @@ class GoodsController extends SellController
                         $spec=new GoodsSpec();
                         $spec->goods_id=$goods->id;
                         $spec->spec_1=$spec_1[$i];
+                        $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
                         $spec->save();
@@ -135,8 +151,10 @@ class GoodsController extends SellController
                 redirect()->back()->with('error', $error);
             }
         }else{
-            $data['cates']=(new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
-            $data['shippings']=(new Shipping())->where('user_id=?')->bindValues($this->user_id)->get();
+            $data['images']=$goodsImage->where("user_id=? and goods_id=0 and status=1")->bindValues($this->user_id)->get();
+            $data['cates']=$this->getCates();
+            $data['shippings']=$this->getShippings();
+            $data['specs']=array('','');
             $this->view('goods_form',$data);
         }
     }
@@ -147,11 +165,17 @@ class GoodsController extends SellController
         if($_POST){
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');
+            $g_price=(float)$request->post('g_price');
+            $g_stock_count=(int)$request->post('g_stock_count');
+            //规格
             $price=$request->post('price');
             $stock_count=$request->post('stock_count');
             $spec_1=$request->post('spec_1');
+            $spec_2=$request->post('spec_2');
+            //规格
             $spec_id=$request->post('spec_id');
             $shipping_fee=(float)$request->post('shipping_fee');
+            $shipping_id=(int)$request->post('shipping_id');
             $content=$request->post('content');
             $shop_cateid=(int)$request->post('shop_category');
             $is_have_spec=(int)$request->post('is_have_spec');
@@ -170,10 +194,17 @@ class GoodsController extends SellController
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';
                 $goods->name=$name;
-                $goods->price=(float)$price;
-                $goods->stock_count=(int)$stock_count;
+                $goods->price=$g_price;
+                $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
-                $goods->shipping_fee=(float)$shipping_fee;
+                if($goods->is_have_spec){
+                    $spec_name1=$request->post('spec_name1');
+                    $spec_name2=$request->post('spec_name2');
+                    $goods->spec_name1=$spec_name1;
+                    $goods->spec_name2=$spec_name2;
+                }
+                $goods->shipping_fee=$shipping_fee;
+                $goods->shipping_id=$shipping_id;
                 $goods->save();
                 $goodsData=$goods->GoodsData();
                 $goodsData->content=$content;
@@ -187,6 +218,7 @@ class GoodsController extends SellController
                         $spec=(new GoodsSpec())->find($spec_id[$i]);
                         $spec->goods_id=$goods->id;
                         $spec->spec_1=$spec_1[$i];
+                        $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
                         if($spec->is_exist){
@@ -225,12 +257,12 @@ class GoodsController extends SellController
             if($goods->is_have_spec){
                 $data['specs']=$goods->GoodsSpec();
             }else{
-                $data['specs']=array();
+                $data['specs']=array('','');
             }
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
-            $data['cates']=(new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
-            $data['shippings']=(new Shipping())->where('user_id=?')->bindValues($this->user_id)->get();
+            $data['cates']=$this->getCates();
+            $data['shippings']=$this->getShippings();
             $this->view('goods_form',$data);
         }
     }
@@ -259,7 +291,7 @@ class GoodsController extends SellController
         if($goods->user_id==$this->user_id){
             $goods->status=-1;
             $goods->save();
-            redirect('goods')->with('msg','册除成功！');
+            redirect("goods")->with('msg','册除成功！');
         }else{
             redirect('goods')->with('error','操作失败！');
         }

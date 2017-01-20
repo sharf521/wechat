@@ -59,10 +59,10 @@ function goodsAdd_js()
                 return false;
             }
             if($('#is_have_spec').val()=='0'){
-                if(form_validate(this,'price')==false){
+                if(form_validate(this,'g_price')==false){
                     return false;
                 }
-                if(form_validate(this,'stock_count')==false){
+                if(form_validate(this,'g_stock_count')==false){
                     return false;
                 }
             }else{
@@ -92,7 +92,7 @@ function goodsAdd_js()
         });
         function form_validate(form,oName){
             var o=$(form).find("input[name="+oName+"]");
-            if(oName=='name' || oName=='price' || oName=='stock_count'){
+            if(oName=='name' || oName=='g_price' || oName=='g_stock_count'){
                 if(o.val()==''){
                     o.parents('.weui-cell').addClass('weui-cell_warn');
                     o.focus();

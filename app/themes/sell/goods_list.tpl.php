@@ -29,7 +29,7 @@
                     <? foreach ($result['list'] as $goods) : ?>
                     <tr>
                         <td><?=$goods->id?></td>
-                        <td><img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>"><?=$goods->name?></td>
+                        <td><img src="/themes/images/blank.gif" width="108" data-echo="<?=$goods->image_url?>"><?=$goods->name?></td>
                         <td>￥<?=$goods->price?></td>
                         <td><?=$goods->stock_count?></td>
                         <td><?=$goods->created_at?></td>
@@ -71,7 +71,7 @@
                 content: '您确定要删除吗？'
                 ,btn: ['删除', '取消']
                 ,yes: function(index){
-                    location.href='<?=url("shipping/del/?id=")?>'+id;
+                    location.href='<?=url("goods/del/?id=")?>'+id;
                     layer.close(index);
                 }
             });

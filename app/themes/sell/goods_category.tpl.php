@@ -6,16 +6,24 @@
             <div class="box">
                 <br>
                     <span class="layui-breadcrumb">
-                      <a href="<?= url('shipping') ?>">商品管理</a>
+                      <a href="<?= url('goods') ?>">商品管理</a>
                       <a><cite>选择分类</cite></a>
                     </span>
                 <hr>
                 <br>
+                <? if(empty($cates) || empty($shippings)) : ?>
+                    <? if(empty($cates)) : ?>
+                        <blockquote class="layui-elem-quote">暂无添加店铺分类，<a href="<?=url('category/add')?>" class="layui-btn layui-btn-mini">添加</a></blockquote>
+                    <? endif;?>
+                    <? if(empty($shippings)) : ?>
+                        <blockquote class="layui-elem-quote">暂无添加配送方式，<a href="<?=url('shipping/add')?>" class="layui-btn layui-btn-mini">添加</a></blockquote>
+                    <? endif;?>
+                <? else : ?>
                 <form method="post">
                     <div id="div_category">
                         <select name="categoryid[]" id="category1" class="multiple" multiple="multiple"
                                 onchange="getsel(1,this.value)">
-                            <? foreach ($cates as $var) { ?>
+                            <? foreach ($categorys as $var) { ?>
                                 <option value='<?= $var['id'] ?>' <? if ($var['id'] == $row->category_id) {
                                     echo 'selected';
                                 } ?>><?= $var['name'] ?></option>
@@ -25,15 +33,11 @@
                     <br><br>
                     <input type="submit" value="下一步，填写商品信息" class="layui-btn">
                 </form>
-
-
-
                 <script language="javascript">
                     $.ajaxSetup({async: false});
                     <?=$row->sel?>
                 </script>
-
-
+                <? endif;?>
             </div>
         </div>
     </div>

@@ -12,20 +12,20 @@
 </head>
 <body>
 <div class="usernav">
-    <div class="userlogo">
+    <div class="layui-main">
         <div class="logoleft">
             <a href="/"><img src="<?=$this->site->logo?>" height="60"></a>
         </div>
         <div class="usermenu">
             <ul>
                 <li>
-                    <a href="<?=url('')?>">个人中心</a>
+                    <a href="<?=url('/member')?>">个人中心</a>
                 </li>
                 <li>
                     <a href="<?=$this->site->center_url?>" target="_blank">支付中心</a>
                 </li>
                 <li>
-                    <a href="<?=url('logout')?>">退出</a>
+                    <a href="<?=url('/member/logout')?>">退出</a>
                 </li>
                 <div class="clear"></div>
             </ul>

@@ -3,7 +3,7 @@
 <div class="warpcon">
     <?php require 'left.php'; ?>
     <div class="warpright">
-        <div class="box">
+        <td class="box">
             <br>
             <?php if($this->func=='index') : ?>
                 <fieldset class="layui-elem-field layui-field-title">
@@ -14,7 +14,7 @@
                 if(count($cates)==0) {
                     echo '<blockquote class="layui-elem-quote">暂无添加分类</blockquote>';
                 }else{?>
-                    <table class="layui-table"  lay-skin="line">
+                    <table class="layui-table"  lay-skin="row" lay-even>
                         <thead>
                         <tr>
                             <th>分类名称</th><th>添加时间</th><th></th>
@@ -25,24 +25,14 @@
                             <tr>
                                 <td><?=$cate['name']?></td>
                                 <td><?=date('Y-m-d H:i:s',$cate['created_at'])?></td>
-                                <td><a href="<?=url("category/add/?pid={$cate['id']}")?>"></a>
+                                <td>
                                     <a href="<?=url("category/edit/?id={$cate['id']}")?>" class="layui-btn layui-btn-mini">编辑</a>
-                                    <a href="javascript:cateDel(<?=$cate['id']?>)" class="layui-btn layui-btn-mini">删除</a></td>
+                                    <a href="javascript:cateDel(<?=$cate['id']?>)" class="layui-btn layui-btn-mini">删除</a>
+                                    <? if($cate['pid']==0) : ?>
+                                        <a href="<?=url("category/add/?pid={$cate['id']}")?>" class="layui-btn layui-btn-mini">添加子分类</a>
+                                    <? endif;?>
+                                </td>
                             </tr>
-                            <? /* if(isset($cate['son']) && is_array($cate['son'])) :
-                echo '<ul>';
-                foreach($cate['son'] as $son) : ?>
-                    <li>
-                        <?=$son['name']?>
-                        <div class="operat">
-                            <a href="<?=url("category/edit/?id={$son['id']}")?>">编辑</a>
-                            <a href="javascript:cateDel(<?=$son['id']?>)">删</a>
-                        </div>
-                    </li>
-                    <?
-                endforeach;
-                echo '</ul>';
-            endif; */ ?>
                         <? endforeach;?>
                         </tbody>
                     </table>

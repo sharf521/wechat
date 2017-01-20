@@ -46,7 +46,7 @@
 
 
 .multiple{width: 210px; margin-right: 10px; min-height: 300px;}
-#uploaderFiles{}
+#uploaderFiles{ /*margin-bottom: 10px; min-height: 100px; background-color: #efefef*/}
 #uploaderFiles li{border: 1px solid #ccc; position: relative; padding: 5px; float: left; margin-right: 10px;}
-#uploaderFiles li img{height: 50px;}
-#uploaderFiles li i{position: absolute; top:-8px; right: -8px; border: 1px solid #ff2222; color: #f00; background-color: #fff;border-radius: 50%; font-size: 6px; width: 18px; height: 18px; line-height: 20px; text-align: center;z-index: 99}
+#uploaderFiles li img{height: 100px;}
+#uploaderFiles li i{position: absolute; top:-8px; right: -8px; border: 1px solid #ff2222; color: #f00; background-color: #fff;border-radius: 50%; font-size: 6px; width: 18px; height: 18px; line-height: 20px; text-align: center;z-index: 99;cursor: pointer}

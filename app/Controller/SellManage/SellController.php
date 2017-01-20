@@ -1,6 +1,8 @@
 <?php
 namespace App\Controller\SellManage;
 use App\Controller\Controller;
+use App\Model\Shipping;
+use App\Model\ShopCategory;
 use App\Model\User;
 
 class SellController extends Controller
@@ -28,6 +30,17 @@ class SellController extends Controller
         if(trim($this->user->headimgurl)==''){
             $this->user->headimgurl='/themes/member/images/no-img.jpg';
         }
+    }
+
+    public function getCates()
+    {
+        return (new ShopCategory())->getListTree($this->user_id);
+        //return (new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
+    }
+
+    public function getShippings()
+    {
+        return (new Shipping())->where('user_id=?')->bindValues($this->user_id)->get();
     }
 
     public function error()

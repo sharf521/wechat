@@ -43,7 +43,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">价格</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" name="price" type="number" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入价格" value="<?=$goods->price?>"/>
+                <input class="weui-input" name="g_price" type="number" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入价格" value="<?=$goods->price?>"/>
             </div>
             <div class="weui-cell__ft">
                 <i class="weui-icon-warn"></i>
@@ -52,7 +52,7 @@
         <div class="weui-cell">
             <div class="weui-cell__hd"><label class="weui-label">库存</label></div>
             <div class="weui-cell__bd">
-                <input class="weui-input" type="number" name="stock_count" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请输入库存数" value="<?=$goods->stock_count?>"/>
+                <input class="weui-input" type="number" name="g_stock_count" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请输入库存数" value="<?=$goods->stock_count?>"/>
             </div>
             <div class="weui-cell__ft">
                 <i class="weui-icon-warn"></i>
@@ -114,7 +114,7 @@
                 <select name="shop_category" class="weui-select">
                     <option value="0" selected>默认</option>
                     <? foreach ($cates as $cate) :?>
-                    <option value="<?=$cate->id?>" <? if($cate->id==$goods->shop_cateid){echo 'selected';}?>><?=$cate->name?></option>
+                    <option value="<?=$cate['id']?>" <? if($cate['id']==$goods->shop_cateid){echo 'selected';}?>><?=$cate['name']?></option>
                     <? endforeach;?>
                 </select>
             </div>

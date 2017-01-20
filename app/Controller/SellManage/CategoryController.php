@@ -19,16 +19,16 @@ class CategoryController extends SellController
         parent::__construct();
     }
 
-    public function index(ShopCategory $category)
+    public function index()
     {
-        $data['cates']=$category->getListTree($this->user_id);
+        $data['cates']=$this->getCates();
         $this->view('category',$data);
     }
 
     public function add(ShopCategory $category,Request $request)
     {
+        $pid=(int)$request->get('pid');
         if($_POST){
-            $pid=(int)$request->post('pid');
             $name=$request->post('name');
             if(empty($name)){
                 redirect()->back()->with('error','名称不能为空！');

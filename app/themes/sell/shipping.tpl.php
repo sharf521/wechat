@@ -11,7 +11,9 @@
             <a href="<?=url('shipping/add')?>" class="layui-btn layui-btn-small">新增</a><br>
             <?
             if(count($ships)==0) {
-                echo '<blockquote class="layui-elem-quote">暂无添加</blockquote>';
+                ?>
+                <br><blockquote class="layui-elem-quote">暂无添加，<a href="<?=url('shipping/add')?>" class="layui-btn layui-btn-mini">添加</a> </blockquote>
+                <?
             }else{?>
                 <? foreach($ships as $ship) : ?>
                     <table class="layui-table">

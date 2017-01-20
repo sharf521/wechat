@@ -18,8 +18,41 @@ class ShopCategory extends Model
         foreach ($result as $row) {
             $items[$row['id']] = $row;
         }
-        return $this->genTree5($items);
+        $array=$this->genTree5($items);
+        $cates=array();
+        foreach ($array as $item){
+            array_push($cates,$item);
+            if(isset($item['son']) && is_array($item['son'])){
+                $num=1;
+                foreach ($item['son'] as $son){
+                    if ($num == count($item['son'])){
+                        $son['name']='&nbsp;&nbsp;└ '.$son['name'];
+                    }else{
+                        $son['name']='&nbsp;&nbsp;├ '.$son['name'];
+                    }
+                    array_push($cates,$son);
+                    $num++;
+                }
+            }
+        }
+        return $cates;
     }
+
+    /**
+    <? if(isset($cate['son']) && is_array($cate['son'])) :
+    foreach($cate['son'] as $son) : ?>
+    <tr>
+    <td>| ---- <?=$son['name']?></td>
+    <td><?=date('Y-m-d H:i:s',$son['created_at'])?></td>
+    <td>
+    <a href="<?=url("category/edit/?id={$cate['id']}")?>" class="layui-btn layui-btn-mini">编辑</a>
+    <a href="javascript:cateDel(<?=$cate['id']?>)" class="layui-btn layui-btn-mini">删除</a></td>
+    </td>
+    </tr>
+    <?
+    endforeach;
+    endif; ?>
+     */
 
     private function genTree5($items)
     {

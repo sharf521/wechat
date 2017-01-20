@@ -483,9 +483,7 @@ function ueditor($data=array())
     ?>
 
     <!-- 加载编辑器的容器 -->
-    <script id="container" name="<?=$name?>" type="text/plain" style="width:800px;">
-        <?=$value?>
-    </script>
+    <script id="container" name="<?=$name?>" type="text/plain" style="width:800px;"><?=$value?></script>
     <!-- 配置文件 -->
     <script type="text/javascript" src="/plugin/ueditor/ueditor.config.js"></script>
     <!-- 编辑器源码文件 -->

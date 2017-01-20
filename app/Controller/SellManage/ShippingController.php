@@ -20,9 +20,9 @@ class ShippingController extends SellController
         parent::__construct();
     }
 
-    public function index(Shipping $shipping)
+    public function index()
     {
-        $ships=$shipping->where("user_id=?")->bindValues($this->user_id)->get();
+        $ships=$this->getShippings();
         foreach($ships as $key=>$ship)
         {
             $ships[$key]->areas=unserialize($ship->code_areas);
