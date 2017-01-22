@@ -9,7 +9,7 @@
                 <fieldset class="layui-elem-field layui-field-title">
                     <legend>店铺分类管理</legend>
                 </fieldset>
-                <a href="<?=url('category/add')?>" class="layui-btn layui-btn-small">添加分类</a><br><br>
+                <a href="<?=url('category/add')?>" class="layui-btn layui-btn-small">添加一级分类</a><br><br>
                 <?
                 if(count($cates)==0) {
                     echo '<blockquote class="layui-elem-quote">暂无添加分类</blockquote>';

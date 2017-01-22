@@ -12,7 +12,9 @@
 
 
 
-.usernav{ height:80px; clear:both; background:#fff;border-bottom: 3px solid #ca1b38;}
+.usernav{ height:80px; clear:both; background:#fff;border-bottom: 5px solid #e45050;}
+
+
 .userlogo{ width:1140px; margin:0 auto; clear:both; height:80px;}
 .logoleft{ width:300px; height:80px; display:inline-block; float:left}
 .logoleft a img{ padding-top:10px}
