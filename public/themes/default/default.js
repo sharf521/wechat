@@ -1,3 +1,11 @@
+$(function () {
+    var layer = layui.layer
+        ,util = layui.util
+        ,laydate = layui.laydate;
+    util.fixbar();
+    var element = layui.element();
+    element.init();
+});
 /* header */
 function header_js() {
     $(".quick-menu dl").hover(function() {
@@ -61,6 +69,18 @@ function header_js() {
         });
     }
     headerShowCategorys();
+}
+
+function index_js() {
+    $(function() {
+        var mySwiper = new Swiper('.swiper-container', {
+            loop: true,
+            autoplay: 4800,
+            autoplayDisableOnInteraction: false,
+            pagination: '.swiper-pagination',
+            paginationClickable: true,
+        });
+    });
 }
 /* 确认订单*/
 function order_js(cart_ids) {

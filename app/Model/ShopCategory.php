@@ -26,9 +26,11 @@ class ShopCategory extends Model
                 $num=1;
                 foreach ($item['son'] as $son){
                     if ($num == count($item['son'])){
-                        $son['name']='&nbsp;&nbsp;└ '.$son['name'];
+                        $son['name']=$son['name'];
+                        $son["name_pre"]='&nbsp;&nbsp;└ ';
                     }else{
-                        $son['name']='&nbsp;&nbsp;├ '.$son['name'];
+                        $son['name']=$son['name'];
+                        $son["name_pre"]='&nbsp;&nbsp;├ ';
                     }
                     array_push($cates,$son);
                     $num++;

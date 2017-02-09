@@ -1,9 +1,11 @@
 <?php
+
+//控制器的父类
+
 namespace App\Controller;
 
 use App\Model\SubSite;
 use System\Lib\Controller as BaseController;
-use System\Lib\DB;
 
 class Controller extends BaseController
 {

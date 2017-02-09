@@ -14,6 +14,7 @@ use App\Model\GoodsData;
 use App\Model\GoodsImage;
 use App\Model\GoodsSpec;
 use App\Model\Shipping;
+use App\Model\Shop;
 use App\Model\ShopCategory;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -98,9 +99,11 @@ class GoodsController extends SellController
             try{
                 DB::beginTransaction();
                 $goods->user_id=$this->user_id;
+                $goods->site_id=$this->user->site_id;
                 $goods->supply_goods_id=0;
                 $goods->category_id=$cid;
                 $goods->category_path=$cpath;
+                $goods->shop_name=(new Shop())->find($this->user_id)->name;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';
@@ -190,6 +193,7 @@ class GoodsController extends SellController
             }
             try{
                 DB::beginTransaction();
+                $goods->shop_name=(new Shop())->find($this->user_id)->name;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';

@@ -11,7 +11,7 @@ class AdminController extends BaseController
     {
         parent::__construct();
         $this->template='admin';
-        $this->control	=application('control');
+        //$this->control	=application('control');
         $this->user_typeid	=session('usertype');
         $this->permission_id=session('permission_id');
 

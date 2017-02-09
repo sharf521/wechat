@@ -10,6 +10,7 @@ namespace App\Controller;
 
 
 use App\Model\Cart;
+use App\Model\Category;
 use App\Model\Goods;
 use App\Model\GoodsSpec;
 use App\Model\Order;
@@ -17,15 +18,27 @@ use App\Model\OrderGoods;
 use System\Lib\DB;
 use System\Lib\Request;
 
-class GoodsController extends Controller
+class GoodsController extends HomeController
 {
     public function __construct()
     {
         parent::__construct();
     }
 
-    public function lists(Goods $goods,Request $request)
+    public function lists(Goods $goods,Request $request,Category $category)
     {
+        $cate=$category->findOrFail($request->get(2));
+        $data['cate']=$cate;
+        //当前位置分类
+        $path=trim($cate->path,',');
+        $paths=explode(',',$path);
+        array_shift($paths);
+        array_pop($paths);
+        $cates=array();
+        foreach ($paths as $cid){
+            array_push($cates,$category->find($cid));
+        }
+        $data['nav_cates']=$cates;
         $data['result']=$goods->where("status=1 and stock_count>0")->orderBy('id desc')->pager($request->get('page'),10);
         $this->view('goods_lists',$data);
     }

@@ -18,7 +18,7 @@ use App\Model\UserAddress;
 use System\Lib\DB;
 use System\Lib\Request;
 
-class OrderController extends Controller
+class OrderController extends HomeController
 {
     public function __construct()
     {

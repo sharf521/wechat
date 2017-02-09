@@ -23,7 +23,7 @@
                         <tbody>
                         <? foreach($cates as $cate) : ?>
                             <tr>
-                                <td><?=$cate['name']?></td>
+                                <td><?=$cate['name_pre']?><?=$cate['name']?></td>
                                 <td><?=date('Y-m-d H:i:s',$cate['created_at'])?></td>
                                 <td>
                                     <a href="<?=url("category/edit/?id={$cate['id']}")?>" class="layui-btn layui-btn-mini">编辑</a>

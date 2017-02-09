@@ -1,5 +1,6 @@
-
-
+i, cite, em { font-style: normal; }
+.goods-price { font-family: Verdana; }
+.goods-price em { font-weight: 600; color: #C00; }
 
 /* 公用顶部区域
 -------------------------------------- */
@@ -49,10 +50,10 @@
 .category-title h2{line-height: 45px; color: #fff;cursor: pointer; font-size: 16px; padding-left: 20px;}
 
 
-.category-list {  z-index:10; display:none;position:absolute; width:150px; border:1px #ccc solid; border-top:none; box-sizing:border-box; padding:3px 3px 3px 0px; background:#FAFAFA; }
-.category-list .item { height:30px; border-top:1px solid #FFFFFF; }
+.category-list {  z-index:999; display:none;position:absolute; width:150px; border:1px #ccc solid; border-top:none; box-sizing:border-box; padding:3px 3px 3px 0px; background:#FAFAFA; }
+.category-list .item { height:30px; border-top:1px solid #FFFFFF;z-index:999; }
 .category-list .item h3 { height:28px; line-height:28px; border:1px; font-size:14px; font-weight:normal; width:151px; overflow:hidden; }
-.category-list .hover h3 { position:relative; z-index:13; background:#FFF; border-color:#DDD; border-width:1px 0px; border-style:solid; }
+.category-list .hover h3 { position:relative;  background:#FFF; border-color:#DDD; border-width:1px 0px; border-style:solid; }
 .category-list .item span { padding:0px 5px; color:#A40000; font-family:"\5B8B\4F53"; }
 .category-list .item a { color:#000; text-decoration:none; }
 .category-list .item a:hover { font-weight:bold; color:#E4393C; }
@@ -68,3 +69,129 @@
 .category-list .item-list .subitem dd em { float:left; height:14px; line-height:14px; padding:0px 8px; margin-top:5px; border-left:1px solid #CCC; font-size:14px; }
 .category-list .item-list .subitem dd em a { color:#666; text-decoration:none; }
 .category-list .item-list .subitem dd em a:hover { font-weight:normal; text-decoration:underline; }
+
+/* index */
+.banner {  width: 100%;    max-width: 1920px;    margin: 0 auto;}
+.allbox{   font-family: "微软雅黑"; margin-top:10px;}
+.allbox>dt{ height:36px; line-height:36px;border-bottom:2px solid #cd1212; font-size:30px;  color:#000}
+.allbox>dt span{ float:left}
+.allbox>dt h3{ color:#990000; font-size:20px; float:left; padding-left:10px; }
+.allbox>dt p{ font-size:12px; float:left; font-family:"ËÎÌå"; padding-left:30px; }
+.allbox>dd{ }
+.morebox{font-family:"宋体";  color:#333; float:right; margin-right:10px; font-size:12px;  height:36px; font-size:14px;}
+
+.allbox .middle-goods-list { }
+.allbox .middle-goods-list ul { }
+.allbox .middle-goods-list ul li { width: 190px; height: 248px; float: left; overflow: hidden; }
+.allbox .middle-goods-list dl { width: 170px; margin: 15px auto auto; position: relative; z-index: 1;}
+.allbox .middle-goods-list dl dt.goods-name { font-family: Tahoma; line-height: 17px; width: 170px; height: 34px; position: absolute; z-index: auto; top: 178px; left: 0; overflow: hidden; }
+.allbox .middle-goods-list dl dd.goods-thumb { width: 170px; height: 170px; position: absolute; z-index: auto; top: 0; left: 0; }
+.allbox .middle-goods-list dl dd.goods-thumb a { text-align: center; vertical-align: middle; display: table-cell; *display: block;
+    width: 160px; height: 160px; overflow: hidden; }
+.allbox .middle-goods-list dl dd.goods-thumb img { max-width: 170px; max-height: 170px; margin-top:expression(160-this.height/2);
+    *margin-top:expression(80-this.height/2);
+}
+.allbox .middle-goods-list dl dd.goods-price { font-size: 14px; line-height: 20px; position: absolute; z-index: auto; top: 214px; left: 0; }
+.allbox .middle-goods-list dl dd.goods-price .original { font-size: 12px; font-weight: normal; text-decoration: line-through; color: #999; vertical-align: middle; margin-left: 6px; }
+
+
+/* 商品列表*/
+.topnav{border-bottom: 1px solid #efefef; padding: 8px 0px 5px 0px;}
+/*大图模式列表页*/
+.goods_list { font-size: 0; *word-spacing:-1px/*IE6、7*/; display: block; width: 1000px; margin-left: -16px;}
+.goods_list li { font-size: 12px; vertical-align: middle; letter-spacing: normal; word-spacing: normal; display: inline-block; *display: inline/*IE6,7*/;  width: 238px; height: 375px; margin: 12px 0 0 12px; *zoom:1;}
+.goods_list .goods-content { line-height: 18px; background-color: #FFF; height: 290px; margin: 3px; border: solid 1px #F0F0F0; border-radius: 2px; position:relative; overflow: hidden; box-shadow: 0 0 3px rgba(153,153,153,0.1); transition: border-color 0.4s ease-in-out 0s;}
+.goods_list .goods-content:hover { z-index: 12;}
+.goods_list .goods-pic { background: #FFF; width: 220px; height: 220px; padding: 5px 5px 0 5px; margin: 0; z-index: 1; top: 0; left: 0;}
+.goods_list .goods-pic a { line-height: 0; text-align: center; vertical-align: middle; display: table-cell; *display: block; width: 220px; height: 220px; overflow: hidden;}
+.goods_list .goods-pic img { max-width: 220px; max-height: 220px; margin-top: expression( 220-this.height/2); *margin-top:expression(110-this.height/2)/*IE6,7*/;}
+.goods_list .goods-info { width: 230px; margin: 0; position: absolute; z-index: 1; left: 0; top: 230px;}
+.goods_list .goods-name { font-size: 12px; line-height: 16px; color: #999; background-color: #FFF; height: 32px; display: block; padding: 0 10px; overflow: hidden;}
+.goods_list .goods-name em { color: #F30;}
+.goods_list .goods-price { font: 12px/20px Arial; color: #C00; background-color: #FFF; white-space: nowrap; display: block; height: 20px; padding: 5px 10px; overflow: hidden;}
+.goods_list .goods-price em.sale-price { font-size: 16px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; max-width:70px; float: left; overflow: hidden;}
+.goods_list .goods-price em.market-price { color: #999; text-decoration: line-through; text-overflow: ellipsis; white-space: nowrap; max-width:50px; float: left; margin-left: 10px; overflow: hidden;}
+.goods_list .sell-stat { width: 212px; margin: 0 auto; border-top: solid 1px #EEE; overflow: hidden;}
+.goods_list .sell-stat ul { font-size: 0; *word-spacing:-1px/*IE6、7*/; width: 213px; margin-left: -1px;}
+.goods_list .sell-stat ul li { vertical-align: middle; letter-spacing: normal; word-spacing: normal; text-align: center; display: inline-block; *display: inline/*IE6,7*/; width: 60px; height: 40px; padding: 5px; margin: 0; border-left: solid 1px #EEE; overflow: hidden; *zoom:1;}
+.goods_list .sell-stat ul li span { font: 600 12px/20px Tahoma; color: #B57C5B;}
+.goods_list .sell-stat ul li span.status { color: #3388BB;}
+.goods_list .sell-stat ul li p { line-height: 20px; color: #999; height: 20px;}
+.goods_list .store { line-height: 20px; display: none; background-color: #F5F5F5; text-align: center;height: 20px; clear: both; padding: 8px 0; border-top: solid 1px #EEE;}
+.goods_list li:hover .goods-content { height: 350px; margin: 0; border: solid 4px #D93600; border-radius: 0; box-shadow: 0px 4px 4px rgba(102,102,102,0.65);}
+
+
+
+
+
+/*footer*/
+.footer {
+    width: 100%;margin-top: 20px;
+    border-top: 5px solid #f50;
+    clear: both;
+    overflow: hidden
+}
+.foottop {
+    width: 1200px;
+    clear: both;
+    margin: 0 auto 10px;
+    display: block;
+    padding-top: 30px
+}
+.footlogo {
+    width: 220px;
+    float: left;
+    display: inline-block
+}
+.foottext {
+    width: 980px;
+    float: right;
+    display: inline-block;
+    overflow: hidden
+}
+.foottext ul li {
+    width: 120px;
+    float: left;
+    display: inline-block;
+    padding: 0 38px
+}
+.foottext ul li h3 {
+    font-size: 18px;
+    font-weight: normal;
+    color: #666;
+    height: 30px;
+    line-height: 30px;
+    margin-bottom: 5px
+}
+.foottext ul li h3 img {
+    float: left;
+    padding-right: 5px
+}
+.foottext ul li p {
+    padding-left: 35px;
+    font-size: 13px;
+    height: 24px; width: 120px; overflow:hidden;
+    line-height: 24px;
+    clear: both
+}
+.foottext ul li p a {
+    color: #666;
+}
+.foottext ul li p a:hover {
+    text-decoration: underline
+}
+.footbot {
+    text-align: center;
+    font-size: 14px;
+    color: #636363;
+    line-height: 30px;
+    padding: 10px 0;
+    clear: both;
+    border-top: 1px solid #eee
+}
+.footbot a {
+    color: #636363;
+}
+.footbot a img {
+    margin: 5px 5px 0;
+}

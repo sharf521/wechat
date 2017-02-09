@@ -79,6 +79,7 @@ class UserController extends Controller
         if($uInfo->return_code=='success'){
             $user=$user->where("openid='{$openid}'")->first();
             if(!$user->is_exist){
+                $user->site_id=$this->site->id;
                 $user->openid=$openid;
                 $user->type_id=1;
                 if($uInfo->invite_openid!=''){

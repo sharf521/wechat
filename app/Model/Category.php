@@ -29,13 +29,32 @@ class Category extends Model
         if (isset($data['path'])) {
             $where .= " and path like '{$data['path']}%'";
         }
-        $result = DB::table('category')->where($where)->orderBy("`showorder`,id")->all();
+        $result=$this->where($where)->orderBy("`showorder`,id")->get(\PDO::FETCH_ASSOC);
         //结果转换为特定格式
         $items = array();
         foreach ($result as $row) {
             $items[$row['id']] = $row;
         }
-        return genTree5($items);
+        $array=$this->genTree5($items);
+        $cates=array();
+        foreach ($array as $item){
+            array_push($cates,$item);
+            if(isset($item['son']) && is_array($item['son'])){
+                $num=1;
+                foreach ($item['son'] as $son){
+                    if ($num == count($item['son'])){
+                        $son['name']=$son['name'];
+                        $son["name_pre"]='&nbsp;&nbsp;└ ';
+                    }else{
+                        $son['name']=$son['name'];
+                        $son["name_pre"]='&nbsp;&nbsp;├ ';
+                    }
+                    array_push($cates,$son);
+                    $num++;
+                }
+            }
+        }
+        return $cates;
     }
 
     function getNames($data)
@@ -129,6 +148,16 @@ class Category extends Model
             $num++;
         }
         return $ss;
+    }
+    private function genTree5($items)
+    {
+        $tree = array(); //格式化好的树
+        foreach ($items as $item)
+            if (isset($items[$item['pid']]))
+                $items[$item['pid']]['son'][] = &$items[$item['id']];
+            else
+                $tree[] = &$items[$item['id']];
+        return $tree;
     }
 
     function createjs()
