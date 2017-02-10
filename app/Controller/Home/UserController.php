@@ -6,10 +6,11 @@
  * Time: 17:22
  */
 
-namespace App\Controller;
+namespace App\Controller\Home;
 
 
 use App\Center;
+use App\Controller\Controller;
 use App\Model\User;
 use System\Lib\Request;
 

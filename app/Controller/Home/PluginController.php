@@ -1,6 +1,7 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Home;
 
+use App\Controller\Controller;
 use System\Lib\Request;
 
 class PluginController extends Controller

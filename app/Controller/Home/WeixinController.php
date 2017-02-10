@@ -1,6 +1,7 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Home;
 
+use App\Controller\Controller;
 use App\Model\LinkPage;
 use App\Model\PrintTask;
 use App\Model\User;

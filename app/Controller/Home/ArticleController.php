@@ -1,10 +1,10 @@
 <?php
-namespace App\Controller;
+namespace App\Controller\Home;
 
 use App\Model\Article;
 use System\Lib\Request;
 
-class ArticleController extends Controller
+class ArticleController extends HomeController
 {
     public function __construct()
     {

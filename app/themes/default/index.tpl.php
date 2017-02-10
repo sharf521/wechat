@@ -27,7 +27,8 @@
                                     乐肤棉印花系列可爱猫咪 可爱猫咪 1.5床单三件套</a></dt>
                             <dd class="goods-thumb">
                                 <a target="_blank" href="http://www.mogo100.com/shop/index.php?act=goods&amp;op=index&amp;goods_id=111611">
-                                    <img src="http://www.mogo100.com/data/upload/shop/store/goods/122/2015/12/10/122_05030544578388186_240.jpg" alt="乐肤棉印花系列可爱猫咪 可爱猫咪 1.5床单三件套">
+
+                                    <img src="/themes/images/blank.gif" data-echo="http://www.mogo100.com/data/upload/shop/store/goods/122/2015/12/10/122_05030544578388186_240.jpg">
                                 </a></dd>
                             <dd class="goods-price"><em>￥280.50</em>
                                 <span class="original">￥0.00</span></dd>

@@ -6,14 +6,14 @@
  * Time: 10:36
  */
 
-namespace App\Controller;
+namespace App\Controller\Home;
 
 
 use App\Model\Cart;
 use App\Model\Goods;
 use System\Lib\Request;
 
-class CartController extends Controller
+class CartController extends HomeController
 {
     public function __construct()
     {
@@ -75,7 +75,7 @@ class CartController extends Controller
         $goods=$goods->addSpec($cart->spec_id);
         $stock_count=$goods->stock_count;
         if($stock_count>=$num){
-            echo json_encode(array('code'=>'0'));
+            echo json_encode(array('code'=>'0','total'=>math($num,$goods->price,'*',2)));
         }else{
             $num=$stock_count;
             echo json_encode(array('code'=>'fail','stock_count'=>$stock_count,'msg'=>"库存不足，剩余：{$stock_count}件"));

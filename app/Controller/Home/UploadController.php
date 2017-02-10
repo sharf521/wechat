@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Home;
 
+use App\Controller\Controller;
 use App\Model\GoodsImage;
 use App\Model\SupplyGoodsImage;
 use App\Model\UploadLog;

@@ -6,7 +6,7 @@
  * Time: 15:38
  */
 
-namespace App\Controller;
+namespace App\Controller\Home;
 
 
 use App\Model\Cart;

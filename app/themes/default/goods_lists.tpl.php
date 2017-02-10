@@ -1,12 +1,6 @@
 <?php require 'header.php';?>
     <div class="layui-main topnav">
-        <span class="layui-breadcrumb">
-                <a href="/">首页</a>
-                    <? foreach ($nav_cates as $c) : ?>
-                        <a href="/goods/lists/<?=$c->id?>"><?=$c->name?></a>
-                    <? endforeach;?>
-                      <a><cite><?=$cate->name?></cite></a>
-                </span>
+        <span class="layui-breadcrumb"><?=$topnav_str?></span>
     </div>
 
     <div class="layui-main container">
@@ -39,15 +33,8 @@
                 </li>
 <? endforeach;?>
             </ul>
-
             <? if($result['total']==0) : ?>
-                <div class="weui-msg">
-                    <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
-                    <div class="weui-msg__text-area">
-                        <h2 class="weui-msg__title">没有任何记录。。</h2>
-                        <p class="weui-msg__desc"></p>
-                    </div>
-                </div>
+                <div class="no-result"><i></i>没有找到符合条件的商品</div>
             <? else: ?>
                 <?=$result['page']?>
             <? endif;?>

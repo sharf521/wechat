@@ -27,6 +27,9 @@
         </div>
         <div class="quick-menu">
             <dl class="">
+                <dt><a href="/cart">我的购物车</a><i></i></dt>
+            </dl>
+            <dl class="">
                 <dt><a href="http://www.mogo100.com/shop/index.php?act=show_joinin&amp;op=index" title="免费开店">免费开店</a><i></i></dt>
                 <dd>
                     <ul>
@@ -89,8 +92,8 @@
             <div class="category-list">
                 <? foreach ($this->site->cates as $_cate) : ?>
                 <div class="item">
-                    <h3><span>·</span><a href="/goods/lists/<?=$_cate['id']?>"><?=$_cate['name']?></a></h3>
-                    <div class="item-list clearfix">
+                    <h3><a href="/goods/lists/<?=$_cate['id']?>"><i class="layui-icon">&#xe60a;</i><?=$_cate['name']?></a></h3>
+                    <div class="item-list">
                         <div class="subitem">
                             <? if(isset($_cate['son']) && is_array($_cate['son'])) : ?>
                                 <? foreach ($_cate['son'] as $child) : ?>

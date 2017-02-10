@@ -6,7 +6,7 @@
  * Time: 11:31
  */
 
-namespace App\Controller;
+namespace App\Controller\Home;
 
 
 use App\Model\Cart;
@@ -27,19 +27,29 @@ class GoodsController extends HomeController
 
     public function lists(Goods $goods,Request $request,Category $category)
     {
-        $cate=$category->findOrFail($request->get(2));
-        $data['cate']=$cate;
-        //当前位置分类
-        $path=trim($cate->path,',');
-        $paths=explode(',',$path);
-        array_shift($paths);
-        array_pop($paths);
-        $cates=array();
-        foreach ($paths as $cid){
-            array_push($cates,$category->find($cid));
+        $where="status=1 and stock_count>0";
+        $cid=(int)$request->get(2);
+        $topnav_str='<a href="/">首页</a>';
+        if($cid!=0){
+            $cate=$category->findOrFail($request->get(2));
+            $data['cate']=$cate;
+            //当前位置分类
+            $path=trim($cate->path,',');
+            $paths=explode(',',$path);
+            array_shift($paths);
+            array_pop($paths);
+            foreach ($paths as $cid){
+                $c=$category->find($cid);
+                $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
+            }
+            $topnav_str.="<a><cite>{$cate->name}</cite></a>";
+
+            $where.=" and category_path like '{$cate->path}%'";
+        }else{
+            $topnav_str.="<a><cite>列表</cite></a>";
         }
-        $data['nav_cates']=$cates;
-        $data['result']=$goods->where("status=1 and stock_count>0")->orderBy('id desc')->pager($request->get('page'),10);
+        $data['topnav_str']=$topnav_str;
+        $data['result']=$goods->where($where)->orderBy('id desc')->pager($request->get('page'),10);
         $this->view('goods_lists',$data);
     }
 
@@ -76,6 +86,17 @@ class GoodsController extends HomeController
             }
             redirect('/member/order')->with('msg','己ok！');*/
         }else{
+            //当前位置
+            $topnav_str='<a href="/">首页</a>';
+            $path=trim($goods->category_path,',');
+            $paths=explode(',',$path);
+            array_shift($paths);
+            foreach ($paths as $cid){
+                $c=(new Category())->find($cid);
+                $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
+            }
+            $topnav_str.="<a><cite>{$goods->name}</cite></a>";
+            $data['topnav_str']=$topnav_str;
             $data['goods']=$goods;
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();

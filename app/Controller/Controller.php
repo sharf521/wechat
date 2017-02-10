@@ -15,10 +15,8 @@ class Controller extends BaseController
         $host = strtolower($_SERVER['HTTP_HOST']);
         if (strpos($host, '.wechat.') === false) {
             $this->is_wap = false;
-            $this->template = 'default';
         } else {
             $this->is_wap = true;
-            $this->template = 'default_wap';
         }
 
         $agent = addslashes($_SERVER['HTTP_USER_AGENT']);
