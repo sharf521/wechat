@@ -5,6 +5,7 @@
 namespace App\Controller;
 
 use App\Model\SubSite;
+use App\Model\User;
 use System\Lib\Controller as BaseController;
 
 class Controller extends BaseController
@@ -18,12 +19,10 @@ class Controller extends BaseController
         } else {
             $this->is_wap = true;
         }
-
         $agent = addslashes($_SERVER['HTTP_USER_AGENT']);
         if(strpos($agent, 'MicroMessenger') === false && strpos($agent, 'Windows Phone') === false)
         {
             $this->is_inWeChat=false;
-            //echo '非微信浏览器不能访问';
             //die('Sorry！非微信浏览器不能访问');
         }else{
             $this->is_inWeChat=true;
@@ -36,6 +35,24 @@ class Controller extends BaseController
         if(!$this->site->is_exist){
             echo 'The site was not found！';
             exit;
+        }
+    }
+    
+    public function check_login()
+    {
+        if($this->control !='login' && $this->control !='logout'){
+            if(empty($this->user_id)){
+                $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+                if($this->is_inWeChat && $this->is_wap){
+                    redirect("/wxOpen/oauth/?url={$url}");
+                }else{
+                    redirect(url("/user/login/?url={$url}"));
+                }
+            }
+            $this->user=(new User())->findOrFail($this->user_id);
+            if(trim($this->user->headimgurl)==''){
+                $this->user->headimgurl='/themes/member/images/no-img.jpg';
+            }
         }
     }
 }

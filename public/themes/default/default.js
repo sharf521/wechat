@@ -3,6 +3,21 @@ $(function () {
         ,util = layui.util
         ,laydate = layui.laydate;
     util.fixbar();
+    /*util.fixbar({
+        bar1: '<i class="iconfont" style="font-size: 24px;">&#xe698;</i>'
+        ,bar2: false
+        ,css: {right: 100, bottom: 100}
+        ,bgcolor: '#c00'
+        ,click: function(type){
+            if(type === 'bar1'){
+                window.location='/cart/';
+            } else if(type === 'bar2') {
+                layer.msg('两个bar都可以设定是否开启')
+            }
+        }
+    });*/
+
+
     var element = layui.element();
     element.init();
 });
@@ -362,10 +377,17 @@ function selectSpec(type,obj){
     if(type==1){
         goodsSpec.spec1_name=obj.html();
         goodsSpec.initSpec2();
+
         $('#specBox_2 span:first').click();
     }else{
         goodsSpec.spec2_name=obj.html();
     }
+    var goods_prompt='已选择 ';
+    goods_prompt+='<strong>'+goodsSpec.spec1_name+'</strong>';
+    if(goodsSpec.specQty==2){
+        goods_prompt+=' , <strong>'+goodsSpec.spec2_name+'</strong>';
+    }
+    $('.goods_prompt').html(goods_prompt);
     goodsSpec.setFormValue();
     $('#buy_quantity').val(1);
 }

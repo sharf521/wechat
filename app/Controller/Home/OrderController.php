@@ -23,6 +23,7 @@ class OrderController extends HomeController
     public function __construct()
     {
         parent::__construct();
+        $this->check_login();
     }
 
     //确认订单

@@ -26,20 +26,19 @@
                             <div class="goods_item clearFix">
                                 <input class="checkbox"  type="checkbox" checked name="cart_id[]" value="<?=$cart->id?>">
                                 <div class="cell2">
-                                    <a href="<?=url("goods/detail/?id={$cart->goods_id}")?>">
-                                        <img class="image" src="<?=$cart->goods_image?>">
-                                        <div class="oi_content" style="float: left">
-                                            <?=$cart->goods_name?>
-                                            <p><?
-                                                if($cart->spec_1!=''){
-                                                    echo "<span class='spec'>{$cart->spec_1}</span>";
-                                                }
-                                                if($cart->spec_2!=''){
-                                                    echo "<span class='spec'>{$cart->spec_2}</span>";
-                                                }
-                                                ?>
-                                                <span class="count">¥<?=$cart->price?></span></p>
-                                        </div></a>
+                                    <img class="image" src="<?=$cart->goods_image?>">
+                                    <div class="oi_content">
+                                        <a href="<?=url("goods/detail/?id={$cart->goods_id}")?>"><?=$cart->goods_name?></a>
+                                        <p><?
+                                            if($cart->spec_1!=''){
+                                                echo "<span class='spec'>{$cart->spec_1}</span>";
+                                            }
+                                            if($cart->spec_2!=''){
+                                                echo "<span class='spec'>{$cart->spec_2}</span>";
+                                            }
+                                            ?>
+                                            <span class="count money">¥<?=$cart->price?></span></p>
+                                    </div>
                                 </div>
                                 <div class="cell3">
                                     <div class="wrap-input" style="margin-left: 80px;">
@@ -48,11 +47,10 @@
                                         <span class="btn-add">+</span>
                                     </div>
                                 </div>
-                                <div class="cell4 goods-price" style="text-align: center">¥
+                                <div class="cell4 money" style="text-align: center">¥
                                     <em class="price"><?=math($cart->price,$cart->quantity,'*',2)?></em>
                                 </div>
-
-                                <i class="iconfont del" data-id="<?=$cart->id?>">&#xe69d;</i>
+                                <i class="del layui-btn layui-btn-danger layui-btn-small" data-id="<?=$cart->id?>">移除</i>
                             </div>
                         <? endforeach;?>
                         <div class="cart_foot">小计：<em>¥<span class="shop_total" shop_id="<?=$i?>"></span></em></div>
