@@ -162,7 +162,7 @@ class WxOpenController extends Controller
             $host_arr=explode('.',$_SERVER['HTTP_HOST']);
             $appid=$host_arr[0];
             $redirect_uri=urlencode('http://'.$_SERVER['HTTP_HOST'].url("wxOpen/oauth_callback/"));
-            $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope=snsapi_base&state=STATE&component_appid={$this->component_appid}#wechat_redirect";
+            $url="https://open.weixin.qq.com/connect/oauth2/authorize?appid={$appid}&redirect_uri={$redirect_uri}&response_type=code&scope=scope&state=STATE&component_appid={$this->component_appid}#wechat_redirect";
             //echo $url;
             redirect($url);
             exit;
