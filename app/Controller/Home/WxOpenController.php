@@ -172,8 +172,6 @@ class WxOpenController extends Controller
     }
     public function oauth_callback(Request $request)
     {
-        var_dump($request);
-        exit;
         $code=$request->get('code');
         $appid=$request->get('appid');
         $userInfo=$this->getWebUserInfo($appid,$code);
@@ -205,8 +203,7 @@ class WxOpenController extends Controller
         $result=$user->login(array('direct'=>1, 'unionid'=>$user->unionid));
         if($result===true){
             $target_url=session('target_url');
-            echo $target_url;
-            //redirect($target_url); // 跳转
+            redirect($target_url); // 跳转
         }else{
             echo $result;
         }
