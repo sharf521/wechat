@@ -1,10 +1,21 @@
-layui.use(['layer', 'util', 'laydate'], function(){
+
+function _initWH() {
+    var $content = $("#main-tab .layui-tab-content");
+    //$content.width($(window).width() - 220);
+    $content.height($(window).height() - 112);
+    $content.find("iframe").each(function() {
+        $(this).height($content.height())
+        //$(this).width($content.width())
+    });
+}
+$(function () {
     var layer = layui.layer
         ,util = layui.util
         ,laydate = layui.laydate;
+    var form = layui.form();
     util.fixbar();
-
-
+    var element = layui.element();
+    element.init();
     //上传文件
     if ($('.layui-upload-file').length>0){
         layui.use(['upload'], function(){
@@ -33,6 +44,36 @@ layui.use(['layer', 'util', 'laydate'], function(){
             });
         });
     }
+
+    $('.li_item').on('click',function () {
+        var title = $(this).find('a').text();
+        var url = $(this).find('a').attr('url');
+        /*        for (var i = 0; i <$('.x-iframe').length; i++) {
+         if($('.x-iframe').eq(i).attr('src')==url){
+         element.tabChange('x-tab', i);
+         return;
+         }
+         }*/
+        var isExist=false;
+        $('.x-iframe').each(function (index,obj) {
+            if($(obj).attr('src')==url){
+                element.tabChange('x-tab', index);
+                isExist=true;
+                return;
+            }
+        });
+        if(isExist==false){
+            element.tabAdd('x-tab', {
+                title: title
+                ,content: '<iframe frameborder="0" src="'+url+'" class="x-iframe" width="100%"></iframe>'
+            });
+            element.tabChange('x-tab', $('.layui-tab-title li').length-1);
+            _initWH();
+            //$('.layui-tab-title li').eq(0).find('i').remove();
+        }
+    });
+
+
 });
 
 //防止重复提交

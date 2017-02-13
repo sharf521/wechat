@@ -11,7 +11,7 @@ textarea {vertical-align: middle; line-height:30px; background:#fdfdfd; border:1
 
 input:focus{ border:1px solid #2baab1;}
 input[type=button],input[type=submit]{ background:#2baab1; color:#fff;border: 1px solid #26969c; cursor:pointer;padding:5px 10px; font-size: 12px;   }
-input[type=button]:hover,input[type=submit]:hover{ background:#32c5cd;}
+/*input[type=button]:hover,input[type=submit]:hover{ background:#32c5cd;}*/
 input[type=radio],input[type=checkbox]{ width:16px; height:16px;}
 
 .but1{color:#FFF; background-color:#d9534f;border:1px solid #df4c43;padding:5px 10px; margin:0 1px;  font-size: 12px; line-height: 1.5; border-radius:3px;}
@@ -32,12 +32,6 @@ ul, li{ list-style:none;}
 
 a{ text-decoration:none;}
 h1,h2,h3{ font-weight:normal;}
-
-
-
-
-
-
 
 .table{ width:100%; margin-top:10px; border-collapse: collapse; border:1px solid #dddddd;border-bottom:2px solid #dddddd;}
 .table .l{ text-align:left; padding-left: 5px;}
@@ -61,18 +55,6 @@ h1,h2,h3{ font-weight:normal;}
 
 .search{ margin-top: 10px;}
 
-.topbox{width:100%; background:#fff; height:54px; overflow: hidden; border-top:2px solid #2baab1;  box-shadow: 0 1px 1px rgba(0,0,0,.15);  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.15);  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.15); }
- .topbox h3{ float:left;font-weight:normal; font-size:18px; color:#2baab1; line-height:54px; padding:0 0 0 20px;}
- .topbox h3 i{ margin-right:6px; font-size:24px;}
-
-
-.nav{ float:left; margin-left:50px;}
-.nav li{float:left; margin-left:20px;  cursor:pointer;color:#018dba; font-size:14px; padding:0 21px; line-height:54px;  padding-top:2px;}
-.nav li.checkit{ color:#FFF; background-color:#4cd1fc;}
-.nav li:hover{background-color:#4cd1fc; color:#FFF;}
-
-.topnav{ top:10px; position:absolute; right:30px;}
-.topnav li{ float:left;}
 .nihao{ color:#858484; margin-right:20px; margin-top:6px;}
 .tuichu{ margin-top:6px;}
 .tuichu a{ color:#c0876c; margin-right:15px;}
@@ -85,20 +67,7 @@ h1,h2,h3{ font-weight:normal;}
 .houtai{  width:70px; background-color:#f9691a; text-align:center; line-height:26px;}
 .houtai a{color:#FFF;}
 
-/*left*/
-.neirong{ overflow:hidden;}
-.leftpanel{ background-color:#1c2b36; width:180px; float:left;}
-/*right*/
-.rightpanel{ float:right;}
 
-.leftpanel h1{ font-size:16px; color:#f9691a; margin-left:36px; margin-top:30px; display: none}
-
-/*二级菜单*/
-.menu a{display: block; text-decoration: none; font-size:14px}
-.menu li{line-height:42px;font-family: "微软雅黑";font-size: 14px;  border-bottom: 1px solid #17232c;}
-.menu li a{ color: #7ca0bb; padding-left: 20px;}
-.menu li a:hover{color: #fff; border-left: 5px #FFAA1C solid; padding-left: 25px;background-color: #17232c;}
-li.menuSelectd a{ color: #fff; border-left: 5px #FFAA1C solid; padding-left: 25px;background-color: #17232c;}
 
 
 /*添加商品-上传图片*/
@@ -134,21 +103,6 @@ li.menuSelectd a{ color: #fff; border-left: 5px #FFAA1C solid; padding-left: 25p
 .form1 li span{margin-left:10px;color:#666;}
 
 
-/*商品规格操作*/
-.up_btn{  background:url(../images/icon.png) no-repeat; background-position:-55px 0; width:17px; height:17px; display:block; cursor: pointer; float:left; margin:3px 5px; overflow:hidden;}
-.down_btn{ background:url(../images/icon.png) no-repeat; background-position:-28px 0; width:17px; height:17px; display:block; cursor: pointer; float:left; margin:3px 5px;}
-.delete_btn{  background:url(../images/icon.png) no-repeat; background-position:0 0; width:17px; height:17px; display:block; cursor: pointer; float:left;  margin:3px 5px;}
-
-
-
-/*订单回复*/
-.div_eval{ width:600px; margin-top:20px;}
-.div_eval span{ margin-top:10px;}
-.div_eval .div_evalcont{ margin-top:10px;}
-.div_evalre{ width:600px; margin-top:20px;}
-.div_evalre .kefu{ color:#F00;}
-.div_evalre .line{ border:1px solid #d9d9d9; margin:10px 0;}
-
 
 /*上传按钮*/
 .upload-upimg{height:25px; line-height:25px;width:80px;position:relative; overflow:hidden; display: inline-block; }
@@ -169,3 +123,16 @@ li.menuSelectd a{ color: #fff; border-left: 5px #FFAA1C solid; padding-left: 25p
 
 /*footer*/
 .footer{ line-height:50px; margin:0 auto; width:445px;}
+
+input.layui-btn{    display: inline-block;
+ height: 38px;
+ line-height: 38px;
+ padding: 0 18px;
+ background-color: #009688;
+ color: #fff;
+ white-space: nowrap;
+ text-align: center;
+ border: none;
+ border-radius: 2px;
+ cursor: pointer;
+ opacity: .9;}
