@@ -26,7 +26,7 @@ class CarProductController extends AdminController
         }
         $result = $product->orderBy('id desc')->where($where)->pager($_GET['page']);
         $data['result'] = $result;
-        $this->view('CarProduct', $data);
+        $this->view('carProduct', $data);
     }
 
     function add(CarProduct $product,CarProductData $productData,Request $request)
@@ -45,7 +45,7 @@ class CarProductController extends AdminController
                 $product->plan_id=$request->post('plan_id');
                 $product->price=$price;
                 $product->picture=$request->post('picture');
-
+                $product->status=0;
                 $insert_id=$product->save(true);
                 $productData->id=$insert_id;
                 $productData->content=$content;
@@ -67,7 +67,7 @@ class CarProductController extends AdminController
                 }
 
                 DB::commit();
-                redirect('carProduct')->with('msg', '添加成功！');
+                redirect('CarProduct')->with('msg', '添加成功！');
             }catch(\Exception $e){
                 DB::rollBack();
                 $error = "Failed: " . $e->getMessage();
@@ -77,7 +77,7 @@ class CarProductController extends AdminController
             $data['plans'] = $this->planList;
             $data['brands']=$this->brandList;
             $data['specs']=array('','','','');
-            $this->view('CarProduct', $data);
+            $this->view('carProduct', $data);
         }
     }
 
@@ -143,7 +143,7 @@ class CarProductController extends AdminController
             $data['specs']=$product->CarProductSpec();
             $data['plans'] = $this->planList;
             $data['brands']=$this->brandList;
-            $this->view('CarProduct', $data);
+            $this->view('carProduct', $data);
         }
     }
 

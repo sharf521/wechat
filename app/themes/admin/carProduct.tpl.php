@@ -14,6 +14,7 @@
                 <th>图片</th>
                 <th>品牌</th>
                 <th>添加时间</th>
+                <th>状态</th>
                 <th>操作</th>
                 </thead>
                 <tbody>
@@ -25,9 +26,15 @@
                         <td><img src="<?=$row->picture?>" height="50"></td>
                         <td> <?= $row->brand_name ?></td>
                         <td><?= $row->created_at ?></td>
+                        <td><? if ($row->status == '1') {
+                                echo '显示';
+                            } else {
+                                echo '隐藏';
+                            } ?></td>
                         <td>
-                            <a href="<?= url("carProduct/edit/?id={$row->id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">修改</a>
-                            <a href="javascript:goDel('<?=$row->id?>')" class="layui-btn layui-btn-mini">删除</a>
+                            <a class="layui-btn layui-btn-mini" href="<?= url("carProduct/change/?id={$row->id}&page={$_GET['page']}") ?>"><?= ($row->status == '1') ? '隐藏' : '显示' ?></a>
+                            <a class="layui-btn layui-btn-mini" href="<?= url("carProduct/edit/?id={$row->id}&page={$_GET['page']}") ?>">修改</a>
+                            <a class="layui-btn layui-btn-mini" href="javascript:goDel('<?=$row->id?>')">删除</a>
                         </td>
                     </tr>
                 <? } ?>
