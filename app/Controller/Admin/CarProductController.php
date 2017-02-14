@@ -77,7 +77,7 @@ class CarProductController extends AdminController
         } else {
             $data['plans'] = $this->planList;
             $data['brands']=$this->brandList;
-            $data['specs']=array('','','','');
+            $data['specs']=array('','');
             $this->view('carProduct', $data);
         }
     }
