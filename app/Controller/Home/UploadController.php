@@ -7,6 +7,7 @@ use App\Model\GoodsImage;
 use App\Model\SupplyGoodsImage;
 use App\Model\System;
 use App\Model\UploadLog;
+use App\Upload;
 use System\Lib\Request;
 
 use Qiniu\Auth;
@@ -118,9 +119,9 @@ class UploadController extends Controller
         }
     }
 
-    private function toPicService($file_path)
+    public function toPicService($file_path)
     {
-        $return=$this->curl_file($file_path);
+        $return=(new Upload())->curl_file($file_path);
         if($return['status']!=1){
             $this->_error($return['error']);
         }else{
@@ -128,13 +129,11 @@ class UploadController extends Controller
         }
     }
 
-    private function curl_file($file_path)
+    /*private function curl_file($file_path)
     {
-        //$curl_url='http://picture.test.cn:8080/upload.php';
-        $curl_url=(new System())->getCode('upload_url');
+        $curl_url='http://picture.test.cn:8080/upload.php';
         $post = array();
-        //$post['sign'] = 'picture_upload_img';
-        $post['sign']=(new System())->getCode('upload_sign');
+        $post['sign'] = 'picture_upload_img';
         $post['path'] = $file_path;
         $filePath = ROOT . '/public' . $file_path;
         if (class_exists('\CURLFile')) {
@@ -161,7 +160,7 @@ class UploadController extends Controller
             $arr['error'] = $result['error'];
             return $arr;
         }
-    }
+    }*/
 
     private function toQiniu($path)
     {

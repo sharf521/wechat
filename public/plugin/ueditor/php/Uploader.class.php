@@ -129,24 +129,25 @@ class Uploader
             $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
         } else { //移动成功
             $this->stateInfo = $this->stateMap[0];
-			/*include '../../../system/upload.class.php';
-			$data=array(
-				'file'=>$this->filePath,
-				'path'=>dirname($this->fullName)
-			);		
-			$up=new upload();
-			$arr=$up->curl_file($data);
-			if($arr['status']==1)
-			{
-				$this->fullName=$arr['file'];
-				$this->stateInfo = $this->stateMap[0];
-			}
-			else
-			{
-				$this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");	
-			}			*/
+
+
+            $file_path=dirname($this->fullName).'/'.$this->fileName;
+            $return=(new \App\Upload())->curl_file($file_path);
+            if($return['status']!=1){
+                //echo $return['error'];
+                $this->stateInfo = $this->getStateInfo("ERROR_FILE_MOVE");
+            }else{
+                //echo  $return['file'];
+                $this->fullName=$return['file'];
+                $this->stateInfo = $this->stateMap[0];
+            }
+
+
         }
     }
+
+
+
 
     /**
      * 处理base64编码的图片上传
