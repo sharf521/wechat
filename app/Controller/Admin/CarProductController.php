@@ -46,6 +46,7 @@ class CarProductController extends AdminController
                 $product->price=$price;
                 $product->picture=$request->post('picture');
                 $product->status=0;
+                $product->is_recommend=(int)$request->post('is_recommend');
                 $insert_id=$product->save(true);
                 $productData->id=$insert_id;
                 $productData->content=$content;
