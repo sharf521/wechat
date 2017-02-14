@@ -142,6 +142,12 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
+                    <label class="layui-form-label">是否推荐</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="is_recommend" value="1" lay-skin="switch" <? if($row->is_recommend==1){echo 'checked';}?>>
+                    </div>
+                </div>
+                <div class="layui-form-item">
                     <div class="layui-input-block">
                         <button class="layui-btn" lay-submit="" lay-filter="*">确认提交</button>
                         <input class="layui-btn" type="button" value="返回" onclick="window.history.go(-1)"/>

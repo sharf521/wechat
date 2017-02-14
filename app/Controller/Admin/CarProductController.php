@@ -81,7 +81,7 @@ class CarProductController extends AdminController
         }
     }
 
-    //修改文章
+    //修改
     function edit(CarProduct $product,CarProductData $productData,Request $request)
     {
         $id = (int)$request->id;
@@ -100,7 +100,7 @@ class CarProductController extends AdminController
                 $product->plan_id=$request->post('plan_id');
                 $product->price=$price;
                 $product->picture=$request->post('picture');
-
+                $product->is_recommend=(int)$request->post('is_recommend');
                 $product->save(true);
                 $productData=$productData->find($id);
                 $productData->content=$content;
