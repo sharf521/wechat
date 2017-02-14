@@ -9,7 +9,7 @@
 namespace App\Controller\Admin;
 
 
-use App\Model\carPlan;
+use App\Model\CarPlan;
 use System\Lib\Request;
 
 class CarPlanController extends AdminController
@@ -18,7 +18,7 @@ class CarPlanController extends AdminController
     {
         parent::__construct();
     }
-    public function index(carPlan $plan,Request $request)
+    public function index(CarPlan $plan,Request $request)
     {
         if (isset($_POST['showorder'])) {
             $id = $request->id;
@@ -35,7 +35,7 @@ class CarPlanController extends AdminController
         }
     }
 
-    public function add(Request $request,carPlan $plan)
+    public function add(Request $request,CarPlan $plan)
     {
         if($_POST){
             $order = (int)$request->post('showorder');
@@ -52,7 +52,7 @@ class CarPlanController extends AdminController
             $this->view('carPlan');
         }
     }
-    public function edit(Request $request,carPlan $plan)
+    public function edit(Request $request,CarPlan $plan)
     {
         $plan=$plan->findOrFail($request->id);
         if($_POST){
@@ -67,7 +67,7 @@ class CarPlanController extends AdminController
             $this->view('carPlan',$data);
         }
     }
-    public function delete(Request $request,carPlan $plan)
+    public function delete(Request $request,CarPlan $plan)
     {
         $plan=$plan->findOrFail($request->id);
         $plan->delete();
