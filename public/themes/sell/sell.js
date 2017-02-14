@@ -106,6 +106,7 @@ function goodsAdd_js() {
     });
     $('.add_btn').click(function(){
         var tem=$("#MySpecTB tr:last").clone(true);
+        $(tem).find('input:first').val(0);
         $("#MySpecTB tr:last").after(tem);
     });
 

@@ -322,37 +322,7 @@ function openlist(o) {
 }
 //user.tpl.php  end
 
-//goods.tpl.php  start
-$(function () {
-    $('.up_btn').click(function () {
-        var i = $(this).parent().parent().index();//当前行的id
-        if (i > 1) {//不是表头，也不是第一行，则可以上移
-            var tem = $(this).parent().parent().prev().clone(true);
-            $(this).parent().parent().prev().remove();
-            $(this).parent().parent().after(tem);
-        }
-    });
-    $('.down_btn').click(function () {
-        var l = $("#MySpecTB tr").length;//总行数
-        var i = $(this).parent().parent().index();//当前行的id
-        if (i < l - 1) {//不是最后一行，则可以下移
-            var tem = $(this).parent().parent().next().clone(true);
-            $(this).parent().parent().next().remove();
-            $(this).parent().parent().before(tem);
-        }
-    });
-    $('.delete_btn').click(function () {
-        var l = $("#MySpecTB tr").length;//总行数
-        if (l > 3)//最少保留两行
-        {
-            $(this).parent().parent().remove();
-        }
-    });
-    $('.add_btn').click(function () {
-        var tem = $("#MySpecTB tr:last").clone(true);
-        $("#MySpecTB tr:last").after(tem);
-    });
-});
+
 
 function calculation() {
     var price = $("#price").val();

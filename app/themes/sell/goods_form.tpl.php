@@ -55,7 +55,9 @@
                                         <tbody>
                                         <? foreach ($specs as $spec) : ?>
                                         <tr>
-                                            <td><input name="spec_1[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_1?>"></td>
+                                            <td>
+                                                <input type="hidden" name="spec_id[]" value="<?=$spec->id?>">
+                                                <input name="spec_1[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_1?>"></td>
                                             <td><input name="spec_2[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_2?>"></td>
                                             <td><input name="price[]" type="text" size="6"  placeholder="￥" class="layui-input" value="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"></td>
                                             <td><input name="stock_count[]" type="text" size="6"  placeholder="库存数量" value="<?=$spec->stock_count?>" class="layui-input" onkeyup="value=value.replace(/[^0-9]/g,'')"></td>
