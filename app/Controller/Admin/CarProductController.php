@@ -34,7 +34,7 @@ class CarProductController extends AdminController
         if ($_POST) {
             $name=$request->post('name');
             $price=(float)$request->post('price');
-            $content=$request->post('content');
+            $content=$_POST('content');
             if(empty($name)){
                 redirect()->back()->with('error','名称不能为空！');
             }
@@ -89,7 +89,7 @@ class CarProductController extends AdminController
         if ($_POST) {
             $name=$request->post('name');
             $price=(float)$request->post('price');
-            $content=$request->post('content');
+            $content=$_POST('content');
             if(empty($name)){
                 redirect()->back()->with('error','名称不能为空！');
             }

@@ -43,6 +43,7 @@ $pager = app('\System\Lib\Page');
 
 $routes=array(
     'chat'=>'Chat',
+    'car'=>'Car',
     'member'=>'Member',
     'sellManage'=>'SellManage',
     'supplyManage'=>'SupplyManage'

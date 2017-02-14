@@ -84,7 +84,7 @@ class GoodsController extends SellController
             //规格
             $shipping_fee=(float)$request->post('shipping_fee');
             $shipping_id=(int)$request->post('shipping_id');
-            $content=$request->post('content');
+            $content=$_POST('content');
             $shop_cateid=(int)$request->post('shop_category');
             $is_have_spec=(int)$request->post('is_have_spec');
             if($shop_cateid!=0){
@@ -179,7 +179,7 @@ class GoodsController extends SellController
             $spec_id=$request->post('spec_id');
             $shipping_fee=(float)$request->post('shipping_fee');
             $shipping_id=(int)$request->post('shipping_id');
-            $content=$request->post('content');
+            $content=$_POST('content');
             $shop_cateid=(int)$request->post('shop_category');
             $is_have_spec=(int)$request->post('is_have_spec');
             if($shop_cateid!=0){
