@@ -5,6 +5,7 @@ namespace App\Controller\Home;
 use App\Controller\Controller;
 use App\Model\GoodsImage;
 use App\Model\SupplyGoodsImage;
+use App\Model\System;
 use App\Model\UploadLog;
 use System\Lib\Request;
 
@@ -103,15 +104,62 @@ class UploadController extends Controller
                         'src' => $path
                     )
                 );
+                echo json_encode($data);
             }else{
                 $data = array(
                     'code' => '0',
                     'id'=>$id,
-                    'url' => $path
+                    'url' => $this->toPicService($path)
                 );
+                echo json_encode($data);
             }
-            echo json_encode($data);
+
             //$this->toQiniu($path);
+        }
+    }
+
+    private function toPicService($file_path)
+    {
+        $return=$this->curl_file($file_path);
+        if($return['status']!=1){
+            $this->_error($return['error']);
+        }else{
+            return $return['file'];
+        }
+    }
+
+    private function curl_file($file_path)
+    {
+        //$curl_url='http://picture.test.cn:8080/upload.php';
+        $curl_url=(new System())->getCode('upload_url');
+        $post = array();
+        //$post['sign'] = 'picture_upload_img';
+        $post['sign']=(new System())->getCode('upload_sign');
+        $post['path'] = $file_path;
+        $filePath = ROOT . '/public' . $file_path;
+        if (class_exists('\CURLFile')) {
+            $post['field'] =  new \CURLFile($filePath);
+        } else {
+            $post['field'] = '@' . $filePath;
+        }
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $curl_url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_POST, true);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        //if((int)$data['is_del'])	unlink($file); 删除文件
+        $result = json_decode($result, true);
+        if ($result['status'] == 1) {
+            $arr['status'] = 1;
+            $arr['file'] =  $result['file'];
+            return $arr;
+        } else {
+            $arr['status'] = 0;
+            $arr['error'] = $result['error'];
+            return $arr;
         }
     }
 
@@ -170,7 +218,7 @@ class UploadController extends Controller
     {
         $data = array(
             'code' => 'fail',
-            'msg' => "Error：{$msg}"
+            'msg' => "Error:{$msg}"
         );
         echo json_encode($data);
         exit;
