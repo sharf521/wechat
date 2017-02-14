@@ -62,7 +62,7 @@
                                         src="<?= $row->picture ?>" align="absmiddle" width="100"/></a>
                             <? } ?>
                         </span>
-                        <input type="file" name="file" class="layui-upload-file" upload_id="article" upload_type="article">
+                        <input type="file" name="file" class="layui-upload-file" upload_id="article" upload_type="carPlan">
                     </div>
                 </div>
                 <div class="layui-form-item">

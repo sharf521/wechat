@@ -38,6 +38,12 @@ class UploadController extends Controller
             $path = "/data/upload/" . ceil($user_id / 2000) . "/" . $user_id . "/goods/" . date('Ym') . '/';
         } elseif ($type == 'supply') {
             $path = "/data/upload/" . ceil($user_id / 2000) . "/" . $user_id . "/supply/" . date('Ym') . '/';
+        } elseif ($type == 'carBrand') {
+            $path = "/data/upload/car/brand/";
+        } elseif ($type == 'carPlan') {
+            $path = "/data/upload/car/plan/";
+        }elseif ($type == 'carProduct') {
+            $path = "/data/upload/car/product/".date('Ym').'/';
         } elseif ($type == 'headimgurl') {
             $name = 'face';
         } elseif ($type == 'card1' || $type == 'card2') {
