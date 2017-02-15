@@ -3,7 +3,7 @@
     <div class="swiper-container car_mes">
         <div class="swiper-wrapper">
             <? foreach ($ads as $ad) : ?>
-            <div class="swiper-slide"><a href="<?=$ad->url?>"><img src="<?=$ad->picture?>" style="max-width: 100%; height: 100%"></a></div>
+            <div class="swiper-slide"><a href="<?=$ad->url?>"><img src="<?=$ad->picture?>" style="max-width: 100%;"></a></div>
             <? endforeach;?>
         </div>
         <div class="swiper-pagination"></div>

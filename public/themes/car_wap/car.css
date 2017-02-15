@@ -3,8 +3,8 @@ a {
     text-decoration: none;
 }
 
-.m_regtilinde{ line-height:60px; height:60px; font-size:22px; width: 90%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
-.m_regtilinde span{ float: right; font-size: 18px; color: #888; display: block}
+.m_regtilinde{ line-height:50px; font-size:18px; width: 90%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
+.m_regtilinde span{ float: right; font-size: 14px; color: #888; display: block}
 .m_regtilinde span a{ display: inline-block}
 
 .car_mes{}
@@ -15,7 +15,7 @@ a {
 
 
 
-.br_box{ padding: 2rem 0; border-bottom: 1px solid #d5d5d5; overflow: hidden;}
+.br_box{ padding: 10px 0; border-bottom: 1px solid #d5d5d5; overflow: hidden;}
 .br_box ul{width: 100%;}
 .br_box li{ float: left; width: 33.33%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
 .br_box li:nth-child(3n){ border-right: none;}
@@ -23,7 +23,7 @@ a {
 .br_box li a{ display: block; text-align: center; width: 100%;}
 .br_box li a>div{text-align: center;    vertical-align: middle; display: block;  height: 80px;}
 .br_box li img{ width: 80px;}
-.br_box li span{ font-size: 22px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
+.br_box li span{ font-size: 18px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
 
 .commoditylist_content{width:100%;margin-top:5px;height:auto;border-top:1px solid #f3f3f3}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
