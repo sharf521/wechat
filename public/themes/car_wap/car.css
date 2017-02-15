@@ -25,14 +25,14 @@ a {
 .br_box li img{ width: 80px;}
 .br_box li span{ font-size: 18px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
 
-.commoditylist_content{width:90%;margin:5px auto;height:auto;border-top:1px solid #f3f3f3}
+.commoditylist_content{width:95%;margin:5px auto;height:auto;border-top:1px solid #f3f3f3}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
-.commoditylist_content li{height:auto;position:relative;padding:.5rem 1rem;border-bottom:1px solid #f3f3f3}
+.commoditylist_content li{height:auto;position:relative;padding:10px 0px;border-bottom:1px solid #f3f3f3}
 .commoditylist_content li .imgspan{display:inline-block;position:relative}
 .commoditylist_content li img{width:100px;height:100px}
 .commoditylist_content li .info{position:absolute;left:116px;top:.5rem;bottom:.5rem;padding-left:.8rem}
 .commoditylist_content li .info .cd_title{color:#000;font-weight:400;font-size:17px;width:auto;overflow:hidden;text-overflow:ellipsis;word-wrap:normal;word-wrap:break-word;word-break:break-all;max-height:50px}
-.commoditylist_content li i{color:#ccc;font-size:20px;position:absolute;top:2rem;bottom:.5rem;right:1rem;padding-left:.8rem}
+.commoditylist_content li i{color:#ccc;font-size:20px;position:absolute;top:2rem;bottom:.5rem;right:0px;padding-left:.8rem}
 .commoditylist_content .cd_ensure{font-size:12px;color:#666;margin-top:3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .commoditylist_content .cd_money{font-size:18px;color:red}
 .commoditylist_content .cd_money span{font-size:12px;color:red}
@@ -106,5 +106,5 @@ a {
     position: relative;
 }
 .product_detail .detail_content{padding: 20px 2px;}
-.product_detail .detail_content p{line-height: 30px;}
+.product_detail .detail_content p{line-height:1.5%;}
 .product_detail .detail_content img{max-width: 100%;}
