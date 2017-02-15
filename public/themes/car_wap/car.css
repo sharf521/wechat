@@ -23,7 +23,7 @@ a {
 .br_box li a{ display: block; text-align: center; width: 100%;}
 .br_box li a>div{text-align: center;    vertical-align: middle; display: block;  height: 80px;}
 .br_box li img{ width: 80px;}
-.br_box li span{ font-size: 18px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
+.br_box li span{ font-size: 14px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
 
 .commoditylist_content{width:95%;margin:5px auto;height:auto;border-top:1px solid #f3f3f3}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
@@ -106,5 +106,5 @@ a {
     position: relative;
 }
 .product_detail .detail_content{padding: 20px 2px;}
-.product_detail .detail_content p{line-height:1.5%;}
+.product_detail .detail_content p{line-height:150%;}
 .product_detail .detail_content img{max-width: 100%;}
