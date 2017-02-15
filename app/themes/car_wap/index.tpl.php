@@ -18,14 +18,14 @@
         </ul>
     </div>
 
-    <div class="m_regtilinde" style="margin-top: -1px">推荐汽车<span><a href="<?=url('product')?>">查看更多</a></span></div>
+    <div class="m_regtilinde" style="margin-top: -1px">推荐汽车<span><a href="<?=url('product/lists')?>">查看更多</a></span></div>
     <div class="clearFix">
         <ul class="commoditylist_content">
             <? foreach ($products as $product) : ?>
                 <li>
                     <a href="<?=url("product/detail/?id={$product->id}")?>">
                         <span class="imgspan">
-                            <img src="/themes/images/blank.gif" data-echo="<?=$product->picture?>">
+                            <img src="/themes/images/blank.gif" data-echo="<?=$product->picture?>_100X100.png">
                         </span>
                         <div class="info">
                             <p class="cd_title"><?=$product->name?></p>

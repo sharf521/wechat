@@ -38,3 +38,71 @@ a {
 .commoditylist_content .cd_money span{font-size:12px;color:red}
 .commoditylist_content .cd_money label{background:#ffc956;color:#fff;border-radius:3px;font-size:10px;margin-left:7px;padding:0 2px}
 .commoditylist_content .cd_sales{font-size:12px;color:#666;position:absolute;bottom:.5rem}
+
+
+/* detail*/
+.car-wrapper {    border-bottom: 1px solid #f2f2f2;    padding: 0.4rem; background: #fff;}
+.car-wrapper .car-photo{float: left; width: 120px;}
+.car-wrapper .car-photo img{width: 100px;}
+.car-wrapper .car-info{float: left}
+.car-wrapper .car-info .car-name{font-weight: 600;}
+.car-wrapper .car-info .car-price{color: #666; font-size: 12px; margin-top: 10px;}
+
+
+
+
+.lease {
+    padding-top: 0.4rem;
+    padding-left: 0.4rem;
+    padding-right: 0.4rem;
+    padding-bottom: 0.13333333rem;
+    background: #FFFFFF;
+}
+
+.lease .product label.active {
+    border-color: #dbb76c;
+    color: #dbb76c;
+}
+.lease .product label {
+    position: relative;
+    display: block;
+    margin-bottom: 0.4rem;
+    text-align: center;
+    padding-top: 0.26666667rem;
+    padding-bottom: 0.26666667rem;
+    color: #999999;
+    border: 1px solid #d2d2d2;
+    -webkit-border-radius: 0.08rem;
+    -moz-border-radius: 0.08rem;
+    -o-border-radius: 0.08rem;
+    -ms-border-radius: 0.08rem;
+    border-radius: 0.08rem;
+    padding-right: 1.06666667rem;
+    line-height: 35px;
+}
+.lease .product label.active:after {
+    content: '';
+    position: absolute;
+    right: 0.53333333rem;
+    top: 0rem;
+    width: 20px;
+    height: 100%;
+    background: url(images/checked.png) no-repeat center center;
+    background-size: 100% auto;
+}
+.lease .product label span:nth-last-child(1) {
+    margin-right: 0rem;
+}
+.lease .product label span {
+    margin-right: 0.4rem;
+}
+
+.product_detail .detail_nav {
+    line-height: 50px;
+    font-size: 24px;
+    color: #f60;
+    padding-left: 8px;
+    border-bottom: 1px solid #d5d5d5;
+    position: relative;
+}
+.product_detail .detail_content{padding: 20px 2px;}

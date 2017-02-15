@@ -12,7 +12,7 @@ use App\Model\Advert;
 use App\Model\CarBrand;
 use App\Model\CarProduct;
 
-class IndexController extends CarController
+class IndexController extends Controller
 {
     public function __construct()
     {

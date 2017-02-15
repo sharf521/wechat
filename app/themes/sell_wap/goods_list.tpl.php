@@ -44,7 +44,6 @@
             <p class="weui-msg__desc"></p>
         </div>
     </div>
-
     <? endif;?>
 
     <div class="weui-btn-area">

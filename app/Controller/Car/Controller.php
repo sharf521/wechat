@@ -2,9 +2,7 @@
 
 namespace App\Controller\Car;
 
-use App\Controller\Controller;
-
-class CarController extends Controller
+class Controller extends \App\Controller\Controller
 {
     public function __construct()
     {
