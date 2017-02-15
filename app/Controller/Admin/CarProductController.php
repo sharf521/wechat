@@ -148,7 +148,7 @@ class CarProductController extends AdminController
         }
     }
 
-    //文章状态切换
+    //状态切换
     public function change(CarProduct $product, Request $request)
     {
         $id = (int)$request->get('id');

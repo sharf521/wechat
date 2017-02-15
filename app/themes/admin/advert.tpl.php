@@ -15,6 +15,7 @@
                 <th>说明</th>
                 <th>排序</th>
                 <th>添加时间</th>
+                <th>状态</th>
                 <th>操作</th>
                 </thead>
                 <tbody>
@@ -28,7 +29,13 @@
                         <td>  <input type="text" value="<?= $row->showorder ?>" name="showorder[]" size="5">
                             <input type="hidden" name="id[]" value="<?= $row->id ?>"></td>
                         <td><?= $row->created_at ?></td>
+                        <td><? if ($row->status == '1') {
+                                echo '显示';
+                            } else {
+                                echo '隐藏';
+                            } ?></td>
                         <td>
+                            <a class="layui-btn layui-btn-mini" href="<?= url("advert/change/?id={$row->id}&page={$_GET['page']}") ?>"><?= ($row->status == '1') ? '隐藏' : '显示' ?></a>
                             <a href="<?= url("advert/edit/?id={$row->id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">修改</a>
                             <a href="javascript:goDel('<?=$row->id?>')" class="layui-btn layui-btn-mini">删除</a>
                         </td>

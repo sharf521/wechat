@@ -49,6 +49,7 @@ class AdvertController extends AdminController
             $advert->picture=$request->post('picture');
             $advert->content=$request->post('content');
             $advert->showorder=$order;
+            $advert->status=1;
             $advert->save();
             redirect('Advert')->with('msg','添加成功！');
         }else{
@@ -73,6 +74,21 @@ class AdvertController extends AdminController
             $data['typeid']=$linkPage->echoLink('advert_type',$advert->typeid,array('name'=>'typeid','attr'=>" class='layui-select'"));
             $this->view('advert',$data);
         }
+    }
+
+    //状态切换
+    public function change(Advert $advert, Request $request)
+    {
+        $id = (int)$request->get('id');
+        $page = (int)$request->get('page');
+        $advert = $advert->findOrFail($id);
+        if ($advert->status == '1') {
+            $advert->status = 0;
+        } else {
+            $advert->status = 1;
+        }
+        $advert->save();
+        redirect('advert/?page=' . $page)->with('msg', '操作成功！');
     }
     public function delete(Request $request,Advert $advert)
     {

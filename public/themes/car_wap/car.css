@@ -1,4 +1,9 @@
-.m_regtilinde{ line-height:60px; height:60px; font-size:20px; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
+a {
+    color: #666666;
+    text-decoration: none;
+}
+
+.m_regtilinde{ line-height:60px; height:60px; font-size:22px; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
 .m_regtilinde span{ float: right; font-size: 18px; color: #888; display: block}
 .m_regtilinde span a{ display: inline-block}
 

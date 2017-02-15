@@ -16,4 +16,13 @@ class Advert extends Model
     {
         parent::__construct();
     }
+
+    public function getRealList($typeid='')
+    {
+        $where='status=1';
+        if($typeid!=''){
+            $where.=" and typeid='{$typeid}'";
+        }
+        return $this->where($where)->orderBy('`showorder`,id')->get();
+    }
 }

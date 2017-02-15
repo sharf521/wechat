@@ -32,9 +32,9 @@ $(function () {
                     ,success: function(res){
                         layer.close(index);
                         if(res.code=='0'){
-                            var path=res.url+'?'+Math.random();
+                            var path=res.url;
                             $('#'+id).val(path);
-                            var _str="<a href='"+path+"' target='_blank'><img src='"+path+"' height='50'/></a>";
+                            var _str="<a href='"+path+"' target='_blank'><img src='"+path+'?'+Math.random()+"' height='50'/></a>";
                             $('#upload_span_'+id).html(_str);
                         }else{
                             alert(res.msg);

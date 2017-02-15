@@ -132,11 +132,11 @@ class ArticleController extends AdminController
             $arr['status'] = (int)$_POST['status'];
             $arr['picture'] = $_POST['picture'];
             $arr['edittime'] = date('Y-m-d H:i:s');
-            $result=Db::table('article')->where("id={$id}")->limit(1)->update($arr);
+            $result=DB::table('article')->where("id={$id}")->limit(1)->update($arr);
 
             $arr = array();
             $arr['content'] = $_POST['content'];
-            $result=Db::table('article_data')->where("id={$id}")->limit(1)->update($arr);
+            $result=DB::table('article_data')->where("id={$id}")->limit(1)->update($arr);
             if ($result) {
                 redirect('article/?page='.$request->get('page'))->with('msg','保存成功!!');
             }else{
