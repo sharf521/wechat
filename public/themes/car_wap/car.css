@@ -3,7 +3,7 @@ a {
     text-decoration: none;
 }
 
-.m_regtilinde{ line-height:50px; font-size:18px; width: 90%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
+.m_regtilinde{ line-height:50px; font-size:18px; width: 95%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
 .m_regtilinde span{ float: right; font-size: 14px; color: #888; display: block}
 .m_regtilinde span a{ display: inline-block}
 
@@ -25,7 +25,7 @@ a {
 .br_box li img{ width: 80px;}
 .br_box li span{ font-size: 18px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
 
-.commoditylist_content{width:100%;margin-top:5px;height:auto;border-top:1px solid #f3f3f3}
+.commoditylist_content{width:90%;margin:5px auto;height:auto;border-top:1px solid #f3f3f3}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
 .commoditylist_content li{height:auto;background:#fff;position:relative;padding:.5rem 1rem;border-bottom:1px solid #f3f3f3}
 .commoditylist_content li .imgspan{display:inline-block;position:relative}
