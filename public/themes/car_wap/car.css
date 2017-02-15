@@ -3,14 +3,14 @@ a {
     text-decoration: none;
 }
 
-.m_regtilinde{ line-height:60px; height:60px; font-size:22px; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
+.m_regtilinde{ line-height:60px; height:60px; font-size:22px; width: 90%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
 .m_regtilinde span{ float: right; font-size: 18px; color: #888; display: block}
 .m_regtilinde span a{ display: inline-block}
 
 .car_mes{}
 .car_mes .swiper-slide{text-align:center;}
-.car_mes .swiper-pagination{bottom:1rem;}
-.car_mes .swiper-pagination-bullet{width:3rem; height:.8rem;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0; background:#000;filter:alpha(opacity=40);opacity:0.4; }
+.car_mes .swiper-pagination{bottom:10px;}
+.car_mes .swiper-pagination-bullet{width:30px; height:5px;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0; background:#000;filter:alpha(opacity=40);opacity:0.4; }
 .car_mes .swiper-pagination-bullet-active{background:#e7001b;filter:alpha(opacity=90);opacity:0.9; }
 
 
@@ -106,3 +106,4 @@ a {
     position: relative;
 }
 .product_detail .detail_content{padding: 20px 2px;}
+.product_detail .detail_content img{max-width: 100%;}
