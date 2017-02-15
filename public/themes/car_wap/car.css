@@ -3,7 +3,7 @@ a {
     text-decoration: none;
 }
 
-.m_regtilinde{ line-height:50px; font-size:18px; width: 95%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
+.m_regtilinde{ line-height:45px; font-size:18px; width: 95%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
 .m_regtilinde span{ float: right; font-size: 14px; color: #888; display: block}
 .m_regtilinde span a{ display: inline-block}
 
@@ -15,7 +15,7 @@ a {
 
 
 
-.br_box{ padding: 10px 0; border-bottom: 1px solid #d5d5d5; overflow: hidden;}
+.br_box{ padding: 10px 0; overflow: hidden;}
 .br_box ul{width: 100%;}
 .br_box li{ float: left; width: 33.33%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
 .br_box li:nth-child(3n){ border-right: none;}
@@ -27,7 +27,7 @@ a {
 
 .commoditylist_content{width:90%;margin:5px auto;height:auto;border-top:1px solid #f3f3f3}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
-.commoditylist_content li{height:auto;background:#fff;position:relative;padding:.5rem 1rem;border-bottom:1px solid #f3f3f3}
+.commoditylist_content li{height:auto;position:relative;padding:.5rem 1rem;border-bottom:1px solid #f3f3f3}
 .commoditylist_content li .imgspan{display:inline-block;position:relative}
 .commoditylist_content li img{width:100px;height:100px}
 .commoditylist_content li .info{position:absolute;left:116px;top:.5rem;bottom:.5rem;padding-left:.8rem}
@@ -98,12 +98,13 @@ a {
 }
 
 .product_detail .detail_nav {
-    line-height: 50px;
-    font-size: 24px;
+    line-height: 45px;
+    font-size: 18px;
     color: #f60;
     padding-left: 8px;
-    border-bottom: 1px solid #d5d5d5;
+    border-bottom: 1px solid #efefef;
     position: relative;
 }
 .product_detail .detail_content{padding: 20px 2px;}
+.product_detail .detail_content p{line-height: 30px;}
 .product_detail .detail_content img{max-width: 100%;}
