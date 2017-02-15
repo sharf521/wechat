@@ -17,7 +17,7 @@
                             <p class="cd_title"><?=$product->name?></p>
                             <p class="cd_money">
                                 <span>￥</span>
-                                <var><?=$product->price?></var>
+                                <var><?=$product->price/10000?>万</var>
                             </p>
                             <p class="cd_sales"><?=$product->brand_name?></p>
                         </div>
