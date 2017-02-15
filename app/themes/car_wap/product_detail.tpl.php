@@ -18,12 +18,14 @@
         <div class="lease">
             <div class="product">
                 <? foreach ($product->specs as $spec) : ?>
-                <label data_id="<?=$spec->id?>">
-                    <span><strong><?=$spec->time_limit?>期</strong></span>
-                    <span>首付: <?=$spec->first_payment	?>元</span>
-                    <span>月租: <?=$spec->month_payment?>元</span>
-                    <span>尾付: <?=(float)$spec->last_payment?>元</span>
-                </label>
+                    <? if($spec->time_limit!=0) : ?>
+                        <label data_id="<?=$spec->id?>">
+                            <span><strong><?=$spec->time_limit?>期</strong></span>
+                            <span>首付: <?=$spec->first_payment	?>元</span>
+                            <span>月租: <?=$spec->month_payment?>元</span>
+                            <span>尾付: <?=(float)$spec->last_payment?>元</span>
+                        </label>
+                    <? endif;?>
                 <? endforeach;?>
             </div>
         </div>

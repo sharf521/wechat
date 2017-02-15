@@ -17,7 +17,7 @@ a {
 
 .br_box{ padding: 2rem 0; border-bottom: 1px solid #d5d5d5; overflow: hidden;}
 .br_box ul{width: 100%;}
-.br_box li{ float: left; width: 33.33%; padding: 2rem 1rem; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
+.br_box li{ float: left; width: 33.33%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
 .br_box li:nth-child(3n){ border-right: none;}
 .br_box li:nth-child(1),.br_box li:nth-child(2),.br_box li:nth-child(3){ border-top: 0;}
 .br_box li a{ display: block; text-align: center; width: 100%;}
