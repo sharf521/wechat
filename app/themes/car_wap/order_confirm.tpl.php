@@ -31,7 +31,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">申请人</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" required name="shipping_fee" placeholder="申请人姓名" value="<?=$goods->shipping_fee?>"/>
+                        <input class="weui-input" type="text" name="contacts" placeholder="申请人姓名" value="<?=$goods->contacts?>"/>
                     </div>
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
@@ -40,7 +40,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">电话</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="shipping_fee" placeholder="联系电话" value="<?=$goods->shipping_fee?>"/>
+                        <input class="weui-input" type="text" name="tel" placeholder="联系电话" value="<?=$goods->tel?>"/>
                     </div>
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
@@ -49,7 +49,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">地址</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="shipping_fee" placeholder="联系地址" value="<?=$goods->shipping_fee?>"/>
+                        <input class="weui-input" type="text" name="address" placeholder="联系地址" value="<?=$goods->address?>"/>
                     </div>
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
@@ -60,12 +60,8 @@
                 <input class="weui-btn weui-btn_primary" type="submit" value="保存">
             </div>
         </form>
-        <script src="/plugin/js/ajaxfileupload.js?111"></script>
-        <script type="text/javascript">
-            order_confirm();
-        </script>
     </div>
-<script>
-
-</script>
+    <script type="text/javascript">
+        order_confirm();
+    </script>
 <?php require 'footer.php';?>

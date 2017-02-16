@@ -59,6 +59,7 @@ $(function () {
             if($(obj).attr('src')==url){
                 element.tabChange('x-tab', index);
                 isExist=true;
+                $(obj).attr('src',url);
                 return;
             }
         });
