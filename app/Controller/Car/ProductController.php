@@ -27,6 +27,7 @@ class ProductController extends Controller
     public function lists(CarProduct $product,Request $request)
     {
         $data['result']=$product->where("status=1")->pager($request->get('page'));
+        $this->title='车辆列表';
         $this->view('product_lists',$data);
     }
 
@@ -38,6 +39,7 @@ class ProductController extends Controller
         $product->content=$product->CarProductData()->content;
         $product->specs=$product->CarProductSpec();
         $data['product']=$product;
+        $this->title='产品详情';
         $this->view('product_detail',$data);
     }
 }

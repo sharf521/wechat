@@ -36,10 +36,11 @@
             </div>
         </div>
     </div>
-<form>
-    <input type="hidden" name="spec_id" id="spec_id" value="0">
-    <input type="submit" value="wkdasdfa">
-</form>
+    <input type="hidden" id="spec_id" value="0">
+    <input type="hidden" id="product_id" value="<?=(int)$_GET['id']?>">
+    <div class="bottom_opts">
+        <a href="javascript:;" class="opt_buy">我要订车</a>
+    </div>
 <script>
     product_detail();
 </script>

@@ -2,7 +2,7 @@
     <div class="m_header">
         <a class="m_header_l" href="/car"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
-        <h1>车辆列表</h1>
+        <h1><?=$this->title?></h1>
     </div>
 
     <div class="clearFix margin_header">

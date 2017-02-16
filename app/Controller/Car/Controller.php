@@ -12,5 +12,6 @@ class Controller extends \App\Controller\Controller
         }else{
             $this->template = 'car';
         }
+        $this->title='';
     }
 }
