@@ -22,7 +22,7 @@ class OrderController extends Controller
 
     public function confirm(Request $request,CarProduct $product,CarProductSpec $spec)
     {
-        $this->check_login();
+        //$this->check_login();
         $id=$request->get('id');
         $spec_id=$request->get('spec_id');
         $product=$product->findOrFail($id);
