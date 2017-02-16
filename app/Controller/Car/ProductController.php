@@ -26,7 +26,12 @@ class ProductController extends Controller
 
     public function lists(CarProduct $product,Request $request)
     {
-        $data['result']=$product->where("status=1")->pager($request->get('page'));
+        $where='status=1';
+        $brand_name=$request->get('brand_name');
+        if($brand_name!=''){
+            $where.=" and brand_name='{$brand_name}'";
+        }
+        $data['result']=$product->where($where)->pager($request->get('page'));
         $this->title='车辆列表';
         $this->view('product_lists',$data);
     }

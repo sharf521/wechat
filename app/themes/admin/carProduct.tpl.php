@@ -195,10 +195,10 @@
 
         $('.delete_btn').click(function(){
             var l=$(this).parents('tbody').find('tr').length;//总行数
-            if(l>2){
+            if(l>1){
                 $(this).parents('tr').remove();
             }else{
-                layui.layer.tips('最少保留两行！', this);
+                layui.layer.tips('最少保留一行！', this);
             }
         });
         $('.add_btn').click(function(){

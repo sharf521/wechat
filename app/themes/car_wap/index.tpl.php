@@ -9,11 +9,11 @@
         <div class="swiper-pagination"></div>
     </div>
     <!--ad end-->
-    <div class="m_regtilinde">推荐品牌<span><a href="<?=url('brand')?>">查看更多</a></span></div>
+    <div class="m_regtilinde">推荐品牌<span><a href="<?=url('brand')?>"></a></span></div>
     <div class="br_box clearFix">
         <ul class="clearFix">
             <? foreach ($brands as $brand) : ?>
-                <li><a href="<?=url("product/?name={$brand->name}")?>"><div><img src="<?=$brand->picture?>" /></div><span><?=$brand->name?></span></a></li>
+                <li><a href="<?=url("product/lists/?brand_name={$brand->name}")?>"><div><img src="<?=$brand->picture?>" /></div><span><?=$brand->name?></span></a></li>
             <? endforeach;?>
         </ul>
     </div>
@@ -39,6 +39,20 @@
                 </li>
             <? endforeach;?>
         </ul>
+    </div><br><br>
+    <div class="weui-tabbar" style="position: fixed">
+        <a href="/" class="weui-tabbar__item <? if($this->func=='index'){echo 'weui-bar__item_on';}?>">
+            <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
+            <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a href="<?=url('product/lists')?>" class="weui-tabbar__item <? if($this->func=='lists'){echo 'weui-bar__item_on';}?>">
+            <i class="iconfont weui-tabbar__icon">&#xe600;</i>
+            <p class="weui-tabbar__label">车辆列表</p>
+        </a>
+        <a href="<?=url('member')?>" class="weui-tabbar__item">
+            <i class="iconfont weui-tabbar__icon">&#xe6fc;</i>
+            <p class="weui-tabbar__label">我的订单</p>
+        </a>
     </div>
     <script>
         //banner Swiper
@@ -51,6 +65,5 @@
                 paginationClickable: true,
             });
         });
-
     </script>
 <?php require 'footer.php';?>
