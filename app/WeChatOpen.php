@@ -29,7 +29,7 @@ class WeChatOpen
             ],
             'oauth' => [
                 'scopes'   => ['snsapi_userinfo'],
-                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/index.php/wxOpen/oauth_callback',
+                'callback' => 'http://'.$_SERVER['HTTP_HOST'].'/wxOpen/oauth_callback',
             ],
             'guzzle' => [
                 'timeout' => 4.0, // 超时时间（秒）

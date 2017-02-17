@@ -30,7 +30,7 @@
             <div class="weui-msg">
                 <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
                 <div class="weui-msg__text-area">
-                    <h2 class="weui-msg__title">没有任何商品。。</h2>
+                    <h2 class="weui-msg__title">没有匹配到任何记录！</h2>
                     <p class="weui-msg__desc"></p>
                 </div>
             </div>

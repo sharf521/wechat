@@ -46,7 +46,7 @@ class Controller extends BaseController
                 if($this->is_inWeChat && $this->is_wap){
                     redirect("/wxOpen/oauth/?url={$url}");
                 }else{
-                    redirect(url("/user/login/?url={$url}"));
+                    redirect("/user/login/?url={$url}");
                 }
             }
             $this->user=(new User())->findOrFail($this->user_id);
