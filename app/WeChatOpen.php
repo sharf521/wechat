@@ -112,6 +112,8 @@ class WeChatOpen
             $code = $_GET['code'];
             $url="https://api.weixin.qq.com/sns/oauth2/component/access_token?appid={$appid}&code={$code}&grant_type=authorization_code&component_appid={$component_appid}&component_access_token={$this->getComponentAccessToken()}";
             $html=$this->curl_url($url);
+            echo $html;
+            exit;
             $json=json_decode($html);
             if(isset($json->access_token)){
                 return $json->openid;
