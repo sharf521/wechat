@@ -41,3 +41,41 @@ function order_confirm() {
         }
     }
 }
+
+/* upload*/
+function uploadImgs(o) {
+    var uBox=$(o).parents('.weui-cell__bd').find('.weui-uploader__files');
+    var upload_type=$(o).attr('upload_type');
+    var lay=layer.open({
+        type: 2
+        ,content: '上传中'
+    });
+    $.ajaxFileUpload({
+        url:'/index.php/upload/save?type=carRent',
+        fileElementId :'uploaderInput_'+upload_type,
+        dataType:'json',
+        success: function (res,status){
+            layer.close(lay);
+            if(res.code == '0'){
+                var imgId=res.id;
+                var path=res.url;
+                var _str='<li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url('+path+')">' +
+                    "<i class='iconfont' onclick=delRentImg(this)>&#xe642;</i>" +
+                    '<input type="hidden" name="'+upload_type+'_img[]" value="'+path+'">'+
+                    //'<input type="hidden" name="'+upload_type+'_img_id[]" value="'+imgId+'">'+
+                    "</li>";
+                uBox.append(_str);
+            }else{
+                alert(res.msg);
+            }
+        },
+        error: function (result, status, e){
+            layer.close(lay);
+            alert(e);
+        }
+    });
+    $('.weui-uploader__input-box').css('border','1px solid #d9d9d9');
+}
+function delRentImg(o) {
+    $(o).parents('li').remove();
+}

@@ -19,7 +19,6 @@
             <div class="weui-cell">
                 <div class="weui-cell__bd">
                     <div class="weui-uploader">
-
                             <ul class="weui-uploader__files" id="uploaderFiles">
                                 <?
                                 $imgids=',';
@@ -33,7 +32,6 @@
                             <div class="weui-uploader__input-box">
                                 <input id="uploaderInput" name="file" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadGoodsImg()"/>
                             </div>
-
                     </div>
                 </div>
             </div>

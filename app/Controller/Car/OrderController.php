@@ -22,6 +22,8 @@ class OrderController extends Controller
         $this->check_login();
     }
 
+    
+
     public function confirm(Request $request,CarProduct $product,CarProductSpec $spec)
     {
         $id=$request->get('id');
@@ -40,6 +42,7 @@ class OrderController extends Controller
             $carRent->address=$request->post('address');
 
             $carRent->car_name=$product->name;
+            $carRent->car_picture=$product->picture;
             $carRent->first_payment_scale=0;
             $carRent->first_payment_money=$spec->first_payment;
             $carRent->last_payment_scale=0;

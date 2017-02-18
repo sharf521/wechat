@@ -49,7 +49,7 @@
             <i class="iconfont weui-tabbar__icon">&#xe600;</i>
             <p class="weui-tabbar__label">车辆列表</p>
         </a>
-        <a href="<?=url('member')?>" class="weui-tabbar__item">
+        <a href="<?=url('rent')?>" class="weui-tabbar__item">
             <i class="iconfont weui-tabbar__icon">&#xe6fc;</i>
             <p class="weui-tabbar__label">我的订单</p>
         </a>

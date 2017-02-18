@@ -21,4 +21,9 @@ class CarRent extends Model
     {
         return $this->hasMany('\App\Model\CarRentRepayment','car_rent_id','id','','id');
     }
+
+    public function CarRentImage()
+    {
+        return $this->hasMany('\App\Model\CarRentImage','rent_id','id','','id');
+    }
 }

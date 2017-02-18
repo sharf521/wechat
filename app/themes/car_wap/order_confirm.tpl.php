@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url("product/detail/?id={$product->id}")?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="javascript:history.go(-1)"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1><?=$this->title?></h1>
     </div>
@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="weui-btn-area">
-                <input class="weui-btn weui-btn_primary" type="submit" value="保存">
+                <input class="weui-btn weui-btn_primary" type="submit" value="下一步">
             </div>
         </form>
     </div>

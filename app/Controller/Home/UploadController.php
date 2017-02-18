@@ -26,6 +26,7 @@ class UploadController extends Controller
             return $this->_error('error');
         }
         $type = $_GET['type'];
+        $about_id=(int)$_GET['about_id'];
         $name = time() . rand(1000, 9000);
         $user_id = $this->user_id;
         if (empty($user_id)) {
@@ -79,6 +80,7 @@ class UploadController extends Controller
             $this->_error('can not move to tempath');
         } else {
             $path=$path . $filename;
+            $path=$this->toPicService($path);
             if($type=='goods'){
                 $goodsImg=new GoodsImage();
                 $goodsImg->user_id=$user_id;
@@ -99,7 +101,7 @@ class UploadController extends Controller
                 $UploadLog->path=$path;
                 $UploadLog->type=$_FILES['file']['type'];
                 $UploadLog->module=$type;
-                $UploadLog->module_id=0;
+                $UploadLog->module_id=$about_id;
                 $UploadLog->status=1;
                 $id=$UploadLog->save(true);
             }
@@ -116,7 +118,7 @@ class UploadController extends Controller
                 $data = array(
                     'code' => '0',
                     'id'=>$id,
-                    'url' => $this->toPicService($path)
+                    'url' => $path
                 );
                 echo json_encode($data);
             }
