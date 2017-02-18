@@ -135,7 +135,7 @@ class RentController extends Controller
 
     public function editPay(Request $request,CarRent $rent,System $system)
     {
-        $booked_money=500;
+        $booked_money=5000;
         $id=$request->get('id');
         $rent=$rent->findOrFail($id);
         if($rent->user_id!=$this->user_id){

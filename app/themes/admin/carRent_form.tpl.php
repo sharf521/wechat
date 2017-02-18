@@ -57,6 +57,13 @@ if($this->func=='add' || $this->func=='edit') :    ?>
                 </div>
             </div>
             <div class="layui-form-item">
+                <label class="layui-form-label">己付订金</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="booked_money" required class="layui-input" value="<?=$row->booked_money?>" autocomplete="off"/>
+                </div>
+                <div class="layui-form-mid layui-word-aux">元</div>
+            </div>
+            <div class="layui-form-item">
                 <label class="layui-form-label">首付比例</label>
                 <div class="layui-input-inline">
                     <select name="first_payment_scale" required>

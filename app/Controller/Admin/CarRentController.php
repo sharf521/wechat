@@ -56,13 +56,14 @@ class CarRentController extends AdminController
             $carRent->address=$request->post('address');
 
             $carRent->car_name=$request->post('car_name');
+            $carRent->booked_money=(float)$request->post('booked_money');
             $carRent->first_payment_scale=$request->post('first_payment_scale');
-            $carRent->first_payment_money=$request->post('first_payment_money');
+            $carRent->first_payment_money=(float)$request->post('first_payment_money');
             $carRent->last_payment_scale=$request->post('last_payment_scale');
-            $carRent->last_payment_money=$request->post('last_payment_money');
-            $carRent->time_limit=$request->post('time_limit');
-            $carRent->month_payment_money=$request->post('month_payment_money');
-            $carRent->month_payment_day=$request->post('month_payment_day');
+            $carRent->last_payment_money=(float)$request->post('last_payment_money');
+            $carRent->time_limit=(int)$request->post('time_limit');
+            $carRent->month_payment_money=(float)$request->post('month_payment_money');
+            $carRent->month_payment_day=(int)$request->post('month_payment_day');
             $carRent->status=0;
             $carRent->save();
             redirect('carRent')->with('msg','添加成功！');
@@ -84,15 +85,17 @@ class CarRentController extends AdminController
             $carRent->tel=$request->post('tel');
             $carRent->area=$request->post('province').'-'.$request->post('city').'-'.$request->post('area');
             $carRent->address=$request->post('address');
-
+            
             $carRent->car_name=$request->post('car_name');
+
+            $carRent->booked_money=(float)$request->post('booked_money');
             $carRent->first_payment_scale=$request->post('first_payment_scale');
-            $carRent->first_payment_money=$request->post('first_payment_money');
+            $carRent->first_payment_money=(float)$request->post('first_payment_money');
             $carRent->last_payment_scale=$request->post('last_payment_scale');
-            $carRent->last_payment_money=$request->post('last_payment_money');
-            $carRent->time_limit=$request->post('time_limit');
-            $carRent->month_payment_money=$request->post('month_payment_money');
-            $carRent->month_payment_day=$request->post('month_payment_day');
+            $carRent->last_payment_money=(float)$request->post('last_payment_money');
+            $carRent->time_limit=(int)$request->post('time_limit');
+            $carRent->month_payment_money=(float)$request->post('month_payment_money');
+            $carRent->month_payment_day=(int)$request->post('month_payment_day');
             $carRent->save();
             redirect('carRent')->with('msg','保存成功！');
         }else{
