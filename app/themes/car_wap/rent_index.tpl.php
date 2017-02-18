@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="javascript:history.go(-1)"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url('')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1><?=$this->title?></h1>
     </div>

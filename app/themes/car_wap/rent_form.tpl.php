@@ -4,9 +4,26 @@
         <a class="m_header_r"></a>
         <h1><?=$this->title?></h1>
     </div>
-
-    <div class="clearFix margin_header">
-        <div class="my-navbar margin_header">
+    <div class="margin_header"></div>
+    <div class="weui-form-preview">
+        <div class="weui-form-preview__hd">
+            <label class="weui-form-preview__label"><?=$rent->car_name?></label>
+            <em class="weui-form-preview__value">&nbsp;</em>
+        </div>
+        <div class="weui-form-preview__bd">
+            <div class="weui-form-preview__item">
+                <label>首付：<span><?=$rent->first_payment_money/10000?>万</span>
+                    <?=$rent->time_limit?>期 <span><?=(float)$rent->month_payment_money?>元/期</span>
+                    <?
+                    if((float)$rent->last_payment_money!=0){
+                        echo "尾付：". $rent->first_payment_money/10000 .'万';
+                    }
+                    ?></label>
+            </div>
+        </div>
+    </div>
+    <div class="clearFix" style="margin-top: 8px;">
+        <div class="my-navbar">
             <div class="my-navbar__item <? if($this->func=='editContacts'){echo 'my-navbar__item_on';}?>">
                 <a href="<?=url("rent/editContacts/?id={$_GET['id']}")?>">申请人</a>
             </div>
