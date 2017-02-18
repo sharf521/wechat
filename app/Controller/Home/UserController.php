@@ -61,7 +61,14 @@ class UserController extends Controller
     {
         $this->check_login();
         $center=new Center();
-        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}";
+        if($this->is_inWeChat){
+            $wechat_openid=(new WeChatOpen())->getOpenid();
+        }else{
+            echo ' not is wechat';
+            exit;
+        }
+
+        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&$wechat_openid=$wechat_openid";
         if($this->is_wap){
             $url=$this->site->center_url_wap.'/'.$url;
         }else{
