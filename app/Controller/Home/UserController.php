@@ -12,6 +12,7 @@ namespace App\Controller\Home;
 use App\Center;
 use App\Controller\Controller;
 use App\Model\User;
+use App\WeChatOpen;
 use System\Lib\Request;
 
 class UserController extends Controller
