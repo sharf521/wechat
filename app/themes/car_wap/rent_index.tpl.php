@@ -24,10 +24,13 @@
                                 ?>
                             </p>
                             <p class="contacts"><?=$rent->contacts?> <?=$rent->tel?></p>
-                            <p>
-                                <a href="<?=url("rent/editUpload/?id={$rent->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">上传资料</a>
-                            </p>
                         </div>
+                    <div class="foot">
+                        <a href="<?=url("rent/editUpload/?id={$rent->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary" >上传资料</a>
+                        <? if($rent->status==0) : ?>
+                            <a href="javascript:;" data-id="<?=$rent->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">删除</a>
+                        <? endif;?>
+                    </div>
                 </li>
             <? endforeach;?>
         </ul>
@@ -44,4 +47,19 @@
             <?=$result['page'] ;?>
         <? endif;?>
     </div>
+    <script type="text/javascript">
+        $(function () {
+            $('.cancel').on('click',function () {
+                var id=$(this).attr('data-id');
+                layer.open({
+                    content: '确定要删除吗？'
+                    ,btn: ['是', '否']
+                    ,yes: function(index){
+                        location.href='<?=url("rent/del/?id=")?>'+id;
+                        layer.close(index);
+                    }
+                });
+            });
+        });
+    </script>
 <?php require 'footer.php';?>

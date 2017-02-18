@@ -9,9 +9,11 @@
 namespace App\Controller\Car;
 
 
+use App\Center;
 use App\Model\CarProduct;
 use App\Model\CarRent;
 use App\Model\CarRentImage;
+use App\Model\System;
 use System\Lib\DB;
 use System\Lib\Request;
 class RentController extends Controller
@@ -26,9 +28,12 @@ class RentController extends Controller
     {
         $user_id=$this->user_id;
         $this->title='我的订单';
-        $data['result']=(new CarRent())->where("user_id=?")->bindValues($user_id)->orderBy('id desc')->pager($request->get('page'),3);
+        $where="status>=0 and user_id={$user_id}";
+        $data['result']=(new CarRent())->where($where)->orderBy('id desc')->pager($request->get('page'));
         $this->view('rent_index',$data);
     }
+
+
     
     public function editContacts(Request $request,CarRent $rent)
     {
@@ -128,8 +133,9 @@ class RentController extends Controller
         }
     }
 
-    public function editPay(Request $request,CarRent $rent)
+    public function editPay(Request $request,CarRent $rent,System $system)
     {
+        $booked_money=500;
         $id=$request->get('id');
         $rent=$rent->findOrFail($id);
         if($rent->user_id!=$this->user_id){
@@ -138,12 +144,78 @@ class RentController extends Controller
         if($rent->status!=0){
             redirect()->back()->with('error','禁止修改');
         }
-        if($_POST){
+        if((float)$rent->booked!=0){
+            redirect()->back()->with('error','请勿重复提交！');
+        }
 
+        $convert_rate=(float)$system->getCode('convert_rate');
+        if(empty($convert_rate)){
+            $convert_rate=2.52;
+        }
+        $center=new Center();
+        $account=$center->getUserFunc($this->user->openid);
+
+        if($_POST){
+            $checkPwd=$center->checkPayPwd($this->user->openid,$request->post('zf_password'));
+            if($checkPwd!==true){
+                redirect()->back()->with('error','支付密码错误！');
+            }
+            $integral=(float)$request->post('integral');
+            if($integral<0){
+                redirect()->back()->with('error','不能为负数！');
+            }
+            if($integral > $account->integral_available){
+                redirect()->back()->with('error','可用积分不足！');
+            }
+            $_money=math($integral,$convert_rate,'/',3);
+            $_money=round_money($_money,1,2);
+            $money=math($booked_money,$_money,'-',2);
+            if($money > $account->funds_available){
+                redirect()->back()->with('error','可用资金不足！');
+            }
+            try {
+                DB::beginTransaction();
+
+                $remark="[{$rent->contacts}]订金,{$rent->car_name}";
+                $params=array(
+                    'openid'=>$this->user->openid,
+                    'body'=>'',
+                    'type'=>'booked_money',
+                    'remark'=>$remark,
+                    'label'=>"car_rent:{$id}",
+                    'data'=>array(
+                        array(
+                            'openid'=>$this->user->openid,
+                            'type'=>'booked_money',
+                            'remark'=>$remark,
+                            'funds_available' =>'-'.$money,
+                            'integral_available' =>'-'.$integral,
+                            'funds_available_now'=>$account->funds_available,
+                            'integral_available_now'=>$account->integral_available,
+                        )
+                    )
+                );
+                $return=$center->receivables($params);
+                if($return===true){
+                    $rent->booked_money=$booked_money;
+                    $rent->save();
+                    DB::commit();
+                    redirect("rent/editPay/?id={$id}")->with('msg','付款完成');
+                }else{
+                    throw new \Exception($return);
+                }
+            } catch (\Exception $e) {
+                DB::rollBack();
+                $error= "Failed: " . $e->getMessage();
+                redirect()->back()->with('error',$error);
+            }
         }else{
             $this->title='支付定金';
+            $data['convert_rate']=$convert_rate;
             $data['rent']=$rent;
             $data['product']=(new CarProduct())->find($rent->car_id);
+            $data['account']=$account;
+            $data['booked_money']=$booked_money;//需交订金
             $this->view('rent_form',$data);
         }
     }
@@ -223,6 +295,18 @@ class RentController extends Controller
             $data['carRent']=$carRent;
             $data['repayment']=$repayment;
             $this->view('rent_form',$data);
+        }
+    }
+
+    public function del(CarRent $rent,Request $request)
+    {
+        $rent=$rent->findOrFail($request->get('id'));
+        if($rent->user_id==$this->user_id){
+            $rent->status=-1;
+            $rent->save();
+            redirect("rent")->with('msg','册除成功！');
+        }else{
+            redirect('rent')->with('error','操作失败！');
         }
     }
 }

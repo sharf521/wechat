@@ -9,6 +9,7 @@
 namespace App;
 
 
+use App\Model\CenterPayOrder;
 use App\Model\System;
 
 class Center
@@ -71,7 +72,102 @@ class Center
         return json_decode($html);
     }
 
-    public function getSign($data)
+    //验证支付密码
+    public function checkPayPwd($openid,$pay_password)
+    {
+        $params=array(
+            'appid'=>$this->appid,
+            'openid'=>$openid,
+            'pay_password'=>$pay_password,
+            'time'=>time()
+        );
+        $params['sign']=$this->getSign($params);
+        $data['data']=json_encode($params);
+        $html=$this->curl_url('user/checkPayPwd',$data);
+        $json=json_decode($html);
+        if($json->return_code=='success'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //用户资金
+    public function getUserFunc($openid)
+    {
+        $params=array(
+            'appid'=>$this->appid,
+            'openid'=>$openid,
+            'time'=>time()
+        );
+        $params['sign']=$this->getSign($params);
+        $data['data']=json_encode($params);
+        $html=$this->curl_url('user/fund',$data);
+        return json_decode($html);
+    }
+
+    public function receivables($data)
+    {
+        $params=array(
+            'appid'=>$this->appid,
+            'time'=>time(),
+            'order_no'=>time().rand(10000,99999),
+            'openid'=>$data['openid'],
+            'user_id'=>0,
+            'body'=>$data['body'],
+            'type'=>$data['type'],
+            'remark'=>$data['remark'],
+            'label'=>$data['label'],
+            'data'=>array()
+        );
+        foreach ($data['data'] as $v){
+            array_push($params['data'],$v);
+        }
+/*        $params=array(
+            'appid'=>$this->appid,
+            'time'=>time(),
+            'order_no'=>time().rand(10000,99999),
+            'openid'=>'',
+            'user_id'=>'',
+            'body'=>'test body',
+            'type'=>1,
+            'remark'=>'test remark',
+            'label'=>'label',
+            'data'=>array(
+                array(
+                    'openid'=>'7902435305879e82d91147355395698',
+                    'type'=>1,
+                    'remark'=>'收入',
+                    'funds_available'=>10,
+                    'integral_available'=>100,
+                    'funds_available_now'=>46678.52,
+                    'integral_available_now'=>2000
+                )
+            )
+        );*/
+
+        $params['sign']=$this->getSign($params);
+        $data['data']=json_encode($params);
+        $html=$this->curl_url('user/receivables',$data);
+        $json=json_decode($html);
+        if($json->return_code=='success'){
+            $order=new CenterPayOrder();
+            $order->order_no=$params['order_no'];
+            $order->openid=$params['openid'];
+            $order->body=$params['body'];
+            $order->type=$params['type'];
+            $order->remark=$params['remark'];
+            $order->label=$params['label'];
+            $order->data=serialize($params['data']);
+            $order->pay_no=$json->pay_no;
+            $order->save();
+            return true;
+        }else{
+            return $json->return_msg;
+        }
+    }
+
+    private function getSign($data)
     {
         if(isset($data['sign'])){
             unset($data['sign']);
@@ -89,7 +185,7 @@ class Center
         return $str;
     }
 
-    public function curl_url($url, $data = array())
+    private function curl_url($url, $data = array())
     {
         $url=$this->url.'/'.$url;
         $ssl = substr($url, 0, 8) == "https://" ? TRUE : FALSE;

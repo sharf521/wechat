@@ -106,8 +106,14 @@ a {
 .goods_add_uploaderLi i{position: absolute; top:-8px; right: -8px; border: 1px solid #ff2222; color: #f00; background-color: #fff;border-radius: 50%; font-size: 6px; width: 18px; height: 18px; line-height: 20px; text-align: center;z-index: 99}
 
 
-.carRentList{width:95%;margin:5px auto;height:auto;border-top:1px solid #f3f3f3}
-.carRentList li{height:auto;position:relative;padding:5px 0px;border-bottom:1px solid #f3f3f3}
+.carRentList{width:95%;margin:5px auto;}
+
+.carRentList li{position: relative;
+    margin-top: 10px;
+    padding: 0 10px 10px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    background: #fff;}
 .carRentList li .imgspan{display:inline-block;position:relative}
 .carRentList li img{width:100px;height:100px}
 .carRentList li .info{position:absolute;left:110px;top:.5rem;bottom:.5rem;}
@@ -116,3 +122,4 @@ a {
 .carRentList .cd_ensure{font-size:12px;color:#666;margin-top:3px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .carRentList li p{font-size:14px;}
 .carRentList .contacts{font-size:12px;color:#666; line-height: 30px}
+.carRentList li .foot{    border-top: 1px solid #eee;    padding-top: 5px;    text-align: right;}

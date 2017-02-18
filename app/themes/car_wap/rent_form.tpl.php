@@ -176,6 +176,60 @@
                 </div>
             </form>
         <? elseif($this->func=='editPay') : ?>
+
+            <?
+            if($rent->booked_money!=0) :
+                    echo "<div style='margin-top: 50px; font-size: 20px; text-align: center'>己交订金：{$rent->booked_money}元</div>";
+            else : ?>
+
+            <form method="post" id="form1">
+                <div class="weui-cells weui-cells_form">
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">使用积分</label></div>
+                        <div class="weui-cell__bd">
+                            <input type="text" id="integral" name="integral" value="0" placeholder="" onkeyup="value=value.replace(/[^0-9.]/g,'')"  class="weui-input" autocomplete="off"/>
+                        </div>
+                        可用积分：<span id="span_integral"><?=$account->integral_available?></span>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">支付密码</label></div>
+                        <div class="weui-cell__bd">
+                            <input class="weui-input" required type="password" name="zf_password" placeholder="请填写支付密码" />
+                        </div>
+                        可用金额：￥<span id="span_funds"><?=$account->funds_available?></span>
+                    </div>
+                    <div class="weui-cell">
+                        <div class="weui-cell__hd"><label class="weui-label">实际支付</label></div>
+                        <div class="weui-cell__bd">
+                            <span id="money_yes"><?=$booked_money?></span> 元
+                        </div>
+                    </div>
+                </div>
+                <div class="weui-btn-area">
+                    <input class="weui-btn weui-btn_primary" type="submit" value="立即支付">
+                </div>
+            </form>
+            <? endif;?>
+
+            <script src="/plugin/js/math.js"></script>
+            <script>
+                $(function () {
+                    var lv='<?=$convert_rate?>';
+                    var price_true = '<?=$booked_money?>';
+                    $("#integral").bind('input propertychange',function(){
+                        if(Number($(this).val())>Number($('#span_integral').html())){
+                            $(this).val($('#span_integral').html());
+                        }
+                        var max_jf=Math.mul(price_true,lv);
+                        if(Number($(this).val())>max_jf){
+                            $("#integral").val(max_jf);
+                        }
+                        var _m=Math.div(Number($("#integral").val()),lv);
+                        var money=Math.sub(price_true,Math.moneyRound(_m,2));
+                        $('#money_yes').html(money);
+                    });
+                });
+            </script>
         <? endif;?>
     </div>
 <?php require 'footer.php';?>
