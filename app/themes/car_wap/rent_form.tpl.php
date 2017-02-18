@@ -10,7 +10,7 @@
         </div>
         <div class="car-info">
             <div class="car-name"><?=$product->name?></div>
-            <div class="car-price">厂商指导价：<?=$product->price?>万</div>
+            <div class="car-price">厂商指导价：<?=$product->price/10000?>万</div>
         </div>
     </div>
     <div class="lease">

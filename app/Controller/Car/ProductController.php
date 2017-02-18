@@ -40,7 +40,6 @@ class ProductController extends Controller
     {
         $id=$request->get('id');
         $product=$product->findOrFail($id);
-        $product->price=$product->price/10000;
         $product->content=$product->CarProductData()->content;
         $product->specs=$product->CarProductSpec();
         $data['product']=$product;
