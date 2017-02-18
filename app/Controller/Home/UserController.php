@@ -69,7 +69,7 @@ class UserController extends Controller
             exit;
         }
 
-        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&$wechat_openid=$wechat_openid";
+        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}";
         if($this->is_wap){
             $url=$this->site->center_url_wap.'/'.$url;
         }else{
