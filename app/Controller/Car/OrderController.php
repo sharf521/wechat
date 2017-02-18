@@ -53,7 +53,7 @@ class OrderController extends Controller
             $carRent->month_payment_day=1;
             $carRent->status=0;
             $inser_id=$carRent->save(true);
-            redirect("rent/editUpload/?id={$inser_id}")->with('msg','己保存，开始下一步！');
+            redirect("rent/editUpload/?id={$inser_id}")->with('msg','己保存，请上传资料！');
         }else{
             $data['product']=$product;
             $data['spec']=$spec;
