@@ -189,14 +189,14 @@
                         <div class="weui-cell__bd">
                             <input type="text" id="integral" name="integral" value="0" placeholder="" onkeyup="value=value.replace(/[^0-9.]/g,'')"  class="weui-input" autocomplete="off"/>
                         </div>
-                        可用积分：<span id="span_integral"><?=$account->integral_available?></span>
+                        可用：<span id="span_integral"><?=$account->integral_available?></span>
                     </div>
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label class="weui-label">支付密码</label></div>
                         <div class="weui-cell__bd">
                             <input class="weui-input" required type="password" name="zf_password" placeholder="请填写支付密码" />
                         </div>
-                        可用金额：￥<span id="span_funds"><?=$account->funds_available?></span>
+                        可用：￥<span id="span_funds"><?=$account->funds_available?></span>
                     </div>
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label class="weui-label">实际支付</label></div>
