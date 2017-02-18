@@ -18,7 +18,7 @@ if($this->func=='index') :    ?>
         <thead>
         <tr>
             <th>USER_ID</th>
-            <th>联系人</th>
+            <th>申请人</th>
             <th>联系电话</th>
             <th>联系地址</th>
             <th>所选车款</th>
@@ -76,7 +76,7 @@ elseif($this->func=='repayment') :
     <div class="main_title">
         <span>租车</span> <a href="<?= url('carRent') ?>" class="but1">列表</a>
     </div>
-    <blockquote class="layui-elem-quote">联系人：<?=$carRent->contacts?><br>车款：<?=$carRent->car_name?></blockquote>
+    <blockquote class="layui-elem-quote">申请人：<?=$carRent->contacts?><br>车款：<?=$carRent->car_name?></blockquote>
     <table class="layui-table" lay-skin="line">
         <thead>
         <tr>

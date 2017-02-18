@@ -9,6 +9,7 @@
 namespace App\Controller\Car;
 
 
+use App\Model\CarProduct;
 use App\Model\CarRent;
 use App\Model\CarRentImage;
 use System\Lib\DB;
@@ -48,6 +49,7 @@ class RentController extends Controller
         }else{
             $this->title='填写申请人信息';
             $data['rent']=$rent;
+            $data['product']=(new CarProduct())->find($rent->car_id);
             $this->view('rent_form',$data);
         }
     }
@@ -121,6 +123,27 @@ class RentController extends Controller
             $this->title='上传资料';
             $data['rent']=$rent;
             $data['rentImages']=$rent->CarRentImage();
+            $data['product']=(new CarProduct())->find($rent->car_id);
+            $this->view('rent_form',$data);
+        }
+    }
+
+    public function editPay(Request $request,CarRent $rent)
+    {
+        $id=$request->get('id');
+        $rent=$rent->findOrFail($id);
+        if($rent->user_id!=$this->user_id){
+            redirect()->back()->with('error','异常');
+        }
+        if($rent->status!=0){
+            redirect()->back()->with('error','禁止修改');
+        }
+        if($_POST){
+
+        }else{
+            $this->title='支付定金';
+            $data['rent']=$rent;
+            $data['product']=(new CarProduct())->find($rent->car_id);
             $this->view('rent_form',$data);
         }
     }

@@ -5,21 +5,26 @@
         <h1><?=$this->title?></h1>
     </div>
     <div class="margin_header"></div>
-    <div class="weui-form-preview">
-        <div class="weui-form-preview__hd">
-            <label class="weui-form-preview__label"><?=$rent->car_name?></label>
-            <em class="weui-form-preview__value">&nbsp;</em>
+    <div class="car-wrapper clearFix">
+        <div class="car-photo"><img src="<?=$product->picture?>">
         </div>
-        <div class="weui-form-preview__bd">
-            <div class="weui-form-preview__item">
-                <label>首付：<span><?=$rent->first_payment_money/10000?>万</span>
-                    <?=$rent->time_limit?>期 <span><?=(float)$rent->month_payment_money?>元/期</span>
-                    <?
+        <div class="car-info">
+            <div class="car-name"><?=$product->name?></div>
+            <div class="car-price">厂商指导价：<?=$product->price?>万</div>
+        </div>
+    </div>
+    <div class="lease">
+        <div class="product">
+            <label class="active">
+                <span><strong><?=$rent->time_limit?>期</strong></span>
+                <span>首付: <?=$rent->first_payment_money/10000?>万元</span>
+                <span><?=(float)$rent->month_payment_money?>元/期</span>
+                <span><?
                     if((float)$rent->last_payment_money!=0){
                         echo "尾付：". $rent->first_payment_money/10000 .'万';
                     }
-                    ?></label>
-            </div>
+                    ?></span>
+            </label>
         </div>
     </div>
     <div class="clearFix" style="margin-top: 8px;">
@@ -30,8 +35,8 @@
             <div class="my-navbar__item <? if($this->func=='editUpload'){echo 'my-navbar__item_on';}?>">
                 <a href="<?=url("rent/editUpload/?id={$_GET['id']}")?>">上传资料</a>
             </div>
-            <div class="my-navbar__item <? if($this->func=='pay'){echo 'my-navbar__item_on';}?>">
-                <a href="<?=url("rent/pay/?id={$_GET['id']}")?>">支付费用</a>
+            <div class="my-navbar__item <? if($this->func=='editPay'){echo 'my-navbar__item_on';}?>">
+                <a href="<?=url("rent/editPay/?id={$_GET['id']}")?>">支付定金</a>
             </div>
         </div>
         <? if($this->func=='editContacts') : ?>
@@ -119,7 +124,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label class="weui-label">信用报告</label></div>
                         <div class="weui-cell__bd">
@@ -141,7 +145,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label class="weui-label">其它</label></div>
                         <div class="weui-cell__bd">
@@ -172,6 +175,7 @@
                     <? endif;?>
                 </div>
             </form>
+        <? elseif($this->func=='editPay') : ?>
         <? endif;?>
     </div>
 <?php require 'footer.php';?>

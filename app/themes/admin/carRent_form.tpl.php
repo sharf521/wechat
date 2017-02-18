@@ -15,9 +15,9 @@ if($this->func=='add' || $this->func=='edit') :    ?>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">联系人</label>
+                <label class="layui-form-label">申请人</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="contacts" required placeholder="请填写联系人" class="layui-input" value="<?=$row->contacts?>" autocomplete="off"/>
+                    <input type="text" name="contacts" required placeholder="姓名" class="layui-input" value="<?=$row->contacts?>" autocomplete="off"/>
                 </div>
             </div>
             <div class="layui-form-item">

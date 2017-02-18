@@ -43,7 +43,7 @@ class Controller extends BaseController
         if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
-                if($this->is_inWeChat && $this->is_wap){
+                if($this->is_inWeChat && $this->is_wap && false){
                     redirect("/wxOpen/oauth/?url={$url}");
                 }else{
                     redirect("/user/login/?url={$url}");
