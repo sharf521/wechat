@@ -40,7 +40,7 @@
                 <div class="weui-cell">
                     <div class="weui-cell__hd"><label class="weui-label">电话</label></div>
                     <div class="weui-cell__bd">
-                        <input class="weui-input" type="text" name="tel" placeholder="联系电话" value="<?=$goods->tel?>"/>
+                        <input class="weui-input" type="tel" name="tel" placeholder="联系电话" value="<?=$goods->tel?>"/>
                     </div>
                     <div class="weui-cell__ft">
                         <i class="weui-icon-warn"></i>
