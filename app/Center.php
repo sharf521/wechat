@@ -15,7 +15,7 @@ use App\Model\System;
 class Center
 {
     private $url='';
-    private $appid='';
+    public $appid='';
     private $appsecret='';
     public function __construct()
     {

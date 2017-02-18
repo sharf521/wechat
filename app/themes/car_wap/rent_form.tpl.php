@@ -207,6 +207,7 @@
                 </div>
                 <div class="weui-btn-area">
                     <input class="weui-btn weui-btn_primary" type="submit" value="立即支付">
+                    <a class="weui-btn weui-btn_plain-primary" href="/user/recharge">我要充值</a>
                 </div>
             </form>
             <? endif;?>

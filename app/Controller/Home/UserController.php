@@ -56,6 +56,19 @@ class UserController extends Controller
         }
         redirect($url);
     }
+    
+    public function recharge()
+    {
+        $this->check_login();
+        $center=new Center();
+        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}";
+        if($this->is_wap){
+            $url=$this->site->center_url_wap.'/'.$url;
+        }else{
+            $url=$this->site->center_url.'/'.$url;
+        }
+        redirect($url);
+    }
 
     public function auth(Request $request,Center $center,User $user)
     {
