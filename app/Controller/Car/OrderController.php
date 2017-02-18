@@ -41,6 +41,7 @@ class OrderController extends Controller
             //$carRent->area=$request->post('province').'-'.$request->post('city').'-'.$request->post('county');
             $carRent->address=$request->post('address');
 
+            $carRent->car_id=$id;
             $carRent->car_name=$product->name;
             $carRent->car_picture=$product->picture;
             $carRent->first_payment_scale=0;
