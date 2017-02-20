@@ -232,7 +232,7 @@
 
                     $('.recharge').on('click',function () {
                         var money=$('#money_yes').html();
-                        window.location='/user/recharge/?money='+money;
+                        window.location='/user/recharge/?money='+money+'&url='+window.location.href;
                     });
                 });
             </script>

@@ -62,6 +62,7 @@ class UserController extends Controller
     public function recharge(Request $request)
     {
         $money=(float)$request->get('money');
+        $url=$request->get('url');
         $this->check_login();
         $center=new Center();
         if($this->is_inWeChat){
@@ -70,8 +71,7 @@ class UserController extends Controller
             echo ' not is wechat';
             exit;
         }
-
-        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}";
+        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
         if($this->is_wap){
             $url=$this->site->center_url_wap.'/'.$url;
         }else{
