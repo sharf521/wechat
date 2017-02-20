@@ -215,7 +215,7 @@ class RentController extends Controller
             $data['rent']=$rent;
             $data['product']=(new CarProduct())->find($rent->car_id);
             $data['account']=$account;
-            $data['booked_money']=$booked_money;//需交订金
+            $data['booked_money']=$booked_money;//需交金额
             $this->view('rent_form',$data);
         }
     }

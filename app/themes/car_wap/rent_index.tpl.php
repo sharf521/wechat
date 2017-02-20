@@ -27,6 +27,9 @@
                         </div>
                     <div class="foot">
                         <a href="<?=url("rent/editUpload/?id={$rent->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary" >上传资料</a>
+                        <? if((float)$rent->booked_money==0) : ?>
+                            <a href="<?=url("rent/editPay/?id={$rent->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付定金</a>
+                        <? endif;?>
                         <? if($rent->status==0) : ?>
                             <a href="javascript:;" data-id="<?=$rent->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">删除</a>
                         <? endif;?>

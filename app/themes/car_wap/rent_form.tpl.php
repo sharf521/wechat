@@ -179,7 +179,7 @@
 
             <?
             if($rent->booked_money!=0) :
-                    echo "<div style='margin-top: 50px; font-size: 20px; text-align: center'>己交订金：{$rent->booked_money}元</div>";
+                    echo "<div style='margin-top: 50px; font-size: 20px; text-align: center'>己交定金：{$rent->booked_money}元</div>";
             else : ?>
 
             <form method="post" id="form1">
@@ -207,7 +207,7 @@
                 </div>
                 <div class="weui-btn-area">
                     <input class="weui-btn weui-btn_primary" type="submit" value="立即支付">
-                    <a class="weui-btn weui-btn_plain-primary" href="/user/recharge">我要充值</a>
+                    <a class="recharge weui-btn weui-btn_plain-primary">我要充值</a>
                 </div>
             </form>
             <? endif;?>
@@ -228,6 +228,11 @@
                         var _m=Math.div(Number($("#integral").val()),lv);
                         var money=Math.sub(price_true,Math.moneyRound(_m,2));
                         $('#money_yes').html(money);
+                    });
+
+                    $('.recharge').on('click',function () {
+                        var money=$('#money_yes').html();
+                        window.location='/user/recharge/?money='+money;
                     });
                 });
             </script>

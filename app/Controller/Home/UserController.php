@@ -57,9 +57,11 @@ class UserController extends Controller
         }
         redirect($url);
     }
-    
-    public function recharge()
+
+    //去充值
+    public function recharge(Request $request)
     {
+        $money=(float)$request->get('money');
         $this->check_login();
         $center=new Center();
         if($this->is_inWeChat){
@@ -69,7 +71,7 @@ class UserController extends Controller
             exit;
         }
 
-        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}";
+        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}";
         if($this->is_wap){
             $url=$this->site->center_url_wap.'/'.$url;
         }else{
