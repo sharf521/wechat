@@ -68,7 +68,7 @@ class UserController extends Controller
         if($this->is_inWeChat){
             $wechat_openid=(new WeChatOpen())->getOpenid();
         }else{
-            echo ' not is wechat';
+            echo ' 仅限微信内调用！';
             exit;
         }
         $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
@@ -78,6 +78,25 @@ class UserController extends Controller
             $url=$this->site->center_url.'/'.$url;
         }
         redirect($url);
+    }
+    
+    //帐户中心调用
+    public function weChatRecharge(Request $request)
+    {
+        $id=(int)$request->get('id');
+        $money=(float)$request->get('money');
+        $url=$request->get('url');
+        if($id>0){
+            if($this->is_inWeChat){
+                $wechat_openid=(new WeChatOpen())->getOpenid();
+            }else{
+                echo ' 仅限微信内调用！';
+                exit;
+            }
+            $url="wechat/recharge/?id={$id}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
+            $url=$this->site->center_url_wap.'/'.$url;
+            redirect($url);
+        }
     }
 
     public function auth(Request $request,Center $center,User $user)
