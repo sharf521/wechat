@@ -232,7 +232,7 @@
 
                     $('.recharge').on('click',function () {
                         var money=$('#money_yes').html();
-                        window.location='/user/recharge/?money='+money+'&url='+window.location.href;
+                        window.location='http://wx02560f146a566747.wechat.yuantuwang.com/user/recharge/?money='+money+'&url='+window.location.href;
                     });
                 });
             </script>
