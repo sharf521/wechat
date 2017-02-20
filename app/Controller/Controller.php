@@ -28,7 +28,8 @@ class Controller extends BaseController
             $this->is_inWeChat=true;
         }
         if($this->is_wap){
-            $this->site=(new SubSite())->find(1);
+            //$this->site=(new SubSite())->find(1);
+            $this->site=(new SubSite())->where("domain like '%{$host}|%'")->first();
         }else{
             $this->site=(new SubSite())->where("domain like '%{$host}|%'")->first();
         }
