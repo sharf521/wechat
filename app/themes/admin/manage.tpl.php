@@ -15,19 +15,13 @@
         .topbox h3{ float:left;font-weight:normal; font-size:18px; color:#2baab1; line-height:70px; padding:0 0 0 20px;}
         .topbox h3 i{ margin-right:6px; font-size:24px;}
 
-
         .nav{ float:left; margin-left:50px;}
         .nav li{float:left; margin-left:20px;  cursor:pointer;color:#018dba; font-size:14px; padding:0 21px; line-height:65px;}
         .nav li.checkit{ color:#FFF; background-color:#4cd1fc;}
         .nav li:hover{background-color:#4cd1fc; color:#FFF;}
-
         .topnav{ top:10px; position:absolute; right:30px;}
         .topnav li{ float:left;}
-
-
         .leftpanel{ background-color:#1c2b36;overflow-y: auto}
-
-
         .leftpanel h1{ font-size:16px; color:#f9691a; margin-left:36px; margin-top:30px; display: none}
         /*二级菜单*/
         .menu a{display: block; text-decoration: none; font-size:14px}
@@ -113,7 +107,7 @@
             </ul>
             <div class="layui-tab-content" >
                 <div class="layui-tab-item layui-show">
-                    <iframe frameborder="0" class="x-iframe" width="100%"></iframe>
+                    <iframe frameborder="0" class="x-iframe" width="100%" src="<?=url('main')?>"></iframe>
                 </div>
             </div>
         </div>

@@ -76,11 +76,11 @@ class WxOpenController extends Controller
                 $auth->principal_name=addslashes($json->principal_name);
                 $auth->business_info=serialize($json->business_info);
             }else{
-                echo $html;
+                echo '<br><br><br>'.$html;
             }
             $auth->save();
         }else{
-            echo $html;
+            echo '<br><br><br>'.$html;
         }
         $this->weChat->log($html,'auth_code');
         echo 'ok';
