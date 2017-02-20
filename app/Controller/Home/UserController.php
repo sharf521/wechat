@@ -71,12 +71,7 @@ class UserController extends Controller
             echo ' 仅限微信内调用！';
             exit;
         }
-        $url="wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
-        if($this->is_wap){
-            $url=$this->site->center_url_wap.'/'.$url;
-        }else{
-            $url=$this->site->center_url.'/'.$url;
-        }
+        $url="http://centerwap.yuantuwang.com/wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
         redirect($url);
     }
     
@@ -93,8 +88,7 @@ class UserController extends Controller
                 echo ' 仅限微信内调用！';
                 exit;
             }
-            $url="wechat/recharge/?id={$id}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
-            $url=$this->site->center_url_wap.'/'.$url;
+            $url="http://centerwap.yuantuwang.com/wechat/recharge/?id={$id}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
             redirect($url);
         }
     }
