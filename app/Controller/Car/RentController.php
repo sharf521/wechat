@@ -32,8 +32,6 @@ class RentController extends Controller
         $data['result']=(new CarRent())->where($where)->orderBy('id desc')->pager($request->get('page'));
         $this->view('rent_index',$data);
     }
-
-
     
     public function editContacts(Request $request,CarRent $rent)
     {
@@ -301,7 +299,7 @@ class RentController extends Controller
     public function del(CarRent $rent,Request $request)
     {
         $rent=$rent->findOrFail($request->get('id'));
-        if($rent->user_id==$this->user_id){
+        if($rent->user_id==$this->user_id && $rent->status==0 && (float)$rent->booked_money==0){
             $rent->status=-1;
             $rent->save();
             redirect("rent")->with('msg','册除成功！');
