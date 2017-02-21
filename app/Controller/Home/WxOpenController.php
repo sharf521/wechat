@@ -92,8 +92,8 @@ class WxOpenController extends Controller
         $app_id=$request->get(2);
         $this->app['access_token']->setToken($this->weChat->getAccessToken($app_id));
 
-        //$auth=(new WeChatAuth())->findOrFail($app_id);
-        //$this->app['access_token']->setToken($auth->authorizer_access_token);
+        $auth=(new WeChatAuth())->findOrFail($app_id);
+        $this->app['access_token']->setToken($auth->authorizer_access_token);
 
         $server=$this->weChat->app->server;
         $server->setMessageHandler(function ($message) {
