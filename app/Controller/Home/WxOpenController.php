@@ -148,7 +148,7 @@ class WxOpenController extends Controller
             $_message=new Text(['content' =>$str]);
             $staff->message($_message)->to($message->FromUserName)->send();
         }
-        return true;
+        //return true;
     }
 
     //用户授权
