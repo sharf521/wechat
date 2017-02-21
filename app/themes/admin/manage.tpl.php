@@ -12,11 +12,16 @@
     <title>管理中心</title>
     <style>
         /*.topbox{width:100%; background:#fff; height:54px; overflow: hidden; border-top:2px solid #2baab1;  box-shadow: 0 1px 1px rgba(0,0,0,.15);  -moz-box-shadow: 0 1px 1px rgba(0,0,0,.15);  -webkit-box-shadow: 0 1px 1px rgba(0,0,0,.15); }*/
-        .topbox h3{ float:left;font-weight:normal; font-size:18px; color:#2baab1; line-height:70px; padding:0 0 0 20px;}
+
+        .layui-layout-admin .layui-header {
+            background-color: #fff;border-bottom: 5px solid #1AA094;
+        }
+        .topbox{height: 55px;}
+        .topbox h3{ float:left;font-weight:normal; font-size:18px; color:#2baab1; line-height:55px; padding:0 0 0 20px;}
         .topbox h3 i{ margin-right:6px; font-size:24px;}
 
         .nav{ float:left; margin-left:50px;}
-        .nav li{float:left; margin-left:20px;  cursor:pointer;color:#018dba; font-size:14px; padding:0 21px; line-height:65px;}
+        .nav li{float:left; margin-left:20px;  cursor:pointer;color:#018dba; font-size:14px; padding:0 21px; line-height:55px;}
         .nav li.checkit{ color:#FFF; background-color:#4cd1fc;}
         .nav li:hover{background-color:#4cd1fc; color:#FFF;}
         .topnav{ top:10px; position:absolute; right:30px;}

@@ -10,6 +10,7 @@ header('Cache-Control: private',false); // required for certain browsers
 header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
 header('Expires: '.gmdate('D, d M Y H:i:s') . ' GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+
 session_cache_limiter('private,must-revalidate');
 session_start();
 date_default_timezone_set('Asia/Shanghai');//时区配置

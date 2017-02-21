@@ -95,9 +95,14 @@ class UserController extends Controller
 
     public function auth(Request $request,Center $center,User $user)
     {
-        $target_url=session('target_url');
-        if(empty($target_url)){
-            $target_url='/';
+        $getUrl=$request->get('url');
+        if(empty($getUrl)){
+            $target_url=session('target_url');
+            if(empty($target_url)){
+                $target_url='/';
+            }
+        }else{
+            $target_url=$getUrl;
         }
         $openid=$request->get('openid');
         $uInfo=$center->getUserInfo($openid);
