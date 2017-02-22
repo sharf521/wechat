@@ -61,15 +61,15 @@ class UserController extends Controller
     //去充值
     public function goWeChatPay(Request $request)
     {
+        $money=(float)$request->get('money');
+        $url=$request->get('url');
+        $id=(int)$request->get('id');
         if($this->is_inWeChat){
             $wechat_openid=(new WeChatOpen())->getOpenid();
         }else{
             echo ' 仅限微信内调用！';
             exit;
         }
-        $money=(float)$request->get('money');
-        $url=$request->get('url');
-        $id=(int)$request->get('id');
         $url="http://centerwap.yuantuwang.com/wechat/recharge/?wechat_openid={$wechat_openid}&money={$money}&url={$url}";
         if($id>0){           
             $url.="&id={$id}"; //帐户中心调用

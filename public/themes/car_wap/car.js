@@ -49,6 +49,7 @@ function goWeChatPay(money,url) {
     if(url==undefined || url==''){
         url=window.location.href;
     }
+    url=encodeURIComponent(url);
     window.location='http://wx02560f146a566747.wechat.yuantuwang.com/user/goWeChatPay/?money='+money+'&url='+url;
 }
 
