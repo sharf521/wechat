@@ -35,9 +35,9 @@
             <div class="my-navbar__item <? if($this->func=='editUpload'){echo 'my-navbar__item_on';}?>">
                 <a href="<?=url("rent/editUpload/?id={$_GET['id']}")?>">上传资料</a>
             </div>
-            <div class="my-navbar__item <? if($this->func=='editPay'){echo 'my-navbar__item_on';}?>">
-                <a href="<?=url("rent/editPay/?id={$_GET['id']}")?>">支付定金</a>
-            </div>
+<!--            <div class="my-navbar__item <?/* if($this->func=='editPay'){echo 'my-navbar__item_on';}*/?>">
+                <a href="<?/*=url("rent/editPay/?id={$_GET['id']}")*/?>">支付定金</a>
+            </div>-->
         </div>
         <? if($this->func=='editContacts') : ?>
             <form method="post" id="form1">
@@ -125,7 +125,7 @@
                         </div>
                     </div>
                     <div class="weui-cell">
-                        <div class="weui-cell__hd"><label class="weui-label">信用报告</label></div>
+                        <div class="weui-cell__hd"><label class="weui-label">征信报告</label></div>
                         <div class="weui-cell__bd">
                             <div class="weui-uploader">
                                 <ul class="weui-uploader__files">
@@ -211,7 +211,6 @@
                 </div>
             </form>
             <? endif;?>
-
             <script src="/plugin/js/math.js"></script>
             <script>
                 $(function () {
@@ -231,8 +230,7 @@
                     });
 
                     $('.recharge').on('click',function () {
-                        var money=$('#money_yes').html();
-                        window.location='http://wx02560f146a566747.wechat.yuantuwang.com/user/recharge/?money='+money+'&url='+window.location.href;
+                        goWeChatPay(5000);
                     });
                 });
             </script>

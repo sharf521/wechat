@@ -59,38 +59,26 @@ class UserController extends Controller
     }
 
     //去充值
-    public function recharge(Request $request)
+    public function goWeChatPay(Request $request)
     {
-        $money=(float)$request->get('money');
-        $url=$request->get('url');
-        $this->check_login();
-        $center=new Center();
         if($this->is_inWeChat){
             $wechat_openid=(new WeChatOpen())->getOpenid();
         }else{
             echo ' 仅限微信内调用！';
             exit;
         }
-        $url="http://centerwap.yuantuwang.com/wechat/recharge/?appid={$center->appid}&openid={$this->user->openid}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
-        redirect($url);
-    }
-    
-    //帐户中心调用
-    public function weChatRecharge(Request $request)
-    {
-        $id=(int)$request->get('id');
         $money=(float)$request->get('money');
         $url=$request->get('url');
-        if($id>0){
-            if($this->is_inWeChat){
-                $wechat_openid=(new WeChatOpen())->getOpenid();
-            }else{
-                echo ' 仅限微信内调用！';
-                exit;
-            }
-            $url="http://centerwap.yuantuwang.com/wechat/recharge/?id={$id}&wechat_openid={$wechat_openid}&money={$money}&url={$url}";
-            redirect($url);
+        $id=(int)$request->get('id');
+        $url="http://centerwap.yuantuwang.com/wechat/recharge/?wechat_openid={$wechat_openid}&money={$money}&url={$url}";
+        if($id>0){           
+            $url.="&id={$id}"; //帐户中心调用
+        }else{
+            $this->check_login();
+            $center=new Center();
+            $url.="&appid={$center->appid}&openid={$this->user->openid}";
         }
+        redirect($url);
     }
 
     public function auth(Request $request,Center $center,User $user)

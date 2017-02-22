@@ -40,6 +40,16 @@ function order_confirm() {
             }
         }
     }
+    $('.recharge').on('click',function () {
+        goWeChatPay(5000);
+    });
+}
+
+function goWeChatPay(money,url) {
+    if(url==undefined || url==''){
+        url=window.location.href;
+    }
+    window.location='http://wx02560f146a566747.wechat.yuantuwang.com/user/goWeChatPay/?money='+money+'&url='+url;
 }
 
 /* upload*/

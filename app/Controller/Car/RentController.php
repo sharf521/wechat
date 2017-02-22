@@ -40,10 +40,10 @@ class RentController extends Controller
         if($rent->user_id!=$this->user_id){
             redirect()->back()->with('error','异常');
         }
-        if($rent->status!=0){
-            redirect()->back()->with('error','禁止修改');
-        }
         if($_POST){
+            if($rent->status!=0){
+                redirect()->back()->with('error','禁止修改');
+            }
             $rent->contacts=$request->post('contacts');
             $rent->tel=$request->post('tel');
             $rent->address=$request->post('address');
@@ -64,10 +64,10 @@ class RentController extends Controller
         if($rent->user_id!=$this->user_id){
             redirect()->back()->with('error','异常');
         }
-        if($rent->status!=0){
-            redirect()->back()->with('error','禁止修改');
-        }
         if($_POST){
+            if($rent->status!=0){
+                redirect()->back()->with('error','禁止修改');
+            }
             $array_ids=$request->post('img_id');
             if(empty($array_ids)){
                 $array_ids=array(0);//不能为空，默认添加一个

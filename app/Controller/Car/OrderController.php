@@ -9,6 +9,7 @@
 namespace App\Controller\Car;
 
 
+use App\Center;
 use App\Model\CarProduct;
 use App\Model\CarProductSpec;
 use App\Model\CarRent;
@@ -33,7 +34,13 @@ class OrderController extends Controller
         if($spec->product_id!=$id){
             redirect()->back()->with('error','参数异常');
         }
+
+        $center=new Center();
+        $account=$center->getUserFunc($this->user->openid);
         if($_POST){
+            if($account->funds_available<5000){
+                redirect()->back()->with('error',"帐户余额不足5000元，请充值后再试！");
+            }
             $carRent=new CarRent();
             $carRent->user_id=$this->user_id;
             $carRent->contacts=$request->post('contacts');
@@ -55,6 +62,7 @@ class OrderController extends Controller
             $inser_id=$carRent->save(true);
             redirect("rent/editUpload/?id={$inser_id}")->with('msg','己保存，请上传资料！');
         }else{
+            $data['account']=$account;
             $data['product']=$product;
             $data['spec']=$spec;
             $this->title='我要订车';
