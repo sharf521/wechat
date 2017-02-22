@@ -17,7 +17,7 @@ if($this->func=='index') :    ?>
     <table class="layui-table" lay-skin="line">
         <thead>
         <tr>
-            <th>USER_ID</th>
+            <th>添加人ID</th>
             <th>申请人</th>
             <th>联系电话</th>
             <th>联系地址</th>
@@ -26,8 +26,9 @@ if($this->func=='index') :    ?>
             <th>尾付</th>
             <th>租期</th>
             <th>月付</th>
-            <th>付款时间</th>
+            <th>己扣车款</th>
             <th>添加时间</th>
+            <th>状态</th>
             <th>操作</th>
         </tr>
         </thead>
@@ -39,27 +40,31 @@ if($this->func=='index') :    ?>
                 <td><?=$row->user_id?></td>
                 <td><?=$row->contacts?></td>
                 <td><?=$row->tel?></td>
-                <td><?=$row->area?>-<?=$row->address?></td>
+                <td><?=$row->area?><br><?=$row->address?></td>
                 <td><?=$row->car_name?></td>
-                <td><?=$row->first_payment_scale*100?>%（￥<?=$row->first_payment_money?>）</td>
-                <td><?=$row->last_payment_scale*100?>%（￥<?=$row->last_payment_money?>）</td>
+                <td><?=$row->first_payment_scale*100?>% <br> ￥<?=$row->first_payment_money?></td>
+                <td><?=$row->last_payment_scale*100?>% <br>￥<?=$row->last_payment_money?></td>
                 <td><?=$row->time_limit?>月</td>
-                <td>￥<?=$row->month_payment_money?></td>
-                <td>每月<?=$row->month_payment_day?>号</td>
+                <td>￥<?=$row->month_payment_money?><br>每月<?=$row->month_payment_day?>号</td>
+                <td>￥<?=$row->money_yes?><br><?=$row->money_yes_at?></td>
                 <td><?=$row->created_at?></td>
+                <td><?=$row->getLinkPageName('rent_status',$row->status)?></td>
                 <td>
-                    <?
-                    if ($row->status == 0) {
-                        ?>
-                        <a href="<?= url("carRent/edit/?id={$row->id}") ?>" class="layui-btn layui-btn-mini">编辑</a> |
-
-                        <?
-                        $txt='生成还款列表，将不可编辑';
-                    }else{
-                        $txt='还款列表';
-                    }
-                    ?>
-                    <a href="<?= url("carRent/repayment/?id={$row->id}") ?>" class="layui-btn layui-btn-mini"><?=$txt?></a>
+                    <div class="layui-btn-group">
+                        <? if($row->status==0 || $row->status==2) : ?>
+                            <a href="<?= url("carRent/checked/?id={$row->id}") ?>" class="layui-btn layui-btn-small">信审</a>
+                        <? endif;?>
+                        <? if ($row->status !=5) : ?>
+                            <a href="<?= url("carRent/edit/?id={$row->id}") ?>" class="layui-btn layui-btn-small">编辑</a>
+                            <a href="<?= url("carRent/deductMoney/?id={$row->id}") ?>" class="layui-btn layui-btn-small">扣除车款</a>
+                        <? endif;?>
+                        <? if($row->status ==1 && $row->money_yes !=0) : ?>
+                            <a href="<?= url("carRent/repayment/?id={$row->id}") ?>" class="layui-btn layui-btn-small">生成还款列表，将不可编辑</a>
+                        <? endif;?>
+                        <? if($row->status ==5) : ?>
+                            <a href="<?= url("carRent/repayment/?id={$row->id}") ?>" class="layui-btn layui-btn-small">还款列表</a>
+                        <? endif;?>
+                    </div>
                 </td>
             </tr>
         <? }?>
@@ -76,7 +81,12 @@ elseif($this->func=='repayment') :
     <div class="main_title">
         <span>租车</span> <a href="<?= url('carRent') ?>" class="but1">列表</a>
     </div>
-    <blockquote class="layui-elem-quote">申请人：<?=$carRent->contacts?><br>车款：<?=$carRent->car_name?></blockquote>
+    <blockquote class="layui-elem-quote">
+        车款：<?=$carRent->car_name?><br>
+        申请人：<?=$carRent->contacts?><br>
+        联系电话：<?=$carRent->tel?><br>
+        地址：<?=$carRent->area?>-<?=$carRent->address?><br>
+    </blockquote>
     <table class="layui-table" lay-skin="line">
         <thead>
         <tr>

@@ -41,7 +41,7 @@ class RentController extends Controller
             redirect()->back()->with('error','异常');
         }
         if($_POST){
-            if($rent->status!=0){
+            if($rent->status==5){
                 redirect()->back()->with('error','禁止修改');
             }
             $rent->contacts=$request->post('contacts');
@@ -65,7 +65,7 @@ class RentController extends Controller
             redirect()->back()->with('error','异常');
         }
         if($_POST){
-            if($rent->status!=0){
+            if($rent->status==5){
                 redirect()->back()->with('error','禁止修改');
             }
             $array_ids=$request->post('img_id');

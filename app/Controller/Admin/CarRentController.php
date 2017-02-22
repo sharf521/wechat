@@ -9,8 +9,12 @@
 namespace App\Controller\Admin;
 
 
+use App\Center;
 use App\Model\CarRent;
 use App\Model\CarRentRepayment;
+use App\Model\System;
+use App\Model\User;
+use System\Lib\DB;
 use System\Lib\Request;
 
 class CarRentController extends AdminController
@@ -43,7 +47,7 @@ class CarRentController extends AdminController
             $where.=" and created_at<".strtotime($endtime);
         }
         $data['result']=$carRent->where($where)->orderBy('id desc')->pager($_GET['page'],10);
-        $this->view('carRent',$data);
+        $this->view('carRent_list',$data);
     }
 
     public function add(CarRent $carRent,Request $request)
@@ -56,7 +60,7 @@ class CarRentController extends AdminController
             $carRent->address=$request->post('address');
 
             $carRent->car_name=$request->post('car_name');
-            $carRent->booked_money=(float)$request->post('booked_money');
+            $carRent->money_yes=(float)$request->post('money_yes');
             $carRent->first_payment_scale=$request->post('first_payment_scale');
             $carRent->first_payment_money=(float)$request->post('first_payment_money');
             $carRent->last_payment_scale=$request->post('last_payment_scale');
@@ -76,10 +80,10 @@ class CarRentController extends AdminController
     public function edit(CarRent $carRent,Request $request)
     {
         $carRent=$carRent->find($request->get('id'));
-        if($carRent->status!=0){
-            redirect()->back()->with('error','状态异常！');
-        }
         if($_POST){
+/*            if($carRent->status==5){
+                redirect()->back()->with('error','状态异常！');
+            }*/
             $carRent->user_id=(int)$request->post('user_id');
             $carRent->contacts=$request->post('contacts');
             $carRent->tel=$request->post('tel');
@@ -88,7 +92,7 @@ class CarRentController extends AdminController
             
             $carRent->car_name=$request->post('car_name');
 
-            $carRent->booked_money=(float)$request->post('booked_money');
+            $carRent->money_yes=(float)$request->post('money_yes');
             $carRent->first_payment_scale=$request->post('first_payment_scale');
             $carRent->first_payment_money=(float)$request->post('first_payment_money');
             $carRent->last_payment_scale=$request->post('last_payment_scale');
@@ -104,39 +108,134 @@ class CarRentController extends AdminController
         }
     }
 
+    //信审
+    public function checked(Request $request,CarRent $carRent)
+    {
+        $carRent=$carRent->findOrFail($request->get('id'));
+        $carRentImgs=$carRent->CarRentImage();
+        if($_POST){
+            if($carRent->status==5){
+                redirect()->back()->with('error','状态异常！');
+            }
+            $checked=$request->post('checked');
+            if(! in_array($checked,array(1,2))){
+                redirect()->back()->with('error','数据异常！');
+            }
+            $carRent->status=$checked;
+            $carRent->verify_userid=$this->user_id;
+            $carRent->verify_remark=time();
+            $carRent->verify_remark=$request->post('verify_remark');
+            $carRent->save();
+            redirect('carRent')->with('msg','保存成功！');
+        }else{
+            $data['carRent']=$carRent;
+            $data['carRentImgs']=$carRentImgs;
+            $this->view('carRent_other',$data);
+        }
+    }
+
+    //扣除车款
+    public function deductMoney(Request $request,CarRent $carRent,System $system)
+    {
+        $carRent=$carRent->findOrFail($request->get('id'));
+        $convert_rate=(float)$system->getCode('convert_rate');
+        if(empty($convert_rate)){
+            $convert_rate=2.52;
+        }
+        $center=new Center();
+        $user=(new User())->find($carRent->user_id);
+        $account=$center->getUserFunc($user->openid);
+        if($_POST){
+            if($carRent->status==5){
+                redirect()->back()->with('error','状态异常！');
+            }
+            $integral=(float)$request->post('integral');
+            if($integral<0){
+                redirect()->back()->with('error','不能为负数！');
+            }
+            if($integral > $account->integral_available){
+                redirect()->back()->with('error','可用积分不足！');
+            }
+            $_money=math($integral,$convert_rate,'/',3);
+            $_money=round_money($_money,1,2);
+
+
+            $funds=(float)$request->post('funds');
+            if($funds<0){
+                redirect()->back()->with('error','不能为负数！');
+            }
+            if($funds > $account->funds_available){
+                redirect()->back()->with('error','可用资金不足！');
+            }
+            if($funds==0 && $integral==0){
+                redirect()->back()->with('error','扣除价值不能为0！');
+            }
+            try {
+                DB::beginTransaction();
+
+                $remark="[{$carRent->contacts}]扣除车款,{$carRent->car_name}";
+                $params=array(
+                    'openid'=>$user->openid,
+                    'body'=>'',
+                    'type'=>'booked_money',
+                    'remark'=>$remark,
+                    'label'=>"car_rent:{$carRent->id}",
+                    'data'=>array(
+                        array(
+                            'openid'=>$user->openid,
+                            'type'=>'booked_money',
+                            'remark'=>$remark,
+                            'funds_available' =>'-'.$funds,
+                            'integral_available' =>'-'.$integral,
+                            'funds_available_now'=>$account->funds_available,
+                            'integral_available_now'=>$account->integral_available,
+                        )
+                    )
+                );
+                $return=$center->receivables($params);
+                if($return===true){
+                    $carRent->money_yes=math($carRent->money_yes,math($_money,$funds,'+',2),'+',2);
+                    $carRent->money_yes_at=time();
+                    $carRent->save();
+                    DB::commit();
+                    redirect("carRent")->with('msg','扣款完成');
+                }else{
+                    throw new \Exception($return);
+                }
+            } catch (\Exception $e) {
+                DB::rollBack();
+                $error= "Failed: " . $e->getMessage();
+                redirect()->back()->with('error',$error);
+            }
+        }else{
+            $data['convert_rate']=$convert_rate;
+            $data['carRent']=$carRent;
+            $data['user']=$user;
+            $data['account']=$account;
+            $this->view('carRent_other',$data);
+        }
+    }
+
     public function repayment(CarRent $carRent,Request $request,CarRentRepayment $rentRepayment)
     {
         $carRent=$carRent->findOrFail($request->get('id'));
         $repayments=$carRent->Repayments();
-        if($carRent->status==0){
-            if(count($repayments)==0){
-                $month_payment_day=$carRent->month_payment_day;
-                if($month_payment_day<10){
-                    $month_payment_day='0'.$month_payment_day;
-                }
-                for($i=1;$i<=$carRent->time_limit;$i++){
-                    $repayment_date=date("Y-m-{$month_payment_day}", strtotime("+{$i} month"));
-                    $money=(float)$carRent->month_payment_money;
-                    if($money!=0){
-                        $rentRepayment->user_id=$carRent->user_id;
-                        $rentRepayment->car_rent_id=$carRent->id;
-                        $rentRepayment->title="第{$i}期";
-                        $rentRepayment->money=$money;
-                        $rentRepayment->money_yes=0;
-                        $rentRepayment->repayment_time=strtotime($repayment_date);
-                        $rentRepayment->repayment_yestime=0;
-                        $rentRepayment->last_days=0;
-                        $rentRepayment->last_interest=0;
-                        $rentRepayment->status=1;
-                        $rentRepayment->save();
-                    }
-                }
-                $lastMoney=(float)$carRent->last_payment_money;
-                if($lastMoney!=0){
+        if($carRent->status!=1){
+            redirect()->back()->with('error','状态异常！');
+        }
+        if(count($repayments)==0){
+            $month_payment_day=$carRent->month_payment_day;
+            if($month_payment_day<10){
+                $month_payment_day='0'.$month_payment_day;
+            }
+            for($i=1;$i<=$carRent->time_limit;$i++){
+                $repayment_date=date("Y-m-{$month_payment_day}", strtotime("+{$i} month"));
+                $money=(float)$carRent->month_payment_money;
+                if($money!=0){
                     $rentRepayment->user_id=$carRent->user_id;
                     $rentRepayment->car_rent_id=$carRent->id;
-                    $rentRepayment->title="尾付款";
-                    $rentRepayment->money=$lastMoney;
+                    $rentRepayment->title="第{$i}期";
+                    $rentRepayment->money=$money;
                     $rentRepayment->money_yes=0;
                     $rentRepayment->repayment_time=strtotime($repayment_date);
                     $rentRepayment->repayment_yestime=0;
@@ -145,13 +244,27 @@ class CarRentController extends AdminController
                     $rentRepayment->status=1;
                     $rentRepayment->save();
                 }
-                $repayments=$carRent->Repayments();
             }
-            $carRent->status=1;
+            $lastMoney=(float)$carRent->last_payment_money;
+            if($lastMoney!=0){
+                $rentRepayment->user_id=$carRent->user_id;
+                $rentRepayment->car_rent_id=$carRent->id;
+                $rentRepayment->title="尾付款";
+                $rentRepayment->money=$lastMoney;
+                $rentRepayment->money_yes=0;
+                $rentRepayment->repayment_time=strtotime($repayment_date);
+                $rentRepayment->repayment_yestime=0;
+                $rentRepayment->last_days=0;
+                $rentRepayment->last_interest=0;
+                $rentRepayment->status=1;
+                $rentRepayment->save();
+            }
+            $carRent->status=5;
             $carRent->save();
+            $repayments=$carRent->Repayments();
         }
         $data['carRent']=$carRent;
         $data['repayments']=$repayments;
-        $this->view('carRent',$data);
+        $this->view('carRent_list',$data);
     }
 }

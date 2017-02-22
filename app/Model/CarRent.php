@@ -12,6 +12,7 @@ namespace App\Model;
 class CarRent extends Model
 {
     protected $table='car_rent';
+    protected $dates=array('created_at','money_yes_at','verify_at');
     public function __construct()
     {
         parent::__construct();
