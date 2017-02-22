@@ -62,7 +62,7 @@ class UserController extends Controller
     public function goWeChatPay(Request $request)
     {
         $money=(float)$request->get('money');
-        $url=$request->get('url');
+        $url=urlencode($request->get('url'));
         $id=(int)$request->get('id');
         if($this->is_inWeChat){
             $wechat_openid=(new WeChatOpen())->getOpenid();
