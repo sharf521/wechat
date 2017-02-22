@@ -29,9 +29,9 @@ class Controller extends BaseController
         }
         if($this->is_wap){
             //$this->site=(new SubSite())->find(1);
-            $this->site=(new SubSite())->where("domain like '%{$host}|%'")->first();
+            $this->site=(new SubSite())->where("domain like '%{$host}|%'")->orderBy('id')->first();
         }else{
-            $this->site=(new SubSite())->where("domain like '%{$host}|%'")->first();
+            $this->site=(new SubSite())->where("domain like '%{$host}|%'")->orderBy('id')->first();
         }
         if(!$this->site->is_exist){
             echo 'The site was not found！';
