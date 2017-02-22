@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="weui-btn-area">
-                当时可用余额：<?=$account->funds_available?> 元
+                余额：<?=$account->funds_available?> 元
                 <?  if($account->funds_available<5000) : ?>
                 <span style="color: #f00">帐户余额不足5000元，请充值！</span>
                     <a href="javascript:;" class="weui-btn weui-btn_disabled weui-btn_primary">下一步</a>
