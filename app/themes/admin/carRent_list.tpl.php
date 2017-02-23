@@ -17,9 +17,8 @@ if($this->func=='index') :    ?>
     <table class="layui-table" lay-skin="line">
         <thead>
         <tr>
-            <th>添加人ID</th>
+            <th>添加人</th>
             <th>申请人</th>
-            <th>联系电话</th>
             <th>联系地址</th>
             <th>所选车款</th>
             <th>首付</th>
@@ -38,9 +37,8 @@ if($this->func=='index') :    ?>
         {
             ?>
             <tr>
-                <td><?=$row->user_id?></td>
-                <td><?=$row->contacts?></td>
-                <td><?=$row->tel?></td>
+                <td><?=$row->user_id?><br><?=$row->User()->username?></td>
+                <td><?=$row->contacts?><br><?=$row->tel?></td>
                 <td><?=$row->area?><br><?=$row->address?></td>
                 <td><?=$row->car_name?></td>
                 <td><?=$row->first_payment_scale*100?>% <br> ￥<?=$row->first_payment_money?></td>

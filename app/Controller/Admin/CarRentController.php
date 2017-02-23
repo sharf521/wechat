@@ -36,7 +36,7 @@ class CarRentController extends AdminController
             $where .= " and user_id={$arr['user_id']}";
         }
         if (!empty($arr['contacts'])) {
-            $where .= " and contacts='{$arr['contacts']}'";
+            $where .= " and contacts like '%{$arr['contacts']}%'";
         }
         $starttime=$request->get('starttime');
         $endtime=$request->get('endtime');
@@ -149,7 +149,7 @@ class CarRentController extends AdminController
             $convert_rate=2.52;
         }
         $center=new Center();
-        $user=(new User())->find($carRent->user_id);
+        $user=$carRent->User();
         $account=$center->getUserFunc($user->openid);
         if($_POST){
             if($carRent->status==5){
@@ -231,7 +231,7 @@ class CarRentController extends AdminController
         }
         $carRent=$carRent->findOrFail($repayment->car_rent_id);
         $center=new Center();
-        $user=(new User())->find($carRent->user_id);
+        $user=$carRent->User();
         $account=$center->getUserFunc($user->openid);
         $convert_rate=(float)$system->getCode('convert_rate');
         if(empty($convert_rate)){
@@ -335,7 +335,7 @@ class CarRentController extends AdminController
         $carRent=$carRent->findOrFail($request->get('id'));
         $repayments=$carRent->Repayments();
         $center=new Center();
-        $user=(new User())->find($carRent->user_id);
+        $user=$carRent->User();
         $account=$center->getUserFunc($user->openid);
         if(count($repayments)==0){
             if($carRent->status!=1){

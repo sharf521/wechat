@@ -18,6 +18,11 @@ class CarRent extends Model
         parent::__construct();
     }
 
+    public function User()
+    {
+        return $this->hasOne('\App\Model\User','id','user_id');
+    }
+
     public function Repayments()
     {
         return $this->hasMany('\App\Model\CarRentRepayment','car_rent_id','id','','id');
