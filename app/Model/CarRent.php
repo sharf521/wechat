@@ -18,6 +18,16 @@ class CarRent extends Model
         parent::__construct();
     }
 
+    //用户是否可以修改
+    public function isHasUserEdit()
+    {
+        if(in_array($this->status,array(0,2))){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function User()
     {
         return $this->hasOne('\App\Model\User','id','user_id');

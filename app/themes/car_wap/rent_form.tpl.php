@@ -71,7 +71,7 @@
                     </div>
                 </div>
                 <div class="weui-btn-area">
-                    <? if($rent->status!=5) : ?>
+                    <? if($rent->isHasUserEdit()) : ?>
                         <input class="weui-btn weui-btn_primary" type="submit" value="保存">
                     <? else : ?>
                         <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled">保存</a>
@@ -168,7 +168,7 @@
                     </div>
                 </div>
                 <div class="weui-btn-area">
-                    <? if($rent->status!=5) : ?>
+                    <? if($rent->isHasUserEdit()) : ?>
                         <input class="weui-btn weui-btn_primary" type="submit" value="保存">
                     <? else : ?>
                         <a href="javascript:;" class="weui-btn weui-btn_plain-primary weui-btn_plain-disabled">保存</a>

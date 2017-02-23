@@ -26,7 +26,7 @@
                             <p class="contacts"><?=$rent->contacts?> <?=$rent->tel?></p>
                         </div>
                     <div class="foot">                        
-                        <? if($rent->status!=5) : ?>
+                        <? if($rent->isHasUserEdit()) : ?>
                             <a href="<?=url("rent/editUpload/?id={$rent->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">上传资料</a>
                             <a href="javascript:;" data-id="<?=$rent->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">删除</a>
                         <? else : ?>
