@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="javascript:history.go(-1)"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url('product/lists')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1>产品详情</h1>
     </div>
