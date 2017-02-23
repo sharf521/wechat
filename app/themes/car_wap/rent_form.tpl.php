@@ -153,7 +153,10 @@
                                     <?  foreach ($rentImages as $img) :
                                         if($img->typeid=='other') :
                                             ?>
-                                            <li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url(<?=$img->image_url?>)"><i class='iconfont' onclick=delRentImg(this)>&#xe642;</i>
+                                            <li class="weui-uploader__file goods_add_uploaderLi" style="background-image:url(<?=$img->image_url?>)">
+                                            <? if($rent->isHasUserEdit()) : ?>
+                                                <i class='iconfont' onclick=delRentImg(this)>&#xe642;</i>
+                                            <? endif;?>
                                                 <input type="hidden" name="img_id[]" value="<?=$img->id?>">
                                             </li>
                                             <?
