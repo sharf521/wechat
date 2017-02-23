@@ -13,7 +13,7 @@
                             <img src="/themes/images/blank.gif" data-echo="<?=$rent->car_picture?>">
                         </span>
                         <div class="info">
-                            <p class="cd_title"><?=$rent->car_name?></p>
+                            <p class="cd_title"><?=$rent->car_name?> <b style="color: #ee5f5b">【<?=$rent->getLinkPageName('rent_status',$rent->status)?>】</b></p>
                             <p>
                                 首付：<span><?=$rent->first_payment_money/10000?>万</span>
                                 <?=$rent->time_limit?>期 <span><?=(float)$rent->month_payment_money?>元/期</span>
