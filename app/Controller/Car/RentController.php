@@ -299,7 +299,7 @@ class RentController extends Controller
     public function del(CarRent $rent,Request $request)
     {
         $rent=$rent->findOrFail($request->get('id'));
-        if($rent->user_id==$this->user_id && $rent->status==0 && (float)$rent->booked_money==0){
+        if($rent->user_id==$this->user_id && $rent->status==0 && (float)$rent->money_yes==0 && (float)$rent->money_linedown==0){
             $rent->status=-1;
             $rent->save();
             redirect("rent")->with('msg','册除成功！');

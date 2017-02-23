@@ -1,16 +1,26 @@
 <?php
 require 'header.php';
-if ($this->func=='checked') :
-    ?>
+?>
     <div class="main_title">
-        <span>租车</span> <a href="<?= url('carRent') ?>" class="but1">列表</a>
+        <span><?=$this->title?></span> <a href="<?= url('carRent') ?>" class="but1">列表</a>
     </div>
     <blockquote class="layui-elem-quote">
-        车款：<?=$carRent->car_name?><br>
+        车款：<?=$carRent->car_name?> &nbsp;&nbsp;<b><?=$repayment->title?></b><br>
         申请人：<?=$carRent->contacts?><br>
         联系电话：<?=$carRent->tel?><br>
         地址：<?=$carRent->area?>-<?=$carRent->address?><br>
     </blockquote>
+
+    <blockquote class="layui-elem-quote">
+        添加人ID：<?=$user->id?><br>
+        添加人：<?=$user->username?><br>
+        可用余额：￥<?=$account->funds_available?><br>
+        可用积分：<?=$account->integral_available?><br>
+    </blockquote>
+    <script src="/plugin/js/math.js"></script>
+<?php
+if ($this->func=='checked') :
+    ?>
     <form method="post" class="layui-form">
         <div class="layui-field-box">
             <div class="layui-form-item">
@@ -71,23 +81,6 @@ if ($this->func=='checked') :
     <?
 elseif($this->func=='deductMoney') : 
 ?>
-    <div class="main_title">
-        <span>租车</span> <a href="<?= url('carRent') ?>" class="but1">列表</a>
-    </div>
-    <blockquote class="layui-elem-quote">
-        车款：<?=$carRent->car_name?><br>
-        申请人：<?=$carRent->contacts?><br>
-        联系电话：<?=$carRent->tel?><br>
-        地址：<?=$carRent->area?>-<?=$carRent->address?><br>
-    </blockquote>
-
-    <blockquote class="layui-elem-quote">
-        添加人ID：<?=$user->id?><br>
-        添加人：<?=$user->username?><br>
-        可用余额：￥<?=$account->funds_available?><br>
-        可用积分：<?=$account->integral_available?><br>
-    </blockquote>
-    <br><br>
     <form method="post" class="layui-form">
         <div class="layui-field-box">
             <div class="layui-form-item">
@@ -112,7 +105,6 @@ elseif($this->func=='deductMoney') :
             </div>
         </div>
     </form>
-    <script src="/plugin/js/math.js"></script>
     <script>
         var lv='<?=$convert_rate?>';
         $(function () {
@@ -139,6 +131,78 @@ elseif($this->func=='deductMoney') :
             });
         });
     </script>
-<?
-endif;
+<? elseif ($this->func=='repaymentPay') :?>
+    <blockquote class="layui-elem-quote">
+        <?=$repayment->title?><br>
+        应还时间：<?=substr($repayment->repayment_time,0,10)?><br>
+        应还金额：<?=$repayment->money?><br>
+    </blockquote>
+    <form method="post" class="layui-form">
+        <div class="layui-field-box">
+            <div class="layui-form-item">
+                <label class="layui-form-label">扣除积分</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="integral" name="integral" value="0" required placeholder="" onkeyup="value=value.replace(/[^0-9.]/g,'')"  class="layui-input" autocomplete="off"/>
+                </div>
+                <div class="layui-form-mid layui-word-aux">可用积分：<span id="span_integral"><?=$account->integral_available?></span></div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">扣除余额</label>
+                <div class="layui-input-inline">
+                    <input type="text" id="funds" name="funds" value="0" placeholder="￥" onkeyup="value=value.replace(/[^0-9.]/g,'')" class="layui-input" autocomplete="off"/>
+                </div>
+                <div class="layui-form-mid layui-word-aux">可用金额：￥<span id="span_funds"><?=$account->funds_available?></span></div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">备注</label>
+                <div class="layui-input-block">
+                    <textarea class="layui-textarea" name="verify_remark"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">扣除价值：￥<span id="money_yes">0</span><br><br>
+                <button class="layui-btn" lay-submit="" lay-filter="*">立即扣除，并设为己还款</button>
+                <button class="layui-btn" onclick="history.go(-1)">返回</button>
+            </div>
+        </div>
+    </form>
+    <script>
+        var lv='<?=$convert_rate?>';
+        $(function () {
+            function change_input() {
+                var integral=Number($("#integral").val());
+                if(integral>Number($('#span_integral').html())){
+                    integral=Number($('#span_integral').html());
+                    $("#integral").val(integral);
+                }
+                var _m=Math.div(integral,lv);
+                var funds=Number($("#funds").val());
+                if(funds>Number($('#span_funds').html())){
+                    funds=Number($('#span_funds').html());
+                    $("#funds").val(funds);
+                }
+                var money=Math.add(funds,Math.moneyRound(_m,2));
+                $('#money_yes').html(money);
+            }
+            $("#integral").bind('input propertychange',function(){
+                change_input();
+            });
+            $("#funds").bind('input propertychange',function(){
+                change_input();
+            });
+            /*var money='<?=$repayment->money?>';
+            $("#integral").bind('input propertychange',function(){
+                var integral=Number($("#integral").val());
+                if(integral>Number($('#span_integral').html())){
+                    integral=Number($('#span_integral').html());
+                    $("#integral").val(integral);
+                }
+                var _m=Math.div(integral,lv);
+                var money_yes=Math.sub(money,Math.moneyRound(_m,2));
+                $('#money_yes').html(money_yes);
+            });*/
+        });
+    </script>
+<? endif;
 require 'footer.php';?>

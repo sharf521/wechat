@@ -26,7 +26,8 @@ if($this->func=='index') :    ?>
             <th>尾付</th>
             <th>租期</th>
             <th>月付</th>
-            <th>己扣车款</th>
+            <th>线下己付</th>
+            <th>线上己扣</th>
             <th>添加时间</th>
             <th>状态</th>
             <th>操作</th>
@@ -46,6 +47,7 @@ if($this->func=='index') :    ?>
                 <td><?=$row->last_payment_scale*100?>% <br>￥<?=$row->last_payment_money?></td>
                 <td><?=$row->time_limit?>月</td>
                 <td>￥<?=$row->month_payment_money?><br>每月<?=$row->month_payment_day?>号</td>
+                <td>￥<?=$row->money_linedown?></td>
                 <td>￥<?=$row->money_yes?><br><?=$row->money_yes_at?></td>
                 <td><?=$row->created_at?></td>
                 <td><?=$row->getLinkPageName('rent_status',$row->status)?></td>
@@ -58,8 +60,8 @@ if($this->func=='index') :    ?>
                             <a href="<?= url("carRent/edit/?id={$row->id}") ?>" class="layui-btn layui-btn-small">编辑</a>
                             <a href="<?= url("carRent/deductMoney/?id={$row->id}") ?>" class="layui-btn layui-btn-small">扣除车款</a>
                         <? endif;?>
-                        <? if($row->status ==1 && $row->money_yes !=0) : ?>
-                            <a href="<?= url("carRent/repayment/?id={$row->id}") ?>" class="layui-btn layui-btn-small">生成还款列表，将不可编辑</a>
+                        <? if($row->status ==1 && ($row->money_yes !=0 || $row->money_linedown!=0)) : ?>
+                            <a href="javascript:goRepayment(<?=$row->id?>)" class="layui-btn layui-btn-small">生成还款列表</a>
                         <? endif;?>
                         <? if($row->status ==5) : ?>
                             <a href="<?= url("carRent/repayment/?id={$row->id}") ?>" class="layui-btn layui-btn-small">还款列表</a>
@@ -74,6 +76,19 @@ if($this->func=='index') :    ?>
 } else {
     echo $result['page'];
 } ?>
+    <script>
+        function goRepayment(id)
+        {
+            layer.open({
+                content: '生成还款列表，将不可编辑？'
+                ,btn: ['确定', '取消']
+                ,yes: function(index){
+                    location.href='<?= url("carRent/repayment/?id=") ?>'+id;
+                    layer.close(index);
+                }
+            });
+        }
+    </script>
     <?
 elseif($this->func=='repayment') :
     $arr_status=array('','待付款','己还款');
@@ -87,6 +102,13 @@ elseif($this->func=='repayment') :
         联系电话：<?=$carRent->tel?><br>
         地址：<?=$carRent->area?>-<?=$carRent->address?><br>
     </blockquote>
+
+    <blockquote class="layui-elem-quote">
+        添加人ID：<?=$user->id?><br>
+        添加人：<?=$user->username?><br>
+        可用余额：￥<?=$account->funds_available?><br>
+        可用积分：<?=$account->integral_available?><br>
+    </blockquote>
     <table class="layui-table" lay-skin="line">
         <thead>
         <tr>
@@ -98,6 +120,8 @@ elseif($this->func=='repayment') :
             <th>还款时间</th>
             <th>逾期天数</th>
             <th>逾期利息</th>
+            <th>管理员ID</th>
+            <th>备注</th>
             <th>状态</th>
             <th>操作</th>
         </tr>
@@ -110,12 +134,18 @@ elseif($this->func=='repayment') :
                 <td>￥<?=$repayment->money?></td>
                 <td>￥<?=$repayment->money_yes?></td>
                 <td><?=substr($repayment->	repayment_time,0,10)?></td>
-                <td><?=$repayment->	repayment_yestime?></td>
+                <td><?=$repayment->	repaymented_at?></td>
                 <td><?=$repayment->last_days?></td>
                 <td>￥<?=$repayment->last_interest?></td>
+                <td><?=$repayment->verify_userid?></td>
+                <td><?=nl2br($repayment->verify_remark)?></td>
                 <td><?=$arr_status[$repayment->status]?></td>
                 <td>
-                    <? if($repayment->status==1)?>
+                    <? if($repayment->status==2) : ?>
+                        <span class="layui-btn layui-btn-mini layui-btn-disabled">己还</span>
+                    <? else : ?>
+                        <a class="layui-btn layui-btn-mini" href="<?=url("carRent/repaymentPay/?repay_id={$repayment->id}")?>">还款</a>
+                    <? endif;?>
                 </td>
             </tr>
         <? endforeach;?>

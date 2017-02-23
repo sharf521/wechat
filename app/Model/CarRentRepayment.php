@@ -12,7 +12,7 @@ namespace App\Model;
 class CarRentRepayment extends Model
 {
     protected $table='car_rent_repayment';
-    protected $dates=array('created_at','repayment_time','repayment_yestime');
+    protected $dates=array('created_at','repayment_time','repaymented_at','verify_at');
     public function __construct()
     {
         parent::__construct();

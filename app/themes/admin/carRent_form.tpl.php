@@ -59,7 +59,7 @@ if($this->func=='add' || $this->func=='edit') :    ?>
             <div class="layui-form-item">
                 <label class="layui-form-label">线下己付车款</label>
                 <div class="layui-input-inline">
-                    <input type="text" name="money_yes" required class="layui-input" value="<?=$row->money_yes?>" autocomplete="off"/>
+                    <input type="text" name="money_linedown" required class="layui-input" value="<?=$row->money_linedown?>" autocomplete="off"/>
                 </div>
                 <div class="layui-form-mid layui-word-aux">元</div>
             </div>
