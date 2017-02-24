@@ -11,7 +11,6 @@
     <script src="/themes/admin/js/base.js"></script>
     <title>管理中心</title>
     <style>
-
         .topbox{height: 55px;}
         .topbox h3{ float:left;font-weight:normal; font-size:18px; color:#2baab1; line-height:55px; padding:0 0 0 20px;}
         .topbox h3 i{ margin-right:6px; font-size:24px;}
@@ -67,7 +66,7 @@
             <span style="line-height: 60px; color: #018dba; font-size: 14px; float: right; padding-right: 320px;">您好，<?= $this->username ?></span>
             <ul class="layui-nav" lay-filter="">
                 <li class="layui-nav-item"><a href="<?=url('/member')?>" target="_blank">用户中心</a></li>
-                <li class="layui-nav-item li_item"><a url="<?=url('changepwd')?>" target="iframe_main">修改密码</a></li>
+                <li class="layui-nav-item li_item"><a style="cursor: pointer" url="<?=url('changepwd')?>" target="iframe_main">修改密码</a></li>
                 <li class="layui-nav-item"><?= $this->anchor('logout', '[退出]') ?></li>
             </ul>
         </div>
