@@ -14,18 +14,29 @@ class CarProductController extends AdminController
     public function __construct()
     {
         parent::__construct();
-        $this->brandList=(new CarBrand())->orderBy('showorder,id')->get();
-        $this->planList=(new CarPlan())->orderBy('showorder,id')->get();
+        $this->brandList=(new CarBrand())->getAll();
+        $this->planList=(new CarPlan())->getAll();
     }
 
-    public function index(CarProduct $product, CarBrand $brand)
+    public function index(CarProduct $product,Request $request)
     {
         $where = ' status>-1 ';
-        if (!empty($_GET['keyword'])) {
-            $where .= " and name like '%{$_GET['keyword']}%'";
+        $brand_name=$request->get('brand_name');
+        $plan_id=$request->get('plan_id');
+        $keyword=$request->get('keyword');
+        if (!empty($keyword)) {
+            $where .= " and name like '%{$keyword}%'";
+        }
+        if (!empty($brand_name)) {
+            $where .= " and brand_name='{$brand_name}'";
+        }
+        if (!empty($plan_id)) {
+            $where .= " and plan_id='{$plan_id}'";
         }
         $result = $product->orderBy('id desc')->where($where)->pager($_GET['page']);
         $data['result'] = $result;
+        $data['plans'] = $this->planList;
+        $data['brands']=$this->brandList;
         $this->view('carProduct', $data);
     }
 

@@ -16,4 +16,9 @@ class CarBrand extends Model
     {
         parent::__construct();
     }
+
+    public function getAll()
+    {
+        return $this->orderBy('`showorder`,id')->get();
+    }
 }

@@ -14,7 +14,7 @@ if($this->func=='index') :    ?>
             <input type="submit" class="but2" value="查询" />
         </div>
     </form>
-    <table class="layui-table" lay-skin="line">
+    <table class="layui-table" lay-even lay-skin="line">
         <thead>
         <tr>
             <th>添加人</th>
@@ -107,7 +107,7 @@ elseif($this->func=='repayment') :
         可用余额：￥<?=$account->funds_available?><br>
         可用积分：<?=$account->integral_available?><br>
     </blockquote>
-    <table class="layui-table" lay-skin="line">
+    <table class="layui-table" lay-even lay-skin="line">
         <thead>
         <tr>
             <th>用户ID</th>

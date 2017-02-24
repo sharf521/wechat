@@ -4,6 +4,33 @@
         <span>车辆管理</span>列表
         <a href="<?= url('carProduct/add/') ?>" class="layui-btn layui-btn-small">添 加</a>
     </blockquote>
+    <form method="get" class="layui-form">
+        <div class="layui-field-box">
+            <div class="layui-form-item">
+                <label class="layui-form-label">品牌</label>
+                <div class="layui-input-inline">
+                    <select name="brand_name" class="layui-select">
+                        <option value="" selected>请选择</option>
+                        <? foreach ($brands as $brand) :?>
+                            <option value="<?=$brand->name?>" <? if($brand->name==$_GET['brand_name']){echo 'selected';}?>><?=$brand->name?></option>
+                        <? endforeach;?>
+                    </select>
+                </div>
+                <label class="layui-form-label">金融方案</label>
+                <div class="layui-input-inline">
+                    <select name="plan_id" class="layui-select">
+                        <option value="" selected>请选择</option>
+                        <? foreach ($plans as $plan) :?>
+                            <option value="<?=$plan->id?>" <? if($plan->id==$_GET['plan_id']){echo 'selected';}?>><?=$plan->name?></option>
+                        <? endforeach;?>
+                    </select>
+                </div>
+                <label class="layui-form-label">关键字</label>
+                <div class="layui-input-inline"><input type="text" class="layui-input" name="keyword" value="<?= $_GET['keyword'] ?>"/></div>
+                <input type="submit" class="layui-btn" value="查询"/>
+            </div>
+        </div>
+    </form>
     <div class="main_content">
         <form method="post">
             <table class="layui-table" lay-skin="line">

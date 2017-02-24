@@ -30,7 +30,7 @@ class CarPlanController extends AdminController
             }
             redirect('carPlan')->with('msg','操作成功！');
         }else{
-            $data['list']=$plan->orderBy('`showorder`,id')->get();
+            $data['list']=$plan->getAll();
             $this->view('carPlan',$data);
         }
     }

@@ -180,7 +180,7 @@ class CarRentController extends AdminController
                     $params = array(
                         'openid' => $user->openid,
                         'body' => '',
-                        'type' => 'booked_money',
+                        'type' => 'car_money',
                         'remark' => $remark,
                         'label' => "car_rent:{$carRent->id}",
                         'data' => array(

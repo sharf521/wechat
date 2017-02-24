@@ -30,7 +30,7 @@ class CarBrandController extends AdminController
             }
             redirect('CarBrand')->with('msg','操作成功！');
         }else{
-            $data['list']=$brand->orderBy('`showorder`,id')->get();
+            $data['list']=$brand->getAll();
             $this->view('carBrand',$data);
         }
     }
