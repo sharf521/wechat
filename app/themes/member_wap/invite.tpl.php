@@ -7,7 +7,8 @@
     </div>
     <div class="margin_header"></div>
     <div class="weui-cells__title">将下面链接或二维码复制并发送给好友，该好友成功注册后您即可成为邀请人</div>
-    <?=$invite_url?>
+    <br>
+    <div class="weui-cells__title"><?=$invite_url?></div>
 
     <div style="text-align: center">
         <img src="<?=$invite_img?>" width="80%">
@@ -16,7 +17,7 @@
 
     <?
     if(count($result)==0){
-        echo '<div class="noadres"><p>暂无邀请！</p></div>';
+        echo '<div class="weui-cells__title"><p>暂无邀请！</p></div>';
     }else{
         ?>
         <div class="weui-cells__title">我的邀请列表</div>

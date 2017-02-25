@@ -10,6 +10,7 @@ namespace App\Controller\Member;
 
 
 use App\Model\User;
+use App\WeChatOpen;
 
 class InviteController extends MemberController
 {
@@ -33,6 +34,9 @@ class InviteController extends MemberController
         $data['invite_img']="/data/upload/".ceil($user_id/2000)."/".$user_id."/invite.png";
         $result=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
         $data['result']=$result;
+        if($this->is_inWeChat){
+            $data['invite_url']=(new WeChatOpen())->shorten($data['invite_url']);
+        }
         $this->view('invite',$data);
     }
 }
