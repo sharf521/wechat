@@ -20,27 +20,24 @@
                 </tr>
                 <? foreach ($list as $row) { ?>
                     <tr>
-                        <td><?= $row['id'] ?></td>
-                        <td><?= $row['pid'] ?></td>
-                        <td><?= $row['name'] ?></td>
-                        <td><?= $row['path'] ?></td>
+                        <td><?= $row->id ?></td>
+                        <td><?= $row->pid ?></td>
+                        <td><?= $row->name ?></td>
+                        <td><?= $row->path ?></td>
                         <td>
-                            <input type="text" value="<?= $row['showorder'] ?>" name="showorder[]" size="5">
-                            <input type="hidden" name="id[]" value="<?= $row['id'] ?>">
+                            <input type="text" value="<?= $row->showorder ?>" name="showorder[]" size="5">
+                            <input type="hidden" name="id[]" value="<?= $row->id ?>">
                         </td>
-                        <td><?= $row['addtime'] ?></td>
+                        <td><?= $row->addtime ?></td>
                         <td>
-                            <a href="<?= url("category/?pid={$row['id']}") ?>">管理子项</a>
+                            <a href="<?= url("category/?pid={$row->id}") ?>">管理子项</a>
                             <?
-                            //echo $this->anchor("category/?pid={$row['id']}","管理子项")." | ";
-                            //echo $this->anchor("category/add/?pid={$row['id']}","添加子项")." | ";
-                            echo $this->anchor('category/edit/?id=' . $row['id'], '编辑') . " | ";
+                            echo $this->anchor('category/edit/?id=' . $row->id, '编辑') . " | ";
                             $arr = array(
                                 'onclick' => "return confirm('确定要删除吗？')"
                             );
-                            echo $this->anchor('category/delete/?pid=' . $row['pid'] . '&id=' . $row['id'], '删除', $arr);
+                            echo $this->anchor('category/delete/?pid=' . $row->pid . '&id=' . $row->id, '删除', $arr);
                             ?>
-
                         </td>
                     </tr>
                 <? } ?>

@@ -18,9 +18,13 @@ class HomeController extends Controller
             $this->template = 'default';
         }
         if(!$_POST){
-            $cates=(new Category())->getListTree(array('path'=>'2,'));
+            $category=new Category();
+            $cates=$category->getListTree(array('path'=>'2,'));
             array_shift($cates);
-            $this->site->cates=$cates;
+            $this->site->cates=$cates;//商品分类
+
+            $articleCates=$category->getList(array('pid'=>1));
+            $this->site->articleCates=$articleCates;
         }
     }
 }

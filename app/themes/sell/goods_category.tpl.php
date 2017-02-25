@@ -24,9 +24,9 @@
                         <select name="categoryid[]" id="category1" class="multiple" multiple="multiple"
                                 onchange="getsel(1,this.value)">
                             <? foreach ($categorys as $var) { ?>
-                                <option value='<?= $var['id'] ?>' <? if ($var['id'] == $row->category_id) {
+                                <option value='<?= $var->id ?>' <? if ($var->id == $row->category_id) {
                                     echo 'selected';
-                                } ?>><?= $var['name'] ?></option>
+                                } ?>><?= $var->name ?></option>
                             <? } ?>
                         </select>
                     </div>

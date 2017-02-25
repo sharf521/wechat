@@ -24,7 +24,8 @@ class ArticleController extends AdminController
         }
         $result = $article->orderBy('id desc')->where($where)->pager($_GET['page']);
         $data['result'] = $result;
-        $data['cates'] = $category->echoOption(array('pid' => 1, 'path' => $_GET['categorypath']));
+        //$data['cates'] = $category->echoOption(array('pid' => 1, 'path' => $_GET['categorypath']));
+        $data['cates']=$category->getListTree(array('not_id'=>1, 'path' => '1,'));
         $this->view('article', $data);
     }
 
@@ -79,15 +80,11 @@ class ArticleController extends AdminController
             $arr = array();
             $arr['id'] = $artice_id;
             $arr['content'] = $_POST['content'];
-            $result = DB::table('article_data')->insert($arr);
-            if ($result) {
-                redirect('article')->with('msg','添加成功!!');
-            }else{
-                redirect()->back()->with('error','添加失败');
-            }
+            DB::table('article_data')->insert($arr);
+            redirect('article')->with('msg','添加成功!!');
         } else {
             //一级分类
-            $data['cates'] = $category->getlist(array('pid' => 1));
+            $data['cates'] = $category->getList(array('pid' => 1));
             $this->view('article', $data);
         }
     }
@@ -136,15 +133,11 @@ class ArticleController extends AdminController
 
             $arr = array();
             $arr['content'] = $_POST['content'];
-            $result=DB::table('article_data')->where("id={$id}")->limit(1)->update($arr);
-            if ($result) {
-                redirect('article/?page='.$request->get('page'))->with('msg','保存成功!!');
-            }else{
-                redirect()->back()->with('error','保存失败!');
-            }
+            DB::table('article_data')->where("id={$id}")->limit(1)->update($arr);
+            redirect('article/?page='.$request->get('page'))->with('msg','保存成功!!');
         } else {
             //一级分类
-            $data['cates'] = $category->getlist(array('pid' => 1));
+            $data['cates'] = $category->getList(array('pid' => 1));
             $data['row'] = $article->findOrFail($id);
             $data['row']->content = $data['row']->ArticleData()->content;
             $categorypath = explode(',', $data['row']->category_path);

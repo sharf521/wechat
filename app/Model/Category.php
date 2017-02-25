@@ -6,25 +6,25 @@ use System\Lib\DB;
 class Category extends Model
 {
     protected $table = 'category';
-    function __construct()
+    public function __construct()
     {
         parent::__construct();
     }
 
-    function getlist($data)
+    public function getList($data)
     {
         $where = " 1=1";
         if ($data['pid'] !== '') {
             $where .= " and pid='{$data['pid']}'";
         }
-        return DB::table('category')->where($where)->orderBy("`showorder`,id")->all();
+        return $this->where($where)->orderBy("`showorder`,id")->get();
     }
 
-    function getListTree($data=array())
+    public function getListTree($data=array())
     {
         $where = " 1=1";
-        if (isset($data['pid'])) {
-            $where .= " and pid='{$data['pid']}'";
+        if (isset($data['not_id'])) {
+            $where .= " and id  !='{$data['not_id']}'";
         }
         if (isset($data['path'])) {
             $where .= " and path like '{$data['path']}%'";
@@ -57,26 +57,16 @@ class Category extends Model
         return $cates;
     }
 
-    function getNames($data)
+    public function getNames($data)
     {
         $where = " where 1=1";
         if (isset($data['pid'])) {
             $where .= " and pid='{$data['pid']}'";
         }
         return DB::table('category')->where($where)->orderBy("`showorder`,id")->lists('name','id');
-//        $sql = "select id,name from {$this->dbfix}category {$where}  order by `showorder`,id";
-//        $result = $this->mysql->get_all($sql);
-//        //结果转换为特定格式
-//        $items = array();
-//        foreach ($result as $row) {
-//            $items[$row['id']] = $row['name'];
-//        }
-//        return $items;
     }
 
-
-
-    function add($data = array())
+    public function add($data = array())
     {
         $arr['pid'] = (int)$data['pid'];
         $arr['name'] = $data['name'];
@@ -115,7 +105,7 @@ class Category extends Model
         return DB::table('category')->where("id={$id}")->limit(1)->update($arr);
     }
 
-    function echoOption($data)
+/*    function echoOption($data)
     {
         $pid = $data['pid'];
         $id = (int)$data['id'];
@@ -148,7 +138,7 @@ class Category extends Model
             $num++;
         }
         return $ss;
-    }
+    }*/
     private function genTree5($items)
     {
         $tree = array(); //格式化好的树
@@ -166,13 +156,13 @@ class Category extends Model
         $result1 = DB::table('category')->select('pid')->groupBy('pid')->all();
         foreach ($result1 as $row1) {
             $parentid = $row1['pid'];
-            $result = $this->getlist(array('pid' => $parentid));
+            $result = $this->getList(array('pid' => $parentid));
             $t = "";
             foreach ($result as $row) {
                 if ($t == "")
-                    $t = $row["id"] . "#" . $row["name"];
+                    $t = $row->id . "#" . $row->name;
                 else
-                    $t .= "[SER]" . $row["id"] . "#" . $row["name"];
+                    $t .= "[SER]" . $row->id . "#" . $row->name;
             }
             $str .= "cate_arr[$parentid]='$t';\r\n";
             $result = null;

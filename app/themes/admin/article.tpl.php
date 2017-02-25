@@ -16,10 +16,10 @@
         <div class="search">
             文章类型：<select name="categorypath">
                 <option value="">&nbsp;&nbsp;请选择</option>
-                <?= $cates ?>
+                <? foreach ($cates as $cate) : ?>
+                    <option value="<?=$cate['path']?>" <? if($cate['path']==$_GET['categorypath']){echo 'selected';}?>><?=$cate['name_pre']?><?=$cate['name']?></option>
+                <? endforeach;?>
             </select>
-
-
             关键字：<input type="text" name="keyword" value="<?= $_GET['keyword'] ?>"/>
             <input type="submit" class="but2" value="查询"/>
         </div>
@@ -72,7 +72,6 @@
         <span>文章管理</span><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>
         <?= $this->anchor('article', '列表', 'class="but1"'); ?>
     </div>
-    <script src="/plugin/js/ajaxfileupload.js"></script>
     <div class="main_content">
         <form method="post">
             <input type="hidden" name="id" value="<?= $row->id ?>"/>
@@ -88,9 +87,9 @@
                             <select name="categoryid[]" id="category1" class="multiple" multiple="multiple"
                                     onchange="getsel(1,this.value)">
                                 <? foreach ($cates as $var) { ?>
-                                    <option value='<?= $var['id'] ?>' <? if ($var['id'] == $row->category_id) {
+                                    <option value='<?= $var->id ?>' <? if ($var->id == $row->category_id) {
                                         echo 'selected';
-                                    } ?>><?= $var['name'] ?></option>
+                                    } ?>><?= $var->name ?></option>
                                 <? } ?>
                             </select>
                         </div>

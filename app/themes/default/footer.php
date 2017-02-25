@@ -2,51 +2,22 @@
         <div class="foottop">
             <div class="footlogo"> <a href="/"><img src="<?=$this->site->logo?>"></a> </div>
             <div class="foottext">
-
-
-                <ul>
-                    <li>
-                        <h3><img src="/themes/images/nopic.gif" width="30" height="30">关于我们</h3>
-                        <p><a href="http://www.xijia520.com/news/detail/10">合作企业</a></p>
-                        <p><a href="http://www.xijia520.com/news/detail/9">门店效果</a></p>
-                        <p ><a href="http://www.xijia520.com/news/detail/8">品牌优势</a></p>
-                        <p ><a href="http://www.xijia520.com/news/detail/2">关于我们</a></p>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <h3><img src="/themes/images/nopic.gif" width="30" height="30">关于我们</h3>
-                        <p><a href="http://www.xijia520.com/news/detail/10">合作企业</a></p>
-                        <p><a href="http://www.xijia520.com/news/detail/9">门店效果</a></p>
-                        <p ><a href="http://www.xijia520.com/news/detail/8">品牌优势</a></p>
-                        <p ><a href="http://www.xijia520.com/news/detail/2">关于我们</a></p>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <h3><img src="/themes/images/nopic.gif" width="30" height="30">关于我们</h3>
-                        <p><a href="http://www.xijia520.com/news/detail/10">合作企业</a></p>
-                        <p ><a href="http://www.xijia520.com/news/detail/2">关于我们</a></p>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <h3><img src="/themes/images/nopic.gif" width="30" height="30">关于我们</h3>
-                        <p><a href="http://www.xijia520.com/news/detail/10">合作企业</a></p>
-                        <p ><a href="http://www.xijia520.com/news/detail/2">关于我们</a></p>
-                    </li>
-                </ul>
-
-                <ul>
-                    <li>
-                        <h3><img src="/themes/images/nopic.gif" width="30" height="30">关于我们</h3>
-                        <p><a href="http://www.xijia520.com/news/detail/10">合作企业</a></p>
-                        <p><a href="http://www.xijia520.com/news/detail/9">门店效果</a></p>
-                    </li>
-                </ul>
+                <?
+                $article=(new \App\Model\Article());
+                foreach ($this->site->articleCates as $cate) :
+                    ?>
+                    <ul>
+                        <li>
+                            <h3><img src="/themes/images/nopic.gif" width="30" height="30"><?=$cate->name?></h3>
+                            <?
+                            $aList=$article->where("status=1 and category_id={$cate->id}")->orderBy('id desc')->limit('0,5')->get();
+                            foreach ($aList as $art) :
+                            ?>
+                                <p><a href="http://www.xijia520.com/news/detail/10"><?=$art->title?></a></p>
+                                <? endforeach;?>
+                        </li>
+                    </ul>
+                <? endforeach;?>
             </div>
         </div>
         <div class="footbot">

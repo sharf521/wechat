@@ -59,7 +59,7 @@ class GoodsController extends SellController
         }else{
             $data['cates']=$this->getCates();
             $data['shippings']=$this->getShippings();
-            $data['categorys'] = $category->getlist(array('pid' => 2));
+            $data['categorys'] = $category->getList(array('pid' => 2));
             $this->view('goods_category',$data);
         }
     }
