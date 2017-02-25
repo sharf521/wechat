@@ -78,6 +78,7 @@ class WxOpenController extends Controller
             }else{
                 echo '<br><br><br>'.$html;
             }
+            $auth->status=1;
             $auth->save();
         }else{
             echo '<br><br><br>'.$html;
@@ -251,6 +252,14 @@ class WxOpenController extends Controller
             $this->weChat->log($redirect_uri);
             $html=$this->weChat->curl_url($redirect_uri);
             $this->weChat->log("BBB".$html,'ticket');
+        }elseif($msg['InfoType']=='unauthorized'){
+            $AuthorizerAppid=$msg['AuthorizerAppid'];
+            $auth=(new WeChatAuth())->where('authorizer_appid=?')->bindValues($AuthorizerAppid)->first();
+            if($auth->is_exist) {
+                $auth->status=0;
+                $auth->save();
+            }
+            $this->weChat->log(json_encode($msg),'ticket');
         }
         echo 'success';
     }
