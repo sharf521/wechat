@@ -7,8 +7,7 @@
     </div>
     <div class="margin_header"></div>
     <div class="weui-cells__title">将下面链接或二维码复制并发送给好友，该好友成功注册后您即可成为邀请人</div>
-    <br>
-    <div class="weui-cells__title"><?=$invite_url?></div>
+    <div class="weui-cells__title">邀请链接：<?=$invite_url?></div>
 
     <div style="text-align: center">
         <img src="<?=$invite_img?>" width="80%">
