@@ -1,3 +1,4 @@
 /vendor
 /.idea
 /app/Config.php
+/public/data/js/*.js
