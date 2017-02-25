@@ -54,7 +54,7 @@
             <p class="weui-tabbar__label">我的订单</p>
         </a>
         <a href="<?=url('/member/invite')?>" class="weui-tabbar__item">
-            <i class="iconfont weui-tabbar__icon">&#xe89d;</i>
+            <i class="iconfont weui-tabbar__icon">&#xe643;</i>
             <p class="weui-tabbar__label">邀请链接</p>
         </a>
         <a href="<?=$this->site->center_url_wap?>" class="weui-tabbar__item">
