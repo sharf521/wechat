@@ -18,7 +18,7 @@ class IndexController extends HomeController
         }else{
             $data['images']=array('\themes\default\images\ad1.jpg','\themes\default\images\ad2.jpg','\themes\default\images\ad3.jpg');
         }
-        //$this->view('index',$data);
+        $this->view('index',$data);
     }
 
     public function up()

@@ -16,8 +16,6 @@ $(function () {
             }
         }
     });*/
-
-
     var element = layui.element();
     element.init();
 });
@@ -36,7 +34,7 @@ function header_js() {
         oLi.mouseenter(function(){
             var index = oLi.index(this);
             $(oLi[index]).addClass("hover2").siblings().removeClass("hover2");
-        })
+        });
         box.mouseleave(function(){
             oLi.removeClass("hover2");
         })
@@ -107,7 +105,7 @@ function order_js(cart_ids) {
             var data = eval('(' + data + ")");
             $("#totalPrice span").html(data.total);
             $("#totalNum span").html(data.nums);
-            $('.foot .shop_total').each(function(){
+            $('.shop_total').each(function(){
                 var shop_id=$(this).attr('shop_id');
                 if(data[shop_id]){
                     $(this).html(data[shop_id]);
@@ -126,18 +124,21 @@ function getCartedMoney() {
     var cart_id = "";
     var allChecked = true;
     $("input:checkbox[name='cart_id[]']").each(function (i) {
-        if ($(this).attr('checked')) {
-            if (cart_id == "") {
-                cart_id = $(this).val();
+        if($(this).attr('disabled')!='disabled'){
+            if ($(this).attr('checked')) {
+                if (cart_id == "") {
+                    cart_id = $(this).val();
+                } else {
+                    cart_id += ("," + $(this).val());
+                }
             } else {
-                cart_id += ("," + $(this).val());
-            }
-        } else {
-            if (allChecked == true) {
-                allChecked = false;
+                if (allChecked == true) {
+                    allChecked = false;
+                }
             }
         }
     });
+
     $(".checkall").attr("checked", allChecked);
     $.get("/index.php/cart/getSelectedMoney?cart_ids=" + cart_id, function (data) {
         if (data != "") {
@@ -183,7 +184,7 @@ function cart_js() {
         getCartedMoney();
     });
     $('.checkall').on('click',function () {
-        $("input[name='cart_id[]']").attr('checked',this.checked);
+        $("input[name='cart_id[]']").not("input[disabled='disabled']").attr('checked',this.checked);
         getCartedMoney();
     });
     $('.wrap-input .btn-reduce').on('click',function(){

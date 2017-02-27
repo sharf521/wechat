@@ -21,10 +21,10 @@
                 </div>
                 <?  foreach ($result_carts as $i=>$carts) : ?>
                     <div class="cart_box clearFix">
-                        <a class="shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>
+                        <a class="shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$i?></em></a>
                         <? foreach($carts as $cart): ?>
                             <div class="goods_item clearFix">
-                                <input class="checkbox"  type="checkbox" checked name="cart_id[]" value="<?=$cart->id?>">
+                                <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">
                                 <div class="cell2">
                                     <img class="image" src="<?=$cart->goods_image?>">
                                     <div class="oi_content">
@@ -37,7 +37,14 @@
                                                 echo "<span class='spec'>{$cart->spec_2}</span>";
                                             }
                                             ?>
-                                            <span class="count money">¥<?=$cart->price?></span></p>
+                                            <? if($cart->is_exist==true) : ?>
+                                                <span class="count money">¥<?=$cart->price?></span>
+                                                <span class="count">剩余：<?=$cart->stock_count?></span>
+                                            <? else :?>
+                                                <span class="money">己失效,请重新添加</span>
+                                            <? endif;?>
+
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="cell3">

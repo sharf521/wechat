@@ -74,6 +74,8 @@ class Cart extends Model
         $buyer_id=(int)$data['buyer_id'];
         $cart_id=$data['cart_id'];//多个id数组
 
+        $cityName=$data['cityName'];
+
         if($buyer_id==0){
             $session_id=session_id();
             $where=" buyer_id=0 and session_id='$session_id' ";
@@ -93,19 +95,35 @@ class Cart extends Model
         foreach($result_carts as $seller_id=>$carts){
             foreach ($carts as $i=>$cart) {
                 if ($cart->spec_id != 0) {
-                    $spec = $cart->GoodsSpec();
-                    if ($spec->spec_1 != '') {
-                        $result_carts[$seller_id][$i]->spec_1=$spec->spec_1;
+                    $spec = $cart->GoodsSpec();//取规格的价格和库存
+                    if($spec->is_exist){
+                        if ($spec->spec_1 != '') {
+                            $result_carts[$seller_id][$i]->spec_1=$spec->spec_1;
+                        }
+                        if ($spec->spec_2 != '') {
+                            $result_carts[$seller_id][$i]->spec_2=$spec->spec_2;
+                        }
+                        $result_carts[$seller_id][$i]->price = $spec->price;
+                        $result_carts[$seller_id][$i]->stock_count = $spec->stock_count;
+                        $result_carts[$seller_id][$i]->is_exist=true;
+                    }else{
+                        $result_carts[$seller_id][$i]->is_exist=false;
+                        $result_carts[$seller_id][$i]->quantity=0;
                     }
-                    if ($spec->spec_2 != '') {
-                        $result_carts[$seller_id][$i]->spec_2=$spec->spec_2;
+                    if($cityName!=''){
+                        $goods = $cart->Goods();
                     }
-                    $result_carts[$seller_id][$i]->price = $spec->price;
-                    $result_carts[$seller_id][$i]->stock_count = $spec->stock_count;
                 } else {
                     $goods = $cart->Goods();
                     $result_carts[$seller_id][$i]->price = $goods->price;
-                    $result_carts[$seller_id][$i]->stock_count = $goods->stock_count;
+                    $result_carts[$seller_id][$i]->stock_count =$goods->stock_count;
+                }
+                if($cityName!=''){
+                    $ship=(new Shipping())->find($goods->shipping_id);
+                    if($ship->is_exist){
+                        $shipping_fee=$ship->getPrice($cityName,$result_carts[$seller_id][$i]->quantity);
+                        $result_carts[$seller_id][$i]->shipping_fee = $shipping_fee;
+                    }
                 }
             }
         }
@@ -117,6 +135,9 @@ class Cart extends Model
         return $this->hasOne('\App\Model\Goods','id','goods_id');
     }
 
+    /**
+     * @return \App\Model\GoodsSpec
+     */
     public function GoodsSpec()
     {
         return $this->hasOne('\App\Model\GoodsSpec','id','spec_id');

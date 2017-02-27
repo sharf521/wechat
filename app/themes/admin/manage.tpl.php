@@ -26,13 +26,8 @@
         .topbox .layui-nav .layui-nav-item a:hover{color: #1AA094;}
         .topbox .layui-nav .layui-this:after,.topbox  .layui-nav-bar{background-color: #393D49;}
 
-        .leftpanel{ background-color:#1c2b36;overflow-y: auto}
+        .leftpanel{ background-color:#393D49;overflow-y: auto}
         .leftpanel h1{ font-size:16px; color:#f9691a; margin-left:36px; margin-top:30px; display: none}
-        /*二级菜单*/
-        .menu a{display: block; text-decoration: none; font-size:14px}
-        .menu li{line-height:42px;font-family: "微软雅黑";font-size: 14px;  border-bottom: 1px solid #17232c;}
-        .menu li a{ color: #7ca0bb; padding-left: 20px;}
-        .menu li a:hover,li.menuSelectd a{ color: #fff; border-left: 5px #1AA094 solid; padding-left: 25px;background-color: #17232c;}
 
         .layui-layout-admin .layui-header { background-color: #fff;border-bottom: 5px solid #1AA094; }
         .layui-tab{ margin: 0px; }
@@ -74,35 +69,28 @@
     <div class="layui-side leftpanel">
         <?
         $num = 0;
-        foreach ($menu as $i => $m) {
+        foreach ($menu as $i => $m)  :
             $num++;
-            //每个一级菜单输出一个div
             ?>
-            <div class="menu <? if ($num > 1) {
-                echo 'hide';
-            } ?>">
+            <div class="menu <? if ($num > 1) {echo 'hide'; } ?>">
                 <h1><?= $menu[$i]['name'] ?></h1>
-                <ul>
+                <ul class="layui-nav layui-nav-tree layui-inline">
                     <?php
                     //显示左侧二级菜单
                     if (isset($m['son']) && is_array($m['son'])) {
                         foreach ($m['son'] as $li) {
                             ?>
-                            <li class="li_item" style="cursor:pointer"><a url="<?= url($li['url']) ?>" target="iframe_main"><?= $li['name'] ?></a></li>
+                            <li class="layui-nav-item li_item" style="cursor:pointer"><a url="<?= url($li['url']) ?>" target="iframe_main"><?= $li['name'] ?></a></li>
                             <?
                         }
                     }
                     ?>
                 </ul>
             </div>
-            <?
-        }
-        ?>
+        <?  endforeach;?>
     </div>
     <div class="layui-body" style="bottom: 0px; padding-left: 8px;">
-
         <div class="layui-tab layui-tab-card larry-tab-box" id="main-tab" lay-filter="x-tab" lay-allowclose="true">
-
             <ul class="layui-tab-title">
                 <li class="layui-this">
                     默认
@@ -115,7 +103,6 @@
                 </div>
             </div>
         </div>
-        <!-- <iframe marginheight="0" width="100%" marginwidth="0" frameborder="0" id="iframe_main" name="iframe_main" src=""></iframe>-->
     </div>
 </div>
 <script>

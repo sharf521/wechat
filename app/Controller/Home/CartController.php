@@ -90,6 +90,7 @@ class CartController extends HomeController
         $cart_id=explode(',',$ids);
         if(count($cart_id)>0 && $ids!=''){
             $arr=array(
+                //'cityName'=>'郑州',
                 'buyer_id'=>$this->user_id,
                 'cart_id'=>$cart_id
             );
@@ -102,6 +103,7 @@ class CartController extends HomeController
                 foreach ($carts as $cart){
                     $_t=math($cart->price,$cart->quantity,'*',2);
                     $result[$seller_id]=math($result[$seller_id],$_t,'+',2);
+                    $result["shipping_fee_{$seller_id}"]=$cart->shipping_fee;
                     $result['nums']++;
                 }
                 $result['total']=math($result['total'],$result[$seller_id],'+',2);

@@ -3,17 +3,17 @@
             <div class="footlogo"> <a href="/"><img src="<?=$this->site->logo?>"></a> </div>
             <div class="foottext">
                 <?
-                $article=(new \App\Model\Article());
+                $articleModel=(new \App\Model\Article());
                 foreach ($this->site->articleCates as $cate) :
                     ?>
                     <ul>
                         <li>
                             <h3><img src="/themes/images/nopic.gif" width="30" height="30"><?=$cate->name?></h3>
                             <?
-                            $aList=$article->where("status=1 and category_id={$cate->id}")->orderBy('id desc')->limit('0,5')->get();
+                            $aList=$articleModel->where("status=1 and category_id={$cate->id}")->orderBy('id desc')->limit('0,5')->get();
                             foreach ($aList as $art) :
                             ?>
-                                <p><a href="http://www.xijia520.com/news/detail/10"><?=$art->title?></a></p>
+                                <p><a href="<?=url("article/detail/{$art->id}")?>"><?=$art->title?></a></p>
                                 <? endforeach;?>
                         </li>
                     </ul>

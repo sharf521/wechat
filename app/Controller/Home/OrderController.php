@@ -14,6 +14,7 @@ use App\Model\Goods;
 use App\Model\Order;
 use App\Model\OrderGoods;
 use App\Model\OrderShipping;
+use App\Model\Shipping;
 use App\Model\UserAddress;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -135,6 +136,7 @@ class OrderController extends HomeController
         }else{
             $data['cart_id']=implode(',',$cart_id);
             $data['address']=$address;
+            $data['addressList']=$address->where('user_id=?')->bindValues($this->user_id)->get();
             $this->view('order',$data);
         }
     }

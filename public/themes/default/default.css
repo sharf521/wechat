@@ -199,74 +199,55 @@ i, cite, em { font-style: normal; }
 .cart_bottom .total>a em {    font-weight: 400;   font-size: 12px;    font-family: none;}
 .cart_bottom .total span{font-family: Verdana;  }
 
-/*footer*/
-.footer {
-    width: 100%;margin-top: 20px;
-    border-top: 5px solid #f50;
-    clear: both;
-    overflow: hidden
-}
-.foottop {
-    width: 1200px;
-    clear: both;
-    margin: 0 auto 10px;
-    display: block;
-    padding-top: 30px
-}
-.footlogo {
-    width: 220px;
-    float: left;
-    display: inline-block
-}
-.foottext {
-    width: 980px;
-    float: right;
-    display: inline-block;
-    overflow: hidden
-}
-.foottext ul li {
-    width: 120px;
-    float: left;
-    display: inline-block;
-    padding: 0 38px
-}
-.foottext ul li h3 {
-    font-size: 18px;
-    font-weight: normal;
-    color: #666;
-    height: 30px;
-    line-height: 30px;
-    margin-bottom: 5px
-}
-.foottext ul li h3 img {
-    float: left;
-    padding-right: 5px
-}
-.foottext ul li p {
-    padding-left: 35px;
-    font-size: 13px;
-    height: 24px; width: 120px; overflow:hidden;
-    line-height: 24px;
-    clear: both
-}
-.foottext ul li p a {
-    color: #666;
-}
-.foottext ul li p a:hover {
-    text-decoration: underline
-}
-.footbot {
-    text-align: center;
-    font-size: 14px;
-    color: #636363;
-    line-height: 30px;
-    padding: 10px 0;
-    clear: both;
-    border-top: 1px solid #eee
-}
-.footbot a {
-    color: #636363;
-}
-.footbot a img {
-    margin: 5px 5px 0;
-}
+
+/* article*/.articleLeft{float:left;width:200px;color:#333}
+.articleLeft dl{margin-bottom:8px;border:1px solid #eaeaea}
+.articleLeft dt{padding:0 10px 0 16px;height:46px;font-size:16px;line-height:46px;font-weight:700;}
+.articleLeft dd{padding:12px 0 12px 20px;border-top:1px solid #eaeaea}
+.articleLeft dd ul li{font-size:14px;line-height:28px}
+.articleLeft dd ul li .active{color:#d22147;font-weight:700}
+.articleRight{float:right;width:920px;border:1px solid #eaeaea;min-height:500px}
+.articleRight h2{font-size:18px;font-weight:700;letter-spacing:1px;line-height:56px;padding:0 20px;border-bottom:1px solid #eee}
+.articleContent{padding:20px;font-size:14px;line-height:200%;}
+
+/*订单提交*/
+.addr-cur{display: inline-block;vertical-align: top;position: relative;width: 237px;height: 106px;margin: 0 14px 14px 0;color: #666;cursor: pointer; float:left; background:url(images/addhbg.png) no-repeat}
+.addr-cur:hover{ background:url(images/addbg.png) no-repeat}
+.addrinner{z-index: 2;position: relative;padding: 11px 15px;overflow: hidden; font-size:12px; line-height: 20px;}
+.addrinner h3{ font-weight:normal; border-bottom:1px solid #f2f2f2; font-size:13px;padding: 0 0 5px;margin-bottom: 5px;height: 18px;line-height: 18px;}
+.addrinner span a{ font-size:12px; color:#F60; line-height:24px}
+.addselect{background:url(images/addbg.png) no-repeat}
+
+.order_box{position:relative;margin-top:10px;padding:0 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
+.order_box .order_shopBar{display:block;height:40px;border-bottom:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
+.order_box .order_shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
+.order_box .cell1{float: left; width:650px; text-align:left}
+.order_box .cell2{float: left; width:130px; text-align:center; margin: 0 2px;}
+.order_box .cell3{float: left; width:130px; text-align:center; margin: 0 2px;}
+.order_box .cell4{float: left; width:130px; text-align:center; margin: 0 2px;}
+.order_box .order_titleBar{    height: 32px;    line-height: 32px;    margin-bottom: 5px;}
+.order_box .order_titleBar ul li {       height: 30px;   color: #333;    border-bottom: 2px solid #ecd6b9;}
+.order_box .goods_item{margin-top:10px; font-size: 14px;color: #333; position: relative; border-bottom: 1px dashed #ddd;}
+.order_box .goods_item .oi_content{ float: left; line-height: 30px;}
+.order_box .goods_item .image{float:left;margin-right:10px;height:80px; width: 80px;}
+.order_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
+
+.order_box .remark .span{margin-top: 20px; float: left}
+.order_box .remark textarea{float: left;background-color: #efefef; margin-top: 8px;font-size: 14px; width: 500px; padding: 5px;}
+.order_box .order_foot{float: right; text-align: right; width: 400px; padding-right: 10px; line-height: 40px; margin-top: 5px;}
+.order_box .order_foot em{font-weight: 700; color: #c00;font-family: Verdana;}
+
+
+/*footer*/.footer{width:100%;margin-top:20px;border-top:5px solid #f50;clear:both;overflow:hidden}
+.foottop{width:1200px;clear:both;margin:0 auto 10px;display:block;padding-top:30px}
+.footlogo{width:220px;float:left;display:inline-block}
+.foottext{width:980px;float:right;display:inline-block;overflow:hidden}
+.foottext ul li{width:120px;float:left;display:inline-block;padding:0 38px}
+.foottext ul li h3{font-size:18px;font-weight:400;color:#666;height:30px;line-height:30px;margin-bottom:5px}
+.foottext ul li h3 img{float:left;padding-right:5px}
+.foottext ul li p{padding-left:35px;font-size:13px;height:24px;width:120px;overflow:hidden;line-height:24px;clear:both}
+.foottext ul li p a{color:#666}
+.foottext ul li p a:hover{text-decoration:underline}
+.footbot{text-align:center;font-size:14px;color:#636363;line-height:30px;padding:10px 0;clear:both;border-top:1px solid #eee}
+.footbot a{color:#636363}
+.footbot a img{margin:5px 5px 0}

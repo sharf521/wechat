@@ -21,6 +21,7 @@ class ArticleController extends HomeController
         $id=$request->get(2);
         $row=$article->findOrFail($id);
         $row->content=$row->ArticleData()->content;
+
         $data['article']=$row;
         $data['title_herder']=$row->title;
         $this->view('article',$data);
