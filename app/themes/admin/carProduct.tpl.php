@@ -9,7 +9,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">品牌</label>
                 <div class="layui-input-inline">
-                    <select name="brand_name" class="layui-select">
+                    <select name="brand_name" class="layui-select" lay-search>
                         <option value="0">请选择</option>
                         <? foreach ($brands as $brand) :?>
                             <option value="<?=$brand->name?>" <? if($brand->name==$_GET['brand_name']){echo 'selected';}?>><?=$brand->name?></option>

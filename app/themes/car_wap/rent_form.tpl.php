@@ -100,7 +100,7 @@
                                         endif;
                                     endforeach;?>
                                 </ul>
-                                <div class="weui-uploader__input-box">
+                                <div class="weui-uploader__input-box <? if(!$rent->isHasUserEdit()){echo 'hide';} ?>">
                                     <input name="file" id="uploaderInput_card" upload_type="card" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadImgs(this)"/>
                                 </div>
                             </div>
@@ -124,7 +124,7 @@
                                         endif;
                                     endforeach;?>
                                 </ul>
-                                <div class="weui-uploader__input-box">
+                                <div class="weui-uploader__input-box <? if(!$rent->isHasUserEdit()){echo 'hide';} ?>">
                                     <input name="file" id="uploaderInput_drive" upload_type="drive" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadImgs(this)"/>
                                 </div>
                             </div>
@@ -148,7 +148,7 @@
                                         endif;
                                     endforeach;?>
                                 </ul>
-                                <div class="weui-uploader__input-box">
+                                <div class="weui-uploader__input-box <? if(!$rent->isHasUserEdit()){echo 'hide';} ?>">
                                     <input name="file" id="uploaderInput_credit" upload_type="credit" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadImgs(this)"/>
                                 </div>
                             </div>
@@ -172,7 +172,7 @@
                                         endif;
                                     endforeach;?>
                                 </ul>
-                                <div class="weui-uploader__input-box">
+                                <div class="weui-uploader__input-box <? if(!$rent->isHasUserEdit()){echo 'hide';} ?>">
                                     <input name="file" id="uploaderInput_other" upload_type="other" class="weui-uploader__input" type="file" accept="image/*" onchange="uploadImgs(this)"/>
                                 </div>
                             </div>
