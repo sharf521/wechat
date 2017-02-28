@@ -98,12 +98,13 @@ class CartController extends HomeController
             $result=array();
             $result['total']=0;
             $result['nums']=0;
+
             foreach ($carts_result as $seller_id=>$carts){
                 $result[$seller_id]=0;
                 foreach ($carts as $cart){
                     $_t=math($cart->price,$cart->quantity,'*',2);
                     $result[$seller_id]=math($result[$seller_id],$_t,'+',2);
-                    $result["shipping_fee_{$seller_id}"]=$cart->shipping_fee;
+                    $result["shipping_fee_{$seller_id}"]=math($result["shipping_fee_{$seller_id}"],$cart->shipping_fee,'+',2);
                     $result['nums']++;
                 }
                 $result['total']=math($result['total'],$result[$seller_id],'+',2);

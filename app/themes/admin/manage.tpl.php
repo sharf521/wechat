@@ -92,7 +92,7 @@
     <div class="layui-body" style="bottom: 0px; padding-left: 8px;">
         <div class="layui-tab layui-tab-card larry-tab-box" id="main-tab" lay-filter="x-tab" lay-allowclose="true">
             <ul class="layui-tab-title">
-                <li class="layui-this">
+                <li class="layui-this" lay-id="0">
                     默认
                     <i class="layui-icon layui-unselect layui-tab-close"></i>
                 </li>
