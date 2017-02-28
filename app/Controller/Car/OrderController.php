@@ -43,6 +43,7 @@ class OrderController extends Controller
             }
             $carRent=new CarRent();
             $carRent->user_id=$this->user_id;
+            $carRent->site_id=$this->user->site_id;
             $carRent->contacts=$request->post('contacts');
             $carRent->tel=$request->post('tel');
             //$carRent->area=$request->post('province').'-'.$request->post('city').'-'.$request->post('county');
