@@ -6,12 +6,12 @@ function order_js(cart_ids) {
     $.get("/index.php/cart/getSelectedMoney?cart_ids="+cart_ids, function (data) {
         if (data != "") {
             var data = eval('(' + data + ")");
-            $("#totalPrice span").html(data.total);
-            $("#totalNum span").html(data.nums);
+            $("#totalPrice span").html(data.countTotal);
+            $("#totalNum span").html(data.countNum);
             $('.foot .shop_total').each(function(){
                 var shop_id=$(this).attr('shop_id');
-                if(data[shop_id]){
-                    $(this).html(data[shop_id]);
+                if(data['shop'+shop_id+'_goodsPrice']){
+                    $(this).html(data['shop'+shop_id+'_goodsPrice']);
                 }else{
                     $(this).html(0);
                 }
@@ -44,11 +44,11 @@ function getCartedMoney() {
         if (data != "") {
             var data = eval('(' + data + ")");
             $("#totalPrice span").html(data.total);
-            $("#totalNum span").html(data.nums);
+            $("#totalNum span").html(data.num);
             $('.cart_foot .shop_total').each(function(){
                 var shop_id=$(this).attr('shop_id');
-                if(data[shop_id]){
-                    $(this).html(data[shop_id]);
+                if(data['shop'+shop_id+'_money']){
+                    $(this).html(data['shop'+shop_id+'_money']);
                 }else{
                     $(this).html(0);
                 }

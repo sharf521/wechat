@@ -11,6 +11,7 @@ namespace App\Controller\Home;
 
 use App\Model\Cart;
 use App\Model\Goods;
+use App\Model\GoodsSpec;
 use App\Model\Order;
 use App\Model\OrderGoods;
 use App\Model\OrderShipping;
@@ -32,10 +33,10 @@ class OrderController extends HomeController
     {
         $user_id=$this->user_id;
         $cart_id=$request->cart_id;//array[]
+        $address_id=(int)$request->address_id;
         if(empty($cart_id)){
             redirect()->back()->with('error','至少选择一件商品');
         }
-        $address_id=(int)$request->get('address_id');
         if($address_id==0){
             $address=$address->where('user_id=? and is_default=1')->bindValues($this->user_id)->first();
         }else{
@@ -45,14 +46,19 @@ class OrderController extends HomeController
             'buyer_id'=>$this->user_id,
             'cart_id'=>$cart_id
         );
+        if($_POST){
+            if(!$address->is_exist){
+                throw  new \Exception("请填写收货地址！");
+            }
+            $arr_area=explode('-',$address->region_name);
+            $arr['cityName']=$arr_area[1];
+        }
         $carts_result=$cart->getList($arr);
         $data['result_carts']=$carts_result;
         if($_POST){
             try{
                 DB::beginTransaction();
-                if(!$address->is_exist){
-                    throw  new \Exception("请填写收货地址！");
-                }
+                $carts_moneys=$cart->getMoneys($carts_result);
                 $goods=new Goods();
                 foreach ($carts_result as $seller_id=>$carts){
                     $order=new Order();
@@ -63,12 +69,10 @@ class OrderController extends HomeController
                     $order->seller_id=$seller_id;
                     $order->buyer_remark=$request->post('buyer_remark');
                     $goods_money=0;
-                    $shipping_fee=0;
                     foreach ($carts as $cart){
                         $goods=$goods->find($cart->goods_id);
                         $stock_count=$goods->stock_count;
                         $price=$goods->price;
-                        $shipping_fee=math($shipping_fee,$goods->shipping_fee,'+',2);
                         //减少库存
                         if($goods->is_exist){
                             $goods->stock_count=$goods->stock_count-$cart->quantity;
@@ -111,9 +115,12 @@ class OrderController extends HomeController
 
                         $cart->delete();
                     }
-                    $order->goods_money=$goods_money;
-                    $order->shipping_fee=$shipping_fee;
-                    $order->order_money=math($order->goods_money,$order->shipping_fee,'+',2);
+
+
+
+                    $order->goods_money=$carts_moneys[$seller_id]['goodsPrice'];
+                    $order->shipping_fee=$carts_moneys[$seller_id]['shippingFee'];
+                    $order->order_money=$carts_moneys[$seller_id]['total'];
                     $order->status=1;
                     $order->save();
                     

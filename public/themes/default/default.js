@@ -96,27 +96,42 @@ function index_js() {
     });
 }
 /* 确认订单*/
-function order_js(cart_ids) {
-    $('.order_bottom .btn').on('click',function () {
-        $('#form_order').submit();
-    });
-    $.get("/index.php/cart/getSelectedMoney?cart_ids="+cart_ids, function (data) {
+function getSelectedMoney() {
+    var cityName=$('.addselect').attr('data_city');
+    $.get("/index.php/cart/getSelectedMoney?cart_ids="+cart_ids+'&cityName='+cityName, function (data) {
         if (data != "") {
             var data = eval('(' + data + ")");
-            $("#totalPrice span").html(data.total);
-            $("#totalNum span").html(data.nums);
+            $("#totalPrice span").html(data.countTotal);
+            $("#totalNum span").html(data.countNum);
             $('.shop_total').each(function(){
                 var shop_id=$(this).attr('shop_id');
-                if(data[shop_id]){
-                    $(this).html(data[shop_id]);
+                if(data['shop'+shop_id+'_total']){
+                    $('#shop'+shop_id+'_money').html(data['shop'+shop_id+'_total']);
                 }else{
-                    $(this).html(0);
+                    $('#shop'+shop_id+'_total').html(0);
+                }
+                if(data['shop'+shop_id+'_shippingFee']){
+                    $('#shop'+shop_id+'_shipping_fee').html(data['shop'+shop_id+'_shippingFee']);
+                }else{
+                    $('#shop'+shop_id+'_shipping_fee').html(0);
                 }
             });
         } else {
             $("#totalPrice span").html(0);
             $("#totalNum span").html(0);
         }
+    });
+}
+function order_js() {
+    getSelectedMoney();
+    $('.addr-cur').on('click',function () {
+        var aId=$(this).attr('data_id');
+        $('#address_id').val(aId);
+        $(this).addClass('addselect').siblings().removeClass('addselect');
+        getSelectedMoney();
+    });
+    $('.order_bottom .btn').on('click',function () {
+        $('#form_order').submit();
     });
 }
 /* 购物车 start*/
@@ -143,12 +158,12 @@ function getCartedMoney() {
     $.get("/index.php/cart/getSelectedMoney?cart_ids=" + cart_id, function (data) {
         if (data != "") {
             var data = eval('(' + data + ")");
-            $("#totalPrice span").html(data.total);
-            $("#totalNum span").html(data.nums);
+            $("#totalPrice span").html(data.countTotal);
+            $("#totalNum span").html(data.countNum);
             $('.cart_foot .shop_total').each(function(){
                 var shop_id=$(this).attr('shop_id');
-                if(data[shop_id]){
-                    $(this).html(data[shop_id]);
+                if(data['shop'+shop_id+'_goodsPrice']){
+                    $(this).html(data['shop'+shop_id+'_goodsPrice']);
                 }else{
                     $(this).html(0);
                 }

@@ -9,11 +9,13 @@
             <a class="layui-btn layui-btn-small" href="<?=url('/member/address')?>">添加收货地址</a>
         </blockquote>
     <? else : ?>
-        <? foreach ($addressList as $add) : ?>
-            <div data_id="<?=$add->id?>" class="addr-cur <? if($add->id==$address->id){echo 'addselect';}?>">
+        <? foreach ($addressList as $add) :
+            $arr=explode('-',$add->region_name);
+            ?>
+            <div data_id="<?=$add->id?>" data_city="<?=$arr[1]?>" class="addr-cur <? if($add->id==$address->id){echo 'addselect';}?>">
                 <div class="addrinner">
-                    <h3><strong><?=$address->name?></strong> <?=$address->phone?></h3>
-                    <p><?=$address->region_name?><br><?=$address->address?></p>
+                    <h3><strong><?=$add->name?></strong> <?=$add->phone?></h3>
+                    <p><?=$add->region_name?><br><?=$add->address?></p>
                 </div>
             </div>
         <? endforeach;?>
@@ -28,6 +30,7 @@
         <legend>确认订单信息</legend>
     </fieldset>
     <form method="post" id="form_order">
+        <input type="hidden" name="address_id" value="<?=$address->id?>" id="address_id">
         <?  foreach ($result_carts as $i=>$carts) : ?>
             <div class="order_box clearFix">
                 <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$i?></em></a>
@@ -78,7 +81,9 @@
                     <div class="span">备注留言：</div>
                     <textarea name="buyer_remark" placeholder="订单备注,选填" rows="3"></textarea>
 
-                    <div class="order_foot">小计：<em>¥<span class="shop_total" shop_id="<?=$i?>"></span></em></div>
+                    <div class="order_foot">
+                        送费：<em>¥<span class="shop_shopping_fee" id="shop<?=$i?>_shipping_fee"></span></em><br>
+                        小计：<em>¥<span class="shop_total" id="shop<?=$i?>_money" shop_id="<?=$i?>"></span></em></div>
                 </div>
 
 
@@ -96,13 +101,9 @@
 </div>
 
 <script>
+    var cart_ids='<?=$cart_id?>';
     $(function () {
-        $('.addr-cur').on('click',function () {
-            var aId=$(this).attr('data_id');
-            alert(aId);
-           $(this).addClass('addselect').siblings().removeClass('addselect');
-        });
-        order_js('<?=$cart_id?>');
+        order_js();
     })
 </script>
 <?php require 'footer.php';?>

@@ -87,28 +87,28 @@ class CartController extends HomeController
     public function getSelectedMoney(Request $request,Cart $cart)
     {
         $ids=trim($request->get('cart_ids'));
+        $cityName=$request->get('cityName');
         $cart_id=explode(',',$ids);
         if(count($cart_id)>0 && $ids!=''){
             $arr=array(
-                //'cityName'=>'郑州',
+                'cityName'=>$cityName,
                 'buyer_id'=>$this->user_id,
                 'cart_id'=>$cart_id
             );
             $carts_result=$cart->getList($arr);
-            $result=array();
-            $result['total']=0;
-            $result['nums']=0;
 
-            foreach ($carts_result as $seller_id=>$carts){
-                $result[$seller_id]=0;
-                foreach ($carts as $cart){
-                    $_t=math($cart->price,$cart->quantity,'*',2);
-                    $result[$seller_id]=math($result[$seller_id],$_t,'+',2);
-                    $result["shipping_fee_{$seller_id}"]=math($result["shipping_fee_{$seller_id}"],$cart->shipping_fee,'+',2);
-                    $result['nums']++;
-                }
-                $result['total']=math($result['total'],$result[$seller_id],'+',2);
+            $carts_moneys=$cart->getMoneys($carts_result);
+            $total=0;
+            $num=0;
+            foreach ($carts_moneys as $i=>$seller){
+                $result["shop{$i}_shippingFee"]=$seller['shippingFee'];
+                $result["shop{$i}_goodsPrice"]=$seller['goodsPrice'];
+                $result["shop{$i}_total"]=$seller['total'];
+                $total=math($total,$seller['total'],'+',2);
+                $num=math($num,$seller['num'],'+',2);
             }
+            $result['countNum']=$num;
+            $result['countTotal']=$total;
             echo json_encode($result);
         }
     }
