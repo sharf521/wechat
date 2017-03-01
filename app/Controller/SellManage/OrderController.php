@@ -12,6 +12,7 @@ namespace App\Controller\SellManage;
 use App\Model\Order;
 use System\Lib\DB;
 use System\Lib\Request;
+use System\Lib\Session;
 
 class OrderController extends SellController
 {
@@ -83,7 +84,13 @@ class OrderController extends SellController
         if($_POST){
             $order->order_money=(float)$request->post('money');
             $order->save();
-            redirect("order")->with('msg','操作成功');
+            if($this->is_wap){
+                redirect("order")->with('msg','操作成功');
+            }else{
+                (new Session())->flash('msg','操作成功');
+                echo '<script>window.parent.location.reload();</script>';
+                exit;
+            }
         }else{
             $data['order']=$order;
             $this->view('order_edit',$data);
@@ -105,13 +112,19 @@ class OrderController extends SellController
         if($_POST){
             $shipping->shipping_name=$request->post('shipping_name');
             $shipping->shipping_no=$request->post('shipping_no');
-            $shipping->shipping_fee=$request->post('shipping_fee');
-            $shipping->shopping_at=time();
+            $shipping->shipping_fee=(float)$request->post('shipping_fee');
+            $shipping->shipping_at=time();
             $shipping->save();
             $order->status=4;
             $order->shipping_at=time();
             $order->save();
-            redirect("order")->with('msg','操作成功');
+            if($this->is_wap){
+                redirect("order")->with('msg','操作成功');
+            }else{
+                (new Session())->flash('msg','操作成功');
+                echo '<script>window.parent.location.reload();</script>';
+                exit;
+            }
         }else{
             $data['order']=$order;
             $data['shipping']=$shipping;

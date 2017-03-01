@@ -52,3 +52,18 @@
 #uploaderFiles li{border: 1px solid #ccc; position: relative; padding: 5px; float: left; margin-right: 10px;}
 #uploaderFiles li img{height: 100px;}
 #uploaderFiles li i{position: absolute; top:-8px; right: -8px; border: 1px solid #ff2222; color: #f00; background-color: #fff;border-radius: 50%; font-size: 6px; width: 18px; height: 18px; line-height: 20px; text-align: center;z-index: 99;cursor: pointer}
+
+
+/*订单列表*/
+.orderbox{border: 1px solid #dddddd; margin-bottom: 10px;}
+.orderbox:hover{border: 1px solid #999;}
+.orderbox dt{ line-height: 40px; background-color: #efefef; padding-left: 8px;}
+.orderbox dt .status{margin-right: 30px; font-weight:700;}
+.orderbox dt .time{float: right; margin-right: 10px;}
+.orderbox dd td{line-height: 22px;vertical-align:middle}
+.orderbox .goodsImg{ margin-right: 10px;width: 100px; float: left}
+.orderbox .goodsDetail{float: left;}
+.orderbox .goodsDetail .name{float: left; width: 300px;}
+.orderbox .goodsDetail .quantity{float: left; margin-left: 20px;}
+.orderbox .goodsDetail .quantity span{font-size: 10px; color: #999;}
+.orderbox .shipping{padding-left: 10px; line-height: 40px;}

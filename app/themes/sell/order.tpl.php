@@ -1,4 +1,5 @@
 <?php require 'header.php';?>
+
     <div class="warpcon">
         <?php require 'left.php'; ?>
         <div class="warpright">
@@ -42,15 +43,15 @@
                                             </div>
                                         <? endforeach;?>
                                     </td>
-                                    <td align="center">¥<?=$order->order_money?><br>(含运费：¥<?=$order->shipping_fee?>)</td>
-                                    <td align="center">
+                                    <td align="center" width="120">¥<?=$order->order_money?><br>(含运费：¥<?=$order->shipping_fee?>)</td>
+                                    <td align="center" width="150">
                                         <? if($order->status==1) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small cancel">取消订单</a>
-                                            <a href="<?=url("order/pay/?id={$order->id}")?>" class="layui-btn layui-btn-small">支付</a>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改价格</a>
+                                        <? elseif ($order->status==3) : ?>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="cancel layui-btn layui-btn-small">取消订单</a>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a>
                                         <? endif;?>
-                                        <? if($order->status==4) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small">确认收货</a>
-                                        <? endif;?>
+                                        <a href="<?=url("order/show/?id={$order->id}")?>" class="layui-btn layui-btn-small">详细</a>
                                     </td>
                                 </tr>
                                 <tr><td colspan="3">备注：<?=nl2br($order->buyer_remark)?></td></tr>
@@ -78,9 +79,37 @@
                                 }
                             });
                         });
+                       $('.editMoney').on('click',function () {
+                           var id=$(this).attr('data-id');
+                           layer.open({
+                               type: 2,
+                               title: '修改价格',
+                               shadeClose: true,
+                               shade: 0.8,
+                               area: ['460px', '290px'],
+                               content: '<?=url("order/editMoney/?id=")?>'+id
+                           });
+                       });
+
+                        $('.editShipping').on('click',function () {
+                            var id=$(this).attr('data-id');
+                            layer.open({
+                                type: 2,
+                                title: '发货',
+                                shadeClose: true,
+                                shade: 0.8,
+                                area: ['460px', '290px'],
+                                content: '<?=url("order/editShipping/?id=")?>'+id
+                            });
+                        });
                     });
                 </script>
+
+
             </div>
+
+
         </div>
     </div>
+
 <?php require 'footer.php';?>

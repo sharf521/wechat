@@ -206,7 +206,7 @@
                     <div class="weui-cell">
                         <div class="weui-cell__hd"><label class="weui-label">支付密码</label></div>
                         <div class="weui-cell__bd">
-                            <input class="weui-input" required type="password" name="zf_password" placeholder="请填写" />
+                            <input class="weui-input" required type="password" name="zf_password" placeholder="支付密码" />
                         </div>
                         可用:￥<span id="span_funds"><?=$account->funds_available?></span>
                     </div>
