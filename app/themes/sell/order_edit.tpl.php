@@ -39,15 +39,15 @@
                 <div class="layui-form-mid layui-word-aux"><?=$order->order_sn?></div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">快递名称</label>
+                <label class="layui-form-label">物流公司</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" required type="text" name="money" value=""  placeholder="请输入快递名称"/>
+                    <input class="layui-input" required type="text" name="shipping_name" value=""  placeholder="物流公司名称"/>
                 </div>
             </div>
             <div class="layui-form-item">
-                <label class="layui-form-label">快递单号</label>
+                <label class="layui-form-label">运单号码</label>
                 <div class="layui-input-inline">
-                    <input class="layui-input" required type="text" name="shipping_no" value=""  placeholder="请输入快递单号"/>
+                    <input class="layui-input" required type="text" name="shipping_no" value=""  placeholder="请输入物流单号"/>
                 </div>
             </div>
             <div class="layui-form-item">

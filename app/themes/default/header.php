@@ -2,7 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php if(!empty($title_herder)){echo $title_herder.'-';}?><?=$this->site->name;?></title>
+    <title><?php if($this->title!=''){echo $this->title.'-';}?><?=$this->site->name;?></title>
     <script language="javascript" src="/plugin/js/jquery.js"></script>
     <link rel="stylesheet" href="/plugin/Swiper/css/swiper.min.css"/>
     <script src="/plugin/Swiper/js/swiper.min.js"></script>

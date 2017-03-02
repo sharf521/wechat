@@ -18,9 +18,8 @@
                 <? foreach($orders['list'] as $order) : ?>
                     <dl class="orderbox">
                         <dt>
-                            订单号：<?= $order->order_sn ?>
+                            <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
-                            <span class="time"><?=$order->created_at?></span>
                         </dt>
                         <dd>
                             <table class="layui-table" style="margin: 0px;">
@@ -42,14 +41,17 @@
                                             </div>
                                         <? endforeach;?>
                                     </td>
-                                    <td align="center">¥<?=$order->order_money?><br>(含运费：¥<?=$order->shipping_fee?>)</td>
-                                    <td align="center">
+                                    <td align="center"><span class="money">¥<?=$order->order_money?></span><br>(含运费：¥<?=$order->shipping_fee?>)<br>
+                                        <a href="<?=url("order/detail/?id={$order->id}")?>">订单详情</a>
+                                    </td>
+                                    <td class="operate">
                                         <? if($order->status==1) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small cancel">取消订单</a>
-                                            <a href="<?=url("order/pay/?id={$order->id}")?>" class="layui-btn layui-btn-small">支付</a>
-                                        <? endif;?>
-                                        <? if($order->status==4) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small">确认收货</a>
+                                            <a href="<?=url("order/pay/?id={$order->id}")?>" class="layui-btn layui-btn-small ">立即支付</a><br>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small layui-btn-primary cancel">取消订单</a><br>
+                                        <? elseif($order->status==4) : ?>
+                                            <a href="<?=url("order/success/?id={$order->id}")?>" class="layui-btn layui-btn-small">确认收货</a><br>
+                                        <? elseif($order->status==5) : ?>
+                                            <span>己完成</span>
                                         <? endif;?>
                                     </td>
                                 </tr>

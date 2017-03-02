@@ -23,6 +23,7 @@ class OrderController extends MemberController
     public function __construct()
     {
         parent::__construct();
+        $this->title='我的订单';
     }
 
     public function index(Order $order,Request $request)
@@ -52,29 +53,19 @@ class OrderController extends MemberController
         $this->view('order',$data);
     }
     
-    public function cancel(Order $order,Request $request)
+    public function detail(Order $order,Request $request)
     {
-        $user_id=$this->user_id;
         $id=$request->get('id');
+        $user_id=$this->user_id;
         $order=$order->findOrFail($id);
         if($order->buyer_id!=$user_id){
-            echo '异常';exit;
+            redirect()->back()->with('error','异常');
         }
-        if($order->status!=1){
-            redirect()->back()->with('msg','状态异常');
-        }else{
-            try{
-                DB::beginTransaction();
-                $order->cancel($this->user_id);
-                DB::commit();
-                redirect()->back()->with('msg','订单取消成功！');
-            }catch (\Exception $e){
-                $error=$e->getMessage();
-                redirect()->back()->with('error',$error);
-                DB::rollBack();
-            }
-
-        }
+        $this->title='订单详情';
+        $data['order']=$order;
+        $data['shipping']=$order->OrderShipping();
+        $data['goods']=$order->OrderGoods();
+        $this->view('order_detail',$data);
     }
 
     public function pay(Order $order,Request $request,System $system)
@@ -119,13 +110,13 @@ class OrderController extends MemberController
                 $params=array(
                     'openid'=>$this->user->openid,
                     'body'=>'',
-                    'type'=>'booked_money',
+                    'type'=>'order_pay',
                     'remark'=>$remark,
                     'label'=>"order_sn:{$order->order_sn}",
                     'data'=>array(
                         array(
                             'openid'=>$this->user->openid,
-                            'type'=>'order',
+                            'type'=>'order_pay',
                             'remark'=>$remark,
                             'funds_available' =>'-'.$money,
                             'integral_available' =>'-'.$integral,
@@ -136,6 +127,9 @@ class OrderController extends MemberController
                 );
                 $return=$center->receivables($params);
                 if($return===true){
+                    $order->payed_funds=$money;
+                    $order->payed_integral=$integral;
+                    $order->payed_at=time();
                     $order->status=3;
                     $order->save();
                     DB::commit();
@@ -174,13 +168,71 @@ class OrderController extends MemberController
                     $order->save();
                 }
             }*/
-            $data['title_herder']='支付';
+            $this->title='支付订单';
             $data['order']=$order;
             $data['convert_rate']=$convert_rate;
             $data['account']=$account;
             $data['shipping']=$order->OrderShipping();
             $data['goods']=$order->OrderGoods();
             $this->view('order_pay',$data);
+        }
+    }
+    public function cancel(Order $order,Request $request)
+    {
+        $user_id=$this->user_id;
+        $id=$request->get('id');
+        $order=$order->findOrFail($id);
+        if($order->buyer_id!=$user_id){
+            echo '异常';exit;
+        }
+        if($order->status!=1){
+            redirect()->back()->with('msg','状态异常');
+        }else{
+            try{
+                DB::beginTransaction();
+                $order->cancel($this->user);
+                DB::commit();
+                redirect()->back()->with('msg','订单取消成功！');
+            }catch (\Exception $e){
+                $error=$e->getMessage();
+                redirect()->back()->with('error',$error);
+                DB::rollBack();
+            }
+        }
+    }
+    public function success(Order $order,Request $request)
+    {
+        $id=$request->get('id');
+        $user_id=$this->user_id;
+        $order=$order->findOrFail($id);
+        if($order->buyer_id!=$user_id){
+            redirect()->back()->with('error','异常');
+        }
+        if($order->status!=4){
+            redirect()->back()->with('error','异常，请勿重复确认收货！');
+        }
+        if($_POST){
+            $center=new Center();
+            $checkPwd=$center->checkPayPwd($this->user->openid,$request->post('zf_password'));
+            if($checkPwd!==true){
+                redirect()->back()->with('error','支付密码错误！');
+            }
+            try {
+                DB::beginTransaction();
+                $order->success($this->user);
+                DB::commit();
+                redirect("order")->with('msg','操作完成');
+            } catch (\Exception $e) {
+                DB::rollBack();
+                $error= "Failed: " . $e->getMessage();
+                redirect()->back()->with('error',$error);
+            }
+        }else{
+            $data['order']=$order;
+            $data['shipping']=$order->OrderShipping();
+            $data['goods']=$order->OrderGoods();
+            $this->title='确认收货';
+            $this->view('order_success',$data);
         }
     }
 }

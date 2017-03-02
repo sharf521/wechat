@@ -26,6 +26,7 @@ class CartController extends HomeController
             
         }else{
             $data['result_carts']=$cart->getList(array('buyer_id'=>$this->user_id));
+            $this->title='我的购物车';
             $this->view('cart',$data);
         }
     }

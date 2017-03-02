@@ -19,9 +19,8 @@
                 <? foreach($orders['list'] as $order) : ?>
                     <dl class="orderbox">
                         <dt>
-                            订单号：<?= $order->order_sn ?>
+                            <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
-                            <span class="time"><?=$order->created_at?></span>
                         </dt>
                         <dd>
                             <table class="layui-table" style="margin: 0px;">
@@ -43,15 +42,17 @@
                                             </div>
                                         <? endforeach;?>
                                     </td>
-                                    <td align="center" width="120">¥<?=$order->order_money?><br>(含运费：¥<?=$order->shipping_fee?>)</td>
-                                    <td align="center" width="150">
+                                    <td align="center" width="120"><span class="money">¥<?=$order->order_money?></span><br>(含运费：¥<?=$order->shipping_fee?>)
+                                        <br>
+                                        <a href="<?=url("order/detail/?id={$order->id}")?>">订单详情</a>
+                                    </td>
+                                    <td class="operate">
                                         <? if($order->status==1) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改价格</a>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改价格</a><br>
                                         <? elseif ($order->status==3) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="cancel layui-btn layui-btn-small">取消订单</a>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a><br>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="cancel layui-btn layui-btn-small layui-btn-primary">取消订单</a><br>
                                         <? endif;?>
-                                        <a href="<?=url("order/show/?id={$order->id}")?>" class="layui-btn layui-btn-small">详细</a>
                                     </td>
                                 </tr>
                                 <tr><td colspan="3">备注：<?=nl2br($order->buyer_remark)?></td></tr>

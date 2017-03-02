@@ -130,6 +130,7 @@ class OrderController extends HomeController
                     $shipping->phone=$address->phone;
                     $shipping->region_name=$address->region_name;
                     $shipping->address=$address->address;
+                    $shipping->zipcode=$address->zipcode;
                     $shipping->save();
                 }
 

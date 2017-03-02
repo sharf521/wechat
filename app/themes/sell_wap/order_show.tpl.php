@@ -27,7 +27,7 @@
         </div>
     </div>
 <br>
-<?php if ($order->payed_money > 0) : ?>
+<?php if ($order->status >= 3) : ?>
     <div class="div_box">
         <table class="table_box">
             <tr><td >支付金额：</td><td><?=$order->payed_money?></td></tr>

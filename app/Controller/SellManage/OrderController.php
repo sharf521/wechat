@@ -19,6 +19,7 @@ class OrderController extends SellController
     public function __construct()
     {
         parent::__construct();
+        $this->title='我的订单';
     }
 
     public function index(Order $order,Request $request)
@@ -59,7 +60,7 @@ class OrderController extends SellController
         }else{
             try{
                 DB::beginTransaction();
-                $order->cancel($this->user_id);
+                $order->cancel($this->user);
                 DB::commit();
                 redirect()->back()->with('msg','订单取消成功！');
             }catch (\Exception $e){
@@ -132,17 +133,19 @@ class OrderController extends SellController
         }
     }
 
-    public function show(Order $order,Request $request)
+    public function detail(Order $order,Request $request)
     {
-        $user_id=$this->user_id;
         $id=$request->get('id');
+        $user_id=$this->user_id;
         $order=$order->findOrFail($id);
         if($order->seller_id!=$user_id){
-            echo '异常';exit;
+            redirect()->back()->with('error','异常');
         }
+        $data['title_herder']='订单详情';
         $data['order']=$order;
         $data['shipping']=$order->OrderShipping();
-        $this->view('order_show',$data);
+        $data['goods']=$order->OrderGoods();
+        $this->view('order_detail',$data);
     }
 
 }

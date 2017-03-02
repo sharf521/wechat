@@ -2,10 +2,12 @@
 
 namespace App\Model;
 
+use App\Center;
+
 class Order extends Model
 {
     protected $table='order';
-    protected $dates=array('created_at','payed_at','shipping_at','finished_at');
+    protected $dates=array('created_at','payed_at','shipping_at','canceled_at','finished_at');
     public function __construct()
     {
         parent::__construct();
@@ -32,23 +34,84 @@ class Order extends Model
         }
     }
 
+    public function success($user)
+    {
+        if($this->status==3){
+            throw new \Exception("异常，请勿重复确认收货！");
+        }
+        $center=new Center();
+        $seller=(new User())->find($this->seller_id);
+        $sellerAccount=$center->getUserFunc($seller->openid);
+        $remark="订单号：{$this->order_sn}";
+        $params=array(
+            'openid'=>$user->openid,
+            'body'=>'',
+            'type'=>'order_success',
+            'remark'=>$remark,
+            'label'=>"order_sn:{$this->order_sn}",
+            'data'=>array(
+                array(
+                    'openid'=>$seller->openid,
+                    'type'=>'order_success',
+                    'remark'=>$remark,
+                    'funds_available' =>$this->order_money,
+                    'funds_available_now'=>$sellerAccount->funds_available
+                )
+            )
+        );
+        $return=$center->receivables($params);
+        if($return===true){
+            $this->status=5;
+            $this->save();
+        }else{
+            throw new \Exception($return);
+        }
+    }
 
-    public function cancel($user_id)
+    public function cancel($user)
     {
         if($this->status==1){    //未支付
-            if($user_id==$this->buyer_id){
-                $this->backStock();
+            if($user->id==$this->buyer_id){
+                $this->backStock();//添加库存
                 $this->status=2;
                 $this->save();
             }else{
                 throw new \Exception('异常');
             }
         }elseif($this->status==3){  //己支付
-            if($user_id==$this->seller_id){
+            if($user->id==$this->seller_id){
                 $this->backStock();
                 //退款
-                $this->status=2;
-                $this->save();
+                $center=new Center();
+                $buyer=(new User())->find($this->buyer_id);
+                $buyerAccount=$center->getUserFunc($buyer->openid);
+                $remark="订单号：{$this->order_sn}";
+                $params=array(
+                    'openid'=>$user->openid,
+                    'body'=>'',
+                    'type'=>'order_cancel',
+                    'remark'=>$remark,
+                    'label'=>"order_sn:{$this->order_sn}",
+                    'data'=>array(
+                        array(
+                            'openid'=>$buyer->openid,
+                            'type'=>'order_cancel',
+                            'remark'=>$remark,
+                            'funds_available' =>'-'.$this->payed_funds,
+                            'integral_available' =>'-'.$this->payed_integral,
+                            'funds_available_now'=>$buyerAccount->funds_available,
+                            'integral_available_now'=>$buyerAccount->integral_available,
+                        )
+                    )
+                );
+                $return=$center->receivables($params);
+                if($return===true){
+                    $this->canceled_at=time();
+                    $this->status=2;
+                    $this->save();
+                }else{
+                    throw new \Exception($return);
+                }
             }else{
                 throw new \Exception('异常');
             }

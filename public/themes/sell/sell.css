@@ -1,4 +1,8 @@
+i, cite, em { font-style: normal; }
+.goods-price { font-family: Verdana; }
+.goods-price em { font-weight: 600; color: #C00; }
 
+.money{font-family: Verdana;font-weight: 600; color: #C00;}
 
 .nav-tabs{border-bottom: 1px solid #ddd;padding-left: 30px; padding-top: 15px;}
 .nav-tabs li{  float: left;  position: relative; margin-bottom: -1px; border-radius: 4px 4px 0 0; margin-right: 2px;line-height: 38px;color: #555;}
@@ -58,8 +62,8 @@
 .orderbox{border: 1px solid #dddddd; margin-bottom: 10px;}
 .orderbox:hover{border: 1px solid #999;}
 .orderbox dt{ line-height: 40px; background-color: #efefef; padding-left: 8px;}
-.orderbox dt .status{margin-right: 30px; font-weight:700;}
-.orderbox dt .time{float: right; margin-right: 10px;}
+.orderbox dt .status{float: right; margin-right: 10px;}
+.orderbox dt .time{margin-right: 5px; font-weight:600;}
 .orderbox dd td{line-height: 22px;vertical-align:middle}
 .orderbox .goodsImg{ margin-right: 10px;width: 100px; float: left}
 .orderbox .goodsDetail{float: left;}
@@ -67,3 +71,12 @@
 .orderbox .goodsDetail .quantity{float: left; margin-left: 20px;}
 .orderbox .goodsDetail .quantity span{font-size: 10px; color: #999;}
 .orderbox .shipping{padding-left: 10px; line-height: 40px;}
+.orderbox .operate{ width: 100px; text-align: center}
+.orderbox .operate a{ width: 90px; margin-bottom: 10px;}
+
+/* 订单详情*/
+.order_detail .status{color: #fe4e02; font-weight: 700; font-size: 14px;font-family: 宋体;}
+.order_detail .order_detail_tit{font-size: 15px;   font-weight: 600; font-family: 宋体;  color: #000;padding: 10px 0px 0px 5px; }
+.order_detail .goods_list th{ text-align: center}
+.order_detail .goods_list .goods_id,.order_detail .goods_list .goods_price,.order_detail .goods_list .goods_num{text-align: center; vertical-align: middle}
+.order_detail .goods_list .goods_info img{float: left; margin-right: 10px; width: 50px;}
