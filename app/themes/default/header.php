@@ -29,32 +29,17 @@
             <dl class="">
                 <dt><a href="/cart">我的购物车</a><i></i></dt>
             </dl>
+            <? if($this->user_id!='' && $this->user_id!=0) : ?>
             <dl class="">
-                <dt><a href="http://www.mogo100.com/shop/index.php?act=show_joinin&amp;op=index" title="免费开店">免费开店</a><i></i></dt>
-                <dd>
-                    <ul>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=show_joinin&amp;op=index" title="招商入驻">招商入驻</a></li>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=seller_login&amp;op=show_login" target="_blank" title="登录商家管理中心">商家登录</a></li>
-                    </ul>
-                </dd>
+                <dt><a href="/member">个人中心</a><i></i></dt>
             </dl>
+            <? endif;?>
             <dl class="">
-                <dt><a href="http://www.mogo100.com/shop/index.php?act=member_order">我的订单</a><i></i></dt>
+                <dt><a href="/member/order">我的订单</a><i></i></dt>
                 <dd>
                     <ul>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=member_order&amp;state_type=state_new">待付款订单</a></li>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=member_order&amp;state_type=state_send">待确认收货</a></li>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=member_order&amp;state_type=state_noeval">待评价交易</a></li>
-                    </ul>
-                </dd>
-            </dl>
-            <dl class="">
-                <dt>客户服务<i></i></dt>
-                <dd>
-                    <ul>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=article&amp;op=article&amp;ac_id=2">帮助中心</a></li>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=article&amp;op=article&amp;ac_id=5">售后服务</a></li>
-                        <li><a href="http://www.mogo100.com/shop/index.php?act=article&amp;op=article&amp;ac_id=6">客服中心</a></li>
+                        <li><a href="/member/order/status1">待付款订单</a></li>
+                        <li><a href="/member/order/status4">待确认收货</a></li>
                     </ul>
                 </dd>
             </dl>

@@ -19,7 +19,7 @@ class OrderController extends SellController
     public function __construct()
     {
         parent::__construct();
-        $this->title='我的订单';
+        $this->title='订单管理';
     }
 
     public function index(Order $order,Request $request)

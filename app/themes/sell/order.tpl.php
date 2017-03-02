@@ -6,14 +6,14 @@
             <div class="box">
                 <br>
                 <fieldset class="layui-elem-field layui-field-title">
-                    <legend>我的订单</legend>
+                    <legend><?=$this->title?></legend>
                 </fieldset>
                 <div class="layui-tab layui-tab-brief" lay-filter="tab">
                     <ul class="layui-tab-title">
                         <li <? if($this->func=='index'){echo 'class="layui-this"';}?>><a href="<?=url('order')?>">全部订单</a></li>
                         <li <? if($this->func=='status1'){echo 'class="layui-this"';}?>><a href="<?=url('order/status1')?>">待付款</a></li>
                         <li <? if($this->func=='status3'){echo 'class="layui-this"';}?>><a href="<?=url('order/status3')?>">待发货</a></li>
-                        <li <? if($this->func=='status4'){echo 'class="layui-this"';}?>><a href="<?=url('order/status4')?>">待收货</a></li>
+                        <li <? if($this->func=='status4'){echo 'class="layui-this"';}?>><a href="<?=url('order/status4')?>">待确认收货</a></li>
                     </ul>
                 </div>
                 <? foreach($orders['list'] as $order) : ?>
