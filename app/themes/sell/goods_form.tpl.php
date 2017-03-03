@@ -104,7 +104,7 @@
                                 <select name="shop_category" class="layui-select">
                                     <option value="" selected>请选择</option>
                                     <? foreach ($cates as $cate) :?>
-                                        <option value="<?=$cate['id']?>" <? if($cate['id']==$goods->shop_cateid){echo 'selected';}?>><?=$cate['name']?></option>
+                                        <option value="<?=$cate['id']?>" <? if($cate['id']==$goods->shop_cateid){echo 'selected';}?>><?=$cate['name_pre']?><?=$cate['name']?></option>
                                     <? endforeach;?>
                                 </select>
                             </div>

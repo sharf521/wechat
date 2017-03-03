@@ -51,6 +51,8 @@ a:hover {    color: #f40;}
 }
 .gray{color: #999}
 .gray a{color: #999;}
+i, cite, em { font-style: normal; }
+.money{font-family: Verdana;font-weight: 600; color: #C00;}
 fieldset, img {border: 0;vertical-align: middle;}
 select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 :focus {outline: 0 none;}

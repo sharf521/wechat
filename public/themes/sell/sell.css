@@ -1,8 +1,7 @@
-i, cite, em { font-style: normal; }
+
 .goods-price { font-family: Verdana; }
 .goods-price em { font-weight: 600; color: #C00; }
 
-.money{font-family: Verdana;font-weight: 600; color: #C00;}
 
 .nav-tabs{border-bottom: 1px solid #ddd;padding-left: 30px; padding-top: 15px;}
 .nav-tabs li{  float: left;  position: relative; margin-bottom: -1px; border-radius: 4px 4px 0 0; margin-right: 2px;line-height: 38px;color: #555;}

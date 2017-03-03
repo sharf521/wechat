@@ -43,14 +43,13 @@
                                             <? else :?>
                                                 <span class="money">己失效,请重新添加</span>
                                             <? endif;?>
-
                                         </p>
                                     </div>
                                 </div>
                                 <div class="cell3">
                                     <div class="wrap-input" style="margin-left: 80px;">
                                         <span class="btn-reduce">-</span>
-                                        <input class="text" value="<?=$cart->quantity?>"  maxlength="5" type="text" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
+                                        <input class="text" value="<?=$cart->quantity?>" readonly  maxlength="5" type="text" name="quantity">
                                         <span class="btn-add">+</span>
                                     </div>
                                 </div>
@@ -65,7 +64,7 @@
                 <? endforeach;?>
                 <br><br>
                 <div class="cart_bottom">
-                    <label><input type="checkbox" class="checkall" checked><br>全选</label>
+                    <label><input type="checkbox" class="checkall"><br>全选</label>
                     <div class="total">
                         <p>总计：<strong id="totalPrice">¥<span></span></strong><small>(不含运费)</small></p>
                         <a href="javascript:;" class="btn_pay">去结算<em id="totalNum">(<span></span>件)</em></a>

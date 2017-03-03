@@ -26,6 +26,9 @@ class Cart extends Model
         if($goods->is_have_spec==1 && $spec_id==0){
             return $this->returnError('请选择规格！');
         }
+        if($quantity==0){
+            return $this->returnError('请选择数量！');
+        }
         $goods=$goods->addSpec($spec_id);
         $stock_count=$goods->stock_count;
         if($stock_count<$quantity){

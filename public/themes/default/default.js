@@ -176,24 +176,6 @@ function getCartedMoney() {
 }
 
 function cart_js() {
-    $('.cart_bottom .btn_pay').on('click',function () {
-        var cart_id='';
-        $("input:checkbox[name='cart_id[]']").each(function (i) {
-            if ($(this).attr('checked')) {
-                if (cart_id == "") {
-                    cart_id ="?cart_id[]="+$(this).val();
-                } else {
-                    cart_id += "&cart_id[]="+$(this).val();
-                }
-            }
-        });
-        if(cart_id==''){
-            layer.msg('请选择商品');
-        }else{
-            window.location='/order/confirm/'+cart_id;
-        }
-    });
-
     getCartedMoney();
     $("input[name='cart_id[]']").on('click',function () {
         getCartedMoney();
@@ -250,18 +232,27 @@ function cart_js() {
             }
         });
     });
+
+    $('.cart_bottom .btn_pay').on('click',function () {
+        var cart_id='';
+        $("input:checkbox[name='cart_id[]']").each(function (i) {
+            if ($(this).attr('checked')) {
+                if (cart_id == "") {
+                    cart_id ="?cart_id[]="+$(this).val();
+                } else {
+                    cart_id += "&cart_id[]="+$(this).val();
+                }
+            }
+        });
+        if(cart_id==''){
+            layer.msg('请选择商品');
+        }else{
+            window.location='/order/confirm/'+cart_id;
+        }
+    });
 }
 /* 购物车 end*/
 
-function showBuyBox() {
-    $('.weui-mask').show();
-    $('#bottom_buy_box').slideDown(150);
-}
-
-function hideBuyBox(){
-    $('.weui-mask').hide();
-    $('#bottom_buy_box').slideUp(150);
-}
 function goods_detail_js()
 {
     $(function(){
@@ -287,7 +278,17 @@ function goods_detail_js()
                 input.val(num+1);
             }
         });
-
+        $("#buy_quantity").bind('input propertychange',function(){
+            var num=Number($(this).val());
+            if(Number.isInteger(num)){
+                var max=Number($('#goods_stock_count').html());
+                if(num > max){
+                    $(this).val(max);
+                }
+            }else{
+                $(this).val(1);
+            }
+        });
         $('#specBox_1 span:first').click();
         //alert(goodsSpec.spec1_name);
         //alert(goodsSpec.spec2_name);

@@ -18,7 +18,7 @@
                 <a class="shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>
                 <? foreach($carts as $cart): ?>
                     <div class="goods_item clearFix">
-                        <input class="checkbox"  type="checkbox" checked name="cart_id[]" value="<?=$cart->id?>">
+                        <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">
                         <a href="<?=url("goods/detail/?id={$cart->goods_id}")?>">
                             <img class="image" src="<?=$cart->goods_image?>">
                             <div class="oi_content" style="float: left">
@@ -31,11 +31,18 @@
                                         echo "<span class='spec'>{$cart->spec_2}</span>";
                                     }
                                     ?>
-                                    <span class="count">¥<?=$cart->price?></span></p>
+
+                                    <? if($cart->is_exist==true) : ?>
+                                        <span class="count money">¥<?=$cart->price?></span>
+                                        <span class="count">剩余：<?=$cart->stock_count?></span>
+                                    <? else :?>
+                                        <span class="money">己失效,请重新添加</span>
+                                    <? endif;?>
+                                </p>
                             </div></a>
                         <div class="wrap-input">
                             <span class="btn-reduce">-</span>
-                            <input class="text" value="<?=$cart->quantity?>"  maxlength="5" type="text" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
+                            <input class="text" value="<?=$cart->quantity?>" readonly  maxlength="5" type="text" name="quantity">
                             <span class="btn-add">+</span>
                         </div>
                         <i class="iconfont del" data-id="<?=$cart->id?>">&#xe69d;</i>
@@ -45,7 +52,7 @@
             </div>
         <? endforeach;?>
         <div class="cart_bottom">
-            <label><input type="checkbox" class="checkall" checked><br>全选</label>
+            <label><input type="checkbox" class="checkall"><br>全选</label>
             <div class="total">
                 <p>总计：<strong id="totalPrice">¥<span></span></strong><small>(不含运费)</small></p>
                 <a href="javascript:;" class="btn_pay">去结算<em id="totalNum">(<span></span>件)</em></a>

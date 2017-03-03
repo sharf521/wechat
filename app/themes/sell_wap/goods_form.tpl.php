@@ -112,7 +112,7 @@
                 <select name="shop_category" class="weui-select">
                     <option value="0" selected>默认</option>
                     <? foreach ($cates as $cate) :?>
-                    <option value="<?=$cate['id']?>" <? if($cate['id']==$goods->shop_cateid){echo 'selected';}?>><?=$cate['name']?></option>
+                    <option value="<?=$cate['id']?>" <? if($cate['id']==$goods->shop_cateid){echo 'selected';}?>><?=$cate['name_pre']?><?=$cate['name']?></option>
                     <? endforeach;?>
                 </select>
             </div>

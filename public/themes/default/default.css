@@ -2,8 +2,6 @@ i, cite, em { font-style: normal; }
 .goods-price { font-family: Verdana; }
 .goods-price em { font-weight: 600; color: #C00; }
 
-.money{font-family: Verdana;font-weight: 600; color: #C00;}
-
 .layui-tab-brief>.layui-tab-title .layui-this {    color: #f44;}
 .layui-tab-brief>.layui-tab-more li.layui-this:after, .layui-tab-brief>.layui-tab-title .layui-this:after { border: none;border-radius: 0;border-bottom: 3px solid #f44;}
 
@@ -86,24 +84,42 @@ i, cite, em { font-style: normal; }
 .allbox>dd{ }
 .morebox{font-family:"宋体";  color:#333; float:right; margin-right:10px; font-size:12px;  height:36px; font-size:14px;}
 
-.allbox .middle-goods-list { }
-.allbox .middle-goods-list ul { }
-.allbox .middle-goods-list ul li { width: 190px; height: 248px; float: left; overflow: hidden; }
-.allbox .middle-goods-list dl { width: 170px; margin: 15px auto auto; position: relative; z-index: 1;}
-.allbox .middle-goods-list dl dt.goods-name { font-family: Tahoma; line-height: 17px; width: 170px; height: 34px; position: absolute; z-index: auto; top: 178px; left: 0; overflow: hidden; }
-.allbox .middle-goods-list dl dd.goods-thumb { width: 170px; height: 170px; position: absolute; z-index: auto; top: 0; left: 0; }
-.allbox .middle-goods-list dl dd.goods-thumb a { text-align: center; vertical-align: middle; display: table-cell; *display: block;
-    width: 160px; height: 160px; overflow: hidden; }
-.allbox .middle-goods-list dl dd.goods-thumb img { max-width: 170px; max-height: 170px; margin-top:expression(160-this.height/2);
-    *margin-top:expression(80-this.height/2);
-}
-.allbox .middle-goods-list dl dd.goods-price { font-size: 14px; line-height: 20px; position: absolute; z-index: auto; top: 214px; left: 0; }
-.allbox .middle-goods-list dl dd.goods-price .original { font-size: 12px; font-weight: normal; text-decoration: line-through; color: #999; vertical-align: middle; margin-left: 6px; }
 
+.mod-conleft{float:left;overflow:hidden;width:249px;}
+.mod-conleft .md-img{display:block;position:relative}
+.mod-conleft .md-img:before{content:'';position:absolute;width:80px;height:300px;top:0;left:-150px;overflow:hidden;background:-moz-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.2) 50%,rgba(255,255,255,0) 100%);background:-webkit-gradient(linear,left top,right top,color-stop(0,rgba(255,255,255,0)),color-stop(50%,rgba(255,255,255,.2)),color-stop(100%,rgba(255,255,255,0)));background:-webkit-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.2) 50%,rgba(255,255,255,0) 100%);background:-o-linear-gradient(left,rgba(255,255,255,0) 0,rgba(255,255,255,.2) 50%,rgba(255,255,255,0) 100%);-webkit-transform:skewX(-25deg);-moz-transform:skewX(-25deg)}
+.mod-conleft .md-img:hover:before{left:250px;-webkit-transition:left 1s;-moz-transition:left 1s;transition:left 1s}
+.mod-conleft .md-img img{width:249px;height:296px;background:0 0}
+.mod-conleft .md-img p{height:52px;line-height:52px;position:absolute;bottom:0;left:0}
+.mod-conleft .md-img p.title-bg{background-color:#FFF;opacity:.5;filter:alpha(opacity=50);width:100%}
+.mod-conleft .md-img p.con-til{font-size:16px;color:#333;padding-left:10px;font-family:\5fae\8f6f\96c5\9ed1;width:240px}
+.mod-conleft .md-img p.con-til i{font-size:18px;margin-left:3px;font-style:normal;display:inline;font-family:Arial}
+.mod-conleft .md-othertry{position:relative;overflow:hidden ;border: 1px solid #E7E7E7}
+.md-othertry ul{margin-top:-1px; }
+.md-othertry ul li{height:66px;border-top:1px dashed #E2E2E2;padding:10px 10px 10px 6px;background-color:#FEFEFE}
+.md-othertry ul li a{display:block;overflow:hidden;width:229px;height:64px;cursor:pointer}
+.md-othertry ul li a img{width:64px;height:64px;float:left}
+.md-othertry ul li a .ot-con{float:left;margin-left:11px;width:154px}
+.md-othertry ul li a .ot-con p{text-overflow:ellipsis;overflow:hidden;white-space:nowrap;color:#555;margin-top:8px}
+.md-othertry ul li a .ot-con p .ot-tag{float:right;border:1px solid #F5531F;color:#F5531F;display:block;padding:0 7px;border-radius:10px;line-height:20px;font-family: 宋体;}
+.md-othertry ul li a .ot-con p strong{color:#ff6100;font-weight:700;font-family:Arial}
+.md-othertry ul li a:hover img{opacity:.8;filter:alpha(opacity=80)}
+.md-othertry ul li a:hover .ot-con p .ot-tag{background-color:#F3451F;color:#fff;}
+
+.allbox .middle-goods-list {  float: right; width: 876px; border-left: 1px solid #E7E7E7;}
+.allbox .middle-goods-list ul li{ width: 218px; height: 278px;  float: left; overflow: hidden; border-right: 1px solid #E7E7E7;    border-bottom: 1px solid #E7E7E7;}
+.allbox .middle-goods-list ul li:hover img{opacity:.8;filter:alpha(opacity=80)}
+.allbox .middle-goods-list ul li:hover .goods-price strong{background-color:#F3451F;color:#FFF;border-color:#F3451F}
+.allbox .middle-goods-list ul li a{display: block; margin: 15px 15px 0px 15px; text-align: center}
+.allbox .middle-goods-list li .goods-name { font-family: Tahoma; line-height: 19px; height: 38px; text-align: left;color: #555;}
+.allbox .middle-goods-list li .goods-thumb{ height: 188px; width:188px;text-align: center; vertical-align: middle; display: table-cell; }
+.allbox .middle-goods-list li .goods-thumb img {max-width: 188px; max-height: 188px; margin-top:expression(160-this.height/2);
+    *margin-top:expression(80-this.height/2);}
+.allbox .middle-goods-list li .goods-price {  text-align: left; margin-top: 5px;}
+.allbox .middle-goods-list li .goods-price em{line-height: 30px;font-size: 14px; }
+.allbox .middle-goods-list li .goods-price strong { padding: 6px 8px;    background-color: #FCE2E4;    border-radius: 2px;    float: right;    font-weight: normal;    border: 1px solid #FCE2E4;    color: #f63a00; font-size: 12px;}
 
 /* 商品列表*/
-.topnav{border-bottom: 1px solid #efefef; padding: 8px 0px 5px 0px;}
-/*大图模式列表页*/
 .goods_list { font-size: 0; *word-spacing:-1px/*IE6、7*/; display: block; width: 1000px; margin-left: -16px;}
 .goods_list li { font-size: 12px; vertical-align: middle; letter-spacing: normal; word-spacing: normal; display: inline-block; *display: inline/*IE6,7*/;  width: 238px; height: 375px; margin: 12px 0 0 12px; *zoom:1;}
 .goods_list .goods-content { line-height: 18px; background-color: #FFF; height: 290px; margin: 3px; border: solid 1px #F0F0F0; border-radius: 2px; position:relative; overflow: hidden; box-shadow: 0 0 3px rgba(153,153,153,0.1); transition: border-color 0.4s ease-in-out 0s;}
@@ -232,11 +248,16 @@ i, cite, em { font-style: normal; }
 .order_box .goods_item .image{float:left;margin-right:10px;height:80px; width: 80px;}
 .order_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
 
-.order_box .remark .span{margin-top: 20px; float: left}
-.order_box .remark textarea{float: left;background-color: #efefef; margin-top: 8px;font-size: 14px; width: 500px; padding: 5px;}
-.order_box .order_foot{float: right; text-align: right; width: 400px; padding-right: 10px; line-height: 40px; margin-top: 5px;}
-.order_box .order_foot em{font-weight: 700; color: #c00;font-family: Verdana;}
 
+.order_box .order_foot{}
+.order_box .order_foot .span{margin-top: 20px; float: left}
+.order_box .order_foot .buyer_remark{float: left;background-color: #efefef; margin-top: 8px;font-size: 14px; width: 500px; padding: 5px;}
+.order_box .order_foot .foot_money{float: right; text-align: right; width: 400px; padding-right: 10px; line-height: 25px; margin-top: 10px;}
+.order_box .order_foot .foot_money em{font-weight: 700; color: #c00;font-family: Verdana;}
+
+.order_bottom{margin-top: 10px;}
+.order_bottom .total{ text-align: right}
+.order_bottom .total strong {  font-weight: 700; line-height: 50px;  font-size: 14px;  color: #c00; margin-right: 10px;}
 
 /*footer*/.footer{width:100%;margin-top:20px;border-top:5px solid #f50;clear:both;overflow:hidden}
 .foottop{width:1200px;clear:both;margin:0 auto 10px;display:block;padding-top:30px}

@@ -25,7 +25,7 @@
     <div class="order_box">
         <div class="order_head">
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
-            <span class="time"><?=$order->created_at?></span>
+            <span class="time"><b><?=substr($order->created_at,0,10)?></b> 订单号：<?= $order->order_sn ?></span>
         </div>
         <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
         <? foreach ($goods as $g) : ?>
@@ -34,7 +34,7 @@
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
                         <?=$g->goods_name?> <?=$g->spec_1?> <?=$g->spec_2?>
-                        <p><span class="count"><?=$g->quantity?> 件</span></p>
+                        <p><span class="count gray"><?=$g->quantity?> 件</span></p>
                     </div>
                 </div>
             </a>

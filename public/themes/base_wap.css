@@ -56,6 +56,8 @@ body{background:#f8f8f8;}
 
 .gray{color: #999}
 .gray a{color: #999;}
+i, cite, em { font-style: normal; }
+.money{font-family: Verdana;font-weight: 600; color: #C00;}
 /*=============================*/
 
 .m_header{ line-height:28px;height:28px; padding:8px 0;background: #eaeaea;color:#333;text-align: center; width:100%; display:block; position:fixed; top:0; left:0; z-index:999;}

@@ -125,8 +125,14 @@
 }
 .order_item{margin-top:10px; font-size: 14px;color: #333;}
 .order_item .image{float:left;margin-right:10px;height:80px;}
-.order_box .foot{text-align: right; padding-right: 10px; line-height: 40px;border-top: 1px solid #ddd; margin-top: 5px;}
-.order_box .foot em{font-weight: 700; color: #e4393c;}
+
+.order_box .order_foot{ border-top: 1px solid #ddd; margin-top: 5px;}
+.order_box .order_foot .buyer_remark{background-color: #efefef; border: 0px; margin-top: 8px;font-size: 14px; float: left; width: 75%;}
+.order_box .order_foot .foot_money{ float:right;text-align: right; padding-right: 10px; margin-top: 8px; line-height: 25px;font-size: 14px;}
+.order_box .order_foot .foot_money em{font-weight: 700; color: #e4393c;}
+
+
+
 
 .order_bottom{position: fixed;  border-top: 1px solid #ddd; bottom: -1px; height: 49px;    width: 100%;   background-color: #F7F7FA;    left:0;}
 .order_bottom .total{position: absolute;    top: 0;    right: 0;}

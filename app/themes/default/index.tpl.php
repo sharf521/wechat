@@ -12,34 +12,61 @@
     </div>
 </div>
 <div class="layui-main">
-    <? for ($j=1;$j<3;$j++) : ?>
+        <? foreach ($floorList as $j=>$floor) : ?>
     <dl class="allbox clearFix">
         <dt>
-            <span><?=$j?>F</span>        <h3>新品上市</h3>        <a class="morebox" href=""></a>
+            <span><?=$j+1?>F</span><h3><?=$floor['cate']['name']?></h3>        <a class="morebox" href="/goods/lists/<?=$floor['cate']['id']?>">更多</a>
         </dt>
         <dd>
+            <div class="mod-conleft">
+                <a href="#" class="md-img">
+                    <img src="/themes/default/images/1F.jpg" data-url="http://static.shikee.com/www/img/20151223/floor/1F.jpg" alt="">
+                    <p class="title-bg"></p>
+                    <p class="con-til" style="display: none">说明<i>»</i></p>
+                </a>
+                <div class="md-othertry">
+                    <ul>
+                        <? foreach ($floor['goodsList'] as $i=>$goods) :
+                        if($i>=8) : ?>
+                            <li><a target="_blank" href="/goods/detail/?id=<?=$goods->id?>">
+                                    <img src="/themes/images/blank.gif"
+                                         data-echo="<?=$goods->image_url?>">
+                                    <div class="ot-con"><p><?=$goods->name?></p>
+                                        <p><span class="ot-tag">查看详情</span>￥<strong><?=$goods->price?></strong></p></div>
+                                </a></li>
+                        <?
+                            endif;
+                        endforeach;?>
+                    </ul>
+                </div>
+            </div>
+
             <div class="middle-goods-list ">
                 <ul>
-                    <? for ($i=1;$i<11;$i++) : ?>
-                    <li>
-                        <dl>
-                            <dt class="goods-name"><a target="_blank" href="http://www.mogo100.com/shop/index.php?act=goods&amp;op=index&amp;goods_id=111611" title="乐肤棉印花系列可爱猫咪 可爱猫咪 1.5床单三件套">
-                                    乐肤棉印花系列可爱猫咪 可爱猫咪 1.5床单三件套</a></dt>
-                            <dd class="goods-thumb">
-                                <a target="_blank" href="http://www.mogo100.com/shop/index.php?act=goods&amp;op=index&amp;goods_id=111611">
-
-                                    <img src="/themes/images/blank.gif" data-echo="http://www.mogo100.com/data/upload/shop/store/goods/122/2015/12/10/122_05030544578388186_240.jpg">
-                                </a></dd>
-                            <dd class="goods-price"><em>￥280.50</em>
-                                <span class="original">￥0.00</span></dd>
-                        </dl>
-                    </li>
-                    <? endfor;?>
+                    <? foreach ($floor['goodsList'] as $i=>$goods) :
+                        if($i>=7){
+                            break;
+                        }
+                        ?>
+                        <li>
+                            <a target="_blank" href="/goods/detail/?id=<?=$goods->id?>">
+                                <div class="goods-thumb">
+                                    <img src="/themes/images/blank.gif"
+                                         data-echo="<?=$goods->image_url?>">
+                                </div>
+                                <div class="goods-name"><?=$goods->name?></div>
+                                <div class="goods-price">
+                                    <em>￥<?=$goods->price?></em>
+                                    <strong>查看详情</strong>
+                                </div>
+                            </a>
+                        </li>
+                    <? endforeach;?>
                 </ul>
             </div>
         </dd>
     </dl>
-    <? endfor;?>
+    <? endforeach;?>
 </div>
 <script>
     index_js();

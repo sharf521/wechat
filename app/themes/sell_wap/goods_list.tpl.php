@@ -46,9 +46,9 @@
     </div>
     <? endif;?>
 
-    <div class="weui-btn-area">
-        <a href="<?=url('goods/add')?>" class="weui-btn weui-btn_primary">添加商品</a>
-    </div>
+<!--    <div class="weui-btn-area">
+        <a href="<?/*=url('goods/add')*/?>" class="weui-btn weui-btn_primary">添加商品</a>
+    </div>-->
 
     <div class="weui-skin_android" id="androidActionsheet" style="display: none">
         <div class="weui-mask"></div>
@@ -60,7 +60,7 @@
                 <? if($this->func=='list_status2') :?>
                     <div class="weui-actionsheet__cell change">上架</div>
                 <? endif;?>
-                <div class="weui-actionsheet__cell edit">编辑</div>
+                <!--<div class="weui-actionsheet__cell edit">编辑</div>-->
                 <div class="weui-actionsheet__cell del">删除</div>
             </div>
         </div>

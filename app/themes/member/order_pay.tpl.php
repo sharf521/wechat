@@ -47,7 +47,6 @@
                     </tbody>
                 </table>
 
-
                 <form method="post" class="layui-form">
                     <div class="layui-field-box">
                         <div class="layui-form-item">
@@ -75,21 +74,8 @@
                 <script src="/plugin/js/math.js"></script>
                 <script>
                     var lv='<?=$convert_rate?>';
-                    $(function () {
-                        var price_true='<?=$order->order_money?>';
-                        $("#integral").bind('input propertychange',function(){
-                            if(Number($(this).val())>Number($('#span_integral').html())){
-                                $(this).val($('#span_integral').html());
-                            }
-                            var max_jf=Math.mul(price_true,lv);
-                            if(Number($(this).val())>max_jf){
-                                $("#integral").val(max_jf);
-                            }
-                            var _m=Math.div(Number($("#integral").val()),lv);
-                            var money=Math.sub(price_true,Math.moneyRound(_m,2));
-                            $('#money_yes').html(money);
-                        });
-                    });
+                    var price_true='<?=$order->order_money?>';
+                    orderPayJs();
                 </script>
             </div>
         </div>

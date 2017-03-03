@@ -9,6 +9,12 @@ class Goods extends Model
         parent::__construct();
     }
 
+    //首页商品
+    public function getListByHome($num=10,$cate_id,$site_id)
+    {
+        return $this->where("status=1 and stock_count>0 and category_path like '2,{$cate_id}%'")->orderBy('id desc')->limit("0,{$num}")->get();
+    }
+
     public function addSpec($spec_id=0)
     {
         if($this->is_have_spec){

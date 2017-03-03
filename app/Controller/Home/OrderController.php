@@ -97,6 +97,9 @@ class OrderController extends HomeController
                         if($stock_count==0){
                             throw  new \Exception("己卖完了！");
                         }
+                        if($cart->quantity==0){
+                            throw  new \Exception("购买数量不能为零！");
+                        }
                         if($cart->quantity > $stock_count){
                             throw  new \Exception("库存不足，仅剩{$stock_count}件！");
                         }
@@ -115,8 +118,6 @@ class OrderController extends HomeController
 
                         $cart->delete();
                     }
-
-
 
                     $order->goods_money=$carts_moneys[$seller_id]['goodsPrice'];
                     $order->shipping_fee=$carts_moneys[$seller_id]['shippingFee'];

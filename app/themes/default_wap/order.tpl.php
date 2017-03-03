@@ -17,6 +17,7 @@
 </div>
 
 <form method="post" id="form_order">
+    <input type="hidden" name="address_id" value="<?=$address->id?>" id="address_id">
     <?
     foreach ($result_carts as $i=>$carts) :
         ?>
@@ -39,8 +40,13 @@
                     </div>
                 </div>
             <? endforeach;?>
-            <textarea name="buyer_remark" class="weui-textarea" style="background-color: #efefef; margin-top: 8px;font-size: 14px;" placeholder="订单备注,选填" rows="2"></textarea>
-            <div class="foot">小计：<em>¥<span class="shop_total" shop_id="<?=$i?>"></span></em></div>
+            <div class="order_foot clearFix">
+                <textarea name="buyer_remark" class="buyer_remark" placeholder="订单备注,选填" rows="3"></textarea>
+                <div class="foot_money">
+                    送费：<em>¥<span class="shop_shopping_fee" id="shop<?=$i?>_shipping_fee"></span></em><br>
+                    小计：<em>¥<span class="shop_total" id="shop<?=$i?>_money" shop_id="<?=$i?>"></span></em>
+                </div>
+            </div>
         </div>
     <? endforeach;?>
 </form><br><br><br>
@@ -52,8 +58,13 @@
         </div>
     </div>
 <script>
+    <?
+    $arr=explode('-',$address->region_name);
+    ?>
+    var cityName='<?=$arr[1]?>';
+    var cart_ids='<?=$cart_id?>';
     $(function () {
-        order_js('<?=$cart_id?>');
+        order_js();
     })
 </script>
 <?php require 'footer.php';?>

@@ -77,25 +77,23 @@
                         </div>
                     </div>
                 <? endforeach;?>
-                <div class="remark clearFix">
+                <div class="order_foot clearFix">
                     <div class="span">备注留言：</div>
-                    <textarea name="buyer_remark" placeholder="订单备注,选填" rows="3"></textarea>
+                    <textarea class="buyer_remark" name="buyer_remark" placeholder="订单备注,选填" rows="3"></textarea>
 
-                    <div class="order_foot">
+                    <div class="foot_money">
                         送费：<em>¥<span class="shop_shopping_fee" id="shop<?=$i?>_shipping_fee"></span></em><br>
-                        小计：<em>¥<span class="shop_total" id="shop<?=$i?>_money" shop_id="<?=$i?>"></span></em></div>
+                        小计：<em>¥<span class="shop_total" id="shop<?=$i?>_money" shop_id="<?=$i?>"></span></em>
+                    </div>
                 </div>
-
-
             </div>
         <? endforeach;?>
 
-    </form><br><br><br>
-
+    </form>
     <div class="order_bottom">
         <div class="total">
-            <p>总计：<strong id="totalPrice">¥<span></span></strong><small>(不含运费)</small></p>
-            <a href="javascript:;" class="btn">提交订单<em id="totalNum">(<span></span>件)</em></a>
+            <strong id="totalPrice">共计：¥<span></span></strong>
+            <a href="javascript:;" class="layui-btn layui-btn-danger btn">提交订单<em id="totalNum">(<span></span>件)</em></a>
         </div>
     </div>
 </div>
