@@ -1,9 +1,9 @@
 var cate_arr=new Array();
-cate_arr[0]='1#文章分类[SER]2#商城分类';
-cate_arr[1]='10#关于我们[SER]21#商城公告[SER]22#项目介绍[SER]23#新闻动态[SER]24#加入我们';
-cate_arr[2]='11#衣服[SER]12#POS[SER]13#电子';
-cate_arr[10]='25#bb';
-cate_arr[11]='14#男装[SER]15#女装';
-cate_arr[12]='18#汇付[SER]19#快刷';
-cate_arr[14]='16#单衣[SER]17#棉衣';
-cate_arr[18]='20#小蓝牙';
+cate_arr[0]='1#商城分类[SER]2#商城分类';
+cate_arr[1]='10#商城分类[SER]21#商城分类[SER]22#商城分类[SER]23#商城分类[SER]24#商城分类';
+cate_arr[2]='12#商城分类[SER]13#商城分类[SER]29#商城分类[SER]30#商城分类';
+cate_arr[10]='25#商城分类';
+cate_arr[11]='14#商城分类[SER]15#商城分类[SER]11#商城分类[SER]28#商城分类';
+cate_arr[12]='18#商城分类[SER]19#商城分类';
+cate_arr[14]='16#商城分类[SER]17#商城分类';
+cate_arr[18]='20#商城分类';

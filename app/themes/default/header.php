@@ -54,17 +54,17 @@
             <li title="请输入您要搜索的商品关键字" act="search" class="current">商品</li>
             <li title="请输入您要搜索的店铺关键字" act="store_list">店铺</li>
         </ul>
-        <form class="search-form" method="get">
+        <form class="search-form" method="get" action="/goods/lists/">
             <input type="hidden" value="search" id="search_act" name="act">
-            <input placeholder="请输入您要搜索的商品关键字" name="keyword" id="keyword" type="text" class="input-text" value="" maxlength="60">
+            <input placeholder="请输入关键字" name="keyword" id="keyword" type="text" class="input-text" value="<?=$_GET['keyword']?>" maxlength="60">
             <input type="submit" id="button" value="搜索" class="input-submit">
         </form>
         <!--搜索关键字-->
         <div class="keyword">热门搜索：        <ul>
-                <li><a href="http://www.mogo100.com/shop/index.php?act=search&amp;op=index&amp;keyword=%E7%8F%A0%E5%AE%9D%E6%89%8B%E8%A1%A8">珠宝手表</a></li>
-                <li><a href="http://www.mogo100.com/shop/index.php?act=search&amp;op=index&amp;keyword=%E5%B0%8F%E5%AE%B6%E7%94%B5">小家电</a></li>
-                <li><a href="http://www.mogo100.com/shop/index.php?act=search&amp;op=index&amp;keyword=%E6%9C%8D%E8%A3%85">服装</a></li>
-                <li><a href="http://www.mogo100.com/shop/index.php?act=search&amp;op=index&amp;keyword=%E5%AE%B6%E7%BA%BA">家纺</a></li>
+                <li><a href="/goods/lists/?keyword=珠宝手表">珠宝手表</a></li>
+                <li><a href="/goods/lists/?keyword=小家电">小家电</a></li>
+                <li><a href="/goods/lists/?keyword=服装">服装</a></li>
+                <li><a href="/goods/lists/?keyword=家纺">家纺</a></li>
             </ul>
         </div>
     </div>

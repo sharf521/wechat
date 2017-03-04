@@ -3,6 +3,7 @@ namespace App\Controller\Admin;
 
 use App\Model\Category;
 use System\Lib\DB;
+use System\Lib\Request;
 
 class CategoryController extends AdminController
 {
@@ -26,35 +27,71 @@ class CategoryController extends AdminController
         } else {
             $data['list'] = $category->getList(array('pid' => $pid));
             if ($pid != 0) {
-                $row = DB::table('category')->where("id={$pid}")->row();
-                $pid = $row['pid'];
-                $data['level'] = $row['level'];
+                $pCate=$category->find($pid);
+                $data['pCate']=$pCate;
             }
             $data['pid'] = $pid;
             $this->view('category', $data);
         }
     }
 
-    public function add(Category $category)
+    public function add(Category $category,Request $request)
     {
+        $pid=(int)$request->get('pid');
         if ($_POST) {
-            $category->add($_POST);
-            redirect("category/?pid={$_GET['pid']}")->with('msg','添加成功！');
+            $category->pid=$pid;
+            $category->name=$request->post('name');
+            $category->picture=$request->post('picture');
+            $category->title=$request->post('title');
+            $category->keyword=$request->post('keyword');
+            $category->remark=$request->post('remark');
+            $category->showorder=(int)$request->post('showorder');
+            $category->aside1=$request->post('aside1');
+            $category->aside2=$request->post('aside2');
+            $category->aside3=$request->post('aside3');
+            $id=$category->save(true);
+            $category=(new Category())->find($id);
+            if($pid==0){
+                $category->path=$id.',';
+                $category->level=1;
+                $category->save();
+            }else{
+                $pCate=(new Category())->find($pid);
+                $category->path=$pCate->path . $id . ",";
+                $category->level=$pCate->level+1;
+                $category->save();
+            }
+            redirect("category/?pid={$pid}")->with('msg','添加成功！');
             $category->createjs();
         } else {
-            $this->view('category');
+            $category->showorder=10;
+            $category->pid=$pid;
+            $data['row'] =$category;
+            $this->view('category',$data);
         }
     }
 
-    public function edit(Category $category)
+    public function edit(Category $category,Request $request)
     {
+        $id=$request->get('id');
+        $category=$category->findOrFail($id);
+        $pid=$category->pid;
         if ($_POST) {
-            $pid = $_POST['pid'];
-            $category->edit($_POST);
+            $category->name=$request->post('name');
+            $category->picture=$request->post('picture');
+            $category->title=$request->post('title');
+            $category->keyword=$request->post('keyword');
+            $category->remark=$request->post('remark');
+            $category->showorder=(int)$request->post('showorder');
+            $category->aside1=$request->post('aside1');
+            $category->aside2=$request->post('aside2');
+            $category->aside3=$request->post('aside3');
+            $category->save();
+
             $category->createjs();
             redirect("category/?pid={$pid}")->with('msg','修改成功！');
         } else {
-            $data['row'] = DB::table('category')->where("id=?")->bindValues($_GET['id'])->row();
+            $data['row'] =$category;
             $this->view('category', $data);
         }
     }

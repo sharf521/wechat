@@ -43,6 +43,8 @@ class UploadController extends Controller
             $path = "/data/upload/car/brand/";
         } elseif ($type == 'carPlan') {
             $path = "/data/upload/car/plan/";
+        } elseif ($type == 'category') {
+            $path = "/data/upload/category/";
         }elseif ($type == 'carProduct') {
             $path = "/data/upload/car/product/".date('Ym').'/';
         } elseif ($type == 'headimgurl') {

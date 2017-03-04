@@ -27,8 +27,12 @@ class GoodsController extends HomeController
 
     public function lists(Goods $goods,Request $request,Category $category)
     {
-        $where="status=1 and stock_count>0";
         $cid=(int)$request->get(2);
+        $keyword=$request->get('keyword');
+        $where="status=1 and stock_count>0";
+        if($keyword!=''){
+            $where.=" and name like '%{$keyword}%'";
+        }
         $topnav_str='<a href="/">首页</a>';
         if($cid!=0){
             $cate=$category->findOrFail($request->get(2));

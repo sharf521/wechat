@@ -1,10 +1,11 @@
 <?php require 'header.php'; ?>
 <? if ($this->func == 'index') : ?>
     <div class="main_title">
-        <span>分类管理</span>列表<?= $this->anchor("category/add/?pid=" . intval($_GET['pid']), '新增', 'class="but1"'); ?>
-        <?php if ($level > 0) { 
-            echo $this->anchor("category/?pid={$pid}", '返回上一级', 'class="but1"');
-        } ?>
+        <span>分类管理</span>列表
+        <?= $this->anchor("category/add/?pid={$pid}", '新增', 'class="layui-btn layui-btn-small"'); ?>
+        <? if($pid!=0) : ?>
+            <a href="<?=url("category/?pid={$pCate->pid}")?>" class="layui-btn layui-btn-small">返回上一级</a>
+        <? endif;?>
     </div>
     <div class="main_content">
         <form method="post">
@@ -28,7 +29,7 @@
                             <input type="text" value="<?= $row->showorder ?>" name="showorder[]" size="5">
                             <input type="hidden" name="id[]" value="<?= $row->id ?>">
                         </td>
-                        <td><?= $row->addtime ?></td>
+                        <td><?= $row->created_at ?></td>
                         <td>
                             <a href="<?= url("category/?pid={$row->id}") ?>">管理子项</a>
                             <?
@@ -48,43 +49,47 @@
 <? elseif ($this->func == 'add' || $this->func == 'edit') : ?>
     <div class="main_title">
         <span>分类管理</span><? if ($this->func == 'add') { ?>新增<? } else { ?>编辑<? } ?>
-        <a href="<?=url('category')?>" class="but1">返回列表</a>
+        <a href="<?=url("category/?pid={$row->pid}")?>" class="but1">返回列表</a>
     </div>
     <div class="main_content">
         <form method="post">
-            <input type="hidden" name="id" value="<?= $row['id'] ?>"/>
             <table class="table_from">
                 <tr>
                     <td >PID：</td>
                     <td >
-                        <?php if ($this->func == 'add'): ?>
-                            <?= $_GET['pid'] ?>
-                            <input type="hidden" name="pid" value="<?= $_GET['pid'] ?>"/>
-                        <?php else: ?>
-                            <?= $row['pid'] ?>
-                            <input type="hidden" name="pid" value="<?= $row['pid'] ?>"/>
-                        <?php endif; ?>
+                        <?=$row->pid?>
                     </td>
                 </tr>
                 <tr>
                     <td >名称：</td>
-                    <td ><input type="text" name="name" value="<?= $row['name'] ?>"/></td>
+                    <td ><input type="text" name="name" value="<?= $row->name ?>"/></td>
+                </tr>
+                <tr>
+                    <td >图标：</td>
+                    <td ><input type="hidden" name="picture" id="article" value="<?= $row->picture ?>"/>
+						<span id="upload_span_article">
+							<? if ($row->picture != '') { ?>
+                                <a href="<?= $row->picture ?>" target="_blank"><img
+                                        src="<?= $row->picture ?>" align="absmiddle" width="100"/></a>
+                            <? } ?>
+                        </span>
+                        <input type="file" name="file" class="layui-upload-file" upload_id="article" upload_type="category"></td>
                 </tr>
                 <tr>
                     <td >aside1：</td>
-                    <td ><input type="text" name="aside1" value="<?= $row['aside1'] ?>"/></td>
+                    <td ><input type="text" name="aside1" value="<?= $row->aside1 ?>"/></td>
                 </tr>
                 <tr>
                     <td>aside2：</td>
-                    <td ><input type="text" name="aside2" value="<?= $row['aside2'] ?>"/></td>
+                    <td ><input type="text" name="aside2" value="<?= $row->aside2 ?>"/></td>
                 </tr>
                 <tr>
                     <td >aside3：</td>
-                    <td ><input type="text" name="aside3" value="<?= $row['aside3'] ?>"/></td>
+                    <td ><input type="text" name="aside3" value="<?= $row->aside3 ?>"/></td>
                 </tr>
                 <tr>
                     <td >排序：</td>
-                    <td ><input type="text" name="showorder" value="<?= $row['showorder'] ?>"/></td>
+                    <td ><input type="text" name="showorder" value="<?= $row->showorder ?>"/></td>
                 </tr>
                 <tr>
                     <td></td>
