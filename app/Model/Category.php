@@ -155,8 +155,9 @@ class Category extends Model
         $str = "var cate_arr=new Array();\r\n";
         $result1 = DB::table('category')->select('pid')->groupBy('pid')->all();
         foreach ($result1 as $row1) {
+
             $parentid = $row1['pid'];
-            $result = $this->getList(array('pid' => $parentid));
+            $result = (new Category())->getList(array('pid' => $parentid));
             $t = "";
             foreach ($result as $row) {
                 if ($t == "")

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Model\Category;
 use App\Model\SubSite;
 use System\Lib\Request;
 
@@ -22,6 +23,8 @@ class SubSiteController extends AdminController
     {
         if($_POST){
             $site->name=$request->post('name');
+            $site->goodsCates=serialize($request->post('goodsCate'));
+            $site->articleCates=serialize($request->post('articleCate'));
             $site->domain=$request->post('domain');
             $site->logo=$request->post('logo');
             $site->title=$request->post('title');
@@ -40,6 +43,8 @@ class SubSiteController extends AdminController
         $site=$site->findOrFail($request->id);
         if($_POST){
             $site->name=$request->post('name');
+            $site->goodsCates=serialize($request->post('goodsCate'));
+            $site->articleCates=serialize($request->post('articleCate'));
             $site->domain=$request->post('domain');
             $site->logo=$request->post('logo');
             $site->title=$request->post('title');
@@ -50,6 +55,10 @@ class SubSiteController extends AdminController
             $site->save();
             redirect('subSite')->with('msg','保存成功！');
         }else{
+            $data['articleCates']=(new Category())->getList(array('pid'=>1));
+            $data['goodsCates']=(new Category())->getList(array('pid'=>2));
+            $site->goodsCates=unserialize($site->goodsCates);
+            $site->articleCates=unserialize($site->articleCates);
             $data['row']=$site;
             $this->view('subSite',$data);
         }

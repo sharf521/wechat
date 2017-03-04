@@ -33,7 +33,10 @@ class Controller extends BaseController
         }else{
             $this->site=(new SubSite())->where("domain like '%{$host}|%'")->orderBy('id')->first();
         }
-        if(!$this->site->is_exist){
+        if($this->site->is_exist){
+            $this->site->goodsCates=unserialize($this->site->goodsCates);
+            $this->site->articleCates=unserialize($this->site->articleCates);
+        }else{
             echo 'The site was not found！';
             exit;
         }

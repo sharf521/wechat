@@ -70,6 +70,22 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>商品分类：</td>
+                    <td>
+                        <? foreach ($goodsCates as $cate) : ?>
+                            <label><input type="checkbox" name="goodsCate[]" <? if(in_array($cate->id,$row->goodsCates)){echo 'checked';}?> value="<?=$cate->id?>"><?=$cate->name?></label>&nbsp;&nbsp;
+                        <? endforeach;?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>文章分类：</td>
+                    <td>
+                        <? foreach ($articleCates as $cate) : ?>
+                            <label><input type="checkbox" name="articleCate[]" <? if(in_array($cate->id,$row->articleCates)){echo 'checked';}?>  value="<?=$cate->id?>"><?=$cate->name?></label>&nbsp;&nbsp;
+                        <? endforeach;?>
+                    </td>
+                </tr>
+                <tr>
                     <td>标题：</td>
                     <td><input type="text" name="title" value="<?= $row->title ?>" size="50"/></td>
                 </tr>

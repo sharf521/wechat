@@ -4,6 +4,19 @@
         <span>广告位管理</span>列表
         <a href="<?= url('advert/add/') ?>" class="layui-btn layui-btn-small">添 加</a>
     </blockquote>
+    <form method="get">
+        <div class="search">
+            分站：<select name="site_id">
+                <option value="">请选择</option>
+                <? foreach ($this->siteList as $site) : ?>
+                    <option value="<?=$site->id?>" <? if($_GET['site_id']==$site->id){echo 'selected';}?>><?=$site->name?></option>
+                <? endforeach;?>
+            </select>
+            类型：<?=$typeid?>
+            关键字：<input type="text" name="keyword" value="<?= $_GET['keyword'] ?>"/>
+            <input type="submit" class="but2" value="查询"/>
+        </div>
+    </form>
     <div class="main_content">
         <form method="post">
             <table class="layui-table" lay-skin="line">
@@ -55,6 +68,17 @@
     <div class="main_content">
         <form method="post" class="layui-form">
             <div class="layui-field-box">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">分站</label>
+                    <div class="layui-input-inline">
+                        <select name="site_id">
+                            <option value="0"></option>
+                            <? foreach ($this->siteList as $site) : ?>
+                                <option value="<?=$site->id?>" <? if($row->site_id==$site->id){echo 'selected';}?>><?=$site->name?></option>
+                            <? endforeach;?>
+                        </select>
+                    </div>
+                </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">名称</label>
                     <div class="layui-input-block">

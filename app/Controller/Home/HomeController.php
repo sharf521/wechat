@@ -19,12 +19,22 @@ class HomeController extends Controller
         }
         if(!$_POST){
             $category=new Category();
-            $cates=$category->getListTree(array('path'=>'2,'));
-            array_shift($cates);
-            $this->site->cates=$cates;//商品分类
+            $goodsCategoryArray=$category->getListTree(array('path'=>'2,'));
+            array_shift($goodsCategoryArray);
+            foreach ($goodsCategoryArray as $i=>$cate){
+                if(!in_array($cate['id'],$this->site->goodsCates)){
+                    unset($goodsCategoryArray[$i]);
+                }
+            }
+            $this->site->cates=$goodsCategoryArray;//商品分类
 
-            $articleCates=$category->getList(array('pid'=>1));
-            $this->site->articleCates=$articleCates;
+            $articleCategoryAll=$category->getList(array('pid'=>1));
+            foreach ($articleCategoryAll as $i=>$cate){
+                if(!in_array($cate->id,$this->site->articleCates)){
+                    unset($articleCategoryAll[$i]);
+                }
+            }
+            $this->site->articleCates=$articleCategoryAll;
         }
     }
 }

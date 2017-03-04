@@ -2,6 +2,7 @@
 namespace App\Controller\Admin;
 
 use App\Controller\Controller;
+use App\Model\SubSite;
 use App\Model\User;
 use System\Lib\DB;
 
@@ -50,6 +51,11 @@ class AdminController extends Controller
                     exit;
                 }
             }
+        }
+        if($this->user->type_id==2){
+            $this->siteList=(new SubSite())->get();
+        }else{
+            $this->siteList=(new SubSite())->where("id={$this->user->site_id}")->get();
         }
     }
 

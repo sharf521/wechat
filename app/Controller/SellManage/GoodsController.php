@@ -59,7 +59,13 @@ class GoodsController extends SellController
         }else{
             $data['cates']=$this->getCates();
             $data['shippings']=$this->getShippings();
-            $data['categorys'] = $category->getList(array('pid' => 2));
+            $categorys = $category->getList(array('pid' => 2));
+            foreach ($categorys as $i=>$cate){
+                if(!in_array($cate->id,$this->site->goodsCates)){
+                    unset($categorys[$i]);
+                }
+            }
+            $data['categorys'] =$categorys;
             $this->view('goods_category',$data);
         }
     }

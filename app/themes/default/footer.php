@@ -5,10 +5,14 @@
                 <?
                 $articleModel=(new \App\Model\Article());
                 foreach ($this->site->articleCates as $cate) :
+                    $pic=$cate->picture;
+                    if(empty($pic)){
+                        $pic='/themes/images/nopic.gif';
+                    }
                     ?>
                     <ul>
                         <li>
-                            <h3><img src="/themes/images/nopic.gif" width="30" height="30"><?=$cate->name?></h3>
+                            <h3><img src="<?=$pic?>" width="30" height="30"><?=$cate->name?></h3>
                             <?
                             $aList=$articleModel->where("status=1 and category_id={$cate->id}")->orderBy('id desc')->limit('0,5')->get();
                             foreach ($aList as $art) :

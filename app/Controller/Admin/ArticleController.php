@@ -22,6 +22,9 @@ class ArticleController extends AdminController
         if (!empty($_GET['keyword'])) {
             $where .= " and title like '%{$_GET['keyword']}%'";
         }
+        if (!empty($_GET['site_id'])) {
+            $where .= " and site_id ={$_GET['site_id']}";
+        }
         $result = $article->orderBy('id desc')->where($where)->pager($_GET['page']);
         $data['result'] = $result;
         //$data['cates'] = $category->echoOption(array('pid' => 1, 'path' => $_GET['categorypath']));
@@ -66,6 +69,7 @@ class ArticleController extends AdminController
             //添加文章信息
             $arr = array();
             $arr['user_id'] = $this->user_id;
+            $arr['site_id'] = $_POST['site_id'];
             $arr['title'] = $_POST['title'];
             $arr['typeid'] = (int)$_POST['typeid'];
             $arr['category_id'] = $categoryid;
@@ -121,6 +125,7 @@ class ArticleController extends AdminController
             //修改文章信息
             $arr = array();
             $arr['user_id'] = $this->user_id;
+            $arr['site_id'] = $_POST['site_id'];
             $arr['title'] = $_POST['title'];
             $arr['typeid'] = (int)$_POST['typeid'];
             $arr['category_id'] = $categoryid;

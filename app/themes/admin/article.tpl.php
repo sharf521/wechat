@@ -14,6 +14,12 @@
     </div>
     <form method="get">
         <div class="search">
+            分站：<select name="site_id">
+                <option value="">请选择</option>
+                <? foreach ($this->siteList as $site) : ?>
+                    <option value="<?=$site->id?>" <? if($_GET['site_id']==$site->id){echo 'selected';}?>><?=$site->name?></option>
+                <? endforeach;?>
+            </select>
             文章类型：<select name="categorypath">
                 <option value="">&nbsp;&nbsp;请选择</option>
                 <? foreach ($cates as $cate) : ?>
@@ -76,6 +82,17 @@
         <form method="post">
             <input type="hidden" name="id" value="<?= $row->id ?>"/>
             <table class="table_from">
+                <tr>
+                    <td>分站：</td>
+                    <td>
+                        <select name="site_id">
+                            <option value="">请选择</option>
+                            <? foreach ($this->siteList as $site) : ?>
+                                <option value="<?=$site->id?>" <? if($row->site_id==$site->id){echo 'selected';}?>><?=$site->name?></option>
+                            <? endforeach;?>
+                        </select>
+                    </td>
+                </tr>
                 <tr>
                     <td>标题：</td>
                     <td><input type="text" name="title" value="<?= $row->title ?>" size="50"/></td>

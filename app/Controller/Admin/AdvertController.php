@@ -31,7 +31,18 @@ class AdvertController extends AdminController
             }
             redirect('Advert')->with('msg','操作成功！');
         }else{
-            $data['list']=$advert->orderBy('`showorder`,id')->get();
+            $where=" 1=1";
+            if (!empty($_GET['keyword'])) {
+                $where .= " and name like '%{$_GET['keyword']}%'";
+            }
+            if (!empty($_GET['site_id'])) {
+                $where .= " and site_id ={$_GET['site_id']}";
+            }
+            if (!empty($_GET['typeid'])) {
+                $where .= " and typeid ='{$_GET['typeid']}'";
+            }
+            $data['list']=$advert->where($where)->orderBy('`showorder`,id')->get();
+            $data['typeid']=(new LinkPage())->echoLink('advert_type',$_GET['typeid'],array('name'=>'typeid','attr'=>" class='layui-select'"));
             $this->view('advert',$data);
         }
     }
@@ -43,6 +54,7 @@ class AdvertController extends AdminController
             if ($order == 0) {
                 $order = 10;
             }
+            $advert->site_id=(int)$request->post('site_id');
             $advert->name=$request->post('name');
             $advert->typeid=$request->post('typeid');
             $advert->url=$request->post('url');
@@ -61,6 +73,7 @@ class AdvertController extends AdminController
     {
         $advert=$advert->findOrFail($request->id);
         if($_POST){
+            $advert->site_id=(int)$request->post('site_id');
             $advert->name=$request->post('name');
             $advert->typeid=$request->post('typeid');
             $advert->url=$request->post('url');

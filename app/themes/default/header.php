@@ -103,15 +103,13 @@
         <!--所有分类 End-->
         <div class="nav-list clearFix">
             <ul>
-                <li  class="hover" ><a href="/">首页</a></li>
-                <li  class="" ><a href="/goods/lists">商品列表</a></li>
+                <li <? if($_SERVER['PHP_SELF']=='/index.php'){echo 'class="hover"';}?>><a href="/">首页</a></li>
+                <li <? if(strpos($_SERVER['PHP_SELF'],'/goods/')!==false){echo 'class="hover"';}?>><a href="/goods/lists">商品列表</a></li>
                 <li class=""><a href="/user/login">登陆</a></li>
             </ul>
         </div>
     </div>
 </div>
-
-
 <script type="text/javascript">
     header_js();
 </script>
