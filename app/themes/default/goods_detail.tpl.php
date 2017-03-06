@@ -22,7 +22,7 @@
                 <div class="price clearFix">
                     <span class="label">价格: </span><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span>
                 </div>
-                <div class="clearFix">
+                <div class="clearFix" style="display: none">
                     <span class="label">运费: </span><span class="shipping_fee">¥<?=$goods->shipping_fee?></span>
                 </div>
                 <div class="bottom_buy_box">

@@ -21,7 +21,12 @@
                 </div>
                 <?  foreach ($result_carts as $i=>$carts) : ?>
                     <div class="cart_box clearFix">
-                        <a class="shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$i?></em></a>
+                        <div class="shopBar">
+                            <?php
+                            $shop=(new \App\Model\Shop())->find($i);
+                            ?>
+                            <i class="iconfont">&#xe854;</i><em><?=$shop->name?></em> <?=\App\Helper::getQqLink($shop->qq)?>
+                        </div>
                         <? foreach($carts as $cart): ?>
                             <div class="goods_item clearFix">
                                 <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">

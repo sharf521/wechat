@@ -33,7 +33,12 @@
         <input type="hidden" name="address_id" value="<?=$address->id?>" id="address_id">
         <?  foreach ($result_carts as $i=>$carts) : ?>
             <div class="order_box clearFix">
-                <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$i?></em></a>
+                <div class="order_shopBar">
+                    <?php
+                    $shop=(new \App\Model\Shop())->find($i);
+                    ?>
+                    <i class="iconfont">&#xe854;</i><em><?=$shop->name?></em> <?=\App\Helper::getQqLink($shop->qq)?>
+                </div>
                 <div class="order_titleBar">
                     <ul>
                         <li class="cell1">商品信息</li>

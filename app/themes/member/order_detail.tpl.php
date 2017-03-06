@@ -29,6 +29,16 @@
                         <tr><td>追踪详情</td><td><a href="http://www.kuaidi100.com/chaxun?com=<?=$shipping->shipping_name?>&nu=<?=$shipping->shipping_no?>" target="_blank" class="layui-btn layui-btn-mini">查看</a></td></tr>
                     </table>
                 <? endif;?>
+
+                <div class="order_detail_tit">卖家信息</div>
+                <table class="layui-table">
+                    <tr><td width="80">店铺名称</td><td><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?>
+                        </td></tr>
+                    <tr><td>联系电话</td><td><?= $shop->tel ?></td></tr>
+                    <tr><td>所在地址</td><td><?=$shop->region_name?></td></tr>
+                </table>
+
+
                 <table class="layui-table goods_list">
                     <thead>
                     <tr>

@@ -65,6 +65,7 @@ class OrderController extends MemberController
         $data['order']=$order;
         $data['shipping']=$order->OrderShipping();
         $data['goods']=$order->OrderGoods();
+        $data['shop']=$order->Shop();
         $this->view('order_detail',$data);
     }
 

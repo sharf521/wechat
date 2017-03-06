@@ -130,4 +130,12 @@ class Order extends Model
     {
         return $this->hasOne('\App\Model\OrderShipping','order_sn','order_sn');
     }
+
+    /**
+     * @return Shop
+     */
+    public function Shop()
+    {
+        return $this->hasOne('\App\Model\Shop','user_id','seller_id');
+    }
 }

@@ -15,11 +15,16 @@
                         <li <? if($this->func=='status4'){echo 'class="layui-this"';}?>><a href="<?=url('order/status4')?>">待确认收货</a></li>
                     </ul>
                 </div>
-                <? foreach($orders['list'] as $order) : ?>
+                <? foreach($orders['list'] as $order) :
+                    $shop=$order->Shop();
+                    ?>
                     <dl class="orderbox">
                         <dt>
                             <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
+                            <span class="shop">
+                                <i class="iconfont">&#xe854;</i> <?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?>
+                            </span>
                         </dt>
                         <dd>
                             <table class="layui-table" style="margin: 0px;">

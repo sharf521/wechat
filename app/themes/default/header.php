@@ -52,7 +52,7 @@
         <!--商品和店铺-->
         <ul class="tab">
             <li title="请输入您要搜索的商品关键字" act="search" class="current">商品</li>
-            <li title="请输入您要搜索的店铺关键字" act="store_list">店铺</li>
+            <!--<li title="请输入您要搜索的店铺关键字" act="store_list">店铺</li>-->
         </ul>
         <form class="search-form" method="get" action="/goods/lists/">
             <input type="hidden" value="search" id="search_act" name="act">
@@ -105,7 +105,6 @@
             <ul>
                 <li <? if($_SERVER['PHP_SELF']=='/index.php'){echo 'class="hover"';}?>><a href="/">首页</a></li>
                 <li <? if(strpos($_SERVER['PHP_SELF'],'/goods/')!==false){echo 'class="hover"';}?>><a href="/goods/lists">商品列表</a></li>
-                <li class=""><a href="/user/login">登陆</a></li>
             </ul>
         </div>
     </div>
