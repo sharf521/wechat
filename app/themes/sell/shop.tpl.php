@@ -8,12 +8,19 @@
             <fieldset class="layui-elem-field layui-field-title">
                 <legend><?=$this->title?></legend>
             </fieldset>
+
             <form method="post" class="layui-form">
                 <div class="layui-field-box">
                     <div class="layui-form-item">
                         <label class="layui-form-label">店铺名称</label>
                         <div class="layui-input-inline">
                             <input type="text" name="name" placeholder="请填写店铺名称" class="layui-input" value="<?=$shop->name?>" autocomplete="off"/>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">联系人</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="contacts" required placeholder="请填写姓名" class="layui-input" value="<?=$shop->contacts?>" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-form-item">

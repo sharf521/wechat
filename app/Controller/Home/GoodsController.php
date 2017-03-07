@@ -29,10 +29,27 @@ class GoodsController extends HomeController
     {
         $cid=(int)$request->get(2);
         $keyword=$request->get('keyword');
+        $minPrice=$request->get('minPrice');
+        $maxPrice=$request->get('maxPrice');
+        $orderBy=$request->get('orderBy');
         $where="status=1 and stock_count>0";
         if($keyword!=''){
             $where.=" and name like '%{$keyword}%'";
         }
+        if($minPrice!=''){
+            $minPrice=(float)$minPrice;
+            $where.=" and price>={$minPrice}";
+        }
+        if($maxPrice!=''){
+            $maxPrice=(float)$maxPrice;
+            $where.=" and price<={$maxPrice}";
+        }
+        if(in_array($orderBy,array('id','sale_count'))){
+            $orderBy="{$orderBy} desc";
+        }else{
+            $orderBy='id desc';
+        }
+
         $topnav_str='<a href="/">首页</a>';
         if($cid!=0){
             $cate=$category->findOrFail($request->get(2));
@@ -53,7 +70,8 @@ class GoodsController extends HomeController
             $topnav_str.="<a><cite>列表</cite></a>";
         }
         $data['topnav_str']=$topnav_str;
-        $data['result']=$goods->where($where)->orderBy('id desc')->pager($request->get('page'),10);
+        $data['result']=$goods->where($where)->orderBy($orderBy)->pager($request->get('page'),10);
+        $this->title='商品列表';
         $this->view('goods_lists',$data);
     }
 
@@ -104,6 +122,7 @@ class GoodsController extends HomeController
             $data['goods']=$goods;
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
+            $this->title='商品详情';
             $this->view('goods_detail',$data);
         }
 

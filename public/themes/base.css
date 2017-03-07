@@ -77,3 +77,6 @@ select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 .upload-upimg input{width: 100%; height: 100%;cursor: pointer;filter:alpha(opacity=0); -moz-opacity:0;	position:absolute;opacity:0;left:0px;top: 0px;}
 
 .layui-form-selected dl { z-index: 9999;}
+
+.title_container{padding: 10px 0 10px 0px;    margin-bottom: 10px;    font-size: 15px; font-weight: 600;font-family: 宋体;    border-bottom: 1px dashed #ececec;}
+.title_container .title {    border-left: 4px solid #f55;    padding-left: 10px;}

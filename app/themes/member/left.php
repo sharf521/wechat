@@ -6,7 +6,7 @@
         <li><a href="<?=url('/member/order')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/member/order')!==false){echo 'class="whover"';}?>>我的订单</a></li>
     </ul>
     <? if($this->user->is_shop==0) : ?>
-        <a class="layui-btn" href="<?=url('shop')?>">申请开店</a>
+        <a class="layui-btn" href="<?=url('/member/shop')?>">申请开店</a>
     <? else: ?>
         <h3>我是卖家</h3>
         <ul>

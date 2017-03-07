@@ -121,6 +121,14 @@ i, cite, em { font-style: normal; }
 .allbox .middle-goods-list li .goods-price strong { padding: 6px 8px;    background-color: #FCE2E4;    border-radius: 2px;    float: right;    font-weight: normal;    border: 1px solid #FCE2E4;    color: #f63a00; font-size: 12px;}
 
 /* 商品列表*/
+
+.goodsSearch{ border: 1px solid #efefef; padding: 10px; margin-bottom: 10px;}
+.goodsSearch .orderBy{cursor: pointer; margin-right: 10px;}
+.goodsSearch .active{font-weight: 700; color: #cc0000}
+.goodsSearch input{line-height: 25px; border: 1px solid #ddd;}
+.goodsSearch input[type=submit]{    background: none;    border: 1px solid #dadada;    color: #333;    width: 45px;    text-align: center;  margin-left:10px;}
+
+
 .goods_list { font-size: 0; *word-spacing:-1px/*IE6、7*/; display: block; width: 1000px; margin-left: -16px;}
 .goods_list li { font-size: 12px; vertical-align: middle; letter-spacing: normal; word-spacing: normal; display: inline-block; *display: inline/*IE6,7*/;  width: 238px; height: 375px; margin: 0px 0 12px 12px; *zoom:1;}
 .goods_list .goods-content { line-height: 18px; background-color: #FFF; height: 290px; margin: 3px; border: solid 1px #F0F0F0; border-radius: 2px; position:relative; overflow: hidden; box-shadow: 0 0 3px rgba(153,153,153,0.1); transition: border-color 0.4s ease-in-out 0s;}

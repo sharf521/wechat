@@ -23,17 +23,19 @@ class ShopController extends MemberController
     {
         $shop=$shop->find($this->user_id);
         if($_POST){
-            $name=$request->post('name');
-            $contacts=$request->post('contacts');
-            $tel=$request->post('tel');
-            $qq=$request->post('qq');
-            $remark=$request->post('remark');
             if(!$shop->is_exist){
                 $shop->user_id=$this->user_id;
                 $shop->status=0;
             }
+            $name=$request->post('name');
+            $contacts=$request->post('contacts');
+            $tel=$request->post('tel');
+            $qq=$request->post('qq');
+            $remark=$request->post('content',false);
             $shop->name=$name;
             $shop->contacts=$contacts;
+            $shop->region_name=$request->post('province').'-'.$request->post('city').'-'.$request->post('county');
+            $shop->address=$request->post('address');
             $shop->tel=$tel;
             $shop->qq=$qq;
             $shop->remark=$remark;
@@ -44,7 +46,12 @@ class ShopController extends MemberController
                 redirect('shop')->with('msg','己提交，等待审核！');
             }
         }else{
+            $region_name=explode('-',$shop->region_name);
+            $shop->province=$region_name[0];
+            $shop->city=$region_name[1];
+            $shop->county=$region_name[2];
             $data['shop']=$shop;
+            $this->title='申请开店';
             $this->view('shop',$data);
         }
     }

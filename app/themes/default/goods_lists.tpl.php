@@ -8,6 +8,25 @@
 
         </div>
         <div class="main">
+            <div class="goodsSearch">
+                <form method="get" id="searchForm">
+                    <input type="hidden" name="orderBy" id="orderBy" value="<?=$_GET['orderBy']?>">
+                    <span class="orderBy <? if($_GET['orderBy']=='sale_count'){echo 'active';}?>" data_val="sale_count">销量</span>
+                    <span class="orderBy <? if($_GET['orderBy']=='id'){echo 'active';}?>" data_val="id">新品</span>
+                    价格：<input type="text" name="minPrice" placeholder="￥" size="5" value="<?=$_GET['minPrice']?>"> -
+                    <input type="text" name="maxPrice" placeholder="￥" size="5" value="<?=$_GET['maxPrice']?>">&nbsp;&nbsp;
+                    <input type="text" name="keyword" value="<?=$_GET['keyword']?>" placeholder="请输入关键字">
+                    <input type="submit" value="搜索">
+                </form>
+            </div>
+            <script>
+                $(function () {
+                    $('.orderBy').on('click',function () {
+                        $('#orderBy').val($(this).attr('data_val'));
+                        $('#searchForm').submit();
+                    });
+                });
+            </script>
             <ul class="goods_list clearFix">
 <? foreach ($result['list'] as $goods) : ?>
                 <li>
