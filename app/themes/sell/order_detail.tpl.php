@@ -10,14 +10,15 @@
                 <table class="layui-table">
                     <tr><td width="80">订单编号</td><td><?= $order->order_sn ?></td></tr>
                     <tr><td>下单时间</td><td><?= $order->created_at ?></td></tr>
-                    <tr><td>订单状态</td><td class="status"><?=$order->getLinkPageName('order_status',$order->status)?></td></tr>
+                    <tr><td>买家</td><td><?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?> </td></tr>
                     <tr><td>买家留言</td><td><?=nl2br($order->buyer_remark)?></td></tr>
+                    <tr><td>订单状态</td><td class="status"><?=$order->getLinkPageName('order_status',$order->status)?></td></tr>
                     <tr><td>订单金额</td><td class="money">¥<?=$order->order_money?></td></tr>
                 </table>
 
                 <div class="order_detail_tit">收货地址</div>
                 <div style="padding: 10px;">
-                    <?=$shipping->name?>，<?=$shipping->phone?>，<?=$shipping->region_name?> <?=$shipping->address?>，<?=$shipping->address?>,<?=$shipping->zipcode?>
+                    <?=$shipping->name?>，<?=$shipping->phone?>，<?=$shipping->region_name?> <?=$shipping->address?>,<?=$shipping->zipcode?>
                 </div>
 
                 
@@ -30,6 +31,9 @@
                         <tr><td>追踪详情</td><td><a href="http://www.kuaidi100.com/chaxun?com=<?=$shipping->shipping_name?>&nu=<?=$shipping->shipping_no?>" target="_blank" class="layui-btn layui-btn-mini">查看</a></td></tr>
                     </table>
                 <? endif;?>
+
+
+                
                 <table class="layui-table goods_list">
                     <thead>
                     <tr>

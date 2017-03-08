@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
 <? if($this->func=='index') : ?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('/car')?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="javascript:history.go(-1);"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1>我的邀请链接</h1>
     </div>

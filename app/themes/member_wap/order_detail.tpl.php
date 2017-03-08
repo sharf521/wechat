@@ -1,8 +1,8 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="javascript:history.go(-1)"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url('order')?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r" href=""></a>
-        <h1><?=$this->title?></h1>
+        <h1>订单详情</h1>
     </div>
 
     <div class="weui-form-preview margin_header">
@@ -36,7 +36,7 @@
         </div>
     </div>
 
-    <br>
+<br>
 
     <div class="div_box">
         <table class="table_box">
@@ -47,6 +47,16 @@
         </table>
     </div>
 
+<? if($shipping->shipping_at!=0) : ?>
+    <div class="div_box">
+        <table class="table_box">
+            <tr><td>物流公司</td><td><?= $shipping->shipping_name ?></td></tr>
+            <tr><td>运单号码</td><td><?= $shipping->shipping_no ?></td></tr>
+            <tr><td>发货时间</td><td><?=$shipping->shipping_at?></td></tr>
+            <tr><td>追踪详情</td><td><a href="http://www.kuaidi100.com/chaxun?com=<?=$shipping->shipping_name?>&nu=<?=$shipping->shipping_no?>" target="_blank" class="layui-btn layui-btn-mini">查看</a></td></tr>
+        </table>
+    </div>
+<? endif;?>
     <div class="order_box">
         <div class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></div>
         <?php foreach ($goods as $g) : ?>
@@ -61,35 +71,5 @@
             </a>
         <? endforeach;?>
     </div>
-<? if($order->status==1) : ?>
-    <div class="pay_footer">
-        总计：¥<?= $order->order_money ?>
-        <a href="javascript:;" id="pay_btn" class="pay_btn">立即支付</a>
-    </div>
-    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" charset="utf-8">
-        wx.config(<?=$config?>);
-        wx.ready(function () {
-            $("#pay_btn").click(function () {
-                wx.chooseWXPay({
-                    timestamp: '<?=$pay['timestamp']?>',
-                    nonceStr: '<?=$pay['nonceStr']?>',
-                    package: '<?=$pay['package']?>',
-                    signType: 'MD5',
-                    paySign: '<?=$pay['paySign']?>',
-                    success: function (res) {
-                        alert('支付成功！');
-                        //window.location = "/index.php/weixin/orderShow/?task_id=<?=$task->id?>";
-                    }
-                });
-            });
-        });
-    </script>
-<? else: ?>
-    <div class="pay_footer">
-        总计：¥<?= $order->order_money ?>
-        <a href="javascript:;" class="pay_btn">己支付或己取消</a>
-    </div>
-<? endif;?>
 
 <?php require 'footer.php';?>

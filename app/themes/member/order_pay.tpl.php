@@ -5,13 +5,14 @@
             <div class="box order_detail">
                 <br>
                 <fieldset class="layui-elem-field layui-field-title">
-                    <legend>支付订单</legend>
+                    <legend><?=$this->title?></legend>
                 </fieldset>
 
                 <table class="layui-table">
                     <tr><td width="80">订单编号</td><td><?= $order->order_sn ?></td></tr>
                     <tr><td>下单时间</td><td><?= $order->created_at ?></td></tr>
                     <tr><td>备注</td><td><?=nl2br($order->buyer_remark)?></td></tr>
+                    <tr><td>卖家</td><td><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?></td></tr>
                     <tr><td>订单金额</td><td class="money">¥<?=$order->order_money?></td></tr>
                 </table>
 

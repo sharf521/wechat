@@ -28,9 +28,8 @@
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
             <span class="time"><?=$order->created_at?></span>
         </div>
-        <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("/goods/detail/?id={$g->goods_id}")?>">
+            <a href="<?=url("order/detail/?id={$order->id}")?>">
                 <div class="order_item">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
@@ -49,7 +48,6 @@
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
                 <a href="<?=url("order/editShipping/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
             <? endif;?>
-            <a href="<?=url("order/show/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">详细</a>
         </div>
     </div>
 <? endforeach;?>

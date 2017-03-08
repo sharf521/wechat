@@ -20,6 +20,13 @@
             </div>
             <div class="weui-cell__ft"></div>
         </a>
+        <a class="weui-cell weui-cell_access" href="<?=url('invite')?>">
+            <div class="weui-cell__bd">
+                <p>邀请链接</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+
     </div>
 
 <? if($this->user->is_shop==0) : ?>

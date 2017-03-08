@@ -145,6 +145,7 @@ class OrderController extends SellController
         $data['order']=$order;
         $data['shipping']=$order->OrderShipping();
         $data['goods']=$order->OrderGoods();
+        $data['buyer']=$order->Buyer();
         $this->view('order_detail',$data);
     }
 

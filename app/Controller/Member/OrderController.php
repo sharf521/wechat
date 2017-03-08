@@ -175,6 +175,7 @@ class OrderController extends MemberController
             $data['account']=$account;
             $data['shipping']=$order->OrderShipping();
             $data['goods']=$order->OrderGoods();
+            $data['shop']=$order->Shop();
             $this->view('order_pay',$data);
         }
     }

@@ -10,8 +10,8 @@
             if($shop->status==0){
                 echo '<div class="weui-cells__title">待审核</div>';
             }
-        }else{
-            echo '<div class="weui-cells__title">填写申请</div>';
+        }elseif($shop->status==2){
+            echo '<div class="weui-cells__title">未通过<br>原因：'.nl2br($shop->verify_remark).'</div>';
         }
         ?>
         <div class="weui-cells weui-cells_form">
@@ -36,7 +36,7 @@
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">电话</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" name="tel" value="<?=$shop->tel?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入手机号"/>
+                    <input class="weui-input" type="number" name="tel" value="<?=$shop->tel?>" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请输入手机号"/>
                 </div>
                 <div class="weui-cell__ft">
                     <i class="weui-icon-warn"></i>
@@ -45,7 +45,7 @@
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">QQ</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="number" name="qq" value="<?=$shop->qq?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="请输入QQ号"/>
+                    <input class="weui-input" type="number" name="qq" value="<?=$shop->qq?>" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="请输入QQ号"/>
                 </div>
                 <div class="weui-cell__ft">
                     <i class="weui-icon-warn"></i>

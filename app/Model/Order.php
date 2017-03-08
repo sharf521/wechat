@@ -138,4 +138,12 @@ class Order extends Model
     {
         return $this->hasOne('\App\Model\Shop','user_id','seller_id');
     }
+
+    /**
+     * @return User
+     */
+    public function Buyer()
+    {
+        return $this->hasOne('\App\Model\User','id','buyer_id');
+    }
 }

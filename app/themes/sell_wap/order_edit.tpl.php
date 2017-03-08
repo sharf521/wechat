@@ -8,6 +8,10 @@
     <div class="weui-form-preview margin_header">
         <div class="weui-form-preview__bd">
             <div class="weui-form-preview__item">
+                <label class="weui-form-preview__label">订单号</label>
+                <span class="weui-form-preview__value"><?=$order->order_sn?></span>
+            </div>
+            <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">下单时间</label>
                 <span class="weui-form-preview__value"><?=$order->created_at?></span>
             </div>

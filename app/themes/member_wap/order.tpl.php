@@ -21,15 +21,16 @@
 
 <? foreach ($orders['list'] as $order) :
     $goods=$order->OrderGoods();
+    $shop=$order->Shop();
     ?>
     <div class="order_box">
         <div class="order_head">
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
             <span class="time"><b><?=substr($order->created_at,0,10)?></b> 订单号：<?= $order->order_sn ?></span>
         </div>
-        <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
+        <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></a>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("/goods/detail/?id={$g->goods_id}")?>">
+            <a href="<?=url("order/detail/?id={$order->id}")?>">
                 <div class="order_item">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
