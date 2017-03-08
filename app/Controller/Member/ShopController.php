@@ -22,11 +22,12 @@ class ShopController extends MemberController
     public function index(Shop $shop,Request $request)
     {
         $shop=$shop->find($this->user_id);
+        if($shop->status==1){
+            redirect()->back()->with('error','己开店成功！');
+        }
         if($_POST){
-            if(!$shop->is_exist){
-                $shop->user_id=$this->user_id;
-                $shop->status=0;
-            }
+            $shop->user_id=$this->user_id;
+            $shop->status=0;
             $name=$request->post('name');
             $contacts=$request->post('contacts');
             $tel=$request->post('tel');

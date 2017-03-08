@@ -123,7 +123,7 @@ class CarRentController extends AdminController
             }
             $carRent->status=$checked;
             $carRent->verify_userid=$this->user_id;
-            $carRent->verify_remark=time();
+            $carRent->verify_at=time();
             $carRent->verify_remark=$request->post('verify_remark');
             $carRent->save();
             redirect('carRent')->with('msg','保存成功！');

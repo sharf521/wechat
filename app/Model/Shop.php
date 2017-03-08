@@ -17,4 +17,12 @@ class Shop extends Model
     {
         parent::__construct();
     }
+
+    /**
+     * @return User
+     */
+    public function User()
+    {
+        return $this->hasOne('\App\Model\User','id','user_id');
+    }
 }

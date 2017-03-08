@@ -12,6 +12,8 @@
                 if($shop->is_exist){
                     if($shop->status==0){
                         echo '<blockquote class="layui-elem-quote">待审核</blockquote>';
+                    }elseif($shop->status==2){
+                        echo '<blockquote class="layui-elem-quote">未通过<br>原因：'.nl2br($shop->verify_remark).'</blockquote>';
                     }
                 }
                 ?>
