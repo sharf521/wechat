@@ -10,26 +10,13 @@
         <? foreach($cates as $cate) : ?>
         <div class="weui-cell">
             <div class="weui-cell__bd"><?=$cate['name_pre']?><?=$cate['name']?></div>
-            <div class="weui-cell__ft"><a href="<?=url("category/add/?pid={$cate['id']}")?>"></a>
+            <div class="weui-cell__ft">
                 <a href="<?=url("category/edit/?id={$cate['id']}")?>">编辑</a>
-                <a href="javascript:cateDel(<?=$cate['id']?>)">删除</a></div>
+                <a href="javascript:cateDel(<?=$cate['id']?>)">删除</a>
                 <? if($cate['pid']==0) : ?>
                     <a href="<?=url("category/add/?pid={$cate['id']}")?>">添加子分类</a>
                 <? endif;?>
-            <? /* if(isset($cate['son']) && is_array($cate['son'])) :
-                echo '<ul>';
-                foreach($cate['son'] as $son) : ?>
-                    <li>
-                        <?=$son['name']?>
-                        <div class="operat">
-                            <a href="<?=url("category/edit/?id={$son['id']}")?>">编辑</a>
-                            <a href="javascript:cateDel(<?=$son['id']?>)">删</a>
-                        </div>
-                    </li>
-                    <?
-                endforeach;
-                echo '</ul>';
-            endif; */ ?>
+            </div>
         </div>
         <? endforeach;?>
     </div>
