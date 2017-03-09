@@ -136,9 +136,8 @@
 
 .order_bottom{position: fixed;  border-top: 1px solid #ddd; bottom: -1px; height: 49px;    width: 100%;   background-color: #F7F7FA;    left:0;}
 .order_bottom .total{position: absolute;    top: 0;    right: 0;}
-.order_bottom .total p {    padding-top: 10px;    font-weight: 700;    line-height: 1em;    height: 50px;    text-align: right;    float: left;    font-size: 16px;}
+.order_bottom .total p {   font-weight: 700;    line-height: 50px;  text-align: right;    float: left;    font-size: 16px;}
 .order_bottom .total strong {    color: #e4393c;}
-.order_bottom .total small {    padding-top: 2px;    display: block;    font-size: 10px;    color: #666;    font-weight: 400;}
 .order_bottom .total>a {  float: right;display: block; padding: 0 10px 0 20px; height: 100%; margin-left: 10px; line-height: 50px; font-size: 16px; text-align: center; font-weight: 700;background: #e4393c; color: #fff;}
 .order_bottom .total>a em {    font-weight: 400;    font-size: 12px;    font-family: none;}
 

@@ -23,12 +23,14 @@ class AddressController extends MemberController
     }
     public function index(UserAddress $address,Request $request)
     {
+        $redirect_url=$request->get('redirect_url');
         if($_POST){
             $this->addAddress();
             redirect('address')->with('msg','添加成功！');
         }else{
             $result=$address->where("user_id=?")->bindValues($this->user_id)->get();
             $data['result']=$result;
+            $data['redirect_url']=$redirect_url;
             $this->view('address',$data);
         }
     }

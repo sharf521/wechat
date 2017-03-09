@@ -48,7 +48,7 @@ class OrderController extends HomeController
         );
         if($_POST){
             if(!$address->is_exist){
-                throw  new \Exception("请填写收货地址！");
+                redirect()->back()->with('error','请填写收货地址！');
             }
             $arr_area=explode('-',$address->region_name);
             $arr['cityName']=$arr_area[1];

@@ -53,7 +53,7 @@
 
     <div class="order_bottom">
         <div class="total">
-            <p>总计：<strong id="totalPrice">¥<span></span></strong><small>(不含运费)</small></p>
+            <p>总计：<strong id="totalPrice">¥<span></span></strong></p>
             <a href="javascript:;" class="btn">提交订单<em id="totalNum">(<span></span>件)</em></a>
         </div>
     </div>

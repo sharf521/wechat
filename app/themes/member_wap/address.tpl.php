@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
 <? if($this->func=='index') : ?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('')?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url($redirect_url)?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1>收货地址</h1>
     </div>
