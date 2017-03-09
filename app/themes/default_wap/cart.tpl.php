@@ -13,9 +13,11 @@
         <?php require 'footer_bar.php';?>
     <? else : ?>
     <div class="margin_header" style="margin-bottom: 60px">
-        <?  foreach ($result_carts as $i=>$carts) : ?>
+        <?  foreach ($result_carts as $i=>$carts) :
+            $shop=(new \App\Model\Shop())->find($i);
+            ?>
             <div class="cart_box">
-                <a class="shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>
+                <a class="shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></a>
                 <? foreach($carts as $cart): ?>
                     <div class="goods_item clearFix">
                         <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">

@@ -55,6 +55,9 @@ class OrderController extends HomeController
         }
         $carts_result=$cart->getList($arr);
         $data['result_carts']=$carts_result;
+        if(empty($data['result_carts'])){
+            redirect('cart')->with('error','选择一件商品');
+        }
         if($_POST){
             try{
                 DB::beginTransaction();

@@ -4,28 +4,28 @@
         <a class="m_header_r" href=""></a>
         <h1>我的订单</h1>
     </div>
-<div class="order_address margin_header">
-    <h4>收货地址</h4>
-
+    <div class="order_address margin_header">
+        <h4>收货地址</h4>
         <? if($address->is_exist) : ?>
-        <a href="<?=url("/member/address/?redirect_url={$this->self_url}")?>">
-            <p><?=$address->region_name?> <?=$address->address?></p>
-            <p><strong><?=$address->name?></strong><?=$address->phone?></p>
-        </a>
+            <a href="<?=url("/member/address/?redirect_url={$this->self_url}")?>">
+                <p><?=$address->region_name?> <?=$address->address?></p>
+                <p><strong><?=$address->name?></strong><?=$address->phone?></p>
+            </a>
         <? else : ?>
             <div class="noadres">
                 <a href="<?=url("/member/address/add/?redirect_url={$this->self_url}")?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">添加收货地址</a>
             </div>
         <? endif;?>
-</div>
+    </div>
 
 <form method="post" id="form_order">
     <input type="hidden" name="address_id" value="<?=$address->id?>" id="address_id">
     <?
     foreach ($result_carts as $i=>$carts) :
+        $shop=(new \App\Model\Shop())->find($i);
         ?>
         <div class="order_box">
-            <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店<?=$cart->seller_id?></em></a>
+            <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></a>
             <? foreach($carts as $cart): ?>
                 <div class="order_item clearFix">
                     <img class="image" src="<?=$cart->goods_image?>">
@@ -52,7 +52,8 @@
             </div>
         </div>
     <? endforeach;?>
-</form><br><br><br>
+</form>
+    <br><br><br>
 
     <div class="order_bottom">
         <div class="total">

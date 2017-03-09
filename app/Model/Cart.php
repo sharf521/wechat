@@ -96,8 +96,6 @@ class Cart extends Model
             $result_carts[$cart->seller_id][]=$cart;
         }
         foreach($result_carts as $seller_id=>$carts){
-//            $result_carts[$seller_id]['goodsPrice']=0;
-//            $result_carts[$seller_id]['shippingFee']=0;
             foreach ($carts as $i=>$cart) {
                 if ($cart->spec_id != 0) {
                     $spec = $cart->GoodsSpec();//取规格的价格和库存
@@ -123,19 +121,14 @@ class Cart extends Model
                     $result_carts[$seller_id][$i]->price = $goods->price;
                     $result_carts[$seller_id][$i]->stock_count =$goods->stock_count;
                 }
-                //$_goodsPrice=math($result_carts[$seller_id][$i]->price,$result_carts[$seller_id][$i]->quantity,'*',2);
-                //$result_carts[$seller_id]['goodsPrice']=math($result_carts[$seller_id]['goodsPrice'],$_goodsPrice,'+',2);
                 if($cityName!=''){
                     $ship=(new Shipping())->find($goods->shipping_id);
                     if($ship->is_exist){
                         $shipping_fee=$ship->getPrice($cityName,$result_carts[$seller_id][$i]->quantity);
                         $result_carts[$seller_id][$i]->shipping_fee = $shipping_fee;
-                        //$result_carts[$seller_id]['shippingFee']=math($result_carts[$seller_id]['shippingFee'],$shipping_fee,'+',2);
                     }
                 }
             }
-            //$_total=math($result_carts[$seller_id]['goodsPrice'],$result_carts[$seller_id]['shippingFee'],'+',2);
-            //$result_carts[$seller_id]['total']=math($result_carts[$seller_id]['total'],$_total,'+',2);
         }
         return $result_carts;
     }
