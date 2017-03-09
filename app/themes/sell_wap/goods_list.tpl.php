@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
     <div class="m_header">
         <a class="m_header_l" href="<?=url('/member')?>"><i class="iconfont">&#xe604;</i></a>
-        <a class="m_header_r" href="<?=url('goods/add')?>">添加</a>
+        <a class="m_header_r" href="<?=url('goods/add')?>"></a>
         <h1>商品管理</h1>
     </div>
     <div class="my-navbar margin_header">

@@ -76,15 +76,15 @@
                 </tr>
                 <tr>
                     <td width="70">省份：</td>
-                    <td><select id="s_province" name="province"></select></td>
+                    <td><select id="s_province" name="province" required></select></td>
                 </tr>
                 <tr>
                     <td>城市：</td>
-                    <td><select id="s_city" name="city" ></select></td>
+                    <td><select id="s_city" name="city" required></select></td>
                 </tr>
                 <tr>
                     <td>地区：</td>
-                    <td><select id="s_county" name="county"></select></td>
+                    <td><select id="s_county" name="county" required></select></td>
                 </tr>
                 <tr>
                     <td>详细地址：</td>
@@ -97,7 +97,12 @@
                 <tr>
                     <td>联系电话：</td>
                     <td>
-                        <input name="phone" type="number" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="手机号码必须填" value=""><span></span></td>
+                        <input name="phone" type="number" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="手机号码必须填" value=""><span></span></td>
+                </tr>
+                <tr>
+                    <td>邮政编码：</td>
+                    <td>
+                        <input name="zipcode" type="number" onkeyup="value=value.replace(/[^0-9]/g,'')" placeholder="邮政编码" value=""><span></span></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="添加" class="adctbuton"></td>
