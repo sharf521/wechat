@@ -6,14 +6,17 @@
     </div>
 <div class="order_address margin_header">
     <h4>收货地址</h4>
-    <a href="<?=url("/member/address/add/?redirect_url={$this->self_url}")?>">
+
         <? if($address->is_exist) : ?>
-        <p><?=$address->region_name?> <?=$address->address?></p>
-        <p><strong><?=$address->name?></strong><?=$address->phone?></p>
+        <a href="<?=url("/member/address/?redirect_url={$this->self_url}")?>">
+            <p><?=$address->region_name?> <?=$address->address?></p>
+            <p><strong><?=$address->name?></strong><?=$address->phone?></p>
+        </a>
         <? else : ?>
-            <div class="noadres"><p>添加收货地址！</p></div>
+            <div class="noadres">
+                <a href="<?=url("/member/address/add/?redirect_url={$this->self_url}")?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">添加收货地址</a>
+            </div>
         <? endif;?>
-    </a>
 </div>
 
 <form method="post" id="form_order">
