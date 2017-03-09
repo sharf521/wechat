@@ -26,7 +26,7 @@
     <div class="order_box">
         <div class="order_head">
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
-            <span class="time"><b><?=substr($order->created_at,0,10)?></b> 订单号：<?= $order->order_sn ?></span>
+            <span class="time"><b><?=substr($order->created_at,0,10)?></b></span>
         </div>
         <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></a>
         <? foreach ($goods as $g) : ?>
@@ -55,7 +55,7 @@
     <div class="weui-msg">
         <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg-primary"></i></div>
         <div class="weui-msg__text-area">
-            <h2 class="weui-msg__title">没有任何记录。。</h2>
+            <h2 class="weui-msg__title">没有任何记录！</h2>
             <a href="<?=url('/goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
         </div>
     </div>
