@@ -7,7 +7,6 @@
     <script charset="utf-8" src="/plugin/js/My97DatePicker/WdatePicker.js"></script>
     <link rel="stylesheet" href="/plugin/layui/css/layui.css" />
     <script src="/plugin/layui/lay/dest/layui.all.js"></script>
-    <link href="/plugin/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="/themes/admin/css/admin.css" rel="stylesheet">
     <script language="javascript" src="/themes/admin/js/base.js"></script>
     <title>管理中心</title>

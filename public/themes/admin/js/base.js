@@ -95,9 +95,10 @@ function init_menu() {
     tablei.click(function () {
         var index = tablei.index(this);
         $(tablei[index]).addClass("checkit").siblings().removeClass("checkit");
-        udiv.addClass("hide");
-        $(udiv[index]).removeClass("hide");
-
+        //udiv.addClass("hide");
+        //$(udiv[index]).removeClass("hide");
+        udiv.hide();
+        $(udiv[index]).fadeIn(400);
         //左侧第一个菜单选中，内容显示中间iframe
         //var firstli=$('li:first',udiv[index]);
         //$('#iframe_main').attr('src',$('a',firstli).attr('href'));
