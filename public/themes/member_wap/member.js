@@ -111,3 +111,32 @@ function goodsAdd_js()
     });
 }
 ///goods js end
+
+function orderPayJs() {
+    $(function () {
+        $("#integral").bind('input propertychange',function(){
+            if(Number($(this).val())>Number($('#span_integral').html())){
+                $(this).val($('#span_integral').html());
+            }
+            var max_jf=Math.mul(price_true,lv);
+            if(Number($(this).val())>max_jf){
+                $("#integral").val(max_jf);
+            }
+            var _m=Math.div(Number($("#integral").val()),lv);
+            var money=Math.sub(price_true,Math.moneyRound(_m,2));
+            $('#money_yes').html(money);
+        });
+
+        $('.recharge').on('click',function () {
+            goWeChatPay($('#money_yes').html());
+        });
+    });
+}
+
+function goWeChatPay(money,url) {
+    if(url==undefined || url==''){
+        url=window.location.href;
+    }
+    url=encodeURIComponent(url);
+    window.location='http://wx02560f146a566747.wechat.yuantuwang.com/user/goWeChatPay/?money='+money+'&url='+url;
+}

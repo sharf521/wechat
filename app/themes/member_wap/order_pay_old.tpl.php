@@ -36,31 +36,8 @@
         </div>
     </div>
 
-
-    <form method="post">
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">扣除积分</label></div>
-                <div class="weui-cell__bd">
-                    <input type="text" id="integral" name="integral" value="0" required placeholder="" onkeyup="value=value.replace(/[^0-9.]/g,'')"  class="weui-input" autocomplete="off"/>
-                </div>
-                <div class="weui-cells__tips">可用积分：<span id="span_integral"><?=$account->integral_available?></span></div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">支付密码</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" required type="password" name="zf_password" placeholder="支付密码" />
-                </div>
-                <div class="weui-cells__tips">可用金额：￥<span id="span_funds"><?=$account->funds_available?></span></div>
-            </div>
-        </div>
-        <div style="text-align: right; padding: 10px 20px 0px 0px; font-size: 16px; font-weight: 600; color: #c00;">支付金额：¥<span id="money_yes"><?=$order->order_money?></span></div>
-        <div class="weui-btn-area">
-            <input class="weui-btn weui-btn_primary" type="submit" value="立即支付">
-            <a class="recharge weui-btn weui-btn_plain-primary">我要充值</a>
-        </div>
-    </form>
     <br>
+
     <div class="div_box">
         <table class="table_box">
             <tr><td >收货人：</td><td><?=$shipping->name?></td></tr>
@@ -84,13 +61,35 @@
             </a>
         <? endforeach;?>
     </div>
-
-
-    <script src="/plugin/js/math.js"></script>
-    <script>
-        var lv='<?=$convert_rate?>';
-        var price_true='<?=$order->order_money?>';
-        orderPayJs();
+<? if($order->status==1) : ?>
+    <div class="pay_footer">
+        总计：¥<?= $order->order_money ?>
+        <a href="javascript:;" id="pay_btn" class="pay_btn">立即支付</a>
+    </div>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.1.0.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" charset="utf-8">
+        wx.config(<?=$config?>);
+        wx.ready(function () {
+            $("#pay_btn").click(function () {
+                wx.chooseWXPay({
+                    timestamp: '<?=$pay['timestamp']?>',
+                    nonceStr: '<?=$pay['nonceStr']?>',
+                    package: '<?=$pay['package']?>',
+                    signType: 'MD5',
+                    paySign: '<?=$pay['paySign']?>',
+                    success: function (res) {
+                        alert('支付成功！');
+                        //window.location = "/index.php/weixin/orderShow/?task_id=<?=$task->id?>";
+                    }
+                });
+            });
+        });
     </script>
+<? else: ?>
+    <div class="pay_footer">
+        总计：¥<?= $order->order_money ?>
+        <a href="javascript:;" class="pay_btn">己支付或己取消</a>
+    </div>
+<? endif;?>
 
 <?php require 'footer.php';?>
