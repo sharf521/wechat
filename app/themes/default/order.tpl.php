@@ -6,7 +6,7 @@
     <? if(empty($addressList)) : ?>
         <blockquote class="layui-elem-quote">
             暂无收货地址
-            <a class="layui-btn layui-btn-small" href="<?=url('/member/address')?>">添加收货地址</a>
+            <a class="layui-btn layui-btn-small" href="<?=url("/member/address/?redirect_url={$this->self_url}")?>">添加收货地址</a>
         </blockquote>
     <? else : ?>
         <? foreach ($addressList as $add) :

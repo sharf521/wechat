@@ -27,7 +27,15 @@ function getSelectedMoney() {
 function order_js() {
     getSelectedMoney();
     $('.order_bottom .btn').on('click',function () {
-        $('#form_order').submit();
+        if($('#address_id').val()==''){
+            layer.open({
+                content: '收货地址不能为空！',
+                skin: 'msg',
+                time:5
+            });
+        }else{
+            $('#form_order').submit();
+        }
     });
 }
 /* 购物车 start*/

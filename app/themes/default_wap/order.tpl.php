@@ -6,12 +6,12 @@
     </div>
 <div class="order_address margin_header">
     <h4>收货地址</h4>
-    <a href="<?=url('/member/address/?redirect_url='.$this->self_url)?>">
+    <a href="<?=url("/member/address/add/?redirect_url={$this->self_url}")?>">
         <? if($address->is_exist) : ?>
         <p><?=$address->region_name?> <?=$address->address?></p>
         <p><strong><?=$address->name?></strong><?=$address->phone?></p>
         <? else : ?>
-            <div class="noadres"><p>暂无收货地址！</p></div>
+            <div class="noadres"><p>添加收货地址！</p></div>
         <? endif;?>
     </a>
 </div>

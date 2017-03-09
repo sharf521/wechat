@@ -21,16 +21,18 @@ class AddressController extends MemberController
             $this->redirect_url=$_GET['redirect_url'];
         }
     }
-    public function index(UserAddress $address,Request $request)
+    public function index(UserAddress $address)
     {
-        $redirect_url=$request->get('redirect_url');
         if($_POST){
             $this->addAddress();
-            redirect('address')->with('msg','添加成功！');
+            if($this->redirect_url==''){
+                $this->redirect_url='address';
+            }
+            redirect($this->redirect_url)->with('msg','地址添加成功！');
         }else{
             $result=$address->where("user_id=?")->bindValues($this->user_id)->get();
             $data['result']=$result;
-            $data['redirect_url']=$redirect_url;
+            $data['redirect_url']=$this->redirect_url;
             $this->view('address',$data);
         }
     }
@@ -67,7 +69,7 @@ class AddressController extends MemberController
             if($this->redirect_url==''){
                 $this->redirect_url='address';
             }
-            redirect($this->redirect_url)->with('msg','添加成功！');
+            redirect($this->redirect_url)->with('msg','地址添加成功！');
         }else{
             $this->view('address');
         }
