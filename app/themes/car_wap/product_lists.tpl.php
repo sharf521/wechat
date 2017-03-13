@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
     <div class="m_header">
         <a class="m_header_l" href="/car"><i class="iconfont">&#xe604;</i></a>
-        <a class="m_header_r"></a>
+        <a class="m_header_r" href="<?=url('brand')?>">筛选品牌</a>
         <h1><?=$this->title?></h1>
     </div>
 

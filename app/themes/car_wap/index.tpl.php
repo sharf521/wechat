@@ -9,7 +9,7 @@
         <div class="swiper-pagination"></div>
     </div>
     <!--ad end-->
-    <div class="m_regtilinde">推荐品牌<span><a href="<?=url('brand')?>"></a></span></div>
+    <div class="m_regtilinde">推荐品牌<span><a href="<?=url('brand')?>">查看更多</a></span></div>
     <div class="br_box clearFix">
         <ul class="clearFix">
             <? foreach ($brands as $brand) : ?>
