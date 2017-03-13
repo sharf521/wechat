@@ -6,7 +6,6 @@
     </div>
 
     <div class="clearFix margin_header">
-        <div class="m_regtilinde">品牌列表<span><a href="<?=url('brand')?>"></a></span></div>
         <div class="br_box clearFix">
             <ul class="clearFix">
                 <? foreach ($brands as $brand) : ?>

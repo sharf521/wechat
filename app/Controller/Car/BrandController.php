@@ -21,6 +21,7 @@ class BrandController extends Controller
     public function index(CarBrand $brand,Request $request)
     {
         $data['brands']=$brand->getAll();
+        $this->title='品牌列表';
         $this->view('brand',$data);
     }
 }
