@@ -28,7 +28,7 @@
                     <ul>
                         <? foreach ($floor['goodsList'] as $i=>$goods) :
                         if($i>=8) : ?>
-                            <li><a target="_blank" href="/goods/detail/?id=<?=$goods->id?>">
+                            <li><a target="_blank" href="/goods/detail/<?=$goods->id?>">
                                     <img src="/themes/images/blank.gif"
                                          data-echo="<?=$goods->image_url?>">
                                     <div class="ot-con"><p><?=$goods->name?></p>
@@ -49,7 +49,7 @@
                         }
                         ?>
                         <li>
-                            <a target="_blank" href="/goods/detail/?id=<?=$goods->id?>">
+                            <a target="_blank" href="/goods/detail/<?=$goods->id?>">
                                 <div class="goods-thumb">
                                     <img src="/themes/images/blank.gif"
                                          data-echo="<?=$goods->image_url?>">

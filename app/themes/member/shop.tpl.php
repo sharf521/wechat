@@ -40,7 +40,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">联系QQ</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="qq" required placeholder="请填写QQ号" class="layui-input" value="<?=$shop->qq?>" autocomplete="off"/>
+                                <input type="text" name="qq" required placeholder="请填写QQ号" class="layui-input" value="<?=$shop->qq?>" autocomplete="off" onkeyup="value=value.replace(/[^0-9]/g,'')"/>
                             </div>
                         </div>
                         <div class="layui-form-item">

@@ -4,7 +4,7 @@
     <ul class="commoditylist_content">
         <? foreach ($goods_result as $goods) : ?>
             <li>
-                <a href="<?=url("/goods/detail/?id={$goods->id}")?>">
+                <a href="<?=url("/goods/detail/{$goods->id}")?>">
                 <span class="imgspan">
                     <img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>">
                 </span>

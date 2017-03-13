@@ -1,5 +1,4 @@
 <?php require 'header.php';?>
-
     <div class="warpcon">
         <?php require 'left.php'; ?>
         <div class="warpright">
@@ -38,7 +37,7 @@
                                                 <img class="goodsImg" src="<?=$g->goods_image?>" width="100">
                                                 <div class="goodsDetail">
                                                     <div class="name">
-                                                        <a href="<?=url("/goods/detail/?id={$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>
+                                                        <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>
                                                         <?=$g->spec_1?> <?=$g->spec_2?>
                                                     </div>
 
@@ -65,8 +64,6 @@
                         </dd>
                     </dl>
                 <? endforeach;?>
-
-
                 <? if($orders['total']==0) : ?>
                     <blockquote class="layui-elem-quote">没有匹配到任何记录！ &nbsp;<a href="<?=url('/goods/lists')?>" class="layui-btn layui-btn-small">去逛逛</a></blockquote>
                 <? else: ?>
@@ -96,7 +93,6 @@
                                content: '<?=url("order/editMoney/?id=")?>'+id
                            });
                        });
-
                         $('.editShipping').on('click',function () {
                             var id=$(this).attr('data-id');
                             layer.open({
@@ -110,11 +106,7 @@
                         });
                     });
                 </script>
-
-
             </div>
-
-
         </div>
     </div>
 

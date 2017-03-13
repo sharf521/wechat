@@ -30,7 +30,7 @@
         </div>
         <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("/goods/detail/?id={$g->goods_id}")?>">
+            <a href="<?=url("/goods/detail/{$g->goods_id}")?>">
                 <div class="order_item">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">

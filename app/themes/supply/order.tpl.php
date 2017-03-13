@@ -1,11 +1,12 @@
 <?php require 'header.php';?>
+
     <div class="warpcon">
         <?php require 'left.php'; ?>
         <div class="warpright">
             <div class="box">
                 <br>
                 <fieldset class="layui-elem-field layui-field-title">
-                    <legend>我的订单</legend>
+                    <legend><?=$this->title?></legend>
                 </fieldset>
                 <div class="layui-tab layui-tab-brief" lay-filter="tab">
                     <ul class="layui-tab-title">
@@ -16,14 +17,14 @@
                     </ul>
                 </div>
                 <? foreach($orders['list'] as $order) :
-                    $shop=$order->Shop();
+                    $buyer=$order->Buyer();
                     ?>
                     <dl class="orderbox">
                         <dt>
-                            <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
+                            <span class="time"><?=substr($order->created_at,0,10)?></span>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
-                            <span class="shop">
-                                <i class="iconfont">&#xe854;</i> <?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?>
+                             <span class="buyer">
+                                <?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?>
                             </span>
                         </dt>
                         <dd>
@@ -46,17 +47,16 @@
                                             </div>
                                         <? endforeach;?>
                                     </td>
-                                    <td align="center"><span class="money">¥<?=$order->order_money?></span><br>(含运费：¥<?=$order->shipping_fee?>)<br>
+                                    <td align="center" width="120"><span class="money">¥<?=$order->order_money?></span><br>(含运费：¥<?=$order->shipping_fee?>)
+                                        <br>
                                         <a href="<?=url("order/detail/?id={$order->id}")?>">订单详情</a>
                                     </td>
                                     <td class="operate">
                                         <? if($order->status==1) : ?>
-                                            <a href="<?=url("order/pay/?id={$order->id}")?>" class="layui-btn layui-btn-small ">立即支付</a><br>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small layui-btn-primary cancel">取消订单</a><br>
-                                        <? elseif($order->status==4) : ?>
-                                            <a href="<?=url("order/success/?id={$order->id}")?>" class="layui-btn layui-btn-small">确认收货</a><br>
-                                        <? elseif($order->status==5) : ?>
-                                            <span>己完成</span>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改价格</a><br>
+                                        <? elseif ($order->status==3) : ?>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a><br>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="cancel layui-btn layui-btn-small layui-btn-primary">取消订单</a><br>
                                         <? endif;?>
                                     </td>
                                 </tr>
@@ -85,9 +85,37 @@
                                 }
                             });
                         });
+                       $('.editMoney').on('click',function () {
+                           var id=$(this).attr('data-id');
+                           layer.open({
+                               type: 2,
+                               title: '修改价格',
+                               shadeClose: true,
+                               shade: 0.8,
+                               area: ['460px', '290px'],
+                               content: '<?=url("order/editMoney/?id=")?>'+id
+                           });
+                       });
+
+                        $('.editShipping').on('click',function () {
+                            var id=$(this).attr('data-id');
+                            layer.open({
+                                type: 2,
+                                title: '发货',
+                                shadeClose: true,
+                                shade: 0.8,
+                                area: ['460px', '290px'],
+                                content: '<?=url("order/editShipping/?id=")?>'+id
+                            });
+                        });
                     });
                 </script>
+
+
             </div>
+
+
         </div>
     </div>
+
 <?php require 'footer.php';?>

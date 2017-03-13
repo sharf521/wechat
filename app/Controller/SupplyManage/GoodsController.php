@@ -8,6 +8,8 @@
 
 namespace App\Controller\SupplyManage;
 
+use App\Model\Category;
+use App\Model\Shop;
 use App\Model\SupplyCategory;
 use App\Model\SupplyGoods;
 use App\Model\SupplyGoodsData;
@@ -42,20 +44,57 @@ class GoodsController extends SupplyController
         $this->view('goods_list',$data);
     }
 
+    public function selCategory(Category $category,Request $request)
+    {
+        if($_POST){
+            //分类start
+            $arr_category = $request->post('categoryid');
+            $categoryid = $arr_category[count($arr_category) - 1];
+            if (empty($categoryid)) {
+                //最后一个元素为空取末第二个
+                $categoryid = $arr_category[count($arr_category) - 2];
+            }
+            //分类end
+            redirect("goods/add/?cid={$categoryid}");
+        }else{
+            $data['cates']=$this->getCates();
+            $data['shippings']=$this->getShippings();
+            $categorys = $category->getList(array('pid' => 2));
+            foreach ($categorys as $i=>$cate){
+                if(!in_array($cate->id,$this->site->goodsCates)){
+                    unset($categorys[$i]);
+                }
+            }
+            $data['categorys'] =$categorys;
+            $this->view('goods_category',$data);
+        }
+    }
+
     public function add(SupplyGoods $goods,SupplyGoodsData $goodsData,SupplyGoodsImage $goodsImage,Request $request)
     {
+        $cid=(int)$request->get('cid');
+        if($cid!=0){
+            $category=(new Category())->findOrFail($cid);
+            $cpath=$category->path;
+        }
         if($_POST){
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');
+            $g_price=(float)$request->post('g_price');
+            $g_stock_count=(int)$request->post('g_stock_count');
+            //规格
             $price=$request->post('price');
             $stock_count=$request->post('stock_count');
             $spec_1=$request->post('spec_1');
+            $spec_2=$request->post('spec_2');
+            //规格
             $shipping_fee=(float)$request->post('shipping_fee');
-            $content=$request->post('content');
+            $shipping_id=(int)$request->post('shipping_id');
+            $content=$_POST['content'];
             $shop_cateid=(int)$request->post('shop_category');
             $is_have_spec=(int)$request->post('is_have_spec');
             if($shop_cateid!=0){
-                $shop_catepath=(new SupplyCategory())->find($shop_cateid)->path;
+                $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
             }
             if(empty($imgids)){
                 redirect()->back()->with('error','图片不能为空！');
@@ -66,16 +105,25 @@ class GoodsController extends SupplyController
             try{
                 DB::beginTransaction();
                 $goods->user_id=$this->user_id;
-                $goods->category_id=0;
-                $goods->category_path='';
+                $goods->site_id=$this->user->site_id;
+                $goods->category_id=$cid;
+                $goods->category_path=$cpath;
+                $goods->shop_name=(new Shop())->find($this->user_id)->name;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';
                 $goods->name=$name;
-                $goods->price=(float)$price;
-                $goods->stock_count=(int)$stock_count;
+                $goods->price=$g_price;
+                $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
+                if($goods->is_have_spec){
+                    $spec_name1=$request->post('spec_name1');
+                    $spec_name2=$request->post('spec_name2');
+                    $goods->spec_name1=$spec_name1;
+                    $goods->spec_name2=$spec_name2;
+                }
                 $goods->shipping_fee=(float)$shipping_fee;
+                $goods->shipping_id=$shipping_id;
                 $goods->sale_count=0;
                 $goods->status=2;
                 $goods_id=$goods->save(true);
@@ -84,7 +132,6 @@ class GoodsController extends SupplyController
                 $goodsData->save();
                 $goodsImage->where("user_id=? and id in({$imgids})")->bindValues($this->user_id)->update(array('goods_id'=>$goods_id));
                 $goods=$goods->find($goods_id);
-                //$goods->image_url=$goodsImage->where("goods_id=?")->bindValues($goods_id)->first()->image_url;
                 $goods->image_url=$goods->GoodsImage()[0]->image_url;
                 if($is_have_spec==1 && is_array($spec_1)){
                     $stock_total=0;
@@ -92,6 +139,7 @@ class GoodsController extends SupplyController
                         $spec=new SupplyGoodsSpec();
                         $spec->goods_id=$goods->id;
                         $spec->spec_1=$spec_1[$i];
+                        $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
                         $spec->save();
@@ -111,7 +159,10 @@ class GoodsController extends SupplyController
                 redirect()->back()->with('error', $error);
             }
         }else{
-            $data['cates']=(new SupplyCategory())->where("user_id=?")->bindValues($this->user_id)->get();
+            $data['images']=$goodsImage->where("user_id=? and goods_id=0 and status=1")->bindValues($this->user_id)->get();
+            $data['cates']=$this->getCates();
+            $data['shippings']=$this->getShippings();
+            $data['specs']=array('','');
             $this->view('goods_form',$data);
         }
     }
@@ -122,16 +173,22 @@ class GoodsController extends SupplyController
         if($_POST){
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');
+            $g_price=(float)$request->post('g_price');
+            $g_stock_count=(int)$request->post('g_stock_count');
+            //规格
             $price=$request->post('price');
             $stock_count=$request->post('stock_count');
             $spec_1=$request->post('spec_1');
+            $spec_2=$request->post('spec_2');
+            //规格
             $spec_id=$request->post('spec_id');
             $shipping_fee=(float)$request->post('shipping_fee');
-            $content=$request->post('content');
+            $shipping_id=(int)$request->post('shipping_id');
+            $content=$_POST['content'];
             $shop_cateid=(int)$request->post('shop_category');
             $is_have_spec=(int)$request->post('is_have_spec');
             if($shop_cateid!=0){
-                $shop_catepath=(new SupplyCategory())->find($shop_cateid)->path;
+                $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
             }
             if(empty($imgids)){
                 redirect()->back()->with('error','图片不能为空！');
@@ -141,14 +198,22 @@ class GoodsController extends SupplyController
             }
             try{
                 DB::beginTransaction();
+                $goods->shop_name=(new Shop())->find($this->user_id)->name;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';
                 $goods->name=$name;
-                $goods->price=(float)$price;
-                $goods->stock_count=(int)$stock_count;
+                $goods->price=$g_price;
+                $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
-                $goods->shipping_fee=(float)$shipping_fee;
+                if($goods->is_have_spec){
+                    $spec_name1=$request->post('spec_name1');
+                    $spec_name2=$request->post('spec_name2');
+                    $goods->spec_name1=$spec_name1;
+                    $goods->spec_name2=$spec_name2;
+                }
+                $goods->shipping_fee=$shipping_fee;
+                $goods->shipping_id=$shipping_id;
                 $goods->save();
                 $goodsData=$goods->GoodsData();
                 $goodsData->content=$content;
@@ -162,6 +227,7 @@ class GoodsController extends SupplyController
                         $spec=(new SupplyGoodsSpec())->find($spec_id[$i]);
                         $spec->goods_id=$goods->id;
                         $spec->spec_1=$spec_1[$i];
+                        $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
                         if($spec->is_exist){
@@ -178,7 +244,7 @@ class GoodsController extends SupplyController
                     }
                     $goods->stock_count=$stock_total;
                 }
-                DB::table('supply_goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
+                DB::table('goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
                 $goods->save();
                 DB::commit();
                 if($goods->stock_count==0){
@@ -200,11 +266,12 @@ class GoodsController extends SupplyController
             if($goods->is_have_spec){
                 $data['specs']=$goods->GoodsSpec();
             }else{
-                $data['specs']=array();
+                $data['specs']=array('','');
             }
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
-            $data['cates']=(new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
+            $data['cates']=$this->getCates();
+            $data['shippings']=$this->getShippings();
             $this->view('goods_form',$data);
         }
     }
@@ -233,7 +300,7 @@ class GoodsController extends SupplyController
         if($goods->user_id==$this->user_id){
             $goods->status=-1;
             $goods->save();
-            redirect('goods')->with('msg','册除成功！');
+            redirect("goods")->with('msg','册除成功！');
         }else{
             redirect('goods')->with('error','操作失败！');
         }

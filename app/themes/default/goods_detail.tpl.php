@@ -91,7 +91,7 @@
     </div>
 
     <script>
-        var goods_id='<?=(int)$_GET['id']?>';
+        var goods_id='<?=(int)$goods->id?>';
         goods_detail_js();
     </script>
 <?php require 'footer.php';?>

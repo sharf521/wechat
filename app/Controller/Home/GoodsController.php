@@ -77,7 +77,8 @@ class GoodsController extends HomeController
 
     public function detail(Goods $goods,Request $request)
     {
-        $goods=$goods->findOrFail($request->get('id'));
+        $id=(int)$request->get(2);
+        $goods=$goods->findOrFail($id);
         if($_POST){
             $data=array(
                 'is_direct_buy'=>1,

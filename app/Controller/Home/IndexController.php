@@ -29,7 +29,7 @@ class IndexController extends HomeController
             }
             $data['floorList']=$floorList;
         }
-        //$this->view('index',$data);
+        $this->view('index',$data);
     }
 
     public function up()

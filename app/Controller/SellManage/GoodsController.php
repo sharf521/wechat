@@ -107,6 +107,7 @@ class GoodsController extends SellController
                 $goods->user_id=$this->user_id;
                 $goods->site_id=$this->user->site_id;
                 $goods->supply_goods_id=0;
+                $goods->supply_user_id=0;
                 $goods->category_id=$cid;
                 $goods->category_path=$cpath;
                 $goods->shop_name=(new Shop())->find($this->user_id)->name;

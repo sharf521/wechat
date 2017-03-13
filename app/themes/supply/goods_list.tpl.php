@@ -29,8 +29,7 @@
                     <? foreach ($result['list'] as $goods) : ?>
                     <tr>
                         <td><?=$goods->id?></td>
-                        <td><img src="/themes/images/blank.gif" width="108" style="float: left" data-echo="<?=$goods->image_url?>">
-                            <a href="/goods/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a> </td>
+                        <td><img src="/themes/images/blank.gif" width="108" data-echo="<?=$goods->image_url?>"><?=$goods->name?></td>
                         <td>￥<?=$goods->price?></td>
                         <td><?=$goods->stock_count?></td>
                         <td><?=$goods->created_at?></td>
