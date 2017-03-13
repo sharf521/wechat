@@ -51,11 +51,12 @@ class AdminController extends Controller
                     exit;
                 }
             }
-        }
-        if($this->user->type_id==2){
-            $this->siteList=(new SubSite())->get();
-        }else{
-            $this->siteList=(new SubSite())->where("id={$this->user->site_id}")->get();
+
+            if($this->user->type_id==2){
+                $this->siteList=(new SubSite())->get();
+            }else{
+                $this->siteList=(new SubSite())->where("id={$this->user->site_id}")->get();
+            }
         }
     }
 
