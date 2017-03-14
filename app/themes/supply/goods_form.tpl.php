@@ -20,9 +20,15 @@
                         <input type="hidden" name="is_have_spec" id="is_have_spec" value="<?=(int)$goods->is_have_spec?>">
                         <div id="specBox_no" <? if((int)$goods->is_have_spec==1){echo 'class="hide"';}?>>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">价格</label>
+                                <label class="layui-form-label">成本价格</label>
                                 <div class="layui-input-inline">
                                     <input type="text" name="g_price" value="<?=$goods->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="￥" class="layui-input" value="" autocomplete="off"/>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">建议零售价</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="g_retail_price" value="<?=$goods->retail_price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="￥" class="layui-input" value="" autocomplete="off"/>
                                 </div>
                             </div>
                             <div class="layui-form-item">
@@ -48,6 +54,7 @@
                                             <th><input name="spec_name1" type="text" class="layui-input" size="4" value="<?=$goods->spec_name1?>" placeholder="颜色"></th>
                                             <th><input name="spec_name2" type="text" class="layui-input" size="4" value="<?=$goods->spec_name2?>" placeholder="大小"></th>
                                             <th>价格</th>
+                                            <th>建议零售价</th>
                                             <th>库存</th>
                                             <th>操作</th>
                                         </tr>
@@ -60,6 +67,7 @@
                                                 <input name="spec_1[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_1?>"></td>
                                             <td><input name="spec_2[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_2?>"></td>
                                             <td><input name="price[]" type="text" size="6"  placeholder="￥" class="layui-input" value="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"></td>
+                                            <td><input name="retail_price[]" type="text" size="6"  placeholder="￥" class="layui-input" value="<?=$spec->retail_price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"></td>
                                             <td><input name="stock_count[]" type="text" size="6"  placeholder="库存数量" value="<?=$spec->stock_count?>" class="layui-input" onkeyup="value=value.replace(/[^0-9]/g,'')"></td>
                                             <td>
                                                 <span class="up_btn layui-btn layui-btn-mini">上移</span>

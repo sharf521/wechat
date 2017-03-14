@@ -19,51 +19,47 @@
             </div>
             <div class="goods_info">
                 <div class="name"><h1><?=$goods->name?></h1></div>
-                <div class="price clearFix">
-                    <span class="label">价格: </span><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span>
-                </div>
-                <div class="clearFix" style="display: none">
-                    <span class="label">运费: </span><span class="shipping_fee">¥<?=$goods->shipping_fee?></span>
-                </div>
-                <div class="bottom_buy_box">
-                    <form method="post" name="form_order">
-                        <? if($goods->is_have_spec) : ?>
-                            <? $specs=$goods->GoodsSpec();?>
-                            <script>
-                                $(function(){
-                                    var specs = new Array();
-                                    <? foreach($specs as $spec) :?>
-                                    specs.push(new spec(<?=$spec->id?>, '<?=$spec->spec_1?>', '<?=$spec->spec_2?>', <?=$spec->price?>, <?=$spec->stock_count?>));
-                                    <? endforeach;?>
-                                    goodsSpec=new GoodsSpec(specs);
-                                });
-                            </script>
-                            <input type="hidden" name="spec_id" id="spec_id">
-                            <div class="clearFix">
-                                <span class="label"><?=$goods->spec_name1?>: </span><div id="specBox_1" class="spec_choose clearFix"></div>
-                            </div>
-                            <?php  if($goods->spec_name2!=''): ?>
-                            <div class="clearFix">
-                                <span class="label"><?=$goods->spec_name2?>: </span><div id="specBox_2" class="spec_choose clearFix"></div>
-                            </div>
-                            <?php endif;?>
-                        <? endif;?>
-                        <div class="clearFix choose">
-                            <span class="label">购买数量: </span>
-                            <div class="wrap-input">
-                                <span class="btn-reduce">-</span>
-                                <input class="text" value="1"  maxlength="5" type="text" id="buy_quantity" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
-                                <span class="btn-add">+</span>
-                            </div>
-                            <div class="stock_count">当前库存<span id="goods_stock_count" class="goods_stock_count"><?=$goods->stock_count?></span>件</div>
+                <input type="hidden" id="is_have_spec" value="<?=$goods->is_have_spec?>">
+                <form method="post" name="form_order">
+                    <? if($goods->is_have_spec) : ?>
+                        <? $specs=$goods->GoodsSpec();?>
+                        <table class="layui-table">
+                            <thead>
+                            <tr>
+                                <th><?=$goods->spec_name1?></th>
+                                <?php  if($goods->spec_name2!=''): ?>
+                                    <th><?=$goods->spec_name2?></th>
+                                <?php endif;?>
+                                <th>库存</th><th>成本价</th><th>建议零售价</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <? foreach($specs as $spec) :?>
+                                <tr>
+                                    <td><?=$spec->spec_1?></td>
+                                    <?php  if($goods->spec_name2!=''): ?>
+                                        <td><?=$spec->spec_2?></td>
+                                    <?php endif;?>
+                                    <td><?=$spec->stock_count?></td>
+                                    <td><?=$spec->price?></td>
+                                    <td>
+                                        <input type="text" class="layui-input" style="width: 150px; display: inline-block" name="retail_price[]" value="<?=$spec->retail_price?>" data_price="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"> 元
+                                    </td>
+                                </tr>
+                            <? endforeach;?>
+                            </tbody>
+                        </table>
+                    <? else:?>
+                        <div class="price clearFix">
+                            <span class="label">价格: </span><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span>
                         </div>
-                        <div class="goods_prompt"></div>
-                        <div class="buy_box_opts clearFix">
-                            <a href="javascript:alert('开发中');" class="layui-btn opt2_11">立即购买</a>
+                        <div class="price clearFix">
+                            <span class="label">建议零售价: </span>
+                            <input type="text" class="layui-input" style="width: 150px; display: inline-block" name="retail_price" value="<?=$goods->retail_price?>" data_price="<?=$goods->price?>"onkeyup="value=value.replace(/[^0-9.]/g,'')"> 元
                         </div>
-                    </form>
-                </div>
-
+                    <? endif;?>
+                </form>
+                <a href="javascript:;" class="layui-btn purchase-btn" style="background-color: #f44; margin:10px 100px;">立即上架到店铺</a>
             </div>
         </div>
         <div class="goods_detail_box">
@@ -91,6 +87,6 @@
 
     <script>
         var goods_id='<?=(int)$goods->id?>';
-        goods_detail_js();
+        purchase_detail_js();
     </script>
 <?php require 'footer.php';?>

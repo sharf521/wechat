@@ -99,9 +99,20 @@ function goodsAdd_js() {
         }
         if($('#is_have_spec').val()=='0'){
             var g_price=$(form).find('input[name=g_price]');
-            if(g_price.val()==''){
+            if(g_price.val()=='' || Number(g_price.val())==0){
                 layer.tips('不能为空！', g_price);
                 g_price.focus();
+                return false;
+            }
+            var g_retail_price=$(form).find('input[name=g_retail_price]');
+            if(g_retail_price.val()=='' || Number(g_retail_price.val())==0){
+                layer.tips('不能为空！', g_retail_price);
+                g_retail_price.focus();
+                return false;
+            }
+            if(Number(g_price.val()) > Number(g_retail_price.val())){
+                layer.tips('零售价不能小于成本价！', g_retail_price);
+                g_retail_price.focus();
                 return false;
             }
             var g_stock_count=$(form).find('input[name=g_stock_count]');

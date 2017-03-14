@@ -81,9 +81,11 @@ class GoodsController extends SupplyController
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');
             $g_price=(float)$request->post('g_price');
+            $g_retail_price=(float)$request->post('g_retail_price');
             $g_stock_count=(int)$request->post('g_stock_count');
             //规格
             $price=$request->post('price');
+            $retail_price=$request->post('retail_price');
             $stock_count=$request->post('stock_count');
             $spec_1=$request->post('spec_1');
             $spec_2=$request->post('spec_2');
@@ -113,6 +115,7 @@ class GoodsController extends SupplyController
                 $goods->image_url='';
                 $goods->name=$name;
                 $goods->price=$g_price;
+                $goods->retail_price=$g_retail_price;
                 $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
                 if($goods->is_have_spec){
@@ -140,10 +143,12 @@ class GoodsController extends SupplyController
                         $spec->spec_1=$spec_1[$i];
                         $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
+                        $spec->retail_price=(float)$retail_price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
                         $spec->save();
-                        if($stock_total==0){
+                        if($i==0){
                             $goods->price=$spec->price;
+                            $goods->retail_price=$spec->retail_price;
                         }
                         $stock_total+=$spec->stock_count;
                     }
@@ -173,9 +178,11 @@ class GoodsController extends SupplyController
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');
             $g_price=(float)$request->post('g_price');
+            $g_retail_price=(float)$request->post('g_retail_price');
             $g_stock_count=(int)$request->post('g_stock_count');
             //规格
             $price=$request->post('price');
+            $retail_price=$request->post('retail_price');
             $stock_count=$request->post('stock_count');
             $spec_1=$request->post('spec_1');
             $spec_2=$request->post('spec_2');
@@ -197,12 +204,12 @@ class GoodsController extends SupplyController
             }
             try{
                 DB::beginTransaction();
-                $goods->shop_name=(new Shop())->find($this->user_id)->name;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';
                 $goods->name=$name;
                 $goods->price=$g_price;
+                $goods->retail_price=$g_retail_price;
                 $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
                 if($goods->is_have_spec){
@@ -228,6 +235,7 @@ class GoodsController extends SupplyController
                         $spec->spec_1=$spec_1[$i];
                         $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
+                        $spec->retail_price=(float)$retail_price[$i];
                         $spec->stock_count=(int)$stock_count[$i];
                         if($spec->is_exist){
                             $spec->save();
@@ -236,8 +244,9 @@ class GoodsController extends SupplyController
                             $_id=$spec->save(true);
                             array_push($array_spec,$_id);
                         }
-                        if($stock_total==0){
+                        if($i==0){
                             $goods->price=$spec->price;
+                            $goods->retail_price=$spec->retail_price;
                         }
                         $stock_total+=$spec->stock_count;
                     }

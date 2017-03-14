@@ -199,7 +199,6 @@ class GoodsController extends SellController
             }
             try{
                 DB::beginTransaction();
-                $goods->shop_name=(new Shop())->find($this->user_id)->name;
                 $goods->shop_cateid=$shop_cateid;
                 $goods->shop_catepath=$shop_catepath;
                 $goods->image_url='';

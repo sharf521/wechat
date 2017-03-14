@@ -65,7 +65,7 @@ class PurchaseController extends HomeController
             array_pop($paths);
             foreach ($paths as $cid){
                 $c=$category->find($cid);
-                $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
+                $topnav_str.="<a href='/purchase/lists/{$c->id}'>{$c->name}</a>";
             }
             $topnav_str.="<a><cite>{$cate->name}</cite></a>";
 
@@ -79,40 +79,82 @@ class PurchaseController extends HomeController
         $this->view('purchase_lists',$data);
     }
 
-    public function detail(SupplyGoods $goods,Request $request)
+    public function detail(SupplyGoods $supplyGoods,Request $request)
     {
         $id=(int)$request->get(2);
-        $goods=$goods->findOrFail($id);
+        $supplyGoods=$supplyGoods->findOrFail($id);
         if($_POST){
-            $data=array(
-                'is_direct_buy'=>1,
-                'buyer_id'=>$this->user_id,
-                'goods_id'=>$goods->id,
-                'spec_id'=>$request->post('spec_id'),
-                'quantity'=>$request->post('quantity')
-            );
-            $return=(new Cart())->add($data);
-            if($return['code']!='0'){
-                redirect()->back()->with('error',$return['msg']);
-                return;
+            if($supplyGoods->is_have_spec){
+                $retail_price=$request->post('retail_price');
             }else{
-                redirect('order/confirm/?cart_id[]='.$return['cart_id']);
+                $retail_price=(float)$request->post('retail_price');
+                if($retail_price<$supplyGoods->price){
+                    redirect()->back()->with('error','零售价不能小于成本价');
+                }
+            }
+            try{
+                DB::beginTransaction();
+                $goods=new Goods();
+                $goods->supply_goods_id=$supplyGoods->id;
+                $goods->supply_user_id=$supplyGoods->user_id;
+                $goods->user_id=$this->user_id;
+                $goods->site_id=$this->user->site_id;
+                $goods->category_id=$supplyGoods->category_id;
+                $goods->category_path=$supplyGoods->category_path;
+                $goods->shop_cateid=0;
+                $goods->shop_catepath='';
+                $goods->image_url=$supplyGoods->image_url;
+                $goods->name=$supplyGoods->name;
+                $goods->stock_count=0;
+                $goods->is_have_spec=$supplyGoods->is_have_spec;
+                $goods->shipping_id=$supplyGoods->shipping_id;
+                $goods->sale_count=0;
+                $goods->status=2;
+                $goods_id=$goods->save(true);
+                $goods=$goods->find($goods_id);
+                if($goods->is_have_spec){
+                    $specs=$supplyGoods->GoodsSpec();
+                    foreach($specs as $i=>$v){
+                        $spec=new GoodsSpec();
+                        $spec->goods_id=$goods->id;
+                        $spec->spec_1=$v->spec_1;
+                        $spec->spec_2=$v->spec_2;
+                        $spec->price=(float)$retail_price[$i];
+                        $spec->retail_float_money=math($spec->price,$v->price,'-',2);
+                        $spec->stock_count=0;
+                        $spec->save();
+                        if($i==0){
+                            $goods->price=$spec->price;
+                            $goods->retail_float_money=$spec->retail_float_money;
+                        }
+                    }
+                }else{
+                    $goods->price=$retail_price;
+                    $goods->retail_float_money=math($goods->price,$supplyGoods->price,'-',2);
+                }
+                $goods->save();
+                DB::commit();
+                redirect('/sellManage/goods')->with('msg', '添加成功！');
+            }catch(\Exception $e){
+                DB::rollBack();
+                $error = "Failed: " . $e->getMessage();
+                redirect()->back()->with('error', $error);
             }
         }else{
             //当前位置
             $topnav_str='<a href="/">首页</a>';
-            $path=trim($goods->category_path,',');
+            $path=trim($supplyGoods->category_path,',');
             $paths=explode(',',$path);
             array_shift($paths);
             foreach ($paths as $cid){
                 $c=(new Category())->find($cid);
-                $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
+                $topnav_str.="<a href='/purchase/lists/{$c->id}'>{$c->name}</a>";
             }
-            $topnav_str.="<a><cite>{$goods->name}</cite></a>";
+            $topnav_str.="<a><cite>{$supplyGoods->name}</cite></a>";
             $data['topnav_str']=$topnav_str;
-            $data['goods']=$goods;
-            $data['images']=$goods->GoodsImage();
-            $data['GoodsData']=$goods->GoodsData();
+            $data['goods']=$supplyGoods;
+            $data['images']=$supplyGoods->GoodsImage();
+            $data['GoodsData']=$supplyGoods->GoodsData();
             $this->title='商品详情';
             $this->view('purchase_detail',$data);
         }

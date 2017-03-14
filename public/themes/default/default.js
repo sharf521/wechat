@@ -260,6 +260,52 @@ function cart_js() {
 }
 /* 购物车 end*/
 
+//采购
+function purchase_detail_js() {
+    $(function(){
+        // 图片替换效果
+        $('.goods_pics li img').mouseover(function(){
+            $('.goods_pics li img').removeClass();
+            $(this).addClass('ware_pic_hover');
+            $('.pic_big img').attr('src', $(this).attr('src'));
+        });
+    });
+    //立刻采购
+    $('.purchase-btn').on('click',function(){
+        var form=document.forms['form_order'];
+        if($('#is_have_spec').val()=='0'){
+            var retail_price=$(form).find('input[name=retail_price]');
+            if(retail_price.val()=='' || Number(retail_price.val())==0){
+                layer.tips('不能为空！', retail_price);
+                retail_price.focus();
+                return false;
+            }
+            var price=retail_price.attr('data_price');
+            if(Number(retail_price.val()) < Number(price)){
+                layer.tips('零售价不能小于成本价！', retail_price);
+                retail_price.focus();
+                return false;
+            }
+        }else{
+            var Tag=false;
+            $(form).find('input[type=text]').each(function () {
+                if($(this).val()=='' || Number($(this).val())==0){
+                    layer.tips('不能为空！', this,{tipsMore: true});
+                    Tag=true;
+                }
+                var price=$(this).attr('data_price');
+                if(Number($(this).val()) < Number(price)){
+                    layer.tips('零售价不能小于成本价！', this,{tipsMore: true});
+                    Tag=true;
+                }
+            });
+            if(Tag){
+                return false;
+            }
+        }
+        form.submit();
+    })
+}
 function goods_detail_js()
 {
     $(function(){
