@@ -28,14 +28,14 @@
                 });
             </script>
             <ul class="goods_list clearFix">
-<? foreach ($result['list'] as $goods) : 
+<? foreach ($result['list'] as $goods) :
     $shop=$goods->Shop();
     ?>
                 <li>
-                    <div class="goods-content">
-                        <div class="goods-pic"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>"></a></div>
+                    <div class="goods-content" nctype_goods=" 128076" nctype_store="209">
+                        <div class="goods-pic"><a href="<?=url("/purchase/detail/{$goods->id}")?>" target="_blank"><img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>"></a></div>
                         <div class="goods-info" style="top: 230px;">
-                            <div class="goods-name"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><?=$goods->name?></a></div>
+                            <div class="goods-name"><a href="<?=url("/purchase/detail/{$goods->id}")?>" target="_blank"><?=$goods->name?></a></div>
                             <div class="goods-price"> <em class="sale-price">¥<?=$goods->price?></em>
                                 <!--<em class="market-price">¥0.00</em>-->  </div>
                             <div class="sell-stat">

@@ -20,7 +20,7 @@
                     ?>
                     <dl class="orderbox">
                         <dt>
-                            <span class="time"><?=substr($order->created_at,0,10)?></span>
+                            <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
                              <span class="buyer">
                                 <?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?>

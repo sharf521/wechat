@@ -105,6 +105,7 @@
             <ul>
                 <li <? if($_SERVER['PHP_SELF']=='/index.php'){echo 'class="hover"';}?>><a href="/">首页</a></li>
                 <li <? if(strpos($_SERVER['PHP_SELF'],'/goods/')!==false){echo 'class="hover"';}?>><a href="/goods/lists">商品列表</a></li>
+                    <li <? if(strpos($_SERVER['PHP_SELF'],'/purchase/')!==false){echo 'class="hover"';}?>><a href="/purchase/lists">我要采购</a></li>
             </ul>
         </div>
     </div>

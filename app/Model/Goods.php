@@ -46,4 +46,12 @@ class Goods extends Model
     {
         return$this->hasMany('\App\Model\GoodsSpec','goods_id','id');
     }
+
+    /**
+     * @return Shop
+     */
+    public function Shop()
+    {
+        return $this->hasOne('\App\Model\Shop','user_id','user_id');
+    }
 }

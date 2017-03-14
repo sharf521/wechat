@@ -131,6 +131,7 @@ i, cite, em { font-style: normal; }
 
 .goods_list { font-size: 0; *word-spacing:-1px/*IE6、7*/; display: block; width: 1000px; margin-left: -16px;}
 .goods_list li { font-size: 12px; vertical-align: middle; letter-spacing: normal; word-spacing: normal; display: inline-block; *display: inline/*IE6,7*/;  width: 238px; height: 375px; margin: 0px 0 12px 12px; *zoom:1;}
+.goods_list li:hover .goods-content { height: 375px; margin: 0; border: solid 4px #D93600; border-radius: 0; box-shadow: 0px 4px 4px rgba(102,102,102,0.65);}
 .goods_list .goods-content { line-height: 18px; background-color: #FFF; height: 290px; margin: 3px; border: solid 1px #F0F0F0; border-radius: 2px; position:relative; overflow: hidden; box-shadow: 0 0 3px rgba(153,153,153,0.1); transition: border-color 0.4s ease-in-out 0s;}
 .goods_list .goods-content:hover { z-index: 12;}
 .goods_list .goods-pic { background: #FFF; width: 220px; height: 220px; padding: 5px 5px 0 5px; margin: 0; z-index: 1; top: 0; left: 0;}
@@ -148,9 +149,7 @@ i, cite, em { font-style: normal; }
 .goods_list .sell-stat ul li span { font: 600 12px/20px Tahoma; color: #B57C5B;}
 .goods_list .sell-stat ul li span.status { color: #3388BB;}
 .goods_list .sell-stat ul li p { line-height: 20px; color: #999; height: 20px;}
-.goods_list .store { line-height: 20px; display: none; background-color: #F5F5F5; text-align: center;height: 20px; clear: both; padding: 8px 0; border-top: solid 1px #EEE;}
-.goods_list li:hover .goods-content { height: 350px; margin: 0; border: solid 4px #D93600; border-radius: 0; box-shadow: 0px 4px 4px rgba(102,102,102,0.65);}
-
+.goods_list .store { line-height: 28px; background-color: #f5f5f5; text-align: center;clear: both; border-top: solid 1px #EEE;}
 
 .no-result{    color: #AAA;    padding: 200px 0;    text-align: center;}
 
