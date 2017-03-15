@@ -10,4 +10,12 @@ class OrderGoods extends Model
     {
         parent::__construct();
     }
+
+    /**
+     * @return Shop
+     */
+    public function Supply()
+    {
+        return $this->hasOne('\App\Model\Shop','user_id','supply_user_id');
+    }
 }

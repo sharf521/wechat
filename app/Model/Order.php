@@ -20,7 +20,8 @@ class Order extends Model
         foreach ($orderGoods as $oGoods){
             //添加库存
             $goods=(new Goods())->find($oGoods->goods_id);
-            if($goods->is_exist){
+            $goods->setStockCount($oGoods->quantity,$oGoods->spec_id);
+            /*if($goods->is_exist){
                 $num=$oGoods->quantity;
                 $goods->stock_count=$goods->stock_count+$num;
                 $goods->sale_count=$goods->sale_count-$num;
@@ -30,7 +31,7 @@ class Order extends Model
                     $spec->stock_count=$spec->stock_count+$num;
                     $spec->save();
                 }
-            }
+            }*/
         }
     }
 

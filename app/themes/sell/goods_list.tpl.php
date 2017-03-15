@@ -18,7 +18,6 @@
                 </div>
                 <table class="layui-table"  lay-even lay-skin="row">
                     <thead>
-                    <th width="50">编号</th>
                     <th>名称</th>
                     <th>价格</th>
                     <th>库存</th>
@@ -28,20 +27,34 @@
                     <tbody>
                     <? foreach ($result['list'] as $goods) : ?>
                     <tr>
-                        <td><?=$goods->id?></td>
-                        <td><img src="/themes/images/blank.gif" width="108" style="float: left" data-echo="<?=$goods->image_url?>">
-                            <a href="/goods/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a> </td>
+                        <td><img src="/themes/images/blank.gif" width="100" style="float: left" data-echo="<?=$goods->image_url?>">
+                            <a href="/goods/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a>
+                            <br>
+                            <? if($goods->supply_goods_id!=0):
+                                $supply=$goods->Supply();
+                                ?>
+                                <div style="margin: 10px; color: #999;">供货商：<?=$supply->name?> <?=\App\Helper::getQqLink($supply->qq)?></div>
+                            <? endif?>
+                        </td>
                         <td>￥<?=$goods->price?></td>
                         <td><?=$goods->stock_count?></td>
                         <td><?=$goods->created_at?></td>
                         <td>
+                            <div class="layui-btn-group">
                             <? if($this->func=='index') : ?>
                                 <a href="<?=url("goods/change/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">下架</a>
                             <? endif;?>
                             <? if($this->func=='list_status2') :?>
                                 <a href="<?=url("goods/change/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">上架</a>
                             <? endif;?>
-                            <a href="<?=url("goods/edit/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">编辑</a><a href="javascript:goodsDel(<?=$goods->id?>)" class="layui-btn layui-btn-mini">删除</a>
+                            <? if($goods->supply_goods_id!=0):?>
+                                <a href="<?=url("goods/purchaseGoodsEdit/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">编辑</a>
+                            <? else: ?>
+                                <a href="<?=url("goods/edit/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">编辑</a>
+                            <? endif?>
+
+                            <a href="javascript:goodsDel(<?=$goods->id?>)" class="layui-btn layui-btn-mini">删除</a>
+                                </div>
                         </td>
                     </tr>
                     <?php endforeach;?>

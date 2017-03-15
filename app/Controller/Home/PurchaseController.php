@@ -79,17 +79,19 @@ class PurchaseController extends HomeController
         $this->view('purchase_lists',$data);
     }
 
-    public function detail(SupplyGoods $supplyGoods,Request $request)
+    public function detail(SupplyGoods $supplyGoods,Goods $goods,Request $request)
     {
         $id=(int)$request->get(2);
         $supplyGoods=$supplyGoods->findOrFail($id);
+        $goods=$goods->where("supply_goods_id=? and status!=-1")->bindValues($supplyGoods->id)->first();
         if($_POST){
-            if($supplyGoods->is_have_spec){
-                $retail_price=$request->post('retail_price');
-            }else{
+            if($goods->is_exist){
+                redirect()->back()->with('error','请不要重复采购');
+            }
+            if($supplyGoods->is_have_spec==0){
                 $retail_price=(float)$request->post('retail_price');
                 if($retail_price<$supplyGoods->price){
-                    redirect()->back()->with('error','零售价不能小于成本价');
+                    redirect()->back()->with('error','零售价不能小于供货价');
                 }
             }
             try{
@@ -105,22 +107,23 @@ class PurchaseController extends HomeController
                 $goods->shop_catepath='';
                 $goods->image_url=$supplyGoods->image_url;
                 $goods->name=$supplyGoods->name;
-                $goods->stock_count=0;
+                $goods->stock_count=9999;
                 $goods->is_have_spec=$supplyGoods->is_have_spec;
                 $goods->shipping_id=$supplyGoods->shipping_id;
                 $goods->sale_count=0;
                 $goods->status=2;
                 $goods_id=$goods->save(true);
                 $goods=$goods->find($goods_id);
-                if($goods->is_have_spec){
+                if($supplyGoods->is_have_spec){
                     $specs=$supplyGoods->GoodsSpec();
                     foreach($specs as $i=>$v){
                         $spec=new GoodsSpec();
                         $spec->goods_id=$goods->id;
                         $spec->spec_1=$v->spec_1;
                         $spec->spec_2=$v->spec_2;
-                        $spec->price=(float)$retail_price[$i];
-                        $spec->retail_float_money=math($spec->price,$v->price,'-',2);
+                        $spec->price=(float)$request->post("retail_price{$v->id}");
+                        $spec->supply_spec_id=$v->id;
+                        $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
                         $spec->stock_count=0;
                         $spec->save();
                         if($i==0){
@@ -134,7 +137,7 @@ class PurchaseController extends HomeController
                 }
                 $goods->save();
                 DB::commit();
-                redirect('/sellManage/goods')->with('msg', '添加成功！');
+                redirect('/sellManage/goods/list_status2')->with('msg', '添加成功！');
             }catch(\Exception $e){
                 DB::rollBack();
                 $error = "Failed: " . $e->getMessage();
@@ -156,6 +159,9 @@ class PurchaseController extends HomeController
             $data['images']=$supplyGoods->GoodsImage();
             $data['GoodsData']=$supplyGoods->GoodsData();
             $this->title='商品详情';
+            if($goods->is_exist){
+                $data['isPurchase']=true;
+            }
             $this->view('purchase_detail',$data);
         }
     }

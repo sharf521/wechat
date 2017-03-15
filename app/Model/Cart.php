@@ -29,6 +29,9 @@ class Cart extends Model
         if($quantity==0){
             return $this->returnError('请选择数量！');
         }
+        if($goods->status==2){
+            return $this->returnError('该商品己下架！');
+        }
         $goods=$goods->addSpec($spec_id);
         $stock_count=$goods->stock_count;
         if($stock_count<$quantity){

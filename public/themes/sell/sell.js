@@ -179,6 +179,51 @@ function goodsAdd_js() {
 
 //goods end
 
+function purchaseGoodsEdit_js() {
+    layui.form('select').render();
+    layui.form().on('submit(*)', function (data) {
+        var form = data.form;
+        var fields = data.field;
+        var name = $(form).find('input[name=name]');
+        if (name.val() == '') {
+            layer.tips('不能为空！', name);
+            name.focus();
+            return false;
+        }
+
+        if ($('#is_have_spec').val() == '0') {
+            var retail_price = $(form).find('input[name=retail_price]');
+            if (retail_price.val() == '' || Number(retail_price.val()) == 0) {
+                layer.tips('不能为空！', retail_price);
+                retail_price.focus();
+                return false;
+            }
+            var price = retail_price.attr('data_price');
+            if (Number(retail_price.val()) < Number(price)) {
+                layer.tips('零售价不能小于供货价！', retail_price);
+                retail_price.focus();
+                return false;
+            }
+        } else {
+            var Tag = false;
+            $(form).find('input[type=text]').each(function () {
+                if ($(this).val() == '' || Number($(this).val()) == 0) {
+                    layer.tips('不能为空！', this, {tipsMore: true});
+                    Tag = true;
+                }
+                var price = $(this).attr('data_price');
+                if (Number($(this).val()) < Number(price)) {
+                    layer.tips('零售价不能小于供货价！', this, {tipsMore: true});
+                    Tag = true;
+                }
+            });
+            if (Tag) {
+                return false;
+            }
+        }
+    });
+}
+
 function category_js() {
     $(function () {
         layui.form().on('submit(*)', function(data){

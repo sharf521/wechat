@@ -22,7 +22,6 @@
                 <input type="hidden" id="is_have_spec" value="<?=$goods->is_have_spec?>">
                 <form method="post" name="form_order">
                     <? if($goods->is_have_spec) : ?>
-                        <? $specs=$goods->GoodsSpec();?>
                         <table class="layui-table">
                             <thead>
                             <tr>
@@ -30,11 +29,13 @@
                                 <?php  if($goods->spec_name2!=''): ?>
                                     <th><?=$goods->spec_name2?></th>
                                 <?php endif;?>
-                                <th>库存</th><th>成本价</th><th>建议零售价</th>
+                                <th>库存</th><th>供货价</th><th>零售价</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <? foreach($specs as $spec) :?>
+                            <?php
+                            $specs=$goods->GoodsSpec();
+                            foreach($specs as $spec) :?>
                                 <tr>
                                     <td><?=$spec->spec_1?></td>
                                     <?php  if($goods->spec_name2!=''): ?>
@@ -43,7 +44,7 @@
                                     <td><?=$spec->stock_count?></td>
                                     <td><?=$spec->price?></td>
                                     <td>
-                                        <input type="text" class="layui-input" style="width: 150px; display: inline-block" name="retail_price[]" value="<?=$spec->retail_price?>" data_price="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"> 元
+                                        <input type="text" class="layui-input" placeholder="￥" style="width: 100px; display: inline-block" name="retail_price<?=$spec->id?>" value="<?=$spec->retail_price?>" data_price="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"> 建议￥<?=$spec->retail_price?>
                                     </td>
                                 </tr>
                             <? endforeach;?>
@@ -59,7 +60,11 @@
                         </div>
                     <? endif;?>
                 </form>
+                <? if($isPurchase!==true) : ?>
                 <a href="javascript:;" class="layui-btn purchase-btn" style="background-color: #f44; margin:10px 100px;">立即上架到店铺</a>
+                <? else : ?>
+                    <a href="javascript:;" class="layui-btn layui-btn-disabled" style="margin:10px 100px;">己采购</a>
+                <? endif;?>
             </div>
         </div>
         <div class="goods_detail_box">

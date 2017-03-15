@@ -1,5 +1,4 @@
 <?php require 'header.php';?>
-    <script type="text/javascript" src="/data/js/category.js?<?= rand(1, 100) ?>"></script>
     <div class="layui-main">
         <?php require 'left.php'; ?>
         <div class="warpright">

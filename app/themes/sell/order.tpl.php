@@ -23,7 +23,7 @@
                             <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
                              <span class="buyer">
-                                <?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?>
+                                买家：<?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?>
                             </span>
                         </dt>
                         <dd>
@@ -37,11 +37,18 @@
                                                 <img class="goodsImg" src="<?=$g->goods_image?>" width="100">
                                                 <div class="goodsDetail">
                                                     <div class="name">
-                                                        <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>
-                                                        <?=$g->spec_1?> <?=$g->spec_2?>
+                                                        <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a>                                                                                <br><?=$g->spec_1?> <?=$g->spec_2?><br>
+                                                        <? if($g->supply_goods_id!=0):
+                                                            $supply=$g->Supply();
+                                                            ?>
+                                                            供货商：<?=$supply->name?> <?=\App\Helper::getQqLink($supply->qq)?>
+                                                        <? endif?>
                                                     </div>
-
-                                                    <div class="quantity">￥<?=$g->price?> <span>X</span> <?= $g->quantity ?></div>
+                                                    <div class="quantity">
+                                                        ¥<?=$g->price?> <span>X</span> <?= $g->quantity ?>
+                                                        <br>
+                                                        <span>运费：¥<?=$g->shipping_fee?></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <? endforeach;?>

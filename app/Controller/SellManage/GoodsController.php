@@ -16,6 +16,7 @@ use App\Model\GoodsSpec;
 use App\Model\Shipping;
 use App\Model\Shop;
 use App\Model\ShopCategory;
+use App\Model\SupplyGoods;
 use System\Lib\DB;
 use System\Lib\Request;
 
@@ -168,9 +169,76 @@ class GoodsController extends SellController
         }
     }
 
+    //编辑采购商品
+    public function purchaseGoodsEdit(Goods $goods,SupplyGoods $supplyGoods,Request $request)
+    {
+        $goods=$goods->findOrFail($request->get('id'));
+        $supplyGoods=$supplyGoods->findOrFail($goods->supply_goods_id);
+        if($goods->supply_goods_id==0){
+            redirect()->back()->with('error','不是采购的商品！');
+        }
+        if($_POST){
+            $name=$request->post('name');
+            if(empty($name)){
+                redirect()->back()->with('error','商品名称不能为空！');
+            }
+            $goods->name=$name;
+            $array_spec=array(0);
+            if($supplyGoods->is_have_spec==0){
+                $retail_price=(float)$request->post('retail_price');
+                if($retail_price<$supplyGoods->price){
+                    redirect()->back()->with('error','零售价不能小于供货价');
+                }
+                $goods->price=$retail_price;
+            }else{
+                $specs=$supplyGoods->GoodsSpec();
+                foreach($specs as $i=>$v){
+                    $spec=(new GoodsSpec())->where("goods_id={$goods->id} && supply_spec_id={$v->id}")->first();
+                    $spec->goods_id=$goods->id;
+                    $spec->spec_1=$v->spec_1;
+                    $spec->spec_2=$v->spec_2;
+                    $spec->price=(float)$request->post("retail_price{$v->id}");
+                    $spec->supply_spec_id=$v->id;
+                    $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
+                    $spec->stock_count=0;
+                    if($spec->is_exist){
+                        $spec->save();
+                        array_push($array_spec,$spec->id);
+                    }else{
+                        $_id=$spec->save(true);
+                        array_push($array_spec,$_id);
+                    }
+                    if($i==0){
+                        $goods->price=$spec->price;
+                        $goods->retail_float_money=$spec->retail_float_money;
+                    }
+                }
+            }
+            DB::table('goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
+            
+            $shop_cateid=(int)$request->post('shop_category');
+            if($shop_cateid!=0){
+                $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
+            }
+            $goods->shop_cateid=$shop_cateid;
+            $goods->shop_catepath=$shop_catepath;
+            $goods->save();
+            redirect('goods')->with('msg', '修改成功！');
+        }else{
+            $data['cates']=$this->getCates();
+            $data['goods']=$goods;
+            $data['supplyGoods']=$supplyGoods;
+            $this->title='编辑采购商品';
+            $this->view('purchase_goods_edit',$data);
+        }
+    }
+
     public function edit(Goods $goods,GoodsImage $goodsImage,Request $request)
     {
         $goods=$goods->findOrFail($request->get('id'));
+        if($goods->supply_goods_id!=0){
+            redirect()->back()->with('error','该商品是采购的商品！');
+        }
         if($_POST){
             $imgids=trim($request->post('imgids'),',');
             $name=$request->post('name');

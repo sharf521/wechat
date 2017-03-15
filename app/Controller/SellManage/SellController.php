@@ -22,7 +22,6 @@ class SellController extends Controller
     public function getCates()
     {
         return (new ShopCategory())->getListTree($this->user_id);
-        //return (new ShopCategory())->where("user_id=?")->bindValues($this->user_id)->get();
     }
 
     public function getShippings()

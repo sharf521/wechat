@@ -62,7 +62,6 @@ class OrderController extends HomeController
             try{
                 DB::beginTransaction();
                 $carts_moneys=$cart->getMoneys($carts_result);
-                $goods=new Goods();
                 foreach ($carts_result as $seller_id=>$carts){
                     $order=new Order();
                     $order_sn=time().rand(10000,99999);
@@ -73,15 +72,18 @@ class OrderController extends HomeController
                     $order->buyer_remark=$request->post('buyer_remark');
                     $goods_money=0;
                     foreach ($carts as $cart){
-                        $goods=$goods->find($cart->goods_id);
+                        $goods=(new Goods())->find($cart->goods_id);
                         $stock_count=$goods->stock_count;
                         $price=$goods->price;
-                        //减少库存
+                        
                         if($goods->is_exist){
-                            $goods->stock_count=$goods->stock_count-$cart->quantity;
+                            //$goods->stock_count=$goods->stock_count-$cart->quantity;
                             $goods->sale_count=$goods->sale_count+$cart->quantity;
                             $goods->save();
                         }
+                        //减少库存
+                        $goods->setStockCount(-$cart->quantity,$cart->spec_id);
+                        
                         if($goods->is_have_spec){
                             $spec=(new GoodsSpec())->find($cart->spec_id);
                             if($spec->goods_id==$goods->id){
@@ -89,13 +91,13 @@ class OrderController extends HomeController
                                 $spec_2=$spec->spec_2;
                                 $stock_count=$spec->stock_count;
                                 $price=$spec->price;
-                                //规格的库存
-                                $spec->stock_count=$spec->stock_count-$cart->quantity;
-                                $spec->save();
                             }else{
                                 $stock_count=0;
                                 $price=0;
                             }
+                        }else{
+                            $spec_1='';
+                            $spec_2='';
                         }
                         if($stock_count==0){
                             throw  new \Exception("己卖完了！");
@@ -109,25 +111,27 @@ class OrderController extends HomeController
                         $orderGoods=new OrderGoods();
                         $orderGoods->order_sn=$order_sn;
                         $orderGoods->goods_id=$goods->id;
+                        $orderGoods->supply_goods_id=$goods->supply_goods_id;
+                        $orderGoods->supply_user_id=$goods->supply_user_id;
                         $orderGoods->goods_name=$goods->name;
                         $orderGoods->goods_image=$goods->image_url;
                         $orderGoods->spec_id=$cart->spec_id;
                         $orderGoods->quantity=$cart->quantity;
                         $orderGoods->price=$price;
+                        $orderGoods->shipping_fee=$cart->shipping_fee;
                         $orderGoods->spec_1=$spec_1;
                         $orderGoods->spec_2=$spec_2;
                         $orderGoods->save();
                         $goods_money=math($goods_money,math($goods->price,$cart->quantity,'*',2),'+',2);
-
+                        //从购物车里删除
                         $cart->delete();
                     }
-
                     $order->goods_money=$carts_moneys[$seller_id]['goodsPrice'];
                     $order->shipping_fee=$carts_moneys[$seller_id]['shippingFee'];
                     $order->order_money=$carts_moneys[$seller_id]['total'];
                     $order->status=1;
                     $order->save();
-                    
+                    //收货人
                     $shipping=new OrderShipping();
                     $shipping->order_sn=$order_sn;
                     $shipping->name=$address->name;
@@ -137,7 +141,6 @@ class OrderController extends HomeController
                     $shipping->zipcode=$address->zipcode;
                     $shipping->save();
                 }
-
                 DB::commit();
             }catch(\Exception $e){
                 $error=$e->getMessage();
