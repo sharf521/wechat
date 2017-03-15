@@ -20,7 +20,7 @@
             <div class="goods_info">
                 <div class="name"><h1><?=$goods->name?></h1></div>
                 <input type="hidden" id="is_have_spec" value="<?=$goods->is_have_spec?>">
-                <form method="post" name="form_order">
+                <form method="post" name="form_order" class="layui-form">
                     <? if($goods->is_have_spec) : ?>
                         <table class="layui-table">
                             <thead>
@@ -51,20 +51,41 @@
                             </tbody>
                         </table>
                     <? else:?>
-                        <div class="price clearFix">
-                            <span class="label">价格: </span><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">供货价</label>
+                            <div class="layui-input-inline"><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span></div>
                         </div>
-                        <div class="price clearFix">
-                            <span class="label">建议零售价: </span>
-                            <input type="text" class="layui-input" style="width: 150px; display: inline-block" name="retail_price" value="<?=$goods->retail_price?>" data_price="<?=$goods->price?>"onkeyup="value=value.replace(/[^0-9.]/g,'')"> 元
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">建议零售价</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" name="retail_price" value="<?=$goods->retail_price?>" data_price="<?=$goods->price?>"onkeyup="value=value.replace(/[^0-9.]/g,'')">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">元</div>
                         </div>
                     <? endif;?>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">店铺分类</label>
+                        <div class="layui-input-inline">
+                            <select name="shop_category" class="layui-select">
+                                <option value="" selected>请选择</option>
+                                <? foreach ($cates as $cate) :?>
+                                    <option value="<?=$cate['id']?>"><?=$cate['name_pre']?><?=$cate['name']?></option>
+                                <? endforeach;?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label"></label>
+                        <div class="layui-input-inline">
+                            <? if($isPurchase!==true) : ?>
+                                <a href="javascript:;" class="layui-btn purchase-btn" style="background-color: #f44;">采购到店铺</a>
+                            <? else : ?>
+                                <a href="javascript:;" class="layui-btn layui-btn-disabled">己采购</a>
+                            <? endif;?>
+                        </div>
+                    </div>
                 </form>
-                <? if($isPurchase!==true) : ?>
-                <a href="javascript:;" class="layui-btn purchase-btn" style="background-color: #f44; margin:10px 100px;">立即上架到店铺</a>
-                <? else : ?>
-                    <a href="javascript:;" class="layui-btn layui-btn-disabled" style="margin:10px 100px;">己采购</a>
-                <? endif;?>
             </div>
         </div>
         <div class="goods_detail_box">

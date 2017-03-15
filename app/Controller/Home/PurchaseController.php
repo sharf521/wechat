@@ -9,6 +9,7 @@ use App\Model\Goods;
 use App\Model\GoodsSpec;
 use App\Model\Order;
 use App\Model\OrderGoods;
+use App\Model\ShopCategory;
 use App\Model\SupplyGoods;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -103,14 +104,20 @@ class PurchaseController extends HomeController
                 $goods->site_id=$this->user->site_id;
                 $goods->category_id=$supplyGoods->category_id;
                 $goods->category_path=$supplyGoods->category_path;
-                $goods->shop_cateid=0;
-                $goods->shop_catepath='';
+
+                $shop_cateid=(int)$request->post('shop_category');
+                if($shop_cateid!=0){
+                    $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
+                }
+                $goods->shop_cateid=$shop_cateid;
+                $goods->shop_catepath=$shop_catepath;
+
                 $goods->image_url=$supplyGoods->image_url;
                 $goods->name=$supplyGoods->name;
-                $goods->stock_count=9999;
+                $goods->stock_count=$supplyGoods->stock_count;
                 $goods->is_have_spec=$supplyGoods->is_have_spec;
                 $goods->shipping_id=$supplyGoods->shipping_id;
-                $goods->sale_count=0;
+                $goods->sale_count=$supplyGoods->sale_count;
                 $goods->status=2;
                 $goods_id=$goods->save(true);
                 $goods=$goods->find($goods_id);
@@ -162,6 +169,7 @@ class PurchaseController extends HomeController
             if($goods->is_exist){
                 $data['isPurchase']=true;
             }
+            $data['cates']=(new ShopCategory())->getListTree($this->user_id);
             $this->view('purchase_detail',$data);
         }
     }

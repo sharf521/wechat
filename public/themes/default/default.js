@@ -271,6 +271,7 @@ function purchase_detail_js() {
         });
     });
     //立刻采购
+    layui.form('select').render();
     $('.purchase-btn').on('click',function(){
         var form=document.forms['form_order'];
         if($('#is_have_spec').val()=='0'){
@@ -282,7 +283,7 @@ function purchase_detail_js() {
             }
             var price=retail_price.attr('data_price');
             if(Number(retail_price.val()) < Number(price)){
-                layer.tips('零售价不能小于成本价！', retail_price);
+                layer.tips('零售价不能小于供货价！', retail_price);
                 retail_price.focus();
                 return false;
             }
@@ -295,7 +296,7 @@ function purchase_detail_js() {
                 }
                 var price=$(this).attr('data_price');
                 if(Number($(this).val()) < Number(price)){
-                    layer.tips('零售价不能小于成本价！', this,{tipsMore: true});
+                    layer.tips('零售价不能小于供货价！', this,{tipsMore: true});
                     Tag=true;
                 }
             });
@@ -303,7 +304,14 @@ function purchase_detail_js() {
                 return false;
             }
         }
-        form.submit();
+        layer.open({
+            content: '您确定要采购到店铺吗？'
+            ,btn: ['确定', '取消']
+            ,yes: function(index){
+                form.submit();
+                layer.close(index);
+            }
+        });
     })
 }
 function goods_detail_js()

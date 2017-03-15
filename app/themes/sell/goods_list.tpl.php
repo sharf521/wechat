@@ -40,7 +40,6 @@
                         <td><?=$goods->stock_count?></td>
                         <td><?=$goods->created_at?></td>
                         <td>
-                            <div class="layui-btn-group">
                             <? if($this->func=='index') : ?>
                                 <a href="<?=url("goods/change/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">下架</a>
                             <? endif;?>
@@ -52,9 +51,7 @@
                             <? else: ?>
                                 <a href="<?=url("goods/edit/?id={$goods->id}")?>" class="layui-btn layui-btn-mini">编辑</a>
                             <? endif?>
-
                             <a href="javascript:goodsDel(<?=$goods->id?>)" class="layui-btn layui-btn-mini">删除</a>
-                                </div>
                         </td>
                     </tr>
                     <?php endforeach;?>
