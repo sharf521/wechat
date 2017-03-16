@@ -20,7 +20,7 @@
         </ul>
     <? endif;?>
 
-    <? if($this->user->is_supply==0) : ?>
+    <? if($this->user->is_shop==1 && $this->user->is_supply==0) : ?>
         <a class="layui-btn" href="<?=url('/member/shop')?>">申请成为供货商</a>
     <? else: ?>
         <h3>我是供货商</h3>
