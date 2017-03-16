@@ -90,7 +90,7 @@ select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 
 /*用户中心*/
 .usernav .avatar{ color:#FF7200; font-size:18px; margin: 20px 50px 0px 100px; display: inline-block;float: left;}
-.usernav .avatar img{ width: 42px; height: 42px; border-radius:100%;}
+.usernav .avatar img{ width: 42px; height: 42px; border-radius:100%; border: 1px solid #eee}
 .usernav .avatar cite, .avatar i{margin-left: 10px}
 .usernav .avatar i{line-height: 20px; color: #FF7200;}
 .usermenu{ width:400px; height:40px; float:left; display:inline-block; padding:20px 0px;}
