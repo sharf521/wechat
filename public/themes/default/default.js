@@ -385,6 +385,7 @@ function goods_detail_js()
                     },
                     onEnd: function(){
                         $("#cart_num").html(Number($("#cart_num").html())+Number($('#buy_quantity').val()));
+                        $("#cart_num").show();
                         layer.msg('添加成功');
                     }
                 });
