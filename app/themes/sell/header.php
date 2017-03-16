@@ -4,6 +4,11 @@
         <div class="logoleft">
             <a href="/"><img src="<?=$this->site->logo?>" height="60"></a>
         </div>
+        <a class="avatar" href="/member/">
+            <img src="<?=$this->user->headimgurl?>">
+            <cite><?=$this->username?></cite>
+            <i></i>
+        </a>
         <div class="usermenu">
             <ul>
                 <li>

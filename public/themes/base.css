@@ -86,3 +86,14 @@ select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 .floating_ck dd i{width:40px; line-height: 40px; color:#ff0000; font-size: 20px; }
 .floating_ck dd .cart_tip{position:absolute;top:-5px;right:-5px;display:none;width:15px;height:15px;border-radius:50%;background:#e40231;color:#fff;text-align:center;font-style:normal;line-height:15px}
 .floating_left{position:absolute;top:0;left:-100px;display:none;width:100px; height: 40px; line-height: 40px;background-color:#e40231;color:#fff;font-size:13px;}
+
+
+/*用户中心*/
+.usernav .avatar{ color:#FF7200; font-size:18px; margin: 20px 50px 0px 100px; display: inline-block;float: left;}
+.usernav .avatar img{ width: 42px; height: 42px; border-radius:100%;}
+.usernav .avatar cite, .avatar i{margin-left: 10px}
+.usernav .avatar i{line-height: 20px; color: #FF7200;}
+.usermenu{ width:400px; height:40px; float:left; display:inline-block; padding:20px 0px;}
+.usermenu ul li{ width:100px; height:40px; line-height:40px; font-size:14px; float:left; display:inline-block; text-align:center;}
+.usermenu ul li a{ font-size:14px; color:#000; width:100px; height:40px; display:block}
+.usermenu ul li a:hover{ background:#ebc5c5; color:#333}
