@@ -1,12 +1,6 @@
-
-
-
 ul {    list-style: none;}
-
 a {    color: #333;}
-
 a:hover {    color: #f40;}
-
 .clear{ clear:both}
 .clearFix:after{
     clear:both;
@@ -80,3 +74,15 @@ select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 
 .title_container{padding: 10px 0 10px 0px;    margin-bottom: 10px;    font-size: 15px; font-weight: 600;font-family: 宋体;    border-bottom: 1px dashed #ececec;}
 .title_container .title {    border-left: 4px solid #f55;    padding-left: 10px;}
+
+/*右侧浮动按钮*/
+.floating_ck{position:fixed;top:50%;right:3%;z-index:9999}
+.floating_ck a{text-decoration:none}
+.floating_ck dl dd{position:relative;margin-bottom:3px;width:40px;height:40px;text-align:center;cursor:pointer; background-color: #e5e5e5}
+.floating_ck dl dd:hover{background-color:#e40231}
+.floating_ck dl dd:hover .floating_left{display:block}
+.floating_ck dl dd:hover i{color:#fff; background-color:#e40231  }
+.floating_ck dd span{display:block;padding-top:54px;color:#fff}
+.floating_ck dd i{width:40px; line-height: 40px; color:#ff0000; font-size: 20px; }
+.floating_ck dd .cart_tip{position:absolute;top:-5px;right:-5px;display:none;width:15px;height:15px;border-radius:50%;background:#e40231;color:#fff;text-align:center;font-style:normal;line-height:15px}
+.floating_left{position:absolute;top:0;left:-100px;display:none;width:100px; height: 40px; line-height: 40px;background-color:#e40231;color:#fff;font-size:13px;}

@@ -74,6 +74,17 @@ class Cart extends Model
             $this->where("buyer_id=0 and session_id='$session_id'")->update(array('buyer_id'=>$user_id));
         }
     }
+    
+    public function getGoodsCount($buyer_id)
+    {
+        if($buyer_id==0){
+            $session_id=session_id();
+            $where=" buyer_id=0 and session_id='$session_id' ";
+        }else{
+            $where=" buyer_id={$buyer_id} ";
+        }
+        return $this->where($where)->value('count(quantity)','int');
+    }
 
     public function getList($data=array())
     {

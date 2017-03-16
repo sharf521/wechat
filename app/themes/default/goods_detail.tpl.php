@@ -89,7 +89,7 @@
             </div>
         </div>
     </div>
-
+    <script src="/plugin/js/fly.min.js"></script>
     <script>
         var goods_id='<?=(int)$goods->id?>';
         goods_detail_js();

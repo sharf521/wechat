@@ -2,7 +2,6 @@ $(function () {
     var layer = layui.layer
         ,util = layui.util
         ,laydate = layui.laydate;
-    util.fixbar();
     /*util.fixbar({
         bar1: '<i class="iconfont" style="font-size: 24px;">&#xe698;</i>'
         ,bar2: false
@@ -18,6 +17,13 @@ $(function () {
     });*/
     var element = layui.element();
     element.init();
+    //右侧
+    $.get("/cart/getGoodsCount/",{},function(data) {
+        $('#cart_num').html(data);
+        if(data>0){
+            $('#cart_num').show();
+        }
+    });
 });
 /* header */
 function header_js() {
@@ -55,7 +61,6 @@ function header_js() {
                 i = $(this).offset().top,									//当前元素滑过距离窗口多少像素
                 item = $(this).children('.item-list').height(),				//下拉菜单子类内容容器的高度
                 sort = $('.category-list').height();						//父类分类列表容器的高度
-
             if (item < sort){												//如果子类的高度小于父类的高度
                 if ( eq == 0 ){
                     $(this).children('.item-list').css('top', (i-h));
@@ -73,7 +78,6 @@ function header_js() {
                     $(this).children('.item-list').css('top', 3 );
                 }
             }
-
             $(this).addClass('hover');
             $(this).children('.item-list').css('display','block');
         },function(){
@@ -354,18 +358,39 @@ function goods_detail_js()
         //alert(goodsSpec.spec1_name);
         //alert(goodsSpec.spec2_name);
     });
+
+
+    
     //加入购物车
-    $('.buy_box_opts .opt1').on('click',function () {
+    $('.buy_box_opts .opt1').on('click',function (event) {
         var quantity=document.forms['form_order'].quantity.value;
         var spec_id=$('#spec_id').val();
         $.post("/index.php/cart/add/",{goods_id:goods_id,spec_id:spec_id,quantity:quantity},function(data){
             var json=eval("("+data+")");
             if(json.code=='0'){
-                var msg='添加成功！';
+                var scrollTop=$(document).scrollTop();
+                var offset = $("#cart_num").offset();
+                var src=$('.pic_big').find('img').attr('src');
+                var flyer = $('<img class="u-flyer" src="'+src+'" width="30" height="30">');
+                flyer.fly({
+                    start: {
+                        left: event.pageX, //开始位置（必填）#fly元素会被设置成position: fixed
+                        top: event.pageY-scrollTop-20 //开始位置（必填）
+                    },
+                    end: {
+                        left: offset.left, //结束位置（必填）
+                        top: offset.top - scrollTop, //结束位置（必填）
+                        width: 0, //结束时宽度
+                        height: 0 //结束时高度
+                    },
+                    onEnd: function(){
+                        $("#cart_num").html(Number($("#cart_num").html())+Number($('#buy_quantity').val()));
+                        layer.msg('添加成功');
+                    }
+                });
             }else{
-                var msg=json.msg;
+                layer.msg(json.msg);
             }
-            layer.msg(msg);
         });
     });
     //立刻购买
@@ -468,4 +493,45 @@ function selectSpec(type,obj){
     $('.goods_prompt').html(goods_prompt);
     goodsSpec.setFormValue();
     $('#buy_quantity').val(1);
+}
+
+/**
+ * JavaScript脚本实现回到页面顶部示例
+ * @param acceleration 速度
+ * @param stime 时间间隔 (毫秒)
+ **/
+function gotoTop(acceleration, stime) {
+    acceleration = acceleration || 0.1;
+    stime = stime || 10;
+    var x1 = 0;
+    var y1 = 0;
+    var x2 = 0;
+    var y2 = 0;
+    var x3 = 0;
+    var y3 = 0;
+    if (document.documentElement) {
+        x1 = document.documentElement.scrollLeft || 0;
+        y1 = document.documentElement.scrollTop || 0;
+    }
+    if (document.body) {
+        x2 = document.body.scrollLeft || 0;
+        y2 = document.body.scrollTop || 0;
+    }
+    var x3 = window.scrollX || 0;
+    var y3 = window.scrollY || 0;
+
+    // 滚动条到页面顶部的水平距离
+    var x = Math.max(x1, Math.max(x2, x3));
+    // 滚动条到页面顶部的垂直距离
+    var y = Math.max(y1, Math.max(y2, y3));
+
+    // 滚动距离 = 目前距离 / 速度, 因为距离原来越小, 速度是大于 1 的数, 所以滚动距离会越来越小
+    var speeding = 1 + acceleration;
+    window.scrollTo(Math.floor(x / speeding), Math.floor(y / speeding));
+
+    // 如果距离不为零, 继续调用函数
+    if (x > 0 || y > 0) {
+        var run = "gotoTop(" + acceleration + ", " + stime + ")";
+        window.setTimeout(run, stime);
+    }
 }

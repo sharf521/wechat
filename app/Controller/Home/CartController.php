@@ -31,6 +31,12 @@ class CartController extends HomeController
         }
     }
 
+    //ajax
+    public function getGoodsCount(Cart $cart)
+    {
+        echo $cart->getGoodsCount($this->user_id);
+    }
+    //ajax
     public function add(Cart $cart,Request $request)
     {
         $data=array(

@@ -52,7 +52,7 @@
                         <div class="cell1">
                             <img class="image" src="<?=$cart->goods_image?>">
                             <div class="oi_content">
-                                <a href="<?=url("goods/detail/?id={$cart->goods_id}")?>"><?=$cart->goods_name?></a>
+                                <a href="<?=url("goods/detail/{$cart->goods_id}")?>"><?=$cart->goods_name?></a>
                                 <p><?
                                     if($cart->spec_1!=''){
                                         echo "<span class='spec'>{$cart->spec_1}</span>";

@@ -28,7 +28,26 @@
             Copyright 2012-2020 Inc.,All rights reserved. 豫ICP备110xxxx2号-1
         </div>
 </div>
-
+<div class="floating_ck">
+    <dl>
+        <dd>
+            <a href="/cart">
+                <i class="iconfont">&#xe698;</i>
+                <div class="floating_left">购物车</div>
+                <em class="cart_tip" id="cart_num">0</em>
+            </a>
+        </dd>
+        <dd>
+            <a href="/member">
+                <i class="iconfont">&#xe6fc;</i>
+                <div class="floating_left">个人中心</div>
+            </a>
+        </dd>
+        <dd>
+            <i class="layui-icon" style="font-size: 32px;" onclick="gotoTop()">&#xe604;</i>
+        </dd>
+    </dl>
+</div>
 <script src="/plugin/js/echo.min.js"></script>
 <script>
     window.onload=function(){
