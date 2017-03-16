@@ -369,13 +369,13 @@ function goods_detail_js()
             var json=eval("("+data+")");
             if(json.code=='0'){
                 var scrollTop=$(document).scrollTop();
-                var offset = $("#cart_num").offset();
+                var offset = $("#icon_cart").offset();
                 var src=$('.pic_big').find('img').attr('src');
                 var flyer = $('<img class="u-flyer" src="'+src+'" width="30" height="30">');
                 flyer.fly({
                     start: {
                         left: event.pageX, //开始位置（必填）#fly元素会被设置成position: fixed
-                        top: event.pageY-scrollTop-20 //开始位置（必填）
+                        top: event.pageY-scrollTop //开始位置（必填）
                     },
                     end: {
                         left: offset.left, //结束位置（必填）

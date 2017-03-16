@@ -32,7 +32,7 @@
     <dl>
         <dd>
             <a href="/cart">
-                <i class="iconfont">&#xe698;</i>
+                <i class="iconfont" id="icon_cart">&#xe698;</i>
                 <div class="floating_left">购物车</div>
                 <em class="cart_tip" id="cart_num">0</em>
             </a>
