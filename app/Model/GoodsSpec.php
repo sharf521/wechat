@@ -19,7 +19,7 @@ class GoodsSpec extends Model
 
     public function __get($key)
     {
-        if($this->supply_spec_id!=0){
+        if($this->is_exist && $this->supply_spec_id!=0){
             if(in_array($key,array('price','stock_count'))){
                 $spec=(new SupplyGoodsSpec())->find($this->supply_spec_id);
                 if($key=='price'){

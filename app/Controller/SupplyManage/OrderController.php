@@ -6,7 +6,7 @@
  * Time: 14:52
  */
 
-namespace App\Controller\SellManage;
+namespace App\Controller\SupplyManage;
 
 
 use App\Model\Order;
@@ -15,7 +15,7 @@ use System\Lib\DB;
 use System\Lib\Request;
 use System\Lib\Session;
 
-class OrderController extends SellController
+class OrderController extends SupplyController
 {
     public function __construct()
     {
@@ -25,88 +25,54 @@ class OrderController extends SellController
 
     public function index(Order $order,Request $request)
     {
-        $data['orders']=$order->where('seller_id=?')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
+        $data['orders']=$order->where('supply_user_id=?')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
 
     //待付款
     public function status1(Order $order,Request $request)
     {
-        $data['orders']=$order->where('seller_id=? and status=1')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
+        $data['orders']=$order->where('supply_user_id=? and status=1')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
     //待发货
     public function status3(Order $order,Request $request)
     {
-        $data['orders']=$order->where('seller_id=? and status=3')->bindValues($this->user_id)->orderBy("id desc")->pager($request->get('page'));
+        $data['orders']=$order->where('supply_user_id=? and status=3')->bindValues($this->user_id)->orderBy("id desc")->pager($request->get('page'));
         $this->view('order',$data);
     }
     //待收货
     public function status4(Order $order,Request $request)
     {
-        $data['orders']=$order->where('seller_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
+        $data['orders']=$order->where('supply_user_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
 
-    public function cancel(Order $order,Request $request)
-    {
-        $user_id=$this->user_id;
-        $id=$request->get('id');
-        $order=$order->findOrFail($id);
-        if($order->seller_id!=$user_id){
-            echo '异常';exit;
-        }
-        if($order->status!=3){
-            redirect()->back()->with('msg','状态异常');
-        }else{
-            try{
-                DB::beginTransaction();
-                $order->cancel($this->user);
-                DB::commit();
-                redirect()->back()->with('msg','订单取消成功！');
-            }catch (\Exception $e){
-                $error=$e->getMessage();
-                redirect()->back()->with('error',$error);
-                DB::rollBack();
-            }
-        }
-    }
     //修改
     public function editMoney(Order $order,Request $request)
     {
         $user_id=$this->user_id;
         $id=$request->get('id');
         $order=$order->findOrFail($id);
-        if($order->seller_id!=$user_id){
+        if($order->supply_user_id!=$user_id){
             echo '异常';exit;
         }
         if($order->status!=1){
             redirect()->back()->with('msg','状态异常');
         }
-        if($order->supply_user_id!=0){
-            $supply_price=0;
-            $orderGoods=$order->OrderGoods();
-            foreach ($orderGoods as $ogs){
-                $goods=$ogs->Goods();
-                $goods=$goods->addSpec($ogs->spec_id);
-                $price=math($goods->price,$goods->retail_float_money,'-',2);
-                $money=math($price,$ogs->quantity,'*',2);
-                $supply_price=math($supply_price,$money,'+',2);
-            }
-            $data['supply_price']=$supply_price;
+        $supply_price=0;
+        $orderGoods=$order->OrderGoods();
+        foreach ($orderGoods as $ogs){
+            $goods=$ogs->Goods();
+            $goods=$goods->addSpec($ogs->spec_id);
+            $price=math($goods->price,$goods->retail_float_money,'-',2);
+            $money=math($price,$ogs->quantity,'*',2);
+            $supply_price=math($supply_price,$money,'+',2);
         }
+        $data['supply_price']=$supply_price;
         if($_POST){
-            $goods_money=(float)$request->post('goods_money');
-            if($order->supply_user_id!=0){
-                //供货
-                if($goods_money<$supply_price){
-                    redirect()->back()->with('error','商品价格不能小于供货价');
-                }
-            }else{
-                $order->shipping_fee=abs((float)$request->post('shipping_fee'));
-            }
-            $order->goods_money=$goods_money;
-            $order->order_money=math($goods_money,$order->shipping_fee,'+',2);
+            $order->shipping_fee=abs((float)$request->post('shipping_fee'));
+            $order->order_money=math($order->goods_money,$order->shipping_fee,'+',2);
             $order->save();
             if($this->is_wap){
                 redirect("order")->with('msg','操作成功');
@@ -126,7 +92,7 @@ class OrderController extends SellController
         $user_id=$this->user_id;
         $id=$request->get('id');
         $order=$order->findOrFail($id);
-        if($order->seller_id!=$user_id || $order->supply_user_id!=0){
+        if($order->supply_user_id!=$user_id){
             echo '异常';exit;
         }
         if($order->status!=3){

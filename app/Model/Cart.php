@@ -55,6 +55,7 @@ class Cart extends Model
         }else{
             $cart->buyer_id=$buyer_id;
             $cart->seller_id=$goods->user_id;
+            $cart->supply_user_id=$goods->supply_user_id;
             $cart->goods_id=$goods->id;
             $cart->goods_name=$goods->name;
             $cart->goods_image=$goods->image_url;
@@ -107,7 +108,7 @@ class Cart extends Model
         //按店铺分组
         $result_carts=array();
         foreach ($carts as $i=>$cart) {
-            $result_carts[$cart->seller_id][]=$cart;
+            $result_carts[$cart->seller_id.'_'.$cart->supply_user_id][]=$cart;
         }
         foreach($result_carts as $seller_id=>$carts){
             foreach ($carts as $i=>$cart) {

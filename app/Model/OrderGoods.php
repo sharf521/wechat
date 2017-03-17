@@ -12,10 +12,10 @@ class OrderGoods extends Model
     }
 
     /**
-     * @return Shop
+     * @return Goods
      */
-    public function Supply()
+    public function Goods()
     {
-        return $this->hasOne('\App\Model\Shop','user_id','supply_user_id');
+        return $this->hasOne('\App\Model\Goods','id','goods_id');
     }
 }

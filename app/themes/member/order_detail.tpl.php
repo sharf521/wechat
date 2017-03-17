@@ -12,7 +12,19 @@
                     <tr><td>下单时间</td><td><?= $order->created_at ?></td></tr>
                     <tr><td>订单状态</td><td class="status"><?=$order->getLinkPageName('order_status',$order->status)?></td></tr>
                     <tr><td>备注</td><td><?=nl2br($order->buyer_remark)?></td></tr>
-                    <tr><td>卖家</td><td><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?></td></tr>
+                    <?php if($buyer->user_id==$this->user_id || $supplyer->user_id==$this->user_id) : ?>
+                        <tr><td>卖家</td><td><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?></td></tr>
+                    <? endif;?>
+
+                    <?php if($shop->user_id==$this->user_id) : ?>
+                        <tr><td>买家</td><td><?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?> </td></tr>
+                    <? endif;?>
+
+                    <?php if($shop->user_id==$this->user_id) : ?>
+                        <tr><td>供货商</td><td><?=$supplyer->name?> <?=\App\Helper::getQqLink($buyer->qq)?> </td></tr>
+                    <? endif;?>
+
+                    <tr><td>物流费用</td><td>¥<?=$order->shipping_fee?></td></tr>
                     <tr><td>订单金额</td><td class="money">¥<?=$order->order_money?></td></tr>
                 </table>
 

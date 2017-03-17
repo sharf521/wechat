@@ -59,7 +59,7 @@
 .orderbox dt{ line-height: 40px; background-color: #efefef; padding-left: 8px;}
 .orderbox dt .status{float: right; margin-right: 10px;}
 .orderbox dt .time{margin-right: 5px; font-weight:600;}
-.orderbox dt .buyer{ margin-left: 200px;}
+.orderbox dt .buyer{ margin-left: 40px;}
 .orderbox dd td{line-height: 22px;vertical-align:middle}
 .orderbox .goodsImg{ margin-right: 10px;width: 100px; float: left}
 .orderbox .goodsDetail{float: left;}

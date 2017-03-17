@@ -141,6 +141,16 @@ class Order extends Model
     }
 
     /**
+     * @return Supply
+     */
+    public function Supply()
+    {
+        if($this->supply_user_id!=0){
+            return $this->hasOne('\App\Model\Shop','user_id','supply_user_id');
+        }
+    }
+
+    /**
      * @return User
      */
     public function Buyer()

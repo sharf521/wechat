@@ -63,24 +63,21 @@ class OrderController extends HomeController
                 DB::beginTransaction();
                 $carts_moneys=$cart->getMoneys($carts_result);
                 foreach ($carts_result as $seller_id=>$carts){
+                    $arr_seller_id=explode('_',$seller_id);
                     $order=new Order();
                     $order_sn=time().rand(10000,99999);
                     $order->order_sn=$order_sn;
                     $order->buyer_id=$user_id;
                     $order->buyer_name=$this->username;
-                    $order->seller_id=$seller_id;
+                    $order->seller_id=$arr_seller_id[0];
+                    $order->supply_user_id=$arr_seller_id[1];
                     $order->buyer_remark=$request->post('buyer_remark');
                     $goods_money=0;
                     foreach ($carts as $cart){
                         $goods=(new Goods())->find($cart->goods_id);
                         $stock_count=$goods->stock_count;
                         $price=$goods->price;
-                        
-                        if($goods->is_exist){
-                            //$goods->stock_count=$goods->stock_count-$cart->quantity;
-                            $goods->sale_count=$goods->sale_count+$cart->quantity;
-                            $goods->save();
-                        }
+
                         //减少库存
                         $goods->setStockCount(-$cart->quantity,$cart->spec_id);
                         

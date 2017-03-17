@@ -11,8 +11,6 @@ i, cite, em { font-style: normal; }
 .nav-tabs li a:hover{background-color: #EFEFEF; color:#ff665b;}
 .nav-tabs:after{clear:both;display:block;visibility:hidden;height:0;line-height:0;content:'';}
 
-
-
 .usernav{ height:80px; clear:both; background:#fff;border-bottom: 3px solid #ca1b38;}
 .userlogo{ width:1140px; margin:0 auto; clear:both; height:80px;}
 .logoleft{ width:300px; height:80px; display:inline-block; float:left}

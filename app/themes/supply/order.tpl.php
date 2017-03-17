@@ -1,5 +1,4 @@
 <?php require 'header.php';?>
-
     <div class="warpcon">
         <?php require 'left.php'; ?>
         <div class="warpright">
@@ -17,14 +16,14 @@
                     </ul>
                 </div>
                 <? foreach($orders['list'] as $order) :
-                    $buyer=$order->Buyer();
+                    $shop=$order->Shop();
                     ?>
                     <dl class="orderbox">
                         <dt>
-                            <span class="time"><?=substr($order->created_at,0,10)?></span>
+                            <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
                             <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
                              <span class="buyer">
-                                <?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?>
+                                卖家：<?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?>
                             </span>
                         </dt>
                         <dd>
@@ -38,25 +37,26 @@
                                                 <img class="goodsImg" src="<?=$g->goods_image?>" width="100">
                                                 <div class="goodsDetail">
                                                     <div class="name">
-                                                        <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>
-                                                        <?=$g->spec_1?> <?=$g->spec_2?>
+                                                        <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a>                                                                                <br><?=$g->spec_1?> <?=$g->spec_2?>
                                                     </div>
-
-                                                    <div class="quantity">￥<?=$g->price?> <span>X</span> <?= $g->quantity ?></div>
+                                                    <div class="quantity">
+                                                        ¥<?=$g->price?> <span>X</span> <?= $g->quantity ?>
+                                                        <br>
+                                                        <span>运费：¥<?=$g->shipping_fee?></span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         <? endforeach;?>
                                     </td>
                                     <td align="center" width="120"><span class="money">¥<?=$order->order_money?></span><br>(含运费：¥<?=$order->shipping_fee?>)
                                         <br>
-                                        <a href="<?=url("order/detail/?id={$order->id}")?>">订单详情</a>
+                                        <a href="<?=url("/member/order/detail/?id={$order->id}")?>">订单详情</a>
                                     </td>
                                     <td class="operate">
                                         <? if($order->status==1) : ?>
                                             <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改价格</a><br>
                                         <? elseif ($order->status==3) : ?>
                                             <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a><br>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="cancel layui-btn layui-btn-small layui-btn-primary">取消订单</a><br>
                                         <? endif;?>
                                     </td>
                                 </tr>
@@ -65,10 +65,8 @@
                         </dd>
                     </dl>
                 <? endforeach;?>
-
-
                 <? if($orders['total']==0) : ?>
-                    <blockquote class="layui-elem-quote">没有匹配到任何记录！ &nbsp;<a href="<?=url('/goods/lists')?>" class="layui-btn layui-btn-small">去逛逛</a></blockquote>
+                    <blockquote class="layui-elem-quote">没有匹配到任何记录！ </blockquote>
                 <? else: ?>
                     <?=$orders['page']?>
                 <? endif;?>
@@ -89,14 +87,13 @@
                            var id=$(this).attr('data-id');
                            layer.open({
                                type: 2,
-                               title: '修改价格',
+                               title: '修改订单价格',
                                shadeClose: true,
                                shade: 0.8,
-                               area: ['460px', '290px'],
+                               area: ['460px', '320px'],
                                content: '<?=url("order/editMoney/?id=")?>'+id
                            });
                        });
-
                         $('.editShipping').on('click',function () {
                             var id=$(this).attr('data-id');
                             layer.open({
@@ -110,11 +107,7 @@
                         });
                     });
                 </script>
-
-
             </div>
-
-
         </div>
     </div>
 

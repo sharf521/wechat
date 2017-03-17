@@ -72,7 +72,7 @@ class Goods extends Model
 
     public function __get($key)
     {
-        if($this->supply_goods_id!=0){
+        if($this->is_exist && $this->supply_goods_id!=0){
             if(in_array($key,array('stock_count','is_have_spec','sale_count','spec_name1','spec_name2'))){
                 $goods=(new SupplyGoods())->find($this->supply_goods_id);
                 return $goods->$key;
@@ -83,7 +83,7 @@ class Goods extends Model
 
     public function GoodsData()
     {
-        if($this->supply_goods_id!=0){
+        if($this->is_exist && $this->supply_goods_id!=0){
             return (new SupplyGoodsData())->where('goods_id=?')->bindValues($this->supply_goods_id)->first();
         }
         return $this->hasOne('\App\Model\GoodsData','goods_id','id');
@@ -91,7 +91,7 @@ class Goods extends Model
 
     public function GoodsImage()
     {
-        if($this->supply_goods_id!=0){
+        if($this->is_exist && $this->supply_goods_id!=0){
             return (new SupplyGoodsImage())->where('goods_id=?')->bindValues($this->supply_goods_id)->get();
         }
         return $this->hasMany('\App\Model\GoodsImage','goods_id','id',"status=1");

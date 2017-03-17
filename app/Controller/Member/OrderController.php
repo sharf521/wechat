@@ -58,7 +58,7 @@ class OrderController extends MemberController
         $id=$request->get('id');
         $user_id=$this->user_id;
         $order=$order->findOrFail($id);
-        if($order->buyer_id!=$user_id){
+        if($order->buyer_id!=$user_id && $order->seller_id!=$user_id && $order->supply_user_id!=$user_id){
             redirect()->back()->with('error','异常');
         }
         $this->title='订单详情';
@@ -66,6 +66,8 @@ class OrderController extends MemberController
         $data['shipping']=$order->OrderShipping();
         $data['goods']=$order->OrderGoods();
         $data['shop']=$order->Shop();
+        $data['buyer']=$order->Buyer();
+        $data['supplyer']=$order->Supply();
         $this->view('order_detail',$data);
     }
 
@@ -233,6 +235,7 @@ class OrderController extends MemberController
             $data['order']=$order;
             $data['shipping']=$order->OrderShipping();
             $data['goods']=$order->OrderGoods();
+            $data['shop']=$order->Shop();
             $this->title='确认收货';
             $this->view('order_success',$data);
         }

@@ -132,11 +132,11 @@ class PurchaseController extends HomeController
                         $spec->supply_spec_id=$v->id;
                         $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
                         $spec->stock_count=0;
-                        $spec->save();
                         if($i==0){
                             $goods->price=$spec->price;
                             $goods->retail_float_money=$spec->retail_float_money;
                         }
+                        $spec->save();
                     }
                 }else{
                     $goods->price=$retail_price;
