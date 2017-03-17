@@ -44,7 +44,7 @@ class Goods extends Model
         if($this->supply_goods_id!=0){
             $supplyGoods=(new SupplyGoods())->find($this->supply_goods_id);
             $supplyGoods->stock_count=$supplyGoods->stock_count+$quantity;
-            $supplyGoods->sale_count=$supplyGoods->sale_count+$quantity;
+            $supplyGoods->sale_count=$supplyGoods->sale_count-$quantity;
             $supplyGoods->save();
             //商品表里库存、规格表里库存都更新
             if($supplyGoods->is_exist){
@@ -57,7 +57,7 @@ class Goods extends Model
             }
         }else{
             $this->stock_count=$this->stock_count+$quantity;
-            $this->sale_count=$this->sale_count+$quantity;
+            $this->sale_count=$this->sale_count-$quantity;
             $this->save();
             if($this->is_have_spec){
                 $spec=(new GoodsSpec())->find($spec_id);
