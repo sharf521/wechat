@@ -15,7 +15,7 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">商品价格</label>
-                <div class="layui-form-mid layui-word-aux"><?=$order->goods_money?>元，原供货价：<?=$supply_price?>元</div>
+                <div class="layui-form-mid layui-word-aux"><?=$order->goods_money?>元，原供货价：<?=$order->supply_goods_money?>元</div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">物流费用</label>

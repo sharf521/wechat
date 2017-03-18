@@ -17,7 +17,7 @@ class GoodsSpec extends Model
         parent::__construct();
     }
 
-    public function __get($key)
+/*    public function __get($key)
     {
         if($this->is_exist && $this->supply_spec_id!=0){
             if(in_array($key,array('price','stock_count'))){
@@ -29,5 +29,5 @@ class GoodsSpec extends Model
             }
         }
         return parent::__get($key);
-    }
+    }*/
 }

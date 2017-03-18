@@ -60,16 +60,6 @@ class OrderController extends SupplyController
         if($order->status!=1){
             redirect()->back()->with('msg','状态异常');
         }
-        $supply_price=0;
-        $orderGoods=$order->OrderGoods();
-        foreach ($orderGoods as $ogs){
-            $goods=$ogs->Goods();
-            $goods=$goods->addSpec($ogs->spec_id);
-            $price=math($goods->price,$goods->retail_float_money,'-',2);
-            $money=math($price,$ogs->quantity,'*',2);
-            $supply_price=math($supply_price,$money,'+',2);
-        }
-        $data['supply_price']=$supply_price;
         if($_POST){
             $order->shipping_fee=abs((float)$request->post('shipping_fee'));
             $order->order_money=math($order->goods_money,$order->shipping_fee,'+',2);

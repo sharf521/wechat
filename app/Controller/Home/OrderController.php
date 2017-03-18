@@ -72,39 +72,20 @@ class OrderController extends HomeController
                     $order->seller_id=$arr_seller_id[0];
                     $order->supply_user_id=$arr_seller_id[1];
                     $order->buyer_remark=$request->post('buyer_remark');
-                    $goods_money=0;
                     foreach ($carts as $cart){
-                        $goods=(new Goods())->find($cart->goods_id);
-                        $stock_count=$goods->stock_count;
-                        $price=$goods->price;
-
-                        //减少库存
-                        $goods->setStockCount(-$cart->quantity,$cart->spec_id);
-                        
-                        if($goods->is_have_spec){
-                            $spec=(new GoodsSpec())->find($cart->spec_id);
-                            if($spec->goods_id==$goods->id){
-                                $spec_1=$spec->spec_1;
-                                $spec_2=$spec->spec_2;
-                                $stock_count=$spec->stock_count;
-                                $price=$spec->price;
-                            }else{
-                                $stock_count=0;
-                                $price=0;
-                            }
-                        }else{
-                            $spec_1='';
-                            $spec_2='';
-                        }
-                        if($stock_count==0){
-                            throw  new \Exception("己卖完了！");
-                        }
-                        if($cart->quantity==0){
+                        if($cart->quantity<=0){
                             throw  new \Exception("购买数量不能为零！");
                         }
-                        if($cart->quantity > $stock_count){
-                            throw  new \Exception("库存不足，仅剩{$stock_count}件！");
+                        $goods=$cart->Goods;
+                        if($goods->stock_count==0){
+                            throw  new \Exception("己卖完了！");
                         }
+                        if($cart->quantity > $goods->stock_count){
+                            throw  new \Exception("库存不足，仅剩{$goods->stock_count}件！");
+                        }
+                        //减少库存
+                        $goods->setStockCount(-$cart->quantity,$cart->spec_id);
+
                         $orderGoods=new OrderGoods();
                         $orderGoods->order_sn=$order_sn;
                         $orderGoods->goods_id=$goods->id;
@@ -114,16 +95,21 @@ class OrderController extends HomeController
                         $orderGoods->goods_image=$goods->image_url;
                         $orderGoods->spec_id=$cart->spec_id;
                         $orderGoods->quantity=$cart->quantity;
-                        $orderGoods->price=$price;
                         $orderGoods->shipping_fee=$cart->shipping_fee;
-                        $orderGoods->spec_1=$spec_1;
-                        $orderGoods->spec_2=$spec_2;
+                        $orderGoods->price=$goods->price;
+                        if($goods->supply_goods_id==0){
+                            $orderGoods->supply_price=0;
+                        }else{
+                            $orderGoods->supply_price=math($goods->price,$goods->retail_float_money,'-',2);
+                        }
+                        $orderGoods->spec_1=$goods->spec_1;
+                        $orderGoods->spec_2=$goods->spec_2;
                         $orderGoods->save();
-                        $goods_money=math($goods_money,math($goods->price,$cart->quantity,'*',2),'+',2);
                         //从购物车里删除
                         $cart->delete();
                     }
                     $order->goods_money=$carts_moneys[$seller_id]['goodsPrice'];
+                    $order->supply_goods_money=$carts_moneys[$seller_id]['supplyGoodsPrice'];
                     $order->shipping_fee=$carts_moneys[$seller_id]['shippingFee'];
                     $order->order_money=$carts_moneys[$seller_id]['total'];
                     $order->status=1;
@@ -141,6 +127,8 @@ class OrderController extends HomeController
                 DB::commit();
             }catch(\Exception $e){
                 $error=$e->getMessage();
+                echo $error;
+                exit;
                 redirect()->back()->with('error',$error);
                 DB::rollBack();
             }

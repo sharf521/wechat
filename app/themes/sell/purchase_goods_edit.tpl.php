@@ -18,7 +18,7 @@
                             </div>
                         </div>
 
-                        <? if($supplyGoods->is_have_spec) : ?>
+                        <? if($goods->is_have_spec) : ?>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">规格</label>
                                 <div class="layui-input-block">
@@ -34,7 +34,6 @@
                                         </thead>
                                         <tbody>
                                         <?php
-                                        $goodsSpecs=$goods->GoodsSpec();
                                         $arrSpecs=array();
                                         foreach ($goodsSpecs as $spec){
                                             $arrSpecs[$spec->supply_spec_id]=$spec->retail_float_money;

@@ -9,6 +9,7 @@
 namespace App\Controller\SupplyManage;
 
 use App\Model\Category;
+use App\Model\Goods;
 use App\Model\Shop;
 use App\Model\SupplyCategory;
 use App\Model\SupplyGoods;
@@ -252,8 +253,14 @@ class GoodsController extends SupplyController
                     }
                     $goods->stock_count=$stock_total;
                 }
-                DB::table('goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
+                DB::table('goods_spec')->where("supply_spec_id not in(".implode(',',$array_spec).")")->delete();
+                DB::table('supply_goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
                 $goods->save();
+
+                $goodsList=(new Goods())->where("supply_goods_id=?")->bindValues($goods->id)->get();
+                foreach ($goodsList as $g){
+                    $g->GoodsSpec();
+                }
                 DB::commit();
                 if($goods->stock_count==0){
                     redirect('goods/list_stock0')->with('msg', '修改成功！');

@@ -223,7 +223,7 @@ class OrderController extends MemberController
             }
             try {
                 DB::beginTransaction();
-                $order->success($this->user);
+                $order->success($this->user->openid);
                 DB::commit();
                 redirect("order")->with('msg','操作完成');
             } catch (\Exception $e) {

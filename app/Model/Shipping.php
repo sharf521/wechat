@@ -52,8 +52,9 @@ class Shipping extends Model
             }
             return (float)$fee;
         }else{
-            echo 'shipp error';
-            exit;
+            $fee=math(11,$quantity,'*',2);//如果配送方式己不删除
+            //通知
+            return (float)$fee;
         }
     }
 }

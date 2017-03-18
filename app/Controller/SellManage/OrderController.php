@@ -83,23 +83,11 @@ class OrderController extends SellController
         if($order->status!=1){
             redirect()->back()->with('msg','状态异常');
         }
-        if($order->supply_user_id!=0){
-            $supply_price=0;
-            $orderGoods=$order->OrderGoods();
-            foreach ($orderGoods as $ogs){
-                $goods=$ogs->Goods();
-                $goods=$goods->addSpec($ogs->spec_id);
-                $price=math($goods->price,$goods->retail_float_money,'-',2);
-                $money=math($price,$ogs->quantity,'*',2);
-                $supply_price=math($supply_price,$money,'+',2);
-            }
-            $data['supply_price']=$supply_price;
-        }
         if($_POST){
             $goods_money=(float)$request->post('goods_money');
             if($order->supply_user_id!=0){
                 //供货
-                if($goods_money<$supply_price){
+                if($goods_money < $order->supply_goods_money){
                     redirect()->back()->with('error','商品价格不能小于供货价');
                 }
             }else{

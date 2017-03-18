@@ -18,7 +18,7 @@
                 <div class="layui-input-inline">
                     <input class="layui-input" required type="text" name="goods_money" onkeyup="value=value.replace(/[^0-9.]/g,'')" value="<?=$order->goods_money?>"  placeholder="¥"/></div>
                 <? if($order->supply_user_id!=0) : ?>
-                    <div class="layui-form-mid layui-word-aux">供货价：<?=$supply_price?>元</div>
+                    <div class="layui-form-mid layui-word-aux">供货价：<?=$order->supply_goods_money?>元</div>
                 <? endif;?>
             </div>
             <div class="layui-form-item">

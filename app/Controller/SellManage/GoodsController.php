@@ -177,13 +177,13 @@ class GoodsController extends SellController
         if($goods->supply_goods_id==0){
             redirect()->back()->with('error','不是采购的商品！');
         }
+        $specs=$goods->GoodsSpec();
         if($_POST){
             $name=$request->post('name');
             if(empty($name)){
                 redirect()->back()->with('error','商品名称不能为空！');
             }
             $goods->name=$name;
-            $array_spec=array(0);
             if($supplyGoods->is_have_spec==0){
                 $retail_price=(float)$request->post('retail_price');
                 if($retail_price<$supplyGoods->price){
@@ -194,27 +194,15 @@ class GoodsController extends SellController
                 $specs=$supplyGoods->GoodsSpec();
                 foreach($specs as $i=>$v){
                     $spec=(new GoodsSpec())->where("goods_id={$goods->id} && supply_spec_id={$v->id}")->first();
-                    $spec->goods_id=$goods->id;
-                    $spec->spec_1=$v->spec_1;
-                    $spec->spec_2=$v->spec_2;
                     $spec->price=(float)$request->post("retail_price{$v->id}");
-                    $spec->supply_spec_id=$v->id;
                     $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
-                    $spec->stock_count=0;
-                    if($spec->is_exist){
-                        $spec->save();
-                        array_push($array_spec,$spec->id);
-                    }else{
-                        $_id=$spec->save(true);
-                        array_push($array_spec,$_id);
-                    }
+                    $spec->save();
                     if($i==0){
                         $goods->price=$spec->price;
                         $goods->retail_float_money=$spec->retail_float_money;
                     }
                 }
             }
-            DB::table('goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
             
             $shop_cateid=(int)$request->post('shop_category');
             if($shop_cateid!=0){
@@ -226,8 +214,9 @@ class GoodsController extends SellController
             redirect('goods')->with('msg', '修改成功！');
         }else{
             $data['cates']=$this->getCates();
-            $data['goods']=$goods;
+            $data['goods']=$goods->pullSupplyGoods();
             $data['supplyGoods']=$supplyGoods;
+            $data['goodsSpecs']=(new GoodsSpec())->where('goods_id=?')->bindValues($goods->id)->get();
             $this->title='编辑采购商品';
             $this->view('purchase_goods_edit',$data);
         }

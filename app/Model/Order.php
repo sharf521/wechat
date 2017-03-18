@@ -35,7 +35,7 @@ class Order extends Model
         }
     }
 
-    public function success($user)
+    public function success($operatorOpenId='')
     {
         if($this->status==3){
             throw new \Exception("异常，请勿重复确认收货！");
@@ -45,7 +45,7 @@ class Order extends Model
         $sellerAccount=$center->getUserFunc($seller->openid);
         $remark="订单号：{$this->order_sn}";
         $params=array(
-            'openid'=>$user->openid,
+            'openid'=>$operatorOpenId,
             'body'=>'',
             'type'=>'order_success',
             'remark'=>$remark,

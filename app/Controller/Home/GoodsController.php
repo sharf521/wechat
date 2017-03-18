@@ -120,7 +120,7 @@ class GoodsController extends HomeController
             }
             $topnav_str.="<a><cite>{$goods->name}</cite></a>";
             $data['topnav_str']=$topnav_str;
-            $data['goods']=$goods;
+            $data['goods']=$goods->pullSupplyGoods();
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
             $this->title='商品详情';
