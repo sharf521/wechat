@@ -236,11 +236,13 @@ function goods_detail_js()
     });
     //加入购物车
     $('#bottom_buy_box .opt1').on('click',function () {
-        var quantity=document.forms['form_order'].quantity.value;
+        var quantity=Number(document.forms['form_order'].quantity.value);
         var spec_id=$('#spec_id').val();
         $.post("/index.php/cart/add/",{goods_id:goods_id,spec_id:spec_id,quantity:quantity},function(data){
             var json=eval("("+data+")");
             if(json.code=='0'){
+                $("#cart_num").html(Number($("#cart_num").html())+quantity);
+                $("#cart_num").show();
                 var msg='添加成功！';
             }else{
                 var msg=json.msg;

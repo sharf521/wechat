@@ -39,9 +39,15 @@
         </a>
     </div>
 <? else: ?>
-    <br><br>
+    <br>
     <div class="weui-cells__title">卖家管理</div>
     <div class="weui-flex margin_header">
+        <div class="weui-flex__item">
+            <a href="<?=url('/sellManage/shop')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+                <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
+                <p class="weui-grid__label">店铺设置</p>
+            </a>
+        </div>
         <div class="weui-flex__item">
             <a href="<?=url('/sellManage/category')?>" style="text-align: center; width: 100%; height: 100%; display: block">
                 <i class="iconfont" style="font-size: 22px; color: #999999">&#xe600;</i>
@@ -61,7 +67,7 @@
             </a>
         </div>
         <div class="weui-flex__item">
-            <a href="<?=url('/sellManage/supply')?>" style="text-align: center; width: 100%; height: 100%; display: block">
+            <a href="<?=url('/purchase')?>" style="text-align: center; width: 100%; height: 100%; display: block">
                 <i class="iconfont" style="font-size: 22px; color: #999999">&#xe89d;</i>
                 <p class="weui-grid__label">我要采购</p>
             </a>
@@ -69,32 +75,34 @@
     </div>
 <? endif;?>
 
-<? if($this->user->is_supply==0) : ?>
-    <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
-            <div class="weui-cell__bd">
-                <p>申请供应商</p>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </a>
-    </div>
-<? else: ?>
-    <br><br>
-    <div class="weui-cells__title">供应商中心</div>
-    <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/category')?>">
-            <div class="weui-cell__bd">
-                <p>分类管理</p>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </a>
-        <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/goods')?>">
-            <div class="weui-cell__bd">
-                <p>商品管理</p>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </a>
-    </div>
+<br>
+<? if($this->user->is_shop==1) : ?>
+    <? if($this->user->is_supply==0) : ?>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
+                <div class="weui-cell__bd">
+                    <p>申请供应商</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+    <? else: ?>
+        <div class="weui-cells__title">供应商中心</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/goods')?>">
+                <div class="weui-cell__bd">
+                    <p>商品管理</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/order')?>">
+                <div class="weui-cell__bd">
+                    <p>我的订单</p>
+                </div>
+                <div class="weui-cell__ft"></div>
+            </a>
+        </div>
+    <? endif;?>
 <? endif;?>
 
     <div class="weui-btn-area">

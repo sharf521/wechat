@@ -1,7 +1,7 @@
 <?php require 'header.php';?>
     <div class="m_header">
         <a class="m_header_l" href="<?=url('/member')?>"><i class="iconfont">&#xe604;</i></a>
-        <a class="m_header_r" href="<?=url('goods/add')?>">添加</a>
+        <a class="m_header_r" href="<?=url('goods/add')?>"></a>
         <h1>供应商品管理</h1>
     </div>
     <div class="my-navbar margin_header">
@@ -47,10 +47,6 @@
 
     <? endif;?>
 
-    <div class="weui-btn-area">
-        <a href="<?=url('goods/add')?>" class="weui-btn weui-btn_primary">添加商品</a>
-    </div>
-
     <div class="weui-skin_android" id="androidActionsheet" style="display: none">
         <div class="weui-mask"></div>
         <div class="weui-actionsheet">
@@ -61,7 +57,7 @@
                 <? if($this->func=='list_status2') :?>
                     <div class="weui-actionsheet__cell change">上架</div>
                 <? endif;?>
-                <div class="weui-actionsheet__cell edit">编辑</div>
+                <!--<div class="weui-actionsheet__cell edit">编辑</div>-->
                 <div class="weui-actionsheet__cell del">删除</div>
             </div>
         </div>
