@@ -109,7 +109,7 @@
             <p class="weui-tabbar__label">首页</p>
         </a>
         <a href="<?=url('/cart')?>" class="weui-tabbar__item">
-            <i class="iconfont weui-tabbar__icon">&#xe698;</i>
+            <i class="iconfont weui-tabbar__icon" style="position: relative">&#xe698;<span class="weui-badge" id="cart_num"></span></i>
             <p class="weui-tabbar__label">购物车</p>
         </a>
         <a href="<?=url('')?>" class="weui-tabbar__item weui-bar__item_on">
@@ -117,4 +117,7 @@
             <p class="weui-tabbar__label">我</p>
         </a>
     </div>
+<script>
+    getCartNum();
+</script>
 <?php require 'footer.php';?>

@@ -1,3 +1,11 @@
+$(function () {
+    $.get("/cart/getGoodsCount/",{},function(data) {
+        $('#cart_num').html(data);
+        if(data>0){
+            $('#cart_num').show();
+        }
+    });
+});
 /* 确认订单*/
 function getSelectedMoney() {
     $.get("/index.php/cart/getSelectedMoney?cart_ids="+cart_ids+'&cityName='+cityName, function (data) {

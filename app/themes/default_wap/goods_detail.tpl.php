@@ -27,8 +27,13 @@
     </div>
 
     <div class="bottom_opts">
+        <a href="/" class="opt_home">
+            <i class="iconfont">&#xe64f;</i>
+            <p>首页</p>
+        </a>
         <a href="<?=url('cart')?>" class="opt_cart">
-            <i class="iconfont">&#xe698;</i>
+            <i class="iconfont" style="position: relative">&#xe698;
+                <span class="weui-badge" id="cart_num"></span></i>
             <p>购物车</p>
         </a>
         <a href="javascript:;" class="opt_add">加入购物车</a>

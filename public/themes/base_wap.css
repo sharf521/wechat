@@ -98,3 +98,4 @@ i, cite, em { font-style: normal; }
 .table_box>tbody>tr>td:first-child{text-align: right; color: #999999; width: 100px; text-align: right}
 
 .price{font-family: verdana;}
+#cart_num{position: absolute;top: -2px;right: -13px;display: none}

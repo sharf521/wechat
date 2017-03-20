@@ -1,3 +1,13 @@
+function getCartNum() {
+    $(function () {
+        $.get("/cart/getGoodsCount/",{},function(data) {
+            $('#cart_num').html(data);
+            if(data>0){
+                $('#cart_num').show();
+            }
+        });
+    });
+}
 //goods js
 function uploadGoodsImg() {
     var lay=layer.open({

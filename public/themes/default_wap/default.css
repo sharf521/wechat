@@ -31,9 +31,10 @@
 .bottom_opts i{font-size: 20px; margin: 0px;}
 .bottom_opts p{    color: #999999;    font-size: 12px; line-height: 20px; margin-top:-5px; padding: 0;}
 .bottom_opts a{padding-top: 0px;    text-align: center;    color: #999999;    font-size: 12px;}
-.bottom_opts .opt_cart{float: left; width: 20%;}
-.bottom_opts .opt_add{float: left; width: 40%;background-color: #f85;color: #fff; display: block;line-height: 50px; font-size: 16px;}
-.bottom_opts .opt_buy{float: left; width: 40%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
+.bottom_opts .opt_home{float: left; width: 15%;}
+.bottom_opts .opt_cart{float: left; width: 15%;}
+.bottom_opts .opt_add{float: left; width: 35%;background-color: #f85;color: #fff; display: block;line-height: 50px; font-size: 16px;}
+.bottom_opts .opt_buy{float: left; width: 35%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
 .wrap-input{float: right; padding-top: 5px;}
 .wrap-input span{width: 25px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
