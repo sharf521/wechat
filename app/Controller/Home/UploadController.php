@@ -51,6 +51,9 @@ class UploadController extends Controller
             $name = 'face';
         } elseif ($type == 'card1' || $type == 'card2') {
             $name = $type;
+        }elseif ($type=='logo'){
+            $name = 'logo'.$name;
+            $path="/data/upload/web/".date('Ym').'/';
         }
         //创建文件夹
         $_path = ROOT . '/public' . $path;

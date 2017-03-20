@@ -48,11 +48,11 @@
             <table class="table_from">
                 <tr>
                     <td>分站名称：</td>
-                    <td><input type="text" name="name" size="50" value="<?= $row->name ?>"/></td>
+                    <td><input type="text" name="name" size="150" value="<?= $row->name ?>"/></td>
                 </tr>
                 <tr>
                     <td>域名：</td>
-                    <td><input type="text" name="domain" size="50" value="<?= $row->domain ?>"/> |分隔，以|结尾</td>
+                    <td><input type="text" name="domain" size="150" value="<?= $row->domain ?>"/> |分隔，以|结尾</td>
                 </tr>
                 <tr>
                     <td>LOGO：</td>
@@ -87,7 +87,7 @@
                 </tr>
                 <tr>
                     <td>标题：</td>
-                    <td><input type="text" name="title" value="<?= $row->title ?>" size="50"/></td>
+                    <td><input type="text" name="title" value="<?= $row->title ?>" size="150"/></td>
                 </tr>
                 <tr>
                     <td>关键字：</td>
@@ -99,11 +99,11 @@
                 </tr>
                 <tr>
                     <td>用户中心网址：</td>
-                    <td><input type="text" name="center_url" value="<?= $row->center_url ?>" size="50"/>http://开始 结尾不要/</td>
+                    <td><input type="text" name="center_url" value="<?= $row->center_url ?>" size="150"/>http://开始 结尾不要/</td>
                 </tr>
                 <tr>
                     <td>用户中心手机端网址：</td>
-                    <td><input type="text" name="center_url_wap" value="<?= $row->center_url_wap ?>" size="50"/></td>
+                    <td><input type="text" name="center_url_wap" value="<?= $row->center_url_wap ?>" size="150"/></td>
                 </tr>
                 <tr>
                     <td></td>
