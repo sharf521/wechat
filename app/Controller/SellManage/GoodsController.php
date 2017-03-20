@@ -342,6 +342,12 @@ class GoodsController extends SellController
                 $goods->save();
                 redirect('goods/list_status2')->with('msg', '己下架！');
             }elseif($goods->status==2){
+                if($goods->supply_goods_id!=0){
+                    $supplyGoods=(new SupplyGoods())->find($goods->supply_goods_id);
+                    if($supplyGoods->status!=1){
+                        redirect()->back()->with('error','供应的商品己下架，如有疑问请联系供应商！');
+                    }
+                }
                 $goods->status=1;
                 $goods->save();
                 redirect('goods')->with('msg','己上架！');

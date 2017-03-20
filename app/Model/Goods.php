@@ -148,6 +148,7 @@ class Goods extends Model
                         $newSpec->spec_1=$supplySpec->spec_1;
                         $newSpec->spec_2=$supplySpec->spec_2;
                         $newSpec->price=$supplySpec->retail_price;
+                        $newSpec->supply_goods_id=$supplySpec->goods_id;
                         $newSpec->supply_spec_id=$supplySpec->id;
                         $newSpec->retail_float_money=abs(math($newSpec->price,$supplySpec->price,'-',2));
                         $newSpec->stock_count=0;

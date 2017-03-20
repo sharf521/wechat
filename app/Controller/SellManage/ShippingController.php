@@ -36,7 +36,7 @@ class ShippingController extends SellController
     {
         $ships=array();
         $data['v_val_tr0']='default';
-        $data['v_txt_tr0']='全国';
+        $data['v_txt_tr0']='默认';
         foreach ($data['one'] as $i => $v) {
             $t = trim($data['v_val_tr' . $i]);
             $tt = $data['v_txt_tr' . $i];

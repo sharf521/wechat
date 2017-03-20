@@ -76,6 +76,20 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">配送费用</label>
+                        <div class="layui-input-block">
+                            <table class="layui-table">
+                                <tr bgcolor="#efefef"><td>地区</td><td>首件</td><td>首费</td><td>续件</td><td>续费</td></tr>
+                                <? foreach ($areas as $area) :?>
+                                    <tr><td><?=$area['areaname']?></td><td><?=$area['one']?></td><td>￥<?=$area['price']?></td><td><?=$area['next']?></td><td>￥<?=$area['nprice']?></td></tr>
+                                <? endforeach;?>
+                            </table>
+
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="layui-form-item">
                         <label class="layui-form-label"></label>
                         <div class="layui-input-inline">
                             <? if($isPurchase!==true) : ?>

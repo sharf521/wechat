@@ -9,6 +9,7 @@ use App\Model\Goods;
 use App\Model\GoodsSpec;
 use App\Model\Order;
 use App\Model\OrderGoods;
+use App\Model\Shipping;
 use App\Model\ShopCategory;
 use App\Model\SupplyGoods;
 use System\Lib\DB;
@@ -129,6 +130,7 @@ class PurchaseController extends HomeController
                         $spec->spec_1=$v->spec_1;
                         $spec->spec_2=$v->spec_2;
                         $spec->price=(float)$request->post("retail_price{$v->id}");
+                        $spec->supply_goods_id=$v->goods_id;
                         $spec->supply_spec_id=$v->id;
                         $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
                         $spec->stock_count=0;
@@ -169,6 +171,8 @@ class PurchaseController extends HomeController
             if($goods->is_exist){
                 $data['isPurchase']=true;
             }
+            $areas=(new Shipping())->find($goods->shipping_id)->code_areas;
+            $data['areas']=unserialize($areas);
             $data['cates']=(new ShopCategory())->getListTree($this->user_id);
             $this->view('purchase_detail',$data);
         }

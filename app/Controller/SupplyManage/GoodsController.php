@@ -253,7 +253,7 @@ class GoodsController extends SupplyController
                     }
                     $goods->stock_count=$stock_total;
                 }
-                DB::table('goods_spec')->where("supply_spec_id not in(".implode(',',$array_spec).")")->delete();
+                DB::table('goods_spec')->where("supply_goods_id={$goods->id} and supply_spec_id not in(".implode(',',$array_spec).")")->delete();
                 DB::table('supply_goods_spec')->where("goods_id={$goods->id} and id not in(".implode(',',$array_spec).")")->delete();
                 $goods->save();
 
@@ -298,6 +298,9 @@ class GoodsController extends SupplyController
             if($goods->status==1){
                 $goods->status=2;
                 $goods->save();
+                //采购的商品也下架,还需要给用户发通知
+                (new Goods())->where("supply_goods_id=?")->bindValues($goods->id)->update(array('status'=>2));
+
                 redirect('goods/list_status2')->with('msg', '己下架！');
             }elseif($goods->status==2){
                 $goods->status=1;
@@ -315,6 +318,10 @@ class GoodsController extends SupplyController
         if($goods->user_id==$this->user_id){
             $goods->status=-1;
             $goods->save();
+
+            //采购的商品也下架,还需要给用户发通知
+            (new Goods())->where("supply_goods_id=?")->bindValues($goods->id)->update(array('status'=>2));
+
             redirect("goods")->with('msg','册除成功！');
         }else{
             redirect('goods')->with('error','操作失败！');
