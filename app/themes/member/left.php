@@ -22,9 +22,9 @@
 
     <? if($this->user->is_shop==1) : ?>
         <? if($this->user->is_supply==0) : ?>
-            <a class="layui-btn" href="<?=url('/member/shop')?>">申请成为供货商</a>
+            <a class="layui-btn" href="<?=url('/member/shop')?>">申请成为供应商</a>
         <? else: ?>
-            <h3>我是供货商</h3>
+            <h3>我是供应商</h3>
             <ul>
                 <li><a href="<?=url('/supplyManage/goods')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/supplyManage/goods')!==false){echo 'class="whover"';}?>>商品管理</a></li>
                 <li><a href="<?=url('/supplyManage/order')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/supplyManage/order')!==false){echo 'class="whover"';}?>>订单管理</a></li>

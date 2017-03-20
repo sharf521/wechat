@@ -11,7 +11,7 @@ class IndexController extends SupplyController
 
     public function index()
     {
-        $data['title_herder'] = '供货商中心';
+        $data['title_herder'] = '供应商中心';
         $this->view('manage', $data);
     }
 }

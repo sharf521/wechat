@@ -33,7 +33,7 @@
                             <? if($goods->supply_goods_id!=0):
                                 $supply=$goods->Supply();
                                 ?>
-                                <div style="margin: 10px; color: #999;">供货商：<?=$supply->name?> <?=\App\Helper::getQqLink($supply->qq)?></div>
+                                <div style="margin: 10px; color: #999;">供应商：<?=$supply->name?> <?=\App\Helper::getQqLink($supply->qq)?></div>
                             <? endif?>
                         </td>
                         <td>￥<?=$goods->price?></td>

@@ -28,7 +28,7 @@
                     <input class="layui-input" required type="text" name="shipping_fee" onkeyup="value=value.replace(/[^0-9.]/g,'')" value="<?=$order->shipping_fee?>"  placeholder="¥"/></div>
                 <div class="layui-form-mid layui-word-aux">元</div>
                 <? else:?>
-                    <div class="layui-form-mid layui-word-aux"><?=$order->shipping_fee?>元（如需修改请联系供货商）</div>
+                    <div class="layui-form-mid layui-word-aux"><?=$order->shipping_fee?>元（如需修改请联系供应商）</div>
                 <? endif;?>
             </div>
             <div class="layui-form-item">

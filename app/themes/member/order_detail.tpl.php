@@ -21,7 +21,7 @@
                     <? endif;?>
 
                     <?php if($shop->user_id==$this->user_id) : ?>
-                        <tr><td>供货商</td><td><?=$supplyer->name?> <?=\App\Helper::getQqLink($buyer->qq)?> </td></tr>
+                        <tr><td>供应商</td><td><?=$supplyer->name?> <?=\App\Helper::getQqLink($buyer->qq)?> </td></tr>
                     <? endif;?>
 
                     <tr><td>物流费用</td><td>¥<?=$order->shipping_fee?></td></tr>

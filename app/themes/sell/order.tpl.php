@@ -29,7 +29,7 @@
                             <? if($order->supply_user_id!=0):
                                 $supply=$order->Supply();
                                 ?>
-                                供货商：<?=$supply->name?> <?=\App\Helper::getQqLink($supply->qq)?>
+                                供应商：<?=$supply->name?> <?=\App\Helper::getQqLink($supply->qq)?>
                             <? endif?>
                             </span>
                         </dt>
@@ -66,7 +66,7 @@
                                             <? if($order->supply_user_id==0) :?>
                                             <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a><br>
                                                 <? else:?>
-                                                联系供货商发货
+                                                联系供应商发货
                                             <? endif;?>
                                             <a href="javascript:;" data-id="<?=$order->id?>" class="cancel layui-btn layui-btn-small layui-btn-primary">取消订单</a><br>
                                         <? endif;?>

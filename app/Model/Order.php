@@ -40,9 +40,17 @@ class Order extends Model
         if($this->status==3){
             throw new \Exception("异常，请勿重复确认收货！");
         }
+
         $center=new Center();
+        $seller_money=$this->order_money;
         $seller=(new User())->find($this->seller_id);
         $sellerAccount=$center->getUserFunc($seller->openid);
+        if($this->supply_user_id!=0){
+            $supplyer_money=math($this->supply_goods_money,$this->shipping_fee,'+',2);
+            $seller_money=math($this->order_money,$supplyer_money,'-',2);
+            $supplyer=(new User())->find($this->supply_user_id);
+            $supplyerAccount=$center->getUserFunc($supplyer->openid);
+        }
         $remark="订单号：{$this->order_sn}";
         $params=array(
             'openid'=>$operatorOpenId,
@@ -55,11 +63,24 @@ class Order extends Model
                     'openid'=>$seller->openid,
                     'type'=>'order_success',
                     'remark'=>$remark,
-                    'funds_available' =>$this->order_money,
+                    'funds_available' =>$seller_money,
                     'funds_available_now'=>$sellerAccount->funds_available
                 )
             )
         );
+        if($this->supply_user_id!=0){
+            if($this->supply_user_id==$this->seller_id){
+                $supplyerAccount->funds_available=math($supplyerAccount->funds_available,$seller_money,'+',2);
+            }
+            $supply_log=array(
+                'openid'=>$supplyer->openid,
+                'type'=>'order_success_supply',
+                'remark'=>$remark,
+                'funds_available' =>$supplyer_money,
+                'funds_available_now'=>$supplyerAccount->funds_available
+            );
+            array_push($params['data'],$supply_log);
+        }
         $return=$center->receivables($params);
         if($return===true){
             $this->status=5;

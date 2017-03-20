@@ -73,14 +73,14 @@
     <div class="weui-cells">
         <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
             <div class="weui-cell__bd">
-                <p>申请供货商</p>
+                <p>申请供应商</p>
             </div>
             <div class="weui-cell__ft"></div>
         </a>
     </div>
 <? else: ?>
     <br><br>
-    <div class="weui-cells__title">供货商中心</div>
+    <div class="weui-cells__title">供应商中心</div>
     <div class="weui-cells">
         <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/category')?>">
             <div class="weui-cell__bd">
