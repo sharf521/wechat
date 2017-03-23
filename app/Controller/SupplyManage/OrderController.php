@@ -72,6 +72,7 @@ class OrderController extends SupplyController
                 exit;
             }
         }else{
+            $this->title='修改运费';
             $data['order']=$order;
             $this->view('order_edit',$data);
         }
@@ -106,6 +107,7 @@ class OrderController extends SupplyController
                 exit;
             }
         }else{
+            $this->title='发货';
             $data['order']=$order;
             $data['shipping']=$shipping;
             $this->view('order_edit',$data);

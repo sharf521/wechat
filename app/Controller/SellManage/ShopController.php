@@ -20,6 +20,9 @@ class ShopController extends SellController
 
     public function index(Shop $shop,Request $request)
     {
+        if($this->is_wap){
+            redirect()->back()->with('error','请在电脑端操作');
+        }
         $shop=$shop->findOrFail($this->user_id);
         if($_POST){
             $name=$request->post('name');

@@ -28,8 +28,15 @@
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
             <span class="time"><?=$order->created_at?></span>
         </div>
+        <? if($order->supply_user_id!=0):
+            $supply=$order->Supply();?>
+            <div class="order_shopBar">
+                供应商：<?=$supply->name?>
+                <?=\App\Helper::getQqLink($supply->qq)?>
+            </div>
+        <? endif;?>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("order/detail/?id={$order->id}")?>">
+            <a href="<?=url("/member/order/detail/?id={$order->id}")?>">
                 <div class="order_item">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
@@ -46,7 +53,14 @@
                 <a href="<?=url("order/editMoney/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">修改价格</a>
             <? elseif ($order->status==3) : ?>
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
-                <a href="<?=url("order/editShipping/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
+
+
+                <? if($order->supply_user_id==0) :?>
+                    <a href="<?=url("order/editShipping/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
+                <? else:?>
+                    <div>联系供应商发货</div>
+                <? endif;?>
+
             <? endif;?>
         </div>
     </div>

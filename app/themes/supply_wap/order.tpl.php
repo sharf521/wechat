@@ -21,16 +21,21 @@
 
 
 <? foreach ($orders['list'] as $order) :
-    $goods=$order->OrderGoods();
+    $shop=$order->Shop();
     ?>
     <div class="order_box">
         <div class="order_head">
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
             <span class="time"><?=$order->created_at?></span>
         </div>
-        <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em>我的小店</em></a>
-        <? foreach ($goods as $g) : ?>
-            <a href="<?=url("/goods/detail/{$g->goods_id}")?>">
+        <div class="order_shopBar">
+            卖家：<?=$shop->name?>
+            <?=\App\Helper::getQqLink($shop->qq)?>
+        </div>
+        <?
+        $goods=$order->OrderGoods();
+        foreach ($goods as $g) : ?>
+            <a href="<?=url("/member/order/detail/?id={$order->id}")?>">
                 <div class="order_item">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
@@ -42,14 +47,14 @@
         <? endforeach;?>
         <div class="remark">备注：<?=nl2br($order->buyer_remark)?></div>
         <div class="order_footer">
-            <p>总价：<em class="co_red price">¥<?=$order->order_money?></em></p>
+            <p>
+                运费：<em>¥<?=$order->shipping_fee?></em><br>
+                总价：<em class="co_red price">¥<?=$order->order_money?></em></p>
             <? if($order->status==1) : ?>
-                <a href="<?=url("order/editMoney/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">修改价格</a>
+                <a href="<?=url("order/editMoney/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">修改运费</a>
             <? elseif ($order->status==3) : ?>
-                <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
                 <a href="<?=url("order/editShipping/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">发货</a>
             <? endif;?>
-            <a href="<?=url("order/show/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">详细</a>
         </div>
     </div>
 <? endforeach;?>

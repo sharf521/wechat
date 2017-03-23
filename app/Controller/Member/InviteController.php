@@ -9,6 +9,7 @@
 namespace App\Controller\Member;
 
 
+use App\Helper;
 use App\Model\User;
 use App\WeChatOpen;
 
@@ -21,17 +22,8 @@ class InviteController extends MemberController
 
     public function index(User $user)
     {
-        $user_id=$this->user_id;
-
-        $file_dir = ROOT . "/public/data/upload/".ceil($user_id/2000)."/".$user_id."/";
-        if (!is_dir($file_dir)) {
-            mkdir($file_dir, 0777, true);
-        }
-        $file_path=$file_dir.'invite.png';
         $data['invite_url']='http://'.$_SERVER['HTTP_HOST']."/user/invite?r={$this->username}";
-        \PHPQRCode\QRcode::png($data['invite_url'],$file_path, 'L', 4, 2);
-
-        $data['invite_img']="/data/upload/".ceil($user_id/2000)."/".$user_id."/invite.png";
+        $data['invite_img']=Helper::QRcode($data['invite_url'],'invite',$this->user_id);
         $result=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
         $data['result']=$result;
         if($this->is_inWeChat){

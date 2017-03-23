@@ -18,18 +18,19 @@
                 </div>
                 <table class="layui-table"  lay-even lay-skin="row">
                     <thead>
-                    <th width="50">编号</th>
-                    <th>名称</th>
-                    <th>价格</th>
-                    <th>库存</th>
-                    <th>添加时间</th>
-                    <th width="140">操作</th>
+                    <tr>
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>库存</th>
+                        <th>添加时间</th>
+                        <th width="140">操作</th>
+                    </tr>
                     </thead>
                     <tbody>
                     <? foreach ($result['list'] as $goods) : ?>
                     <tr>
-                        <td><?=$goods->id?></td>
-                        <td><img src="/themes/images/blank.gif" width="108" data-echo="<?=$goods->image_url?>" style="float: left"><?=$goods->name?></td>
+                        <td><img src="/themes/images/blank.gif" width="108" data-echo="<?=$goods->image_url?>" style="float: left">
+                            <a href="/purchase/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a></td>
                         <td>￥<?=$goods->price?></td>
                         <td><?=$goods->stock_count?></td>
                         <td><?=$goods->created_at?></td>

@@ -9,6 +9,7 @@
 namespace App\Controller\Home;
 
 
+use App\Helper;
 use App\Model\Cart;
 use App\Model\Category;
 use App\Model\Goods;
@@ -123,6 +124,9 @@ class GoodsController extends HomeController
             $data['goods']=$goods->pullSupplyGoods();
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
+            $domain=explode('|',$this->site->domain);
+            $wap_url=$domain[1].'/goods/detail/'.$id;
+            $data['QRcode_url']=Helper::QRcode($wap_url,'goods',$id);
             $this->title='商品详情';
             $this->view('goods_detail',$data);
         }

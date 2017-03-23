@@ -7,6 +7,27 @@
                 <fieldset class="layui-elem-field layui-field-title">
                     <legend><?=$this->title?></legend>
                 </fieldset>
+                <div class="order-progress">
+                    <ul class="progress-list">
+                        <li class="step step-first <?=($order->status==1 || $order->status==2)?'step-active':'step-done';?>">
+                            <div class="progress"><span class="text">下单</span></div>
+                            <div class="info"><?=$order->created_at?></div>
+                        </li>
+                        <li class="step <? if($order->status==3){echo 'step-active';}?> <? if($order->status>3){echo 'step-done';}?>">
+                            <div class="progress"><span class="text">付款</span></div>
+                            <div class="info"><?=$order->payed_at?></div>
+                        </li>
+                        <li class="step <? if($order->status==4){echo 'step-active';}?> <? if($order->status>4){echo 'step-done';}?>">
+                            <div class="progress"><span class="text">发货</span></div>
+                            <div class="info"><?=$shipping->shipping_at?></div>
+                        </li>
+                        <li class="step step-last <? if($order->status==5){echo 'step-active';}?>">
+                            <div class="progress"><span class="text">交易成功</span></div>
+                            <div class="info"><?=$order->finished_at?></div>
+                        </li>
+                    </ul>
+                </div>
+
                 <table class="layui-table">
                     <tr><td width="80">订单编号</td><td><?= $order->order_sn ?></td></tr>
                     <tr><td>下单时间</td><td><?= $order->created_at ?></td></tr>

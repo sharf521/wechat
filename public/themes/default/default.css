@@ -172,6 +172,13 @@ i, cite, em { font-style: normal; }
 .goods_info .label{ float: left; display: block;   font-family: simsun;   text-align: right;  color: #666;   width: 96px; font-size: 14px;    margin-right: 6px;}
 .goods_info .goods_prompt{line-height: 22px; padding-left: 25px; margin-top: 10px; color: #D93600}
 .goods_info .goods_prompt strong{font-size: 1em;    font-style: normal; }
+
+.goods_detail_box{}
+.goods_detail_box .sidebar{float: left; width: 210px; margin-top: 10px; border: 1px solid #eee;}
+.goods_detail_box .sidebar_title{ line-height: 40px;background-color: #f7f7f7; text-align: center; border-bottom: 1px solid #eee;}
+.goods_detail_box .sidebar_content{ text-align: center; padding: 15px 0px;}
+.goods_detail_box .sidebar_content img{ width: 180px;}
+.goods_detail_box .main{float: right; width: 915px;}
 /*购买数量和库存*/
 
 .bottom_buy_box{font-size: 14px;}
@@ -242,7 +249,7 @@ i, cite, em { font-style: normal; }
 .addrinner span a{ font-size:12px; color:#F60; line-height:24px}
 .addselect{background:url(images/addbg.png) no-repeat}
 
-.order_box{position:relative;margin-top:10px;padding:0 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
+.order_box{position:relative;padding:10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
 .order_box .order_shopBar{display:block;height:40px;border-bottom:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
 .order_box .order_shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
 .order_box .cell1{float: left; width:650px; text-align:left}

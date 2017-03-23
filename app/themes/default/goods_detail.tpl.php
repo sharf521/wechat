@@ -69,9 +69,10 @@
         </div>
         <div class="goods_detail_box">
             <div class="sidebar">
-                <ul>
-                    
-                </ul>
+                <div class="sidebar_title">商品二维码</div>
+                <div class="sidebar_content">
+                    <img src="<?=$QRcode_url?>">
+                </div>
             </div>
             <div class="main">
                 <div class="layui-tab layui-tab-brief">

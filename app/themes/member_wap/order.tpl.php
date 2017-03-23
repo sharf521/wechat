@@ -28,10 +28,10 @@
             <p class="status"><em class="co_blue"><?=$order->getLinkPageName('order_status',$order->status)?></em></p>
             <span class="time"><b><?=substr($order->created_at,0,10)?></b></span>
         </div>
-        <a class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></a>
+        <div class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em> <?=\App\Helper::getQqLink($shop->qq)?></div>
         <? foreach ($goods as $g) : ?>
             <a href="<?=url("order/detail/?id={$order->id}")?>">
-                <div class="order_item">
+                <div class="order_item clearFix">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
                         <?=$g->goods_name?> <?=$g->spec_1?> <?=$g->spec_2?>

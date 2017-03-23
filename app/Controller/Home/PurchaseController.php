@@ -33,6 +33,9 @@ class PurchaseController extends HomeController
 
     public function lists(SupplyGoods $goods,Request $request,Category $category)
     {
+        if($this->is_wap){
+            redirect()->back()->with('error','请在电脑端操作');
+        }
         $cid=(int)$request->get(2);
         $keyword=$request->get('keyword');
         $minPrice=$request->get('minPrice');

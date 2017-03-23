@@ -84,6 +84,7 @@ class Order extends Model
         $return=$center->receivables($params);
         if($return===true){
             $this->status=5;
+            $this->finished_at=time();
             $this->save();
         }else{
             throw new \Exception($return);

@@ -54,7 +54,7 @@
                                     </td>
                                     <td class="operate">
                                         <? if($order->status==1) : ?>
-                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改价格</a><br>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editMoney">修改运费</a><br>
                                         <? elseif ($order->status==3) : ?>
                                             <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a><br>
                                         <? endif;?>
@@ -87,7 +87,7 @@
                            var id=$(this).attr('data-id');
                            layer.open({
                                type: 2,
-                               title: '修改订单价格',
+                               title: '修改运费',
                                shadeClose: true,
                                shade: 0.8,
                                area: ['460px', '320px'],
