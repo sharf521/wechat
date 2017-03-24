@@ -68,6 +68,7 @@
             </ul>
         </div>
     </div>
+    <a href="/cart" class="my_cart layui-btn  layui-btn-primary"><i class="iconfont">&#xe698;</i> 我的购物车</a>
 </div>
 <div class="header-wrapper">
     <div class="layui-main">

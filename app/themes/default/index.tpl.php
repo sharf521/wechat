@@ -2,9 +2,9 @@
 <div class="banner">
     <div class="swiper-container">
         <div class="swiper-wrapper">
-            <? foreach($images as $img) : ?>
+            <? foreach($banners as $ad) : ?>
                 <div class="swiper-slide" style="text-align: center">
-                    <img src="<?=$img?>" style="max-width: 100%;">
+                    <a href="<?=$ad['href']?>"><img src="<?=$ad['picture']?>" style="max-width: 100%;"></a>
                 </div>
             <? endforeach;?>
         </div>
@@ -19,8 +19,8 @@
         </dt>
         <dd>
             <div class="mod-conleft">
-                <a href="#" class="md-img">
-                    <img src="/themes/default/images/1F.jpg" data-url="http://static.shikee.com/www/img/20151223/floor/1F.jpg" alt="">
+                <a href="<?=$floor['ad']['href']?>" class="md-img">
+                    <img src="<?=$floor['ad']['picture']?>">
                     <p class="title-bg"></p>
                     <p class="con-til" style="display: none">说明<i>»</i></p>
                 </a>

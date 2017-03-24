@@ -19,6 +19,7 @@ select, input, button, textarea {font: 100% "Microsoft YaHei";padding: 0;}
 :focus {outline: 0 none;}
 .hide{display: none}
 
+.wrapper,.container{min-height: 500px;}
 .but1{color:#FFF; background-color:#d9534f;border:1px solid #df4c43;padding:5px 10px; margin:0 1px;  font-size: 12px; line-height: 1.5; border-radius:3px;}
 .but1:hover{background-color:#c9302c; }
 

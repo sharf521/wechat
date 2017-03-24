@@ -8,7 +8,7 @@
         <? if(count($result_carts)==0) : ?>
             <div class="cart_empty">
                 购物车内还没有商品！<br>
-                <a href="<?=url('goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
+                <a href="<?=url('goods/lists')?>" class="layui-btn layui-btn-primary">去逛逛</a>
             </div>
         <? else : ?>
             <div class="cart_list">

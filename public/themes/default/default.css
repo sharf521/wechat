@@ -42,6 +42,9 @@ i, cite, em { font-style: normal; }
 .head-search-bar .keyword ul li { font-size: 12px; vertical-align: top; letter-spacing: normal; word-spacing: normal; display: inline-block; *display:inline/*IE6、7*/; margin-right: 12px;}
 .head-search-bar .keyword ul li a { color: #777;}
 
+.public-head-layout .my_cart{margin: 30px 0px 0px 150px;}
+.public-head-layout .my_cart:hover{border: 1px solid #ccc;}
+
 .header-wrapper{    background: #f50;    position: relative;    z-index: 10;    width: 100%;}
 .header-wrapper  .nav-list{}
 .header-wrapper  .nav-list li{float:left;line-height: 45px;}
@@ -201,6 +204,7 @@ i, cite, em { font-style: normal; }
 /*cart*/
 .cart_empty{text-align: center; padding-top: 30px; font-size: 16px; font-weight: 700; line-height: 40px;}
 .cart_empty a{font-size: 16px;font-weight: normal}
+.cart_empty a:hover{border: 1px solid #ccc;}
 .cart_list .cart_title{background-color: #e5e5e5; line-height: 40px; text-align: center}
 .cart_list .cell1{ float: left; width: 80px; }
 .cart_list .cell2{ float: left; width: 530px;}
