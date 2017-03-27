@@ -67,7 +67,6 @@ class OrderController extends MemberController
         $data['goods']=$order->OrderGoods();
         $data['shop']=$order->Shop();
         $data['buyer']=$order->Buyer();
-        var_dump($data['buyer']);
         $data['supplyer']=$order->Supply();
         $this->view('order_detail',$data);
     }

@@ -33,7 +33,7 @@
                     <tr><td>下单时间</td><td><?= $order->created_at ?></td></tr>
                     <tr><td>订单状态</td><td class="status"><?=$order->getLinkPageName('order_status',$order->status)?></td></tr>
                     <tr><td>备注</td><td><?=nl2br($order->buyer_remark)?></td></tr>
-                    <?php if($buyer->user_id==$this->user_id || $supplyer->user_id==$this->user_id) : ?>
+                    <?php if($buyer->id==$this->user_id || $supplyer->user_id==$this->user_id) : ?>
                         <tr><td>卖家</td><td><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?></td></tr>
                     <? endif;?>
 
