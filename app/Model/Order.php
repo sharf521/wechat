@@ -59,15 +59,18 @@ class Order extends Model
             'remark'=>$remark,
             'label'=>"order_sn:{$this->order_sn}",
             'data'=>array(
-                array(
-                    'openid'=>$seller->openid,
-                    'type'=>'order_success',
-                    'remark'=>$remark,
-                    'funds_available' =>$seller_money,
-                    'funds_available_now'=>$sellerAccount->funds_available
-                )
             )
         );
+        if($seller_money!=0){
+            $sell_log=array(
+                'openid'=>$seller->openid,
+                'type'=>'order_success',
+                'remark'=>$remark,
+                'funds_available' =>$seller_money,
+                'funds_available_now'=>$sellerAccount->funds_available
+            );
+            array_push($params['data'],$sell_log);
+        }
         if($this->supply_user_id!=0){
             if($this->supply_user_id==$this->seller_id){
                 $supplyerAccount->funds_available=math($supplyerAccount->funds_available,$seller_money,'+',2);

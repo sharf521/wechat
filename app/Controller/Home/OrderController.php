@@ -127,8 +127,6 @@ class OrderController extends HomeController
                 DB::commit();
             }catch(\Exception $e){
                 $error=$e->getMessage();
-                echo $error;
-                exit;
                 redirect()->back()->with('error',$error);
                 DB::rollBack();
             }
