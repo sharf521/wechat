@@ -271,7 +271,8 @@ function purchase_detail_js() {
         $('.goods_pics li img').mouseover(function(){
             $('.goods_pics li img').removeClass();
             $(this).addClass('ware_pic_hover');
-            $('.pic_big img').attr('src', $(this).attr('src'));
+            var src=$(this).attr('src').split('_');
+            $('.pic_big img').attr('src', src[0]);
         });
     });
     //立刻采购
@@ -325,7 +326,8 @@ function goods_detail_js()
         $('.goods_pics li img').mouseover(function(){
             $('.goods_pics li img').removeClass();
             $(this).addClass('ware_pic_hover');
-            $('.pic_big img').attr('src', $(this).attr('src'));
+            var src=$(this).attr('src').split('_');
+            $('.pic_big img').attr('src', src[0]);
         });
 
         $('.wrap-input .btn-reduce').on('click',function(){

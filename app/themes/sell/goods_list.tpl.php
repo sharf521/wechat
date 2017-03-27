@@ -25,9 +25,11 @@
                     <th width="140">操作</th>
                     </thead>
                     <tbody>
-                    <? foreach ($result['list'] as $goods) : ?>
+                    <? foreach ($result['list'] as $goods) :
+                        $goods=$goods->addSpec();
+                        ?>
                     <tr>
-                        <td><img src="/themes/images/blank.gif" width="100" style="float: left" data-echo="<?=$goods->image_url?>">
+                        <td><img width="100" style="float: left" src="<?=\App\Helper::smallPic($goods->image_url)?>">
                             <a href="/goods/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a>
                             <br>
                             <? if($goods->supply_goods_id!=0):

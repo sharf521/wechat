@@ -79,7 +79,7 @@
                         <tr>
                             <td class="goods_id"><?=$g->id?></td>
                             <td class="goods_info">
-                                <img src="<?=$g->goods_image?>">
+                                <img src="<?=\App\Helper::smallPic($g->goods_image)?>">
                                 <div style="float: left">
                                     <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>
                                     <?=$g->spec_1?> <?=$g->spec_2?>

@@ -29,7 +29,7 @@
                     <tbody>
                     <? foreach ($result['list'] as $goods) : ?>
                     <tr>
-                        <td><img src="/themes/images/blank.gif" width="108" data-echo="<?=$goods->image_url?>" style="float: left">
+                        <td><img width="100" src="<?=\App\Helper::smallPic($goods->image_url)?>" style="float: left">
                             <a href="/purchase/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a></td>
                         <td>￥<?=$goods->price?></td>
                         <td><?=$goods->stock_count?></td>

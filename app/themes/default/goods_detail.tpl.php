@@ -12,7 +12,7 @@
                 <ul class="clearFix">
                     <? foreach($images as $img) : ?>
                         <li>
-                            <img src="/themes/images/blank.gif" data-echo="<?=$img->image_url?>">
+                            <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($img->image_url)?>">
                         </li>
                     <? endforeach;?>
                 </ul>

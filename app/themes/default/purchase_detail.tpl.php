@@ -12,7 +12,7 @@
                 <ul class="clearFix">
                     <? foreach($images as $img) : ?>
                         <li>
-                            <img src="/themes/images/blank.gif" data-echo="<?=$img->image_url?>">
+                            <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($img->image_url)?>">
                         </li>
                     <? endforeach;?>
                 </ul>
@@ -64,6 +64,18 @@
                         </div>
                     <? endif;?>
 
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">采购到分类</label>
+                        <div class="layui-input-inline">
+                            <select name="shop_category" class="layui-select">
+                                <option value="" selected>请选择</option>
+                                <? foreach ($cates as $cate) :?>
+                                    <option value="<?=$cate['id']?>"><?=$cate['name_pre']?><?=$cate['name']?></option>
+                                <? endforeach;?>
+                            </select>
+                        </div>
+                    </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">配送费用</label>
                         <div class="layui-input-block">
@@ -76,18 +88,6 @@
 
                         </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">采购到分类</label>
-                        <div class="layui-input-inline">
-                            <select name="shop_category" class="layui-select">
-                                <option value="" selected>请选择</option>
-                                <? foreach ($cates as $cate) :?>
-                                    <option value="<?=$cate['id']?>"><?=$cate['name_pre']?><?=$cate['name']?></option>
-                                <? endforeach;?>
-                            </select>
-                        </div>
-                    </div>
-                    
                     <div class="layui-form-item">
                         <label class="layui-form-label"></label>
                         <div class="layui-input-inline">
