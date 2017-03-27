@@ -41,7 +41,7 @@
                                         $goods=$order->OrderGoods();
                                         foreach ($goods as $g) : ?>
                                             <div class="clearFix" style="border-bottom: 1px solid #efefef;">
-                                                <img class="goodsImg" src="<?=$g->goods_image?>" width="100">
+                                                <img class="goodsImg" src="<?=\App\Helper::smallPic($g->goods_image)?>" width="100">
                                                 <div class="goodsDetail">
                                                     <div class="name">
                                                         <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a>                                                                                <br><?=$g->spec_1?> <?=$g->spec_2?>

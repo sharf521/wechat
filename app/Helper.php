@@ -34,4 +34,8 @@ class Helper
         }
         return $img_url;
     }
+    public static function smallPic($image_url)
+    {
+        return $image_url.'_100X100.png';
+    }
 }

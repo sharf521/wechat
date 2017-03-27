@@ -50,7 +50,7 @@
                 <? foreach($carts as $cart): ?>
                     <div class="goods_item clearFix">
                         <div class="cell1">
-                            <img class="image" src="<?=$cart->goods_image?>">
+                            <img class="image" src="<?=\App\Helper::smallPic($cart->goods_image)?>">
                             <div class="oi_content">
                                 <a href="<?=url("goods/detail/{$cart->goods_id}")?>"><?=$cart->goods_name?></a>
                                 <p><?
