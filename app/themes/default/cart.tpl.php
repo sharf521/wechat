@@ -31,7 +31,7 @@
                             <div class="goods_item clearFix">
                                 <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">
                                 <div class="cell2">
-                                    <img class="image" src="<?=$cart->goods_image?>">
+                                    <img class="image" src="<?=\App\Helper::smallPic($cart->goods_image)?>">
                                     <div class="oi_content">
                                         <a href="<?=url("goods/detail/{$cart->goods_id}")?>"><?=$cart->goods_name?></a>
                                         <p><?
