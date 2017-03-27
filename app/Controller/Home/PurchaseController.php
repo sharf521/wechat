@@ -89,8 +89,11 @@ class PurchaseController extends HomeController
         $id=(int)$request->get(2);
         $supplyGoods=$supplyGoods->findOrFail($id);
         $goods=$goods->where("supply_goods_id=? and status!=-1")->bindValues($supplyGoods->id)->first();
+        if($goods->is_exist){
+            $data['isPurchase']=true;
+        }
         if($_POST){
-            if($goods->is_exist){
+            if($data['isPurchase']==true){
                 redirect()->back()->with('error','请不要重复采购');
             }
             if($supplyGoods->is_have_spec==0){
@@ -171,10 +174,7 @@ class PurchaseController extends HomeController
             $data['images']=$supplyGoods->GoodsImage();
             $data['GoodsData']=$supplyGoods->GoodsData();
             $this->title='商品详情';
-            if($goods->is_exist){
-                $data['isPurchase']=true;
-            }
-            $areas=(new Shipping())->find($goods->shipping_id)->code_areas;
+            $areas=(new Shipping())->find($supplyGoods->shipping_id)->code_areas;
             $data['areas']=unserialize($areas);
             $data['cates']=(new ShopCategory())->getListTree($this->user_id);
             $this->view('purchase_detail',$data);

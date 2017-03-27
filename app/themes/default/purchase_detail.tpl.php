@@ -65,17 +65,6 @@
                     <? endif;?>
 
                     <div class="layui-form-item">
-                        <label class="layui-form-label">店铺分类</label>
-                        <div class="layui-input-inline">
-                            <select name="shop_category" class="layui-select">
-                                <option value="" selected>请选择</option>
-                                <? foreach ($cates as $cate) :?>
-                                    <option value="<?=$cate['id']?>"><?=$cate['name_pre']?><?=$cate['name']?></option>
-                                <? endforeach;?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
                         <label class="layui-form-label">配送费用</label>
                         <div class="layui-input-block">
                             <table class="layui-table">
@@ -87,7 +76,17 @@
 
                         </div>
                     </div>
-                    
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">采购到分类</label>
+                        <div class="layui-input-inline">
+                            <select name="shop_category" class="layui-select">
+                                <option value="" selected>请选择</option>
+                                <? foreach ($cates as $cate) :?>
+                                    <option value="<?=$cate['id']?>"><?=$cate['name_pre']?><?=$cate['name']?></option>
+                                <? endforeach;?>
+                            </select>
+                        </div>
+                    </div>
                     
                     <div class="layui-form-item">
                         <label class="layui-form-label"></label>
