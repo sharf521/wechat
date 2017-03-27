@@ -177,7 +177,7 @@ class GoodsController extends SellController
         if($goods->supply_goods_id==0){
             redirect()->back()->with('error','不是采购的商品！');
         }
-        $specs=$goods->GoodsSpec();
+        $goods->GoodsSpec();//同步供货规格
         if($_POST){
             $name=$request->post('name');
             if(empty($name)){
@@ -190,6 +190,7 @@ class GoodsController extends SellController
                     redirect()->back()->with('error','零售价不能小于供货价');
                 }
                 $goods->price=$retail_price;
+                $goods->retail_float_money=abs(math($retail_price,$supplyGoods->price,'-',2));
             }else{
                 $specs=$supplyGoods->GoodsSpec();
                 foreach($specs as $i=>$v){
