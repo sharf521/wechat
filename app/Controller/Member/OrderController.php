@@ -55,6 +55,7 @@ class OrderController extends MemberController
     
     public function detail(Order $order,Request $request)
     {
+        //wap端使用
         $id=$request->get('id');
         $user_id=$this->user_id;
         $order=$order->findOrFail($id);

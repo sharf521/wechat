@@ -50,7 +50,7 @@
                                     </td>
                                     <td align="center" width="120"><span class="money">¥<?=$order->order_money?></span><br>(含运费：¥<?=$order->shipping_fee?>)
                                         <br>
-                                        <a href="<?=url("/member/order/detail/?id={$order->id}")?>">订单详情</a>
+                                        <a href="<?=url("/order/detail/?sn={$order->order_sn}")?>" target="_blank">订单详情</a>
                                     </td>
                                     <td class="operate">
                                         <? if($order->status==1) : ?>

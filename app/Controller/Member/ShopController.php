@@ -26,6 +26,7 @@ class ShopController extends MemberController
             redirect()->back()->with('error','己开店成功！');
         }
         if($_POST){
+            $shop->site_id=$this->site->id;
             $shop->user_id=$this->user_id;
             $shop->status=0;
             $name=$request->post('name');

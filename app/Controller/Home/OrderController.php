@@ -10,12 +10,9 @@ namespace App\Controller\Home;
 
 
 use App\Model\Cart;
-use App\Model\Goods;
-use App\Model\GoodsSpec;
 use App\Model\Order;
 use App\Model\OrderGoods;
 use App\Model\OrderShipping;
-use App\Model\Shipping;
 use App\Model\UserAddress;
 use System\Lib\DB;
 use System\Lib\Request;
@@ -26,6 +23,29 @@ class OrderController extends HomeController
     {
         parent::__construct();
         $this->check_login();
+    }
+
+    public function detail(Order $order,Request $request)
+    {
+        $sn=$request->get('sn');
+        $user_id=$this->user_id;
+        $order=$order->where('order_sn=?')->bindValues($sn)->first();
+        if(!$order->is_exist){
+            redirect()->back()->with('error','订单不存在！');
+        }
+        if($this->user->type_id==1){
+            if($order->buyer_id!=$user_id && $order->seller_id!=$user_id && $order->supply_user_id!=$user_id){
+                redirect()->back()->with('error','异常');
+            }
+        }
+        $this->title='订单详情';
+        $data['order']=$order;
+        $data['shipping']=$order->OrderShipping();
+        $data['goods']=$order->OrderGoods();
+        $data['shop']=$order->Shop();
+        $data['buyer']=$order->Buyer();
+        $data['supplyer']=$order->Supply();
+        $this->view('order_detail',$data);
     }
 
     //确认订单
@@ -66,6 +86,7 @@ class OrderController extends HomeController
                     $arr_seller_id=explode('_',$seller_id);
                     $order=new Order();
                     $order_sn=time().rand(10000,99999);
+                    $order->site_id=$this->site->id;
                     $order->order_sn=$order_sn;
                     $order->buyer_id=$user_id;
                     $order->buyer_name=$this->username;

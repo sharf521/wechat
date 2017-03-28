@@ -6,7 +6,7 @@
             <div class="box"><br>
                 <span class="layui-breadcrumb">
                       <a href="<?= url('goods') ?>">商品管理</a>
-                      <a><cite><?=$this->func == 'add'?'新增':'编辑'; ?>商品</cite></cite></a>
+                      <a><cite><?=$this->func == 'add'?'新增':'编辑'; ?>商品</cite></a>
                 </span>
                 <hr>
                 <form method="post" class="layui-form">

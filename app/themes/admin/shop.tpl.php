@@ -41,6 +41,11 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
             </tbody>
 
         </table>
+        <? if (empty($result['total'])) {
+            echo "无记录！";
+        } else {
+            echo $result['page'];
+        } ?>
     </div>
 <? elseif ($this->func == 'checked') : ?>
     <blockquote class="layui-elem-quote"><span>审核</span>

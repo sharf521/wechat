@@ -277,6 +277,22 @@ i, cite, em { font-style: normal; }
 .order_bottom{margin-top: 10px;}
 .order_bottom .total{ text-align: right}
 .order_bottom .total strong {  font-weight: 700; line-height: 50px;  font-size: 14px;  color: #c00; margin-right: 10px;}
+/* 订单详情*/
+.order_detail .status{color: #fe4e02; font-weight: 700; font-size: 14px;font-family: 宋体;}
+.order_detail .order_detail_tit{font-size: 15px;   font-weight: 600; font-family: 宋体;  color: #000;padding: 10px 0px 0px 5px; }
+.order_detail th{ text-align: center}
+.order_detail .goods_info img{float: left; margin-right: 10px; width: 50px;}
+.order-progress{height:65px;margin-bottom:15px; margin-top: 10px;}
+.progress-list{width:710px;height:20px;padding:0;list-style-type:none;border-radius:20px;font-size:12px;line-height:20px;text-align:center;color:#424242;background-color:#eee}
+.progress-list .step{float:left;width:176px;height:20px}
+.progress-list .step-first{border-top-left-radius:20px;border-bottom-left-radius:20px}
+.progress-list .step-last{border-top-right-radius:20px;border-bottom-right-radius:20px}
+.progress-list .step-done{background-color:#009688;color:#fff}
+.progress-list .step-active{border-top-right-radius:20px;border-bottom-right-radius:20px;background-color:#009688;color:#fff}
+.progress-list .step .info{margin-top:15px;color:#757575}
+.progress-list-col-4 .step{width:220px}
+.order_detail_bottom{ line-height: 30px; float: right;padding:0px 30px 20px 0px;}
+.order_detail_bottom label{width: 100px;display: inline-block; text-align: right;margin-right: 20px;}
 
 /*footer*/.footer{width:100%;margin-top:20px;border-top:5px solid #f50;clear:both;overflow:hidden}
 .foottop{width:1200px;clear:both;margin:0 auto 10px;display:block;padding-top:30px}
