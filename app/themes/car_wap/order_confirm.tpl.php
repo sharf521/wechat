@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url("product/detail/{$product->id}")?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url("product/detail/?id={$product->id}")?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r"></a>
         <h1><?=$this->title?></h1>
     </div>
