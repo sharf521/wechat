@@ -102,23 +102,15 @@
             </div>
         </div>
         <div class="goods_detail_box">
-            <div class="sidebar">
-                <ul>
-                    
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">商品详情</li>
                 </ul>
-            </div>
-            <div class="main">
-                <div class="layui-tab layui-tab-brief">
-                    <ul class="layui-tab-title">
-                        <li class="layui-this">商品详情</li>
-                        <li>交易记录</li>
-                    </ul>
-                    <div class="layui-tab-content" style="min-height: 400px;">
-                        <div class="layui-tab-item layui-show">
-                            <?=nl2br($GoodsData->content)?>
-                        </div>
-                        <div class="layui-tab-item">暂不显示</div>
+                <div class="layui-tab-content" style="min-height: 400px;">
+                    <div class="layui-tab-item layui-show">
+                        <?=nl2br($GoodsData->content)?>
                     </div>
+                    <div class="layui-tab-item">暂不显示</div>
                 </div>
             </div>
         </div>
