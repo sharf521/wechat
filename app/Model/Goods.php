@@ -19,6 +19,7 @@ class Goods extends Model
 
     public function addSpec($spec_id=0)
     {
+        $this->pullSupplyGoods();
         if($this->is_have_spec && $spec_id!=0){
             $spec=(new GoodsSpec())->find($spec_id);
             if($spec->goods_id ==$this->id){
