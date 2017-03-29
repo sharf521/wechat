@@ -114,6 +114,7 @@ class Cart extends Model
         foreach($result_carts as $seller_id=>$carts){
             foreach ($carts as $i=>$cart) {
                 $goods = $cart->Goods();
+                $goods=$goods->pullSupplyGoods();
                 $goods=$goods->addSpec($cart->spec_id);//取规格的价格和库存
 
                 $result_carts[$seller_id][$i]->Goods=$goods;
