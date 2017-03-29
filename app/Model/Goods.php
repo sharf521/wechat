@@ -29,14 +29,12 @@ class Goods extends Model
                 $this->price=$spec->price;
                 $this->retail_float_money=$spec->retail_float_money;
                 $this->spec_is_exist=true;
-
                 if($this->supply_goods_id!=0){
                     $supplySpec=(new SupplyGoodsSpec())->find($spec->supply_spec_id);
                     if($supplySpec->is_exist){
                         $this->stock_count=$supplySpec->stock_count;
                     }
                 }
-
             }else{
                 $this->spec_1='';
                 $this->spec_2='';
@@ -50,7 +48,6 @@ class Goods extends Model
         }
         return $this;
     }
-
 
     /***
      * @param $quantity 1 or -1

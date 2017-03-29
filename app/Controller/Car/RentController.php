@@ -121,7 +121,7 @@ class RentController extends Controller
                 }
             }
             DB::table('car_rent_image')->where("rent_id={$id} and id not in(".implode(',',$array_ids).")")->delete();
-            redirect("rent/editUpload/?id={$id}")->with('msg','己保存');
+            redirect("rent")->with('msg','己保存');
         }else{
             $this->title='上传资料';
             $data['rent']=$rent;
