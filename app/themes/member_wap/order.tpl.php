@@ -30,7 +30,7 @@
         </div>
         <div class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em> <?=\App\Helper::getQqLink($shop->qq)?></div>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("order/detail/?id={$order->id}")?>">
+            <a href="<?=url("/order/detail/?sn={$order->order_sn}")?>">
                 <div class="order_item clearFix">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">

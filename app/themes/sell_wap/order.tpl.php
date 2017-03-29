@@ -36,7 +36,7 @@
             </div>
         <? endif;?>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("/member/order/detail/?id={$order->id}")?>">
+            <a href="<?=url("/order/detail/?sn={$order->order_sn}")?>">
                 <div class="order_item">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">

@@ -15,14 +15,31 @@
                 <label class="weui-form-preview__label">下单时间</label>
                 <span class="weui-form-preview__value"><?=$order->created_at?></span>
             </div>
+            <?php if($this->user->type_id!=1 || $order->seller_id==$this->user_id) : ?>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">买家</label>
+                    <span class="weui-form-preview__value"><?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?></span>
+                </div>
+            <? endif;?>
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">备注</label>
                 <span class="weui-form-preview__value"><?=nl2br($order->buyer_remark)?></span>
             </div>
-            <div class="weui-form-preview__item">
-                <label class="weui-form-preview__label">卖家</label>
-                <span class="weui-form-preview__value"><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?></span>
-            </div>
+
+            <?php if($this->user->type_id!=1 || $order->buyer_id==$this->user_id || $order->supply_user_id==$this->user_id) : ?>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">卖家</label>
+                    <span class="weui-form-preview__value"><?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?></span>
+                </div>
+            <? endif;?>
+
+            <?php if($this->user->type_id!=1 || $order->seller_id==$this->user_id) : ?>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">供应商</label>
+                    <span class="weui-form-preview__value"><?=$supplyer->name?> <?=\App\Helper::getQqLink($supplyer->qq)?></span>
+                </div>
+            <? endif;?>
+
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">订单状态</label>
                 <span class="weui-form-preview__value"><?=$order->getLinkPageName('order_status',$order->status)?></span>

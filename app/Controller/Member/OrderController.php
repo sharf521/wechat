@@ -52,25 +52,6 @@ class OrderController extends MemberController
         $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
-    
-    public function detail(Order $order,Request $request)
-    {
-        //wap端使用
-        $id=$request->get('id');
-        $user_id=$this->user_id;
-        $order=$order->findOrFail($id);
-        if($order->buyer_id!=$user_id && $order->seller_id!=$user_id && $order->supply_user_id!=$user_id){
-            redirect()->back()->with('error','异常');
-        }
-        $this->title='订单详情';
-        $data['order']=$order;
-        $data['shipping']=$order->OrderShipping();
-        $data['goods']=$order->OrderGoods();
-        $data['shop']=$order->Shop();
-        $data['buyer']=$order->Buyer();
-        $data['supplyer']=$order->Supply();
-        $this->view('order_detail',$data);
-    }
 
     public function pay(Order $order,Request $request,System $system)
     {
