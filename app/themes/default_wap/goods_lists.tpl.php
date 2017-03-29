@@ -8,7 +8,7 @@
         <form class="weui-search-bar__form">
             <div class="weui-search-bar__box">
                 <i class="weui-icon-search"></i>
-                <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                <input type="search" name="keyword" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
                 <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
             </div>
             <label class="weui-search-bar__label" id="searchText">
@@ -24,7 +24,7 @@
             <li>
                 <a href="<?=url("/goods/detail/{$goods->id}")?>">
                 <span class="imgspan">
-                    <img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>">
+                    <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($goods->image_url)?>">
                 </span>
                     <div class="info">
                         <p class="cd_title"><?=$goods->name?></p>
