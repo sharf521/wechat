@@ -188,6 +188,7 @@ function cart_ajaxSetMoney(data) {
                 $(this).html(0);
             }
         });
+        $('#cart_num').html(data.countNum);
     } else {
         $("#totalPrice span").html(0);
         $("#totalNum span").html(0);

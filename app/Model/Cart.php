@@ -152,14 +152,14 @@ class Cart extends Model
             $return[$seller_id]['shippingFee']=0;
             $return[$seller_id]['num']=0;
             foreach ($carts as $i=>$cart) {
-                $_goodsPrice=math($result_carts[$seller_id][$i]->price,$result_carts[$seller_id][$i]->quantity,'*',2);
+                $_goodsPrice=math($cart->price,$cart->quantity,'*',2);
                 $return[$seller_id]['goodsPrice']=math($return[$seller_id]['goodsPrice'],$_goodsPrice,'+',2);
                 if($result_carts[$seller_id][$i]->supply_price!=0){
-                    $_supplyGoodsPrice=math($result_carts[$seller_id][$i]->supply_price,$result_carts[$seller_id][$i]->quantity,'*',2);
+                    $_supplyGoodsPrice=math($cart->supply_price,$cart->quantity,'*',2);
                     $return[$seller_id]['supplyGoodsPrice']=math($return[$seller_id]['supplyGoodsPrice'],$_supplyGoodsPrice,'+',2);
                 }
                 $return[$seller_id]['shippingFee']=math($return[$seller_id]['shippingFee'],$result_carts[$seller_id][$i]->shipping_fee,'+',2);
-                $return[$seller_id]['num']++;
+                $return[$seller_id]['num']+=$cart->quantity;
             }
             $_total=math($return[$seller_id]['goodsPrice'],$return[$seller_id]['shippingFee'],'+',2);
             $return[$seller_id]['total']=math($return[$seller_id]['total'],$_total,'+',2);
