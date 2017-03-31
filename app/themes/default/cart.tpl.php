@@ -78,11 +78,6 @@
             </div>
         <? endif;?>
     </div>
-
-
-
-
-
 <script>
     $(function () {
         cart_js();

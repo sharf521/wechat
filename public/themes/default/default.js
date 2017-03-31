@@ -146,8 +146,9 @@ function order_js() {
     });
 }
 /* 购物车 start*/
+var cart_id = "";
 function getCartedMoney() {
-    var cart_id = "";
+    cart_id = "";
     var allChecked = true;
     $("input:checkbox[name='cart_id[]']").each(function (i) {
         if($(this).attr('disabled')!='disabled'){
@@ -164,28 +165,34 @@ function getCartedMoney() {
             }
         }
     });
-
     $(".checkall").attr("checked", allChecked);
-    $.get("/index.php/cart/getSelectedMoney?cart_ids=" + cart_id, function (data) {
-        if (data != "") {
-            var data = eval('(' + data + ")");
-            $("#totalPrice span").html(data.countTotal);
-            $("#totalNum span").html(data.countNum);
-            $('.cart_foot .shop_total').each(function(){
-                var shop_id=$(this).attr('shop_id');
-                if(data['shop'+shop_id+'_goodsPrice']){
-                    $(this).html(data['shop'+shop_id+'_goodsPrice']);
-                }else{
-                    $(this).html(0);
-                }
-            });
-        } else {
-            $("#totalPrice span").html(0);
-            $("#totalNum span").html(0);
-        }
-    });
+    if (cart_id == '') {
+        $("#totalPrice span").html(0);
+        $("#totalNum span").html(0);
+    } else {
+        $.get("/index.php/cart/getSelectedMoney?cart_ids=" + cart_id, function (data) {
+            cart_ajaxSetMoney(data);
+        });
+    }
 }
-
+function cart_ajaxSetMoney(data) {
+    if (data != "") {
+        var data = eval('(' + data + ")");
+        $("#totalPrice span").html(data.countTotal);
+        $("#totalNum span").html(data.countNum);
+        $('.cart_foot .shop_total').each(function () {
+            var shop_id = $(this).attr('shop_id');
+            if (data['shop' + shop_id + '_goodsPrice']) {
+                $(this).html(data['shop' + shop_id + '_goodsPrice']);
+            } else {
+                $(this).html(0);
+            }
+        });
+    } else {
+        $("#totalPrice span").html(0);
+        $("#totalNum span").html(0);
+    }
+}
 function cart_js() {
     getCartedMoney();
     $("input[name='cart_id[]']").on('click',function () {
@@ -202,8 +209,8 @@ function cart_js() {
             num--;
             var chkbox=$(this).parents('.goods_item').find('input:checkbox');
             var tr=$(this).parents('.goods_item');
-            $.get("/index.php/cart/changeQuantity?num="+num+"&id="+chkbox.val(), function (data) {
-                var data=eval("("+data+")");
+            $.get("/index.php/cart/changeQuantity?num="+num+"&id="+chkbox.val()+"&cart_ids="+cart_id, function (json) {
+                var data=eval("("+json+")");
                 if(data.code=='0'){
                     input.val(num);
                     tr.find('.price').html(data.total);
@@ -211,17 +218,17 @@ function cart_js() {
                     input.val(data.stock_count);
                     layer.msg(data.msg);
                 }
+                cart_ajaxSetMoney(json);
             });
         }
-        getCartedMoney();
     });
     $('.wrap-input .btn-add').on('click', function () {
         var input=$(this).parent().find('input');
         var num=Number(input.val())+1;
         var chkbox=$(this).parents('.goods_item').find('input:checkbox');
         var tr=$(this).parents('.goods_item');
-        $.get("/index.php/cart/changeQuantity?num="+num+"&id="+chkbox.val(), function (data) {
-            var data=eval("("+data+")");
+        $.get("/index.php/cart/changeQuantity?num="+num+"&id="+chkbox.val()+"&cart_ids="+cart_id, function (json) {
+            var data=eval("("+json+")");
             if(data.code=='0'){
                 input.val(num);
                 tr.find('.price').html(data.total);
@@ -229,8 +236,8 @@ function cart_js() {
                 input.val(data.stock_count);
                 layer.msg(data.msg);
             }
+            cart_ajaxSetMoney(json);
         });
-        getCartedMoney();
     });
     $(".goods_item .del").on('click',function () {
         var id=Number($(this).attr('data-id'));
@@ -243,7 +250,6 @@ function cart_js() {
             }
         });
     });
-
     $('.cart_bottom .btn_pay').on('click',function () {
         var cart_id='';
         $("input:checkbox[name='cart_id[]']").each(function (i) {

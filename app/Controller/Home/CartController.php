@@ -82,28 +82,41 @@ class CartController extends HomeController
         $goods=$goods->addSpec($cart->spec_id);
         $stock_count=$goods->stock_count;
         if($stock_count>=$num){
-            echo json_encode(array('code'=>'0','total'=>math($num,$goods->price,'*',2)));
+            $result=array('code'=>'0','total'=>math($num,$goods->price,'*',2));
+
         }else{
             $num=$stock_count;
-            echo json_encode(array('code'=>'fail','stock_count'=>$stock_count,'msg'=>"库存不足，剩余：{$stock_count}件"));
+            $result=array('code'=>'fail','stock_count'=>$stock_count,'msg'=>"库存不足，剩余：{$stock_count}件");
         }
         $cart->quantity=$num;
         $cart->save();
+        //计算价格
+        $ids=trim($request->get('cart_ids'));
+        $array=$this->getSelMoney($ids);
+        $result=array_merge($result,$array);
+        echo json_encode($result);
     }
 
-    public function getSelectedMoney(Request $request,Cart $cart)
+    public function getSelectedMoney(Request $request)
     {
         $ids=trim($request->get('cart_ids'));
         $cityName=$request->get('cityName');
-        $cart_id=explode(',',$ids);
-        if(count($cart_id)>0 && $ids!=''){
+        $result=$this->getSelMoney($ids,$cityName);
+        echo json_encode($result);
+    }
+
+    private function getSelMoney($cart_ids,$cityName='')
+    {
+        $result=array();
+        $cart_id=explode(',',$cart_ids);
+        if(count($cart_id)>0 && $cart_ids!=''){
             $arr=array(
                 'cityName'=>$cityName,
                 'buyer_id'=>$this->user_id,
                 'cart_id'=>$cart_id
             );
+            $cart=new Cart();
             $carts_result=$cart->getList($arr);
-
             $carts_moneys=$cart->getMoneys($carts_result);
             $total=0;
             $num=0;
@@ -116,7 +129,7 @@ class CartController extends HomeController
             }
             $result['countNum']=$num;
             $result['countTotal']=$total;
-            echo json_encode($result);
+            return $result;
         }
     }
 }
