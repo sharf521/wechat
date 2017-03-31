@@ -17,4 +17,20 @@ class Supply extends Model
     {
         parent::__construct();
     }
+
+    /**
+     * @return  User
+     */
+    public function User()
+    {
+        return $this->hasOne('\App\Model\User','id','user_id');
+    }
+
+    /**
+     * @return Shop
+     */
+    public function Shop()
+    {
+        return $this->hasOne('\App\Model\Shop','user_id','user_id');
+    }
 }

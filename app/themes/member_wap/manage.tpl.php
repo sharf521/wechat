@@ -79,7 +79,7 @@
 <? if($this->user->is_shop==1) : ?>
     <? if($this->user->is_supply==0) : ?>
         <div class="weui-cells">
-            <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
+            <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/applySupply')?>">
                 <div class="weui-cell__bd">
                     <p>申请供应商</p>
                 </div>

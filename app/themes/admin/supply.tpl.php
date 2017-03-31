@@ -4,7 +4,7 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
 ?>
 <? if ($this->func == 'index') : ?>
     <blockquote class="layui-elem-quote">
-        <span>店铺管理</span>列表
+        <span>供货商管理</span>列表
     </blockquote>
     <div class="main_content">
         <table class="layui-table" lay-skin="line">
@@ -21,19 +21,21 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
             </thead>
             <tbody>
             <? foreach ($result['list'] as $row) {
+                $shop=$row->Shop();
+                $user=$row->User();
                 ?>
                 <tr>
                     <td><?=$row->id?></td>
-                    <td><?= $row->User()->username ?>(<?=$row->user_id?>)</td>
-                    <td><?= $row->name ?></td>
-                    <td><?= $row->contacts ?><br><?= $row->tel ?></td>
-                    <td><?= $row->qq ?></td>
-                    <td> <?=$row->region_name?><br><?= $row->address ?></td>
+                    <td><?= $user->username ?>(<?=$row->user_id?>)</td>
+                    <td><?= $shop->name ?></td>
+                    <td><?= $shop->contacts ?><br><?= $shop->tel ?></td>
+                    <td><?= $shop->qq ?></td>
+                    <td> <?=$shop->region_name?><br><?= $shop->address ?></td>
                     <td><?= $row->created_at ?></td>
                     <td><?=$arr_status[$row->status]?></td>
                     <td>
                         <? if($row->status==0) : ?>
-                        <a href="<?= url("shop/checked/?user_id={$row->user_id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">审核</a>
+                        <a href="<?= url("supply/checked/?user_id={$row->user_id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">审核</a>
                         <? endif;?>
                     </td>
                 </tr>
@@ -49,7 +51,7 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
     </div>
 <? elseif ($this->func == 'checked') : ?>
     <blockquote class="layui-elem-quote"><span>审核</span>
-        <a href="<?= url('shop') ?>" class="layui-btn layui-btn-small">返回列表</a></blockquote>
+        <a href="<?= url('supply') ?>" class="layui-btn layui-btn-small">返回列表</a></blockquote>
     <div class="main_content">
         <form method="post" class="layui-form">
             <div class="layui-field-box">

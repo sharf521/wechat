@@ -22,7 +22,7 @@
 
     <? if($this->user->is_shop==1) : ?>
         <? if($this->user->is_supply==0) : ?>
-            <a class="layui-btn" href="<?=url('/member/shop')?>">申请成为供应商</a>
+            <a class="layui-btn" href="<?=url('/sellManage/applySupply')?>">申请成为供应商</a>
         <? else: ?>
             <h3>我是供应商</h3>
             <ul>
