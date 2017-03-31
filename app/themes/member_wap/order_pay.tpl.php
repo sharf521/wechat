@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="weui-cells__tips">可用金额：￥<span id="span_funds"><?=$account->funds_available?></span></div>
+        <div class="weui-cells__tips">可用金额：¥<span id="span_funds"><?=$account->funds_available?></span></div>
         <div style="text-align: right; padding: 10px 20px 0px 0px; font-size: 16px; font-weight: 600; color: #c00;">支付金额：¥<span id="money_yes"><?=$order->order_money?></span></div>
         <div class="weui-btn-area">
             <input class="weui-btn weui-btn_primary" type="submit" value="立即支付">
