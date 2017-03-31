@@ -38,22 +38,26 @@
 
 
     <form method="post">
+
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">扣除积分</label></div>
                 <div class="weui-cell__bd">
                     <input type="text" id="integral" name="integral" value="0" required placeholder="" onkeyup="value=value.replace(/[^0-9.]/g,'')"  class="weui-input" autocomplete="off"/>
                 </div>
-                <div class="weui-cells__tips">可用积分：<span id="span_integral"><?=$account->integral_available?></span></div>
+
             </div>
+        </div>
+        <div class="weui-cells__tips">可用积分：<span id="span_integral"><?=$account->integral_available?></span></div>
+        <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd"><label class="weui-label">支付密码</label></div>
                 <div class="weui-cell__bd">
                     <input class="weui-input" required type="password" name="zf_password" placeholder="支付密码" />
                 </div>
-                <div class="weui-cells__tips">可用金额：￥<span id="span_funds"><?=$account->funds_available?></span></div>
             </div>
         </div>
+        <div class="weui-cells__tips">可用金额：￥<span id="span_funds"><?=$account->funds_available?></span></div>
         <div style="text-align: right; padding: 10px 20px 0px 0px; font-size: 16px; font-weight: 600; color: #c00;">支付金额：¥<span id="money_yes"><?=$order->order_money?></span></div>
         <div class="weui-btn-area">
             <input class="weui-btn weui-btn_primary" type="submit" value="立即支付">
