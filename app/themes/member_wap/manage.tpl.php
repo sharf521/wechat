@@ -4,7 +4,7 @@
         <a class="m_header_r"></a>
         <h1>用户中心</h1>
     </div>
-    <br><br>
+    <div class="margin_header"></div>
 
     <div class="weui-cells__title">会员中心</div>
     <div class="weui-cells">
@@ -27,7 +27,6 @@
             <div class="weui-cell__ft"></div>
         </a>
     </div>
-
 <? if($this->user->is_shop==0) : ?>
     <div class="weui-cells">
         <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
@@ -38,7 +37,6 @@
         </a>
     </div>
 <? else: ?>
-    <br>
     <div class="weui-cells__title">卖家管理</div>
     <div class="weui-cells">
         <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/category')?>">
@@ -95,7 +93,6 @@
     </div>-->
 <? endif;?>
 
-<br>
 <? if($this->user->is_shop==1) : ?>
     <? if($this->user->is_supply==0) : ?>
         <div class="weui-cells">
