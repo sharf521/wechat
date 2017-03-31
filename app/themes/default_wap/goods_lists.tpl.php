@@ -8,7 +8,7 @@
         <form class="weui-search-bar__form">
             <div class="weui-search-bar__box">
                 <i class="weui-icon-search"></i>
-                <input type="search" name="keyword" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
+                <input type="search" name="keyword" value="<?=$_GET['keyword']?>" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required/>
                 <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
             </div>
             <label class="weui-search-bar__label" id="searchText">

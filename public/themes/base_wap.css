@@ -10,10 +10,9 @@
 @media only screen and (min-width:800px){
     body{ width:760px; margin:0 auto; }
 }
+a{color: #000;}
 ul,li{list-style: none}
-em, i {
-    font-style: normal;
-}
+em, i { font-style: normal;}
 .hide{display: none}
 .clear{ clear:both}
 .clearFix:after{

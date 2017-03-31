@@ -11,9 +11,24 @@ header('Cache-Control: no-cache, no-store, max-age=0, must-revalidate');
 header('Expires: '.gmdate('D, d M Y H:i:s') . ' GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 
+//获取当前一级域名
+$domain=strtolower($_SERVER['HTTP_HOST']);
+if(strpos($domain,':')!==false){//去除端口
+    $domain=explode(':',$domain);
+    $domain=$domain[0];
+}
+$domain=explode('.',$domain);
+if ($domain[0] == 'www') {
+    unset($domain[0]);
+}
+$domain=implode('.',$domain);
+//session_start();之前设置  php.ini 里 session.auto_start=0
+ini_set('session.cookie_domain', 'test.cn');//域名不需要端口
+//ini_set("session.save_handler", "redis");
+//ini_set("session.save_path", "tcp://127.0.0.1:6379");
 session_cache_limiter('private,must-revalidate');
 session_start();
-date_default_timezone_set('Asia/Shanghai');//时区配置
+date_default_timezone_set('Asia/Shanghai');
 set_time_limit($set_time = 3600);
 
 define('ROOT', __DIR__);

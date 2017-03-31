@@ -55,7 +55,7 @@
 .cart_box .goods_item .image{float:left;margin-right:10px;height:80px; width: 80px;}
 .cart_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
 .cart_box .del{ position: absolute; right: 10px; top: 0px; color: #999999;}
-.cart_box .wrap-input{padding-top: 35px;}
+.cart_box .wrap-input{margin-top: 35px;}
 .cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px;border-top: 1px solid #ddd; margin-top: 5px;}
 .cart_box .cart_foot em{font-weight: 700; color: #e4393c;}
 
@@ -129,8 +129,8 @@
 .order_item .image{float:left;margin-right:10px;height:80px;}
 
 .order_box .order_foot{ border-top: 1px solid #ddd; margin-top: 5px;}
-.order_box .order_foot .buyer_remark{background-color: #efefef; border: 0px; margin-top: 8px;font-size: 14px; float: left; width: 75%;}
-.order_box .order_foot .foot_money{ float:right;text-align: right; padding-right: 10px; margin-top: 8px; line-height: 25px;font-size: 14px;}
+.order_box .order_foot .buyer_remark{background-color: #efefef; border: 0px; margin-top: 8px;font-size: 14px; width: 100%;line-height: 25px;}
+.order_box .order_foot .foot_money{ float:right;text-align: right; padding-right: 10px; line-height: 25px;font-size: 14px;}
 .order_box .order_foot .foot_money em{font-weight: 700; color: #e4393c;}
 
 
