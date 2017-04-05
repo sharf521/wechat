@@ -88,7 +88,7 @@ class PurchaseController extends HomeController
     {
         $id=(int)$request->get(2);
         $supplyGoods=$supplyGoods->findOrFail($id);
-        $goods=$goods->where("supply_goods_id=? and status!=-1")->bindValues($supplyGoods->id)->first();
+        $goods=$goods->where("supply_goods_id=? and user_id={$this->user_id} and status!=-1")->bindValues($supplyGoods->id)->first();
         if($goods->is_exist){
             $data['isPurchase']=true;
         }
