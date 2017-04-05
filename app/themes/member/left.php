@@ -16,7 +16,7 @@
             <li><a href="<?=url('/sellManage/shipping')?>"  <? if($this->control=='shipping'){echo 'class="whover"';}?>>配送方式管理</a></li>
             <li><a href="<?=url('/sellManage/goods')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/sellManage/goods')!==false){echo 'class="whover"';}?>>商品管理</a></li>
             <li><a href="<?=url('/sellManage/order')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/sellManage/order')!==false){echo 'class="whover"';}?>>订单管理</a></li>
-            <li><a href="<?=url('/purchase')?>" target="_blank">我要采购</a></li>
+            <li><a href="<?=url('/purchase')?>">我要采购</a></li>
         </ul>
     <? endif;?>
 

@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">照片</label>
+                            <label class="layui-form-label">图片相册</label>
                             <div class="layui-input-block">
                                 <ul id="uploaderFiles">
                                     <?
