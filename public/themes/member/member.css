@@ -76,7 +76,9 @@ i, cite, em { font-style: normal; }
 .orderbox .operate{ width: 100px; text-align: center}
 .orderbox .operate a{ width: 90px; margin-bottom: 10px;}
 
-
+.goods_list th{ text-align: center}
+.goods_list .goods_id,.goods_list .goods_price,.goods_list .goods_num{text-align: center; vertical-align: middle}
+.goods_list .goods_info img{float: left; margin-right: 10px; width: 50px;}
 
 
 

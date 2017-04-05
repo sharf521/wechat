@@ -45,11 +45,25 @@ class Order extends Model
         $seller_money=$this->order_money;
         $seller=(new User())->find($this->seller_id);
         $sellerAccount=$center->getUserFunc($seller->openid);
+        //积分奖励
+        $rebate=new RebateList();
         if($this->supply_user_id!=0){
+            //采购的商品
             $supplyer_money=math($this->supply_goods_money,$this->shipping_fee,'+',2);
             $seller_money=math($this->order_money,$supplyer_money,'-',2);
             $supplyer=(new User())->find($this->supply_user_id);
             $supplyerAccount=$center->getUserFunc($supplyer->openid);
+            //积分奖励
+            $rebate->user_id=$supplyer->id;
+            $rebate->money=$supplyer_money;
+            $_money=math($supplyer_money,0.21,'*',2);
+            $supplyer_money=math($supplyer_money,$_money,'-',2);
+        }else{
+            //自卖商品积分奖励
+            $rebate->user_id=$seller->id;
+            $rebate->money=$seller_money;
+            $_money=math($seller_money,0.21,'*',2);
+            $seller_money=math($seller_money,$_money,'-',2);
         }
         $remark="订单号：{$this->order_sn}";
         $params=array(
@@ -89,6 +103,10 @@ class Order extends Model
             $this->status=5;
             $this->finished_at=time();
             $this->save();
+            $rebate->typeid=1;
+            $rebate->label=$params['label'];
+            $rebate->status=0;
+            $rebate->save();
         }else{
             throw new \Exception($return);
         }

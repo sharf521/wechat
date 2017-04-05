@@ -8,6 +8,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
     </blockquote>
     <form method="get">
         <div class="search">
+            订单号：<input type="text" name="order_sn" value="<?=$_GET['order_sn']?>" size="15" placeholder="订单号"/>
             买家ID：<input type="text" name="buyer_id" value="<?=$_GET['buyer_id']?>" size="15" placeholder="买家用户id"/>
             商家ID：<input type="text" name="seller_id" value="<?=$_GET['seller_id']?>" size="15" placeholder="商家用户id"/>
             供应商ID：<input type="text" name="supply_user_id" value="<?=$_GET['supply_user_id']?>" size="15" placeholder="供应商用户ID"/>

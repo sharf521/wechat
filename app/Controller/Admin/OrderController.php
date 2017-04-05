@@ -20,11 +20,15 @@ class OrderController extends AdminController
     public function index(Order $order,Request $request)
     {
         $where = " status>-1";
+        $order_sn=$request->get('order_sn');
         $buyer_id=(int)$request->get('buyer_id');
         $seller_id=(int)$request->get('seller_id');
         $supply_user_id=(int)$request->get('supply_user_id');
         $starttime=$request->get('starttime');
         $endtime=$request->get('endtime');
+        if($order_sn!=''){
+            $where.=" and order_sn='{$order_sn}'";
+        }
         if ($buyer_id!=0) {
             $where .= " and buyer_id={$buyer_id}";
         }

@@ -70,9 +70,4 @@
 .orderbox .operate{ width: 100px; text-align: center}
 .orderbox .operate a{ width: 90px; margin-bottom: 10px;}
 
-/* 订单详情*/
-.order_detail .status{color: #fe4e02; font-weight: 700; font-size: 14px;font-family: 宋体;}
-.order_detail .order_detail_tit{font-size: 15px;   font-weight: 600; font-family: 宋体;  color: #000;padding: 10px 0px 0px 5px; }
-.order_detail .goods_list th{ text-align: center}
-.order_detail .goods_list .goods_id,.order_detail .goods_list .goods_price,.order_detail .goods_list .goods_num{text-align: center; vertical-align: middle}
-.order_detail .goods_list .goods_info img{float: left; margin-right: 10px; width: 50px;}
+

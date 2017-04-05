@@ -46,6 +46,8 @@
             <? if($order->status==1) : ?>
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
                 <a href="<?=url("order/pay/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>
+            <? elseif($order->status==4) : ?>
+                <a href="<?=url("order/success/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">确认收货</a><br>
             <? endif;?>
         </div>
     </div>

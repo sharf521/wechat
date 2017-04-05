@@ -105,6 +105,27 @@ class Center
         $html=$this->curl_url('user/fund',$data);
         return json_decode($html);
     }
+    
+    
+    public function rebateAdd($openid,$typeid=1,$integral=0)
+    {
+        $params=array(
+            'appid'=>$this->appid,
+            'openid'=>$openid,
+            'typeid'=>(int)$typeid,
+            'money'=>$integral,
+            'time'=>time()
+        );
+        $params['sign']=$this->getSign($params);
+        $data['data']=json_encode($params);
+        $html=$this->curl_url('algorithm/rebate_add',$data);
+        $json=json_decode($html);
+        if($json->return_code=='success'){
+            return true;
+        }else{
+            return $json->return_msg;
+        }
+    }
 
     public function receivables($data)
     {
