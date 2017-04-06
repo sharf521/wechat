@@ -166,7 +166,7 @@ i, cite, em { font-style: normal; }
 .goods_info_box .goods_pics  ul li { width: 74px; height: 74px; overflow: hidden; float: left; cursor: pointer; }
 .goods_info_box .goods_pics  ul li img{border:2px solid #fff; width:64px; height:64px}
 .goods_info_box .goods_pics  ul li img.ware_pic_hover {border:2px solid #ff665b }
-.goods_info_box .goods_info{width: 600px; float: left;min-height: 430px; padding:0px 10px;line-height: 40px;  background-color: #fafafa}
+.goods_info_box .goods_info{width: 530px; float: left;min-height: 430px; padding-left:10px;line-height: 40px;  background-color: #fafafa}
 .goods_info_box .goods_info .name{ padding: 20px 0px;}
 .goods_info_box .goods_info .name h1{ font: 700 16px Tahoma;    color: #333;    text-overflow: ellipsis;    white-space: nowrap; overflow: hidden;}
 .goods_info .price{ background-color: #eee; padding: 5px 0px;}
@@ -175,6 +175,15 @@ i, cite, em { font-style: normal; }
 .goods_info .label{ float: left; display: block;   font-family: simsun;   text-align: right;  color: #666;   width: 96px; font-size: 14px;    margin-right: 6px;}
 .goods_info .goods_prompt{line-height: 22px; padding-left: 25px; margin-top: 10px; color: #D93600}
 .goods_info .goods_prompt strong{font-size: 1em;    font-style: normal; }
+
+/*详情页店铺信息 6.17*/
+.about_store{ border: 1px dotted #c90; padding: 10px; float: right; width: 200px;}
+.about_store h3{ font-size: 14px; line-height: 20px; margin: 10px;}
+.about_store p{ line-height: 20px; margin-bottom: 5px; color: #000; border-bottom: 1px dashed #C90; padding: 10px 0}
+.about_store p:last-child{ border-bottom: none;}
+.about_store p span{ color: #666; line-height: 25px;}
+.about_store strong{ color: #C90;}
+
 
 .goods_detail_box{}
 .goods_detail_box .sidebar{float: left; width: 210px; margin-top: 10px; border: 1px solid #eee;}

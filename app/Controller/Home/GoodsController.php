@@ -124,6 +124,7 @@ class GoodsController extends HomeController
             $data['goods']=$goods->pullSupplyGoods();
             $data['images']=$goods->GoodsImage();
             $data['GoodsData']=$goods->GoodsData();
+            $data['shop']=$goods->Shop();
             $domain=explode('|',$this->site->domain);
             $wap_url=$domain[1].'/goods/detail/'.$id;
             $data['QRcode_url']=Helper::QRcode($wap_url,'goods',$id);
