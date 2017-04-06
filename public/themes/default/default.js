@@ -366,6 +366,12 @@ function goods_detail_js()
         $('#specBox_1 span:first').click();
         //alert(goodsSpec.spec1_name);
         //alert(goodsSpec.spec2_name);
+        //遍历图片
+        $('.goods_detail_txt img').each(function (i) {
+            if($(this).width()>=700){
+                $(this).attr('width','100%');
+            }
+        });
     });
 
 
