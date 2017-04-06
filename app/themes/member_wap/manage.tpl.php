@@ -57,12 +57,12 @@
             </div>
             <div class="weui-cell__ft"></div>
         </a>
-        <a class="weui-cell weui-cell_access" href="<?=url('/purchase')?>">
+<!--        <a class="weui-cell weui-cell_access" href="<?/*=url('/purchase')*/?>">
             <div class="weui-cell__bd">
                 <p>我要采购</p>
             </div>
             <div class="weui-cell__ft"></div>
-        </a>
+        </a>-->
     </div>
 
     <!--<div class="weui-flex margin_header">
