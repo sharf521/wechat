@@ -22,7 +22,7 @@
     <div class="weui-panel" style="margin-bottom: 60px;">
         <div class="weui-panel__hd">详细说明</div>
         <article class="weui-article">
-            <?=nl2br($GoodsData->content)?>
+            <?=nl2br($content)?>
         </article>
     </div>
 
