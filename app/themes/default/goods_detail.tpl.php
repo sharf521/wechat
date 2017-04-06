@@ -85,8 +85,8 @@
                         <li>交易记录</li>
                     </ul>
                     <div class="layui-tab-content" style="min-height: 400px;">
-                        <div class="layui-tab-item layui-show">
-                            <?=nl2br($GoodsData->content)?>
+                        <div class="layui-tab-item layui-show goods_detail_txt">
+                            <?=nl2br($content)?>
                         </div>
                         <div class="layui-tab-item">暂不显示</div>
                     </div>

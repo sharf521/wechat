@@ -123,7 +123,17 @@ class GoodsController extends HomeController
             $data['topnav_str']=$topnav_str;
             $data['goods']=$goods->pullSupplyGoods();
             $data['images']=$goods->GoodsImage();
-            $data['GoodsData']=$goods->GoodsData();
+
+            $content=$goods->GoodsData()->content;
+
+            //图片按需加载处理
+            $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
+            preg_match_all($pattern, $content, $m);
+            //preg_match('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i',$content,$m);
+            foreach ($m[0] as $key => $v) {
+                $content = str_replace($v, "<img data-echo='" . $m[1][$key] . "' src='/themes/images/blank.gif'/>", $content);
+            }
+            $data['content']=$content;
             $data['shop']=$goods->Shop();
             $domain=explode('|',$this->site->domain);
             $wap_url=$domain[1].'/goods/detail/'.$id;

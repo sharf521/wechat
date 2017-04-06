@@ -191,6 +191,7 @@ i, cite, em { font-style: normal; }
 .goods_detail_box .sidebar_content{ text-align: center; padding: 15px 0px;}
 .goods_detail_box .sidebar_content img{ width: 180px;}
 .goods_detail_box .main{float: right; width: 915px;}
+.goods_detail_box  .goods_detail_txt img{max-width: 100%;}
 /*购买数量和库存*/
 
 .bottom_buy_box{font-size: 14px;}
