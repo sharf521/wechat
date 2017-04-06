@@ -127,11 +127,11 @@ class GoodsController extends HomeController
             $content=$goods->GoodsData()->content;
 
             //图片按需加载处理
-            /*$pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
+            $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
             preg_match_all($pattern, $content, $m);
             foreach ($m[0] as $key => $v) {
                 $content = str_replace($v, "<img data-echo='" . $m[1][$key] . "' src='/themes/images/blank.gif'/>", $content);
-            }*/
+            }
             $data['content']=$content;
             $data['shop']=$goods->Shop();
             $domain=explode('|',$this->site->domain);
