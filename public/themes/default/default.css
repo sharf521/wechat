@@ -163,7 +163,7 @@ i, cite, em { font-style: normal; }
 .goods_info_box .goods_pics .pic_big{ height: 350px; width:350px;text-align: center; display: table-cell; vertical-align: middle}
 .goods_info_box .goods_pics .pic_big img{max-height: 320px; max-width: 320px;}
 .goods_info_box .goods_pics  ul { margin-left: 10px;}
-.goods_info_box .goods_pics  ul li { width: 74px; height: 74px; overflow: hidden; float: left; cursor: pointer; }
+.goods_info_box .goods_pics  ul li { width: 70px; height: 70px; overflow: hidden; float: left; cursor: pointer; }
 .goods_info_box .goods_pics  ul li img{border:2px solid #fff; width:64px; height:64px}
 .goods_info_box .goods_pics  ul li img.ware_pic_hover {border:2px solid #ff665b }
 .goods_info_box .goods_info{width: 530px; float: left;min-height: 430px; padding-left:10px;line-height: 40px;  background-color: #fafafa}
