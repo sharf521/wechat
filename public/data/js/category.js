@@ -1,5 +1,5 @@
 var cate_arr=new Array();
-cate_arr[0]='1#文章分类[SER]2#商城分类';
+cate_arr[0]='1#文章分类1[SER]2#商城分类';
 cate_arr[1]='10#关于我们[SER]21#商城公告[SER]22#项目介绍[SER]23#新闻动态[SER]24#加入我们';
 cate_arr[2]='12#POS[SER]13#电子[SER]29#11[SER]30#22';
 cate_arr[10]='25#bb';

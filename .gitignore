@@ -3,3 +3,5 @@
 /app/Config.php
 /public/data/js/*.js
 /public/data/js
+/public/data/js/category.js
+/public/data/js/cateshop.js
