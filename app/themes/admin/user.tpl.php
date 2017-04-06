@@ -54,6 +54,7 @@ if($this->func=='index'){?>
             	<td><?=$row->id?>/<?=$row->username?></td>
                 <td><?=$row->UserType()->name?></td>
                 <td>
+                    <img src="<?=$row->headimgurl?>" width="50">
                     <? if($UserWx->headimgurl!=''):?>
                     <img src="<?=substr($UserWx->headimgurl,0,-1)?>64" width="50">
                     <? endif;?>
@@ -73,11 +74,10 @@ if($this->func=='index'){?>
                         echo $this->anchor('user/edit/?id=' . $row->id, '编辑');
                         echo '&nbsp;|&nbsp;';
                         echo $this->anchor('user/edittype/?id=' . $row->id, '修改用户类型');
-                        echo '&nbsp;|&nbsp;';
-                        echo $this->anchor('user/updatepwd/?id=' . $row->id, '修改密码');
+                        //echo '&nbsp;|&nbsp;';
+                       // echo $this->anchor('user/updatepwd/?id=' . $row->id, '修改密码');
                     }
                     ?>
-                    <a href="<?=url("printTask/taskAdd/?id={$row->id}&page={$_GET['page']}&nickname={$row->nickname}")?>">添加订单</a>
                     </td>
             </tr>
             <? }?>
