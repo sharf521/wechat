@@ -23,6 +23,7 @@ class Cart extends Model
         $spec_id=(int)$data['spec_id'];
         $quantity=(int)$data['quantity'];
         $goods=(new Goods())->findOrFail($goods_id);
+        $goods=$goods->pullSupplyGoods();
         if($goods->is_have_spec==1 && $spec_id==0){
             return $this->returnError('请选择规格！');
         }
