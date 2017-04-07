@@ -116,7 +116,20 @@ function orderPayJs() {
             var money=Math.sub(price_true,Math.moneyRound(_m,2));
             $('#money_yes').html(money);
         });
+        /*$('.recharge').on('click',function () {
+            var center_url=$(this).attr('center_url');
+            var money=$('#money_yes').html();
+            goCenterRecharge(center_url,money);
+        });   */
     });
 }
+
+/*function goCenterRecharge(center_url,money,return_url) {
+    if(return_url==undefined || return_url==''){
+        return_url=window.location.href;
+    }
+    return_url=encodeURIComponent(return_url);
+    window.location=center_url+'/member/account/recharge/?money='+money+'&url='+return_url;
+}*/
 
 

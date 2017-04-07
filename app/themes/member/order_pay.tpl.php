@@ -66,7 +66,10 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <div class="layui-input-block">实际支付：￥<span id="money_yes"><?=$order->order_money?></span><br><br>
+                        <div class="layui-input-block">实际支付：￥<span id="money_yes"><?=$order->order_money?></span> &nbsp;
+                            <a class="layui-btn layui-btn-mini layui-btn-normal recharge" target="_blank"
+                               href="<?= $this->site->center_url?>/member/account/recharge/?money=<?=$order->order_money?>">我要充值</a>
+                            <br><br>
                             <button class="layui-btn" lay-submit="" lay-filter="*">立即支付</button>
                             <button class="layui-btn" onclick="history.go(-1)">返回</button>
                         </div>
