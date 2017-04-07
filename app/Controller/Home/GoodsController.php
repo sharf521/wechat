@@ -71,7 +71,7 @@ class GoodsController extends HomeController
             $topnav_str.="<a><cite>列表</cite></a>";
         }
         $data['topnav_str']=$topnav_str;
-        $data['result']=$goods->where($where)->orderBy($orderBy)->pager($request->get('page'),15);
+        $data['result']=$goods->where($where)->orderBy($orderBy)->pager($request->get('page'),16);
         $this->title='商品列表';
         $this->view('goods_lists',$data);
     }
