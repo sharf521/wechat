@@ -23,7 +23,7 @@ class HomeController extends Controller
             $goodsCategoryArray=$category->getListTree(array('path'=>'2,'));
             array_shift($goodsCategoryArray);
             foreach ($goodsCategoryArray as $i=>$cate){
-                if(!in_array($cate['id'],$this->site->goodsCates)){
+                if(is_array($this->site->goodsCates) && !in_array($cate['id'],$this->site->goodsCates)){
                     unset($goodsCategoryArray[$i]);
                 }
             }
@@ -31,7 +31,7 @@ class HomeController extends Controller
 
             $articleCategoryAll=$category->getList(array('pid'=>1));
             foreach ($articleCategoryAll as $i=>$cate){
-                if(!in_array($cate->id,$this->site->articleCates)){
+                if(is_array($this->site->articleCates) && !in_array($cate->id,$this->site->articleCates)){
                     unset($articleCategoryAll[$i]);
                 }
             }
