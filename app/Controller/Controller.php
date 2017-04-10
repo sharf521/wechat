@@ -10,8 +10,8 @@ use System\Lib\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    public $user_id;
-    public $username;
+    protected $user_id;
+    protected $username;
     public function __construct()
     {
         parent::__construct();
