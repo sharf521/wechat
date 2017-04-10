@@ -63,12 +63,16 @@ class UserController extends Controller
     {
         $money=(float)$request->get('money');
         $url=urlencode($request->get('url'));
-        $id=(int)$request->get('id');
-        if($this->is_inWeChat){
-            $wechat_openid=(new WeChatOpen())->getOpenid();
-        }else{
+        $id=(int)$request->get('id');//帐户中心id
+        if(! $this->is_inWeChat){
             echo ' 仅限微信内调用！';
             exit;
+        }
+        if($id==0){
+            $wechat_openid=(new User())->find($this->user_id)->wechat_openid;
+        }
+        if(empty($wechat_openid)){
+            $wechat_openid=(new WeChatOpen())->getOpenid();
         }
         $url="http://centerwap.yuantuwang.com/wechat/recharge/?wechat_openid={$wechat_openid}&money={$money}&url={$url}";
         if($id>0){           
