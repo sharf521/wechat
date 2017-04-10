@@ -19,11 +19,11 @@ if(strpos($domain,':')!==false){
     $domain=$domain[0];
 }
 $domain_arr=explode('.',$domain);
-if($domain_arr[count($domain_arr)-2]=='com'){
+/*if($domain_arr[count($domain_arr)-2]=='com'){
     $domain=$domain_arr[count($domain_arr)-3].'.'.$domain_arr[count($domain_arr)-2].'.'.$domain_arr[count($domain_arr)-1];
 }else{
     $domain=$domain_arr[count($domain_arr)-2].'.'.$domain_arr[count($domain_arr)-1];
-}
+}*/
 //session_start();之前设置  php.ini 里 session.auto_start=0
 ini_set('session.cookie_domain', $domain);//域名不需要端口
 //ini_set("session.save_handler", "redis");
