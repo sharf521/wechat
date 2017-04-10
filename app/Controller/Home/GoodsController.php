@@ -50,27 +50,28 @@ class GoodsController extends HomeController
         }else{
             $orderBy='id desc';
         }
+        if(!$this->is_wap){
+            $topnav_str='<a href="/">首页</a>';
+            if($cid!=0){
+                $cate=$category->findOrFail($request->get(2));
+                $data['cate']=$cate;
+                //当前位置分类
+                $path=trim($cate->path,',');
+                $paths=explode(',',$path);
+                array_shift($paths);
+                array_pop($paths);
+                foreach ($paths as $cid){
+                    $c=$category->find($cid);
+                    $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
+                }
+                $topnav_str.="<a><cite>{$cate->name}</cite></a>";
 
-        $topnav_str='<a href="/">首页</a>';
-        if($cid!=0){
-            $cate=$category->findOrFail($request->get(2));
-            $data['cate']=$cate;
-            //当前位置分类
-            $path=trim($cate->path,',');
-            $paths=explode(',',$path);
-            array_shift($paths);
-            array_pop($paths);
-            foreach ($paths as $cid){
-                $c=$category->find($cid);
-                $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
+                $where.=" and category_path like '{$cate->path}%'";
+            }else{
+                $topnav_str.="<a><cite>列表</cite></a>";
             }
-            $topnav_str.="<a><cite>{$cate->name}</cite></a>";
-
-            $where.=" and category_path like '{$cate->path}%'";
-        }else{
-            $topnav_str.="<a><cite>列表</cite></a>";
+            $data['topnav_str']=$topnav_str;
         }
-        $data['topnav_str']=$topnav_str;
         $data['result']=$goods->where($where)->orderBy($orderBy)->pager($request->get('page'),16);
         $this->title='商品列表';
         $this->view('goods_lists',$data);

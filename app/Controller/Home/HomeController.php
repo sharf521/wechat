@@ -18,7 +18,7 @@ class HomeController extends Controller
         }else{
             $this->template = 'default';
         }
-        if(!$_POST){
+        if(!$_POST && !$this->is_wap){
             $category=new Category();
             $goodsCategoryArray=$category->getListTree(array('path'=>'2,'));
             array_shift($goodsCategoryArray);
