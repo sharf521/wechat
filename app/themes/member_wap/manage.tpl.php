@@ -8,15 +8,15 @@
 
     <div class="weui-cells__title">会员中心</div>
     <div class="weui-cells">
-        <a class="weui-cell weui-cell_access" href="<?=url('address')?>">
-            <div class="weui-cell__bd">
-                <p>地址管理</p>
-            </div>
-            <div class="weui-cell__ft"></div>
-        </a>
         <a class="weui-cell weui-cell_access" href="<?=url('order')?>">
             <div class="weui-cell__bd">
                 <p>我的订单</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="<?=url('address')?>">
+            <div class="weui-cell__bd">
+                <p>地址管理</p>
             </div>
             <div class="weui-cell__ft"></div>
         </a>

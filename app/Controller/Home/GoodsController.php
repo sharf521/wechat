@@ -138,6 +138,7 @@ class GoodsController extends HomeController
             $wap_url=$domain[1].'/goods/detail/'.$id;
             $data['QRcode_url']=Helper::QRcode($wap_url,'goods',$id);
             $this->title='商品详情';
+            //库存0 显示 看看店铺其它商品
             $this->view('goods_detail',$data);
         }
 
