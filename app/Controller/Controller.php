@@ -10,9 +10,15 @@ use System\Lib\Controller as BaseController;
 
 class Controller extends BaseController
 {
+    public $user_id;
+    public $username;
     public function __construct()
     {
         parent::__construct();
+        $this->user_id = session('user_id');
+        $this->username = session('username');
+        $this->user_typeid = session('usertype');
+
         $host = strtolower($_SERVER['HTTP_HOST']);
         if (strpos($host, '.wechat.') === false) {
             $this->is_wap = false;
