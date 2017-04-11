@@ -244,9 +244,4 @@ class User extends Model
     {
         return $this->hasOne('App\Model\User', 'id','invite_userid');
     }
-
-    public function PrintShop()
-    {
-        return $this->hasMany('App\Model\PrintShop', 'user_id','id');
-    }
 }

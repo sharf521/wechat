@@ -27,11 +27,18 @@
     </div>
 
     <div class="bottom_opts">
-        <a href="/" class="opt_home">
+        <?
+        if($this->st_uid==0){
+            $home_url='/';
+        }else{
+            $home_url=$this->store_url;
+        }
+        ?>
+        <a href="<?=$home_url?>" class="opt_home">
             <i class="iconfont">&#xe64f;</i>
             <p>首页</p>
         </a>
-        <a href="<?=url('cart')?>" class="opt_cart">
+        <a href="/cart/?st_uid=<?=$this->st_uid?>" class="opt_cart">
             <i class="iconfont" style="position: relative">&#xe698;
                 <span class="weui-badge" id="cart_num"></span></i>
             <p>购物车</p>

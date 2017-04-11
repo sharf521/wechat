@@ -34,6 +34,28 @@ class Helper
         }
         return $img_url;
     }
+
+    /**
+     * //获取顶级域名
+     * @return array|string
+     */
+    public static function getTopDomain($port=0)
+    {
+        $domain=strtolower($_SERVER['HTTP_HOST']);
+        if($port==0 && strpos($domain,':')!==false){
+            //去除端口
+            $domain=explode(':',$domain);
+            $domain=$domain[0];
+        }
+        $domain_arr=explode('.',$domain);
+        if($domain_arr[count($domain_arr)-2]=='com'){
+            $domain=$domain_arr[count($domain_arr)-3].'.'.$domain_arr[count($domain_arr)-2].'.'.$domain_arr[count($domain_arr)-1];
+        }else{
+            $domain=$domain_arr[count($domain_arr)-2].'.'.$domain_arr[count($domain_arr)-1];
+        }
+        return $domain;
+    }
+
     public static function smallPic($image_url)
     {
         return $image_url.'_100X100.png';

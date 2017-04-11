@@ -151,7 +151,7 @@ class OrderController extends HomeController
                 redirect()->back()->with('error',$error);
                 DB::rollBack();
             }
-            redirect('/member/order')->with('msg','提交成功，请支付！');
+            redirect("/member/order/?st_uid={$this->st_uid}")->with('msg','提交成功，请支付！');
         }else{
             $data['cart_id']=implode(',',$cart_id);
             $data['address']=$address;

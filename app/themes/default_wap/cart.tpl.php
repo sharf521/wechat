@@ -1,16 +1,23 @@
 <?php require 'header.php';?>
     <div class="m_header">
         <a class="m_header_l" href="javascript:history.go(-1)"><i class="iconfont">&#xe604;</i></a>
-        <a class="m_header_r" href="/member"><i class="iconfont">&#xe6fc;</i></a>
+        <a class="m_header_r" href="/member/?st_uid=<?=$this->st_uid?>"><i class="iconfont">&#xe6fc;</i></a>
         <h1>我的购物车</h1>
     </div>
-
-    <? if(count($result_carts)==0) : ?>
-        <div class="cart_empty margin_header">
-            购物车内还没有商品！<br>
-            <a href="<?=url('goods/lists')?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
-        </div>
-        <?php require 'footer_bar.php';?>
+    <?
+    if(count($result_carts)==0) : ?>
+    <div class="cart_empty margin_header">
+        购物车内还没有商品！<br>
+        <?
+        if($this->st_uid==0){
+            $goodsList_url=url('goods/lists');
+        }else{
+            $goodsList_url=$this->store_url.'/goods/lists/';
+        }
+        ?>
+        <a href="<?=$goodsList_url?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
+    </div>
+    <?php require 'footer_bar.php';?>
     <? else : ?>
     <div class="margin_header" style="margin-bottom: 60px">
         <?  foreach ($result_carts as $i=>$carts) :

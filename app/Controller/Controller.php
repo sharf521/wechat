@@ -4,6 +4,7 @@
 
 namespace App\Controller;
 
+use App\Helper;
 use App\Model\SubSite;
 use App\Model\User;
 use System\Lib\Controller as BaseController;
@@ -45,6 +46,23 @@ class Controller extends BaseController
         }else{
             echo 'The site was not found！';
             exit;
+        }
+        $this->st_uid=0;
+        if(isset($_GET['st_uid'])){
+            $st_uid=(int)$_GET['st_uid'];
+            if($st_uid!=0){
+                $this->st_uid=$st_uid;
+                if($this->is_wap){
+                    $this->store_url="http://shop-{$st_uid}.wap.".Helper::getTopDomain(1);
+                }else{
+                    $this->store_url="http://shop-{$st_uid}.".Helper::getTopDomain(1);
+                }
+            }
+        }
+        if($this->st_uid==0){
+            $this->home_url='/';
+        }else{
+            $this->home_url=$this->store_url;
         }
     }
     

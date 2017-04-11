@@ -1,21 +1,21 @@
 <?php require 'header.php';?>
     <div class="m_header">
-        <a class="m_header_l" href="<?=url('')?>"><i class="iconfont">&#xe604;</i></a>
+        <a class="m_header_l" href="<?=url("?st_uid={$this->st_uid}")?>"><i class="iconfont">&#xe604;</i></a>
         <a class="m_header_r" href=""></a>
         <h1>我的订单</h1>
     </div>
     <div class="my-navbar margin_header">
         <div class="my-navbar__item <? if($this->func=='index'){echo 'my-navbar__item_on';}?>">
-            <a href="<?=url('order')?>">全部订单</a>
+            <a href="<?=url("order/?st_uid={$this->st_uid}")?>">全部订单</a>
         </div>
         <div class="my-navbar__item <? if($this->func=='status1'){echo 'my-navbar__item_on';}?>">
-            <a href="<?=url('order/status1')?>">待付款</a>
+            <a href="<?=url("order/status1/?st_uid={$this->st_uid}")?>">待付款</a>
         </div>
         <div class="my-navbar__item <? if($this->func=='status3'){echo 'my-navbar__item_on';}?>">
-            <a href="<?=url('order/status3')?>">待发货</a>
+            <a href="<?=url("order/status3/?st_uid={$this->st_uid}")?>">待发货</a>
         </div>
         <div class="my-navbar__item <? if($this->func=='status4'){echo 'my-navbar__item_on';}?>">
-            <a href="<?=url('order/status4')?>">待收货</a>
+            <a href="<?=url("order/status4/?st_uid={$this->st_uid}")?>">待收货</a>
         </div>
     </div>
 
@@ -30,7 +30,7 @@
         </div>
         <div class="order_shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em> <?=\App\Helper::getQqLink($shop->qq)?></div>
         <? foreach ($goods as $g) : ?>
-            <a href="<?=url("/order/detail/?sn={$order->order_sn}")?>">
+            <a href="<?=url("/order/detail/?sn={$order->order_sn}&st_uid={$this->st_uid}")?>">
                 <div class="order_item clearFix">
                     <img class="image" src="<?=$g->goods_image?>">
                     <div class="oi_content">
@@ -45,9 +45,9 @@
             <p>总价：<em class="co_red">¥<?=$order->order_money?></em></p>
             <? if($order->status==1) : ?>
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
-                <a href="<?=url("order/pay/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>
+                <a href="<?=url("order/pay/?id={$order->id}&st_uid={$this->st_uid}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>
             <? elseif($order->status==4) : ?>
-                <a href="<?=url("order/success/?id={$order->id}")?>" class="weui-btn weui-btn_mini weui-btn_primary">确认收货</a><br>
+                <a href="<?=url("order/success/?id={$order->id}&st_uid={$this->st_uid}")?>" class="weui-btn weui-btn_mini weui-btn_primary">确认收货</a><br>
             <? endif;?>
         </div>
     </div>
@@ -72,7 +72,7 @@
                     content: '确定要取消该订单吗？'
                     ,btn: ['是', '否']
                     ,yes: function(index){
-                        location.href='<?=url("order/cancel/?id=")?>'+id;
+                        location.href='<?=url("order/cancel/?st_uid={$this->st_uid}&id=")?>'+id;
                         layer.close(index);
                     }
                 });

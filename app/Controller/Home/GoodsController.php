@@ -94,7 +94,7 @@ class GoodsController extends HomeController
                 redirect()->back()->with('error',$return['msg']);
                 return;
             }else{
-                redirect('order/confirm/?cart_id[]='.$return['cart_id']);
+                redirect("order/confirm/?cart_id[]={$return['cart_id']}&st_uid={$this->st_uid}");
             }
 
 /*            try{
