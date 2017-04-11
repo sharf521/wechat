@@ -3,11 +3,18 @@
         <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
         <p class="weui-tabbar__label">首页</p>
     </a>
-    <a href="<?="{$this->home_url}/goods/lists/"?>" class="weui-tabbar__item <? if($this->func=='lists'){echo 'weui-bar__item_on';}?>">
+    <?
+    if($this->st_uid==0){
+        $_url='';
+    }else{
+        $_url=$this->home_url;
+    }
+    ?>
+    <a href="<?="{$_url}/goods/lists/"?>" class="weui-tabbar__item <? if($this->func=='lists'){echo 'weui-bar__item_on';}?>">
         <i class="iconfont weui-tabbar__icon">&#xe600;</i>
         <p class="weui-tabbar__label">商品列表</p>
     </a>
-    <a href="<?="{$this->home_url}/cart"?>" class="weui-tabbar__item <? if($this->control=='cart'){echo 'weui-bar__item_on';}?>">
+    <a href="<?="{$_url}/cart"?>" class="weui-tabbar__item <? if($this->control=='cart'){echo 'weui-bar__item_on';}?>">
         <i class="iconfont weui-tabbar__icon" style="position: relative">&#xe698;
             <span class="weui-badge" id="cart_num"></span></i>
         <p class="weui-tabbar__label">购物车</p>
