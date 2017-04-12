@@ -27,67 +27,65 @@
             <div class="weui-cell__ft"></div>
         </a>
     </div>
-<? if($this->st_uid==0) : ?>
-    <? if($this->user->is_shop==0) : ?>
+<? if($this->user->is_shop==0) : ?>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
+            <div class="weui-cell__bd">
+                <p>申请开店</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+    </div>
+<? else: ?>
+    <div class="weui-cells__title">卖家管理</div>
+    <div class="weui-cells">
+        <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/category')?>">
+            <div class="weui-cell__bd">
+                <p>分类管理</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/goods')?>">
+            <div class="weui-cell__bd">
+                <p>商品管理</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+        <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/order')?>">
+            <div class="weui-cell__bd">
+                <p>我的订单</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
+    </div>
+<? endif;?>
+
+<? if($this->user->is_shop==1) : ?>
+    <? if($this->user->is_supply==0) : ?>
         <div class="weui-cells">
-            <a class="weui-cell weui-cell_access" href="<?=url('shop')?>">
+            <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/applySupply')?>">
                 <div class="weui-cell__bd">
-                    <p>申请开店</p>
+                    <p>申请供应商</p>
                 </div>
                 <div class="weui-cell__ft"></div>
             </a>
         </div>
     <? else: ?>
-        <div class="weui-cells__title">卖家管理</div>
+        <div class="weui-cells__title">供应商中心</div>
         <div class="weui-cells">
-            <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/category')?>">
-                <div class="weui-cell__bd">
-                    <p>分类管理</p>
-                </div>
-                <div class="weui-cell__ft"></div>
-            </a>
-            <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/goods')?>">
+            <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/goods')?>">
                 <div class="weui-cell__bd">
                     <p>商品管理</p>
                 </div>
                 <div class="weui-cell__ft"></div>
             </a>
-            <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/order')?>">
+            <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/order')?>">
                 <div class="weui-cell__bd">
                     <p>我的订单</p>
                 </div>
                 <div class="weui-cell__ft"></div>
             </a>
         </div>
-    <? endif;?>
-
-    <? if($this->user->is_shop==1) : ?>
-        <? if($this->user->is_supply==0) : ?>
-            <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" href="<?=url('/sellManage/applySupply')?>">
-                    <div class="weui-cell__bd">
-                        <p>申请供应商</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-            </div>
-        <? else: ?>
-            <div class="weui-cells__title">供应商中心</div>
-            <div class="weui-cells">
-                <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/goods')?>">
-                    <div class="weui-cell__bd">
-                        <p>商品管理</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-                <a class="weui-cell weui-cell_access" href="<?=url('/supplyManage/order')?>">
-                    <div class="weui-cell__bd">
-                        <p>我的订单</p>
-                    </div>
-                    <div class="weui-cell__ft"></div>
-                </a>
-            </div>
-        <? endif;?>
     <? endif;?>
 <? endif;?>
 
