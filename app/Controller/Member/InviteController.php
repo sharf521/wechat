@@ -11,6 +11,7 @@ namespace App\Controller\Member;
 
 use App\Helper;
 use App\Model\User;
+use App\WeChat;
 use App\WeChatOpen;
 
 class InviteController extends MemberController
@@ -27,7 +28,7 @@ class InviteController extends MemberController
         $result=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
         $data['result']=$result;
         if($this->is_inWeChat){
-            $data['invite_url']=(new WeChatOpen())->shorten($data['invite_url']);
+            $data['invite_url']=(new WeChat())->shorten($data['invite_url']);
         }
         $this->view('invite',$data);
     }
