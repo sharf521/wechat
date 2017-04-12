@@ -48,7 +48,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="store"><a><?=$shop->name?></a></div>
+                            <div class="store"><a href="<?=$shop->getLink()?>" target="_blank"><?=$shop->name?></a></div>
                         </div>
                     </div>
                 </li>

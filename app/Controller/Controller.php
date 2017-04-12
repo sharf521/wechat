@@ -53,9 +53,9 @@ class Controller extends BaseController
             if($st_uid!=0){
                 $this->st_uid=$st_uid;
                 if($this->is_wap){
-                    $this->store_url="http://shop-{$st_uid}.wap.".Helper::getTopDomain(1);
+                    $this->store_url=Helper::getStoreUrl($st_uid,1);
                 }else{
-                    $this->store_url="http://shop-{$st_uid}.".Helper::getTopDomain(1);
+                    $this->store_url=Helper::getStoreUrl($st_uid,0);
                 }
             }
         }

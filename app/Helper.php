@@ -17,6 +17,16 @@ class Helper
     {
         return "<a href='http://wpa.qq.com/msgrd?v=3&uin={$qq}&site=qq&menu=yes' target='_blank'><img src='http://wpa.qq.com/pa?p=1:{$qq}:4' alt='QQ'></a>";
     }
+    
+    public static function getStoreUrl($user_id,$is_wap=0)
+    {
+        if($is_wap){
+            $store_url="http://shop-{$user_id}.wap.".self::getTopDomain(1);
+        }else{
+            $store_url="http://shop-{$user_id}.".self::getTopDomain(1);
+        }
+        return $store_url;
+    }
 
     public static function QRcode($txt,$type='goods',$type_id=0,$level='L')
     {

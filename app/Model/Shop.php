@@ -9,6 +9,8 @@
 namespace App\Model;
 
 
+use App\Helper;
+
 class Shop extends Model
 {
     protected $table='shop';
@@ -24,5 +26,10 @@ class Shop extends Model
     public function User()
     {
         return $this->hasOne('\App\Model\User','id','user_id');
+    }
+
+    public function getLink($is_wap=0)
+    {
+        return Helper::getStoreUrl($this->user_id,$is_wap);
     }
 }

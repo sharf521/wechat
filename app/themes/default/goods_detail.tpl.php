@@ -67,7 +67,7 @@
 
             </div>
             <div class="about_store">
-                <p><span>店铺名称：</span><br><strong><?=$shop->name?></strong></p>
+                <p><span>店铺名称：</span><br><strong><a href="<?=$shop->getLink()?>"><?=$shop->name?></a></strong></p>
                 <p><span>联系店家：</span><?=\App\Helper::getQqLink($shop->qq)?></p>
             </div>
         </div>
