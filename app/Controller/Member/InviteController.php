@@ -24,7 +24,7 @@ class InviteController extends MemberController
     public function index(User $user)
     {
         $data['invite_url']='http://'.$_SERVER['HTTP_HOST']."/user/invite?r={$this->username}";
-        $data['invite_img']=Helper::QRcode($data['invite_url'],'invite',$this->user_id);
+        $data['invite_img']=Helper::QRcode($data['invite_url'],'invite_wap',$this->user_id);
         $result=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
         $data['result']=$result;
         if($this->is_inWeChat){
