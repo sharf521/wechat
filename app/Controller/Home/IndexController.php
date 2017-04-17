@@ -3,6 +3,7 @@ namespace App\Controller\Home;
 
 use App\Model\Advert;
 use App\Model\Goods;
+use App\Model\OrderGoods;
 use App\UserCenter;
 
 class IndexController extends HomeController
@@ -65,11 +66,5 @@ class IndexController extends HomeController
             $data['floorList']=$floorList;
         }
         $this->view('index',$data);
-    }
-
-    public function up()
-    {
-       
-
     }
 }

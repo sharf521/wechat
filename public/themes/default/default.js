@@ -373,10 +373,24 @@ function goods_detail_js()
                 $(this).attr('width','100%');
             }
         });*/
+
+        //购买记录
+        var element = layui.element();
+        element.on('tab(demo)', function(data){
+            if(data.index==1){
+                $.get('/goods/getOrderRecord/?id='+goods_id,function (data) {
+                    var json = eval('(' + data + ')');
+                    var html='<table class="layui-table" lay-skin="line"><thead><tr><td>买家</td><td></td><td width="150">购买数量</td><td>购买时间</td></thead>';
+                    for(index in json){
+                        var obj=json[index];
+                        html+="<tr><td>"+obj.username+"</td><td>"+obj.spec_1+obj.spec_2+"</td><td>"+obj.quantity+"</td><td width='200'>"+obj.created_at+"</td></tr>";
+                    }
+                    html+='</table>';
+                    $('#orderRecord').html(html);
+                })
+            }
+        });
     });
-
-
-    
     //加入购物车
     $('.buy_box_opts .opt1').on('click',function (event) {
         var quantity=document.forms['form_order'].quantity.value;

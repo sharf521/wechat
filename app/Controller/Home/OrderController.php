@@ -108,6 +108,7 @@ class OrderController extends HomeController
                         $goods->setStockCount(-$cart->quantity,$cart->spec_id);
 
                         $orderGoods=new OrderGoods();
+                        $orderGoods->user_id=$this->user_id;
                         $orderGoods->order_sn=$order_sn;
                         $orderGoods->goods_id=$goods->id;
                         $orderGoods->supply_goods_id=$goods->supply_goods_id;
@@ -125,6 +126,7 @@ class OrderController extends HomeController
                         }
                         $orderGoods->spec_1=$goods->spec_1;
                         $orderGoods->spec_2=$goods->spec_2;
+                        $orderGoods->status=1;
                         $orderGoods->save();
                         //从购物车里删除
                         $cart->delete();

@@ -142,7 +142,6 @@ class GoodsController extends HomeController
             //库存0 显示 看看店铺其它商品
             $this->view('goods_detail',$data);
         }
-
     }
 
     public function getQuantity(Goods $goods,Request $request)
@@ -158,6 +157,32 @@ class GoodsController extends HomeController
         }else{
             echo $goods->stock_count;
         }
+    }
+
+    //交易记录
+    public function getOrderRecord(Goods $goods,Request $request)
+    {
+        $goods=$goods->findOrFail($request->get('id'));
+        $where="status=5";
+        if($goods->supply_goods_id==0){
+            $where.=" and goods_id={$goods->id}";
+        }else{
+            $where.=" and supply_goods_id={$goods->supply_goods_id}";
+        }
+        $result=(new OrderGoods())->where($where)->get();
+        $return_arr=array();
+        foreach ($result as $goods){
+            $user=$goods->User();
+            $array=array();
+            $array['user_id']=$user->id;
+            $array['username']=substr($user->username,0,4).'***';
+            $array['created_at']=substr($goods->created_at,0,16);
+            $array['quantity']=$goods->quantity;
+            $array['spec_1']=$goods->spec_1;
+            $array['spec_2']=$goods->spec_2;
+            array_push($return_arr,$array);
+        }
+        echo json_encode($return_arr);
     }
 
 

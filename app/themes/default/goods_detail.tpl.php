@@ -67,7 +67,7 @@
 
             </div>
             <div class="about_store">
-                <p><span>店铺名称：</span><br><strong><a href="<?=$shop->getLink()?>"><?=$shop->name?></a></strong></p>
+                <p><span>店铺名称：</span><br><strong><a href="<?=$shop->getLink()?>" target="_blank"><?=$shop->name?></a></strong></p>
                 <p><span>联系店家：</span><?=\App\Helper::getQqLink($shop->qq)?></p>
             </div>
         </div>
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="main">
-                <div class="layui-tab layui-tab-brief">
+                <div class="layui-tab layui-tab-brief" lay-filter="demo">
                     <ul class="layui-tab-title">
                         <li class="layui-this">商品详情</li>
                         <li>交易记录</li>
@@ -88,7 +88,7 @@
                         <div class="layui-tab-item layui-show goods_detail_txt">
                             <?=nl2br($content)?>
                         </div>
-                        <div class="layui-tab-item">暂不显示</div>
+                        <div class="layui-tab-item" id="orderRecord">暂不显示</div>
                     </div>
                 </div>
             </div>

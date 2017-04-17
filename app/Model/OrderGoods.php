@@ -18,4 +18,12 @@ class OrderGoods extends Model
     {
         return $this->hasOne('\App\Model\Goods','id','goods_id');
     }
+
+    /**
+     * @return User
+     */
+    public function User()
+    {
+        return $this->hasOne('\App\Model\User','id','user_id');
+    }
 }
