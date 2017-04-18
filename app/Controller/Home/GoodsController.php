@@ -163,14 +163,14 @@ class GoodsController extends HomeController
     public function getOrderRecord(Goods $goods,Request $request)
     {
         $goods=$goods->findOrFail($request->get('id'));
-        $where="status=5";
+        $where=" status>=3 ";//己支付
         if($goods->supply_goods_id==0){
             $where.=" and goods_id={$goods->id}";
         }else{
             $where.=" and supply_goods_id={$goods->supply_goods_id}";
         }
         $result=(new OrderGoods())->where($where)->get();
-        $return_arr=array();
+        $list_arr=array();
         foreach ($result as $goods){
             $user=$goods->User();
             $array=array();
@@ -180,7 +180,12 @@ class GoodsController extends HomeController
             $array['quantity']=$goods->quantity;
             $array['spec_1']=$goods->spec_1;
             $array['spec_2']=$goods->spec_2;
-            array_push($return_arr,$array);
+            array_push($list_arr,$array);
+        }
+        if(empty($list_arr)){
+            $return_arr=array('code'=>0);
+        }else{
+            $return_arr=array('code'=>1,'list'=>$list_arr);
         }
         echo json_encode($return_arr);
     }

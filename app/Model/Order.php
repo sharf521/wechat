@@ -108,10 +108,17 @@ class Order extends Model
             $rebate->label=$params['label'];
             $rebate->status=0;
             $rebate->save();
-            (new OrderGoods())->where("order_sn='{$this->order_sn}'")->update(array('status'=>5));
         }else{
             throw new \Exception($return);
         }
+    }
+
+    /**
+     * //更新订单产品状态
+     * @param $status
+     */
+    public function updateOrderGoodsStatus($status){
+        (new OrderGoods())->where("order_sn='{$this->order_sn}'")->update(array('status'=>$status));
     }
 
     public function cancel($user)

@@ -11,6 +11,7 @@ namespace App\Controller\Member;
 
 use App\Center;
 use App\Model\Order;
+use App\Model\OrderGoods;
 use App\Model\System;
 use App\Model\User;
 use App\WeChat;
@@ -117,6 +118,7 @@ class OrderController extends MemberController
                     $order->payed_at=time();
                     $order->status=3;
                     $order->save();
+                    $order->updateOrderGoodsStatus(3);
                     DB::commit();
                     redirect("order")->with('msg','付款完成');
                 }else{
@@ -177,6 +179,7 @@ class OrderController extends MemberController
             try{
                 DB::beginTransaction();
                 $order->cancel($this->user);
+                $order->updateOrderGoodsStatus(2);
                 DB::commit();
                 redirect()->back()->with('msg','订单取消成功！');
             }catch (\Exception $e){
@@ -206,6 +209,7 @@ class OrderController extends MemberController
             try {
                 DB::beginTransaction();
                 $order->success($this->user->openid);
+                $order->updateOrderGoodsStatus(5);
                 DB::commit();
                 redirect("order")->with('msg','操作完成');
             } catch (\Exception $e) {
