@@ -67,8 +67,6 @@ class UserController extends Controller
             echo ' 仅限微信内调用！';
             exit;
         }
-        echo 111;
-        exit;
         $this->check_login();
         $wechat_openid=$this->user->wechat_openid;
         if(empty($wechat_openid)){
