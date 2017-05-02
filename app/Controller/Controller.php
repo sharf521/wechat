@@ -21,7 +21,7 @@ class Controller extends BaseController
         $this->user_typeid = session('usertype');
 
         $host = strtolower($_SERVER['HTTP_HOST']);
-        if (strpos($host, '.wechat.') === false) {
+        if (strpos($host, 'wap.') === false) {
             $this->is_wap = false;
         } else {
             $this->is_wap = true;

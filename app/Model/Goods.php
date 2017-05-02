@@ -58,6 +58,7 @@ class Goods extends Model
         if(!$this->is_exist){
             return;
         }
+        //高并发需要优化
         if($this->supply_goods_id!=0){
             $supplyGoods=(new SupplyGoods())->find($this->supply_goods_id);
             $supplyGoods->stock_count=$supplyGoods->stock_count+$quantity;
