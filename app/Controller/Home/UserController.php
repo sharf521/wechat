@@ -63,11 +63,12 @@ class UserController extends Controller
     {
         $money=(float)$request->get('money');
         $url=urlencode($request->get('url'));
-        $id=(int)$request->get('id');//帐户中心id
         if(! $this->is_inWeChat){
             echo ' 仅限微信内调用！';
             exit;
         }
+        echo 111;
+        exit;
         $this->check_login();
         $wechat_openid=$this->user->wechat_openid;
         if(empty($wechat_openid)){
