@@ -41,6 +41,9 @@ class Controller extends BaseController
             $this->site=(new SubSite())->where("domain like '%{$host}|%'")->orderBy('id')->first();
         }
         if($this->site->is_exist){
+            $arr_domain=explode('|',$this->site->domain);
+            $this->site->pc_url='http://'.$arr_domain[0];
+            $this->site->wap_url='http://'.$arr_domain[1];
             $this->site->goodsCates=unserialize($this->site->goodsCates);
             $this->site->articleCates=unserialize($this->site->articleCates);
         }else{

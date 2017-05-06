@@ -126,6 +126,36 @@ class Center
             return $json->return_msg;
         }
     }
+    
+    public function getFirstOrNewPayNo($data)
+    {
+        $params=array(
+            'appid'=>$this->appid,
+            'time'=>time(),
+            'order_sn'=>$data['order_sn'],
+            'order_pc_url'=>$data['order_pc_url'],
+            'order_wap_url'=>$data['order_wap_url'],
+            'openid'=>$data['openid'],
+            'title'=>$data['title'],
+            'money'=>$data['money'],
+            'typeid'=>$data['typeid'],
+            'remark'=>$data['remark'],
+            'label'=>$data['label'],
+            'in_out'=>$data['in_out'],//1收，2支
+            'other_nickname'=>$data['other_nickname'],
+            'other_openid'=>$data['other_openid']
+        );
+        $params['sign']=$this->getSign($params);
+        $data['data']=json_encode($params);
+        $html=$this->curl_url('order/firstOrNew',$data);
+        $json=json_decode($html);
+        if($json->return_code=='success'){
+            return $json->pay_no;
+        }else{
+            $error= $json->return_msg;
+            redirect()->back()->with('error',$error);
+        }
+    }
 
     public function receivables($data)
     {

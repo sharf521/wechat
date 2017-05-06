@@ -123,7 +123,7 @@ class Goods extends Model
     public function GoodsImage()
     {
         if($this->is_exist && $this->supply_goods_id!=0){
-            return (new SupplyGoodsImage())->where('goods_id=?')->bindValues($this->supply_goods_id)->get();
+            return (new SupplyGoodsImage())->where('goods_id=? and status=1')->bindValues($this->supply_goods_id)->get();
         }
         return $this->hasMany('\App\Model\GoodsImage','goods_id','id',"status=1");
     }

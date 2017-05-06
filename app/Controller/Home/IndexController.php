@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\Home;
 
+use App\Center;
 use App\Model\Advert;
 use App\Model\Goods;
 use App\Model\OrderGoods;

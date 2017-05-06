@@ -53,6 +53,51 @@ class OrderController extends MemberController
         $data['orders']=$order->where('buyer_id=? and status=4')->bindValues($this->user_id)->orderBy('id desc')->pager($request->get('page'));
         $this->view('order',$data);
     }
+    
+    //去支付中心支付
+    public function centerPay(Order $order,Request $request)
+    {
+        $order=$order->where('order_sn=?')->bindValues($request->get('sn'))->first();
+        if(!$order->is_exist){
+            redirect()->back()->with('error','订单不存在！');
+        }
+        if($order->buyer_id!=$this->user_id){
+            redirect()->back()->with('error','异常');
+        }
+        if($order->status!=1){
+            redirect()->back()->with('error','异常，请勿重复支付！');
+        }
+        $orderGoods=$order->OrderGoods();
+        if(count($orderGoods)==1){
+            $orderTitle=$orderGoods[0]->goods_name;
+        }else{
+            $orderTitle=$orderGoods[0]->goods_name.' 等多件。';
+        }
+        $params=array(
+            'order_sn'=>$order->order_sn,
+            'order_pc_url'=>$this->site->pc_url,
+            'order_wap_url'=>$this->site->wap_url,
+            'openid'=>$this->user->openid,
+            'title'=>$orderTitle,
+            'money'=>$order->order_money,
+            'typeid'=>'mall',
+            'remark'=>'remark',
+            'label'=>$order->order_sn,
+            'in_out'=>2//1收，2支
+        );
+        $sell_user=(new User())->find($order->seller_id);
+        $params['other_nickname']=$sell_user->username;
+        $params['other_openid']=$sell_user->openid;
+        $center=new Center();
+        $pay_no=$center->getFirstOrNewPayNo($params);
+        if($this->is_wap){
+            $centerUrl=$this->site->center_url_wap;
+        }else{
+            $centerUrl=$this->site->center_url;
+        }
+        $url=$centerUrl."/member/order/pay/?sn={$pay_no}";
+        redirect($url);
+    }
 
     public function pay(Order $order,Request $request,System $system)
     {
