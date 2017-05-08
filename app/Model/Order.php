@@ -46,12 +46,20 @@ class Order extends Model
         $seller_money=$this->order_money;
         $seller=(new User())->find($this->seller_id);
         $sellerAccount=$center->getUserFunc($seller->openid);
+
+        //商家积分奖励
+        $rebate_sell=new RebateList();
+        $rebate_sell->user_id=$seller->id;
+        $rebate_sell->money=$seller_money;
+        $_money=math($seller_money,0.21,'*',2);
+        $seller_money=math($seller_money,$_money,'-',2);
         if($this->supply_user_id!=0){
             //采购的商品
             $supplyer_money=math($this->supply_goods_money,$this->shipping_fee,'+',2);
-            $seller_money=math($this->order_money,$supplyer_money,'-',2);
             $supplyer=(new User())->find($this->supply_user_id);
             $supplyerAccount=$center->getUserFunc($supplyer->openid);
+
+            $seller_money=math($seller_money,$supplyer_money,'-',2);
 
             //积分奖励
             $rebate_supply=new RebateList();
@@ -60,12 +68,7 @@ class Order extends Model
             $_money=math($supplyer_money,0.21,'*',2);
             $supplyer_money=math($supplyer_money,$_money,'-',2);
         }
-        //商家积分奖励
-        $rebate_sell=new RebateList();
-        $rebate_sell->user_id=$seller->id;
-        $rebate_sell->money=$seller_money;
-        $_money=math($seller_money,0.21,'*',2);
-        $seller_money=math($seller_money,$_money,'-',2);
+
 
         $remark="订单号：{$this->order_sn}";
         $params=array(
