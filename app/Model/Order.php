@@ -41,11 +41,25 @@ class Order extends Model
         if($this->status==3){
             throw new \Exception("异常，请勿重复确认收货！");
         }
+        $convert_rate=(new System())->getCode('convert_rate');
+        if(empty($convert_rate)){
+            $convert_rate=2.52;
+        }
+
+        $remark="订单号：{$this->order_sn}";
+        $params=array(
+            'openid'=>$operatorOpenId,
+            'body'=>'',
+            'type'=>'order_success',
+            'remark'=>$remark,
+            'label'=>"order_sn:{$this->order_sn}",
+            'data'=>array(
+            )
+        );
 
         $center=new Center();
         $seller_money=$this->order_money;
         $seller=(new User())->find($this->seller_id);
-        $sellerAccount=$center->getUserFunc($seller->openid);
 
         //商家积分奖励
         $rebate_sell=new RebateList();
@@ -65,22 +79,10 @@ class Order extends Model
             $rebate_supply=new RebateList();
             $rebate_supply->user_id=$supplyer->id;
             $rebate_supply->money=$supplyer_money;
-            $_money=math($supplyer_money,0.21,'*',2);
-            $supplyer_money=math($supplyer_money,$_money,'-',2);
         }
 
-
-        $remark="订单号：{$this->order_sn}";
-        $params=array(
-            'openid'=>$operatorOpenId,
-            'body'=>'',
-            'type'=>'order_success',
-            'remark'=>$remark,
-            'label'=>"order_sn:{$this->order_sn}",
-            'data'=>array(
-            )
-        );
         if($seller_money!=0){
+            $sellerAccount=$center->getUserFunc($seller->openid);
             $sell_log=array(
                 'openid'=>$seller->openid,
                 'type'=>'order_success',
@@ -94,16 +96,72 @@ class Order extends Model
             if($this->supply_user_id==$this->seller_id){
                 $supplyerAccount->funds_available=math($supplyerAccount->funds_available,$seller_money,'+',2);
             }
+            $_money=math($supplyer_money,0.21,'*',2);
             $supply_log=array(
                 'openid'=>$supplyer->openid,
                 'type'=>'order_success_supply',
                 'remark'=>$remark,
-                'funds_available' =>$supplyer_money,
+                'funds_available' =>math($supplyer_money,$_money,'-',2),
                 'funds_available_now'=>$supplyerAccount->funds_available
             );
             array_push($params['data'],$supply_log);
         }
-        $return=$center->receivables($params);
+        //买家推荐人奖励
+        $buyer=(new User())->find($this->buyer_id);
+        if($buyer->invite_userid!=0){
+            $buyer_parent_money=math($this->order_money,'0.001','*',2);
+            $buyer_parent_integral=math($buyer_parent_money,$convert_rate,'*',2);
+            if($buyer_parent_integral>0){
+                $buyer_parent=(new User())->find($buyer->invite_userid);
+                if($buyer_parent->is_shop==1){//店铺是店铺才有奖励
+                    $buyerParentAccount=$center->getUserFunc($buyer_parent->openid);
+                    $buyer_parent_log=array(
+                        'openid'=>$buyer_parent->openid,
+                        'type'=>'invite_award',
+                        'remark'=>"您推荐的用户:{$this->buyer_name} 购买商品，您获取奖励。",
+                        'integral_available' =>$buyer_parent_integral,
+                        'integral_available_now'=>$buyerParentAccount->integral_available_now
+                    );
+                    array_push($params['data'],$buyer_parent_log);
+                }
+            }
+        }
+        //商家推荐人奖励
+        if($seller->invite_userid!=0){
+            $seller_parent_money=math($this->order_money,'0.01','*',2);
+            $seller_parent_integral=math($seller_parent_money,$convert_rate,'*',2);
+            if($seller_parent_integral>0){
+                $seller_parent=(new User())->find($seller->invite_userid);
+                $seller_parentAccount=$center->getUserFunc($seller_parent->openid);
+                $seller_parent_log=array(
+                    'openid'=>$seller_parent->openid,
+                    'type'=>'invite_award',
+                    'remark'=>"您推荐的商家:{$seller->username} 购出商品，您获取奖励。",
+                    'integral_available' =>$seller_parent_integral,
+                    'integral_available_now'=>$seller_parentAccount->integral_available_now
+                );
+                array_push($params['data'],$seller_parent_log);
+            }
+        }
+        //供货商推荐人奖励
+        if($this->supply_user_id!=0 && $supplyer->invite_userid!=0){
+            $supplyer_parent_money=math($supplyer_money,'0.02','*',2);
+            $supplyer_parent_integral=math($supplyer_parent_money,$convert_rate,'*',2);
+            if($supplyer_parent_integral>0){
+                $supplyer_parent=(new User())->find($supplyer->invite_userid);
+                $supplyer_parentAccount=$center->getUserFunc($supplyer_parent->openid);
+                $supplyer_parent_log=array(
+                    'openid'=>$supplyer_parent->openid,
+                    'type'=>'invite_award',
+                    'remark'=>"您推荐的供应商:{$supplyer->username} 购出商品，您获取奖励。",
+                    'integral_available' =>$supplyer_parent_integral,
+                    'integral_available_now'=>$supplyer_parentAccount->integral_available_now
+                );
+                array_push($params['data'],$supplyer_parent_log);
+            }
+        }
+
+            $return=$center->receivables($params);
         if($return===true){
             $this->status=5;
             $this->finished_at=time();
