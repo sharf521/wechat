@@ -128,7 +128,7 @@ class Order extends Model
         }
         //商家推荐人奖励
         if($seller->invite_userid!=0){
-            $seller_parent_money=math($this->order_money,'0.01','*',2);
+            $seller_parent_money=math($this->order_money,'0.02','*',2);
             $seller_parent_integral=math($seller_parent_money,$convert_rate,'*',2);
             if($seller_parent_integral>0){
                 $seller_parent=(new User())->find($seller->invite_userid);
