@@ -138,7 +138,7 @@ class GoodsController extends HomeController
             $domain=explode('|',$this->site->domain);
             $wap_url='http://'.$domain[1]."/goods/detail/{$id}/?st_uid={$goods->user_id}";
             $data['QRcode_url']=Helper::QRcode($wap_url,'goods',$id);
-            $this->title='商品详情';
+            $this->title=$goods->name;
             //库存0 显示 看看店铺其它商品
             $this->view('goods_detail',$data);
         }
