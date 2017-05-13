@@ -2,6 +2,8 @@
 
 namespace App\Controller\SupplyManage;
 
+use App\Model\UserData;
+
 class IndexController extends SupplyController
 {
     public function __construct()
@@ -13,5 +15,10 @@ class IndexController extends SupplyController
     {
         $data['title_herder'] = '供应商中心';
         $this->view('manage', $data);
+    }
+    
+    public function commitment(UserData $userData)
+    {
+        
     }
 }

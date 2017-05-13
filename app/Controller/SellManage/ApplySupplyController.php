@@ -30,6 +30,11 @@ class ApplySupplyController extends SellController
         if($_POST){
             $supply->site_id=$this->site->id;
             $supply->user_id=$this->user_id;
+            $supply->company_name=$request->post('company_name');
+            $supply->company_owner=$request->post('company_owner');
+            $supply->picture1=$request->post('picture1');
+            $supply->picture2=$request->post('picture2');
+            $supply->picture3=$request->post('picture3');
             $remark=$request->post('content',false);
             $supply->remark=$remark;
             $supply->status=0;

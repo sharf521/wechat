@@ -18,6 +18,9 @@ class SupplyController extends Controller
         }
     }
 
+    /**
+     * @return array
+     */
     public function getCates()
     {
         return (new ShopCategory())->getListTree($this->user_id);

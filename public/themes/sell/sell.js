@@ -321,4 +321,28 @@ function shop_js() {
     });
 }
 
+function supply_apply() {
+    $(function () {
+        layui.form().on('submit(*)', function(data){
+            var form=data.form;
+            var fields=data.field;
+            var company_name=$(form).find('input[name=company_name]');
+            if(company_name.val()==''){
+                layer.tips('不能为空！', company_name);
+                company_name.focus();
+                return false;
+            }
+            var company_owner=$(form).find('input[name=company_owner]');
+            if(company_owner.val()==''){
+                layer.tips('不能为空！', company_owner);
+                company_owner.focus();
+                return false;
+            }
+            if(ue.hasContents()==false){
+                layer.tips('说明不能为空！', '#container');
+                return false;
+            }
+        });
+    });
+}
 
