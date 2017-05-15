@@ -25,6 +25,12 @@ function getSelectedMoney() {
                 }else{
                     $('#shop'+shop_id+'_shipping_fee').html(0);
                 }
+                if(data['shop'+shop_id+'_fullDownMoney']>0){
+                    $('#shop'+shop_id+'_fulldown_money').find('span').html('-'+data['shop'+shop_id+'_fullDownMoney']);
+                    $('#shop'+shop_id+'_fulldown_money').show();
+                }else{
+                    $('#shop'+shop_id+'_fulldown_money').hide();
+                }
             });
         } else {
             $("#totalPrice span").html(0);

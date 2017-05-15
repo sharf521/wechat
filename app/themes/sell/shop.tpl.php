@@ -60,6 +60,13 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">开启满减</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" value="1" <? if($shop->is_fulldown){echo 'checked';}?> name="is_fulldown" lay-skin="switch" lay-filter="switchTest" lay-text="ON|OFF">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">开启后：用户订单满100元直减10元。</div>
+                    </div>
+                    <div class="layui-form-item">
                         <label class="layui-form-label">店铺介绍</label>
                         <div class="layui-input-block">
                             <? ueditor(array('value' => $shop->remark)); ?>

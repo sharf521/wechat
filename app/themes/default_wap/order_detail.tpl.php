@@ -45,6 +45,24 @@
                 <span class="weui-form-preview__value"><?=$order->getLinkPageName('order_status',$order->status)?></span>
             </div>
         </div>
+        <div class="weui-form-preview">
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">商品总价</label>
+                    <span class="weui-form-preview__value">¥<?=$order->goods_money?></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">运费</label>
+                    <span class="weui-form-preview__value">¥<?=$order->shipping_fee?></span>
+                </div>
+                <?php  if ($order->fulldown_money > 0) : ?>
+                    <div class="weui-form-preview__item">
+                        <label class="weui-form-preview__label">满减优惠</label>
+                        <span class="weui-form-preview__value">-<?=$order->fulldown_money?></span>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
         <div class="weui-form-preview__hd">
             <div class="weui-form-preview__item">
                 <label class="weui-form-preview__label">订单总金额</label>

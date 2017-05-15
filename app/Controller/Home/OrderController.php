@@ -134,6 +134,7 @@ class OrderController extends HomeController
                     $order->goods_money=$carts_moneys[$seller_id]['goodsPrice'];
                     $order->supply_goods_money=$carts_moneys[$seller_id]['supplyGoodsPrice'];
                     $order->shipping_fee=$carts_moneys[$seller_id]['shippingFee'];
+                    $order->fulldown_money=$carts_moneys[$seller_id]['fullDownMoney'];
                     $order->order_money=$carts_moneys[$seller_id]['total'];
                     $order->status=1;
                     $order->save();

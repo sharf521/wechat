@@ -47,6 +47,7 @@
                 <textarea name="buyer_remark" class="buyer_remark" placeholder="订单备注,选填" rows="2"></textarea>
                 <div class="foot_money">
                     运费：<em>¥<span class="shop_shopping_fee" id="shop<?=$i?>_shipping_fee"></span></em><br>
+                    <div id="shop<?=$i?>_fulldown_money">满减优惠：<span class="money">0</span></div>
                     小计：<em>¥<span class="shop_total" id="shop<?=$i?>_money" shop_id="<?=$i?>"></span></em>
                 </div>
             </div>

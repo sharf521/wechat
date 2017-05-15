@@ -119,6 +119,7 @@ class CartController extends HomeController
             foreach ($carts_moneys as $i=>$seller){
                 $result["shop{$i}_shippingFee"]=$seller['shippingFee'];
                 $result["shop{$i}_goodsPrice"]=$seller['goodsPrice'];
+                $result["shop{$i}_fullDownMoney"]=$seller['fullDownMoney'];
                 $result["shop{$i}_total"]=$seller['total'];
                 $total=math($total,$seller['total'],'+',2);
                 $num=math($num,$seller['num'],'+',2);

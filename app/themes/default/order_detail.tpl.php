@@ -86,6 +86,9 @@
             <div class="order_detail_bottom">
                 <label>商品总价：</label>¥<?=$order->goods_money?><br>
                 <label>运费：</label>¥<?=$order->shipping_fee?><br>
+                <?php  if ($order->fulldown_money > 0) : ?>
+                    <label>满减优惠：</label>-<?= $order->fulldown_money ?><br>
+                <?php endif; ?>
                 <label>订单总价：</label><span class="money">¥<?=$order->order_money?></span><br>
                 <?php if($order->status>=3) : ?>
                     <label>实付积分：</label><?=(float)$order->payed_integral?> 积分<br>

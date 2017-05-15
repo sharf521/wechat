@@ -36,6 +36,7 @@ class ShopController extends SellController
             $shop->address=$request->post('address');
             $shop->tel=$tel;
             $shop->qq=$qq;
+            $shop->is_fulldown=(int)$request->post('is_fulldown');
             $shop->remark=$remark;
             $shop->save();
             redirect('shop')->with('msg','修改成功！');

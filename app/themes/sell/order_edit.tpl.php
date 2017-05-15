@@ -71,4 +71,5 @@
             parent.layer.close(index);
         }
     </script>
-<?php require 'footer.php';?>
+<?php
+require ROOT.'/app/themes/footer.php';
