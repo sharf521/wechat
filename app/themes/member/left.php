@@ -28,6 +28,7 @@
             <ul>
                 <li><a href="<?=url('/supplyManage/goods')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/supplyManage/goods')!==false){echo 'class="whover"';}?>>商品管理</a></li>
                 <li><a href="<?=url('/supplyManage/order')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/supplyManage/order')!==false){echo 'class="whover"';}?>>订单管理</a></li>
+                <li><a href="<?=url('/supplyManage/commitment')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/supplyManage/commitment')!==false){echo 'class="whover"';}?>>奖励承诺</a></li>
             </ul>
         <? endif;?>
     <? endif;?>

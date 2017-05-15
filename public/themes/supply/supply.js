@@ -201,5 +201,16 @@ function shop_js() {
         });
     });
 }
-
-
+//奖励承诺
+function commitment() {
+    $(function () {
+        layui.form().on('submit(*)', function(data){
+            var form=data.form;
+            var fields=data.field;
+            if(ue.hasContents()==false){
+                layer.tips('内容不能为空！', '#container');
+                return false;
+            }
+        });
+    });
+}
