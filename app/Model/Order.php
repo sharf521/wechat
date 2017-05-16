@@ -45,7 +45,6 @@ class Order extends Model
         if(empty($convert_rate)){
             $convert_rate=2.52;
         }
-
         $remark="订单号：{$this->order_sn}";
         $params=array(
             'openid'=>$operatorOpenId,
@@ -53,74 +52,86 @@ class Order extends Model
             'type'=>'order_success',
             'remark'=>$remark,
             'label'=>"order_sn:{$this->order_sn}",
-            'data'=>array(
-            )
+            'data'=>array()
         );
-
         $center=new Center();
-        $seller_money=$this->order_money;
+        $buyer=(new User())->find($this->buyer_id);
         $seller=(new User())->find($this->seller_id);
-
-        //商家积分奖励
-        $rebate_sell=new RebateList();
-        $rebate_sell->user_id=$seller->id;
-        $rebate_sell->money=$seller_money;
-        $_money=math($seller_money,0.21,'*',2);
-        $seller_money=math($seller_money,$_money,'-',2);
         if($this->supply_user_id!=0){
-            //采购的商品
-            $supplyer_money=math($this->supply_goods_money,$this->shipping_fee,'+',2);
             $supplyer=(new User())->find($this->supply_user_id);
-            $supplyerAccount=$center->getUserFunc($supplyer->openid);
-
-            $seller_money=math($seller_money,$supplyer_money,'-',2);
-
-            //积分奖励
-            $rebate_supply=new RebateList();
-            $rebate_supply->user_id=$supplyer->id;
-            $rebate_supply->money=$supplyer_money;
         }
-
-        if($seller_money!=0){
-            $sellerAccount=$center->getUserFunc($seller->openid);
-            $sell_log=array(
-                'openid'=>$seller->openid,
-                'type'=>'order_success',
-                'remark'=>$remark,
-                'funds_available' =>$seller_money,
-                'funds_available_now'=>$sellerAccount->funds_available
-            );
-            array_push($params['data'],$sell_log);
-        }
-        if($this->supply_user_id!=0){
-            if($this->supply_user_id==$this->seller_id){
-                $supplyerAccount->funds_available=math($supplyerAccount->funds_available,$seller_money,'+',2);
+        //开始处理卖家资金
+        $seller_remark=$remark;
+        if($this->supply_user_id==0){
+            //自卖商品
+            $seller_money=$this->order_money;
+            if($this->shipping_fee>0){
+                $shipping_award_fee=math($this->shipping_fee,0.21,'*',2);
+                $seller_money=math($seller_money,$shipping_award_fee,'-',2);
+                $seller_remark.="，运费奖励支出：{$shipping_award_fee}元";
             }
-            $_money=math($supplyer_money,0.21,'*',2);
+            $seller_float=0;//差价
+        }else {
+            //采购的商品
+            $seller_money=math($this->order_money,$this->shipping_fee,'-',2);
+            if($this->fulldown_money>0){
+                //满减由供货商出，订单价己经减过了，要加上。
+                $seller_money=math($seller_money,$this->fulldown_money,'+',2);
+                $seller_remark.="，供应商减满补贴：{$this->fulldown_money}元";
+            }
+            $supplyer_goods_money=math($this->supply_goods_money,1.31,'*',2);
+            $seller_float = math($seller_money, $supplyer_goods_money, '-', 2);
+        }
+        $seller_money=math($seller_money,$seller_float,'+',2);
+        $seller_award_fee=math($seller_money,0.21,'*',2);
+        $seller_remark.="，积分奖励支出：{$seller_award_fee}元";
+        $sell_log=array(
+            'openid'=>$seller->openid,
+            'type'=>'order_success',
+            'remark'=>$seller_remark,
+            'funds_available' =>math($seller_money,$seller_award_fee,'-',2),
+            'funds_available_now'=>$center->getUserFunc($seller->openid)->funds_available
+        );
+        array_push($params['data'],$sell_log);
+
+        //开始处理供货商资金
+        if($this->supply_user_id>0){
+            $supplyer_remark=$remark;
+            $supplyer_money=math($this->supply_goods_money,$this->shipping_fee,'+',2);
+            if($this->fulldown_money>0){
+                //满减由供货商出
+                $supplyer_money=math($supplyer_money,$this->fulldown_money,'-',2);
+                $supplyer_remark.="，满减支出：{$this->fulldown_money}元";
+            }
+            if($this->shipping_fee>0){
+                $shipping_award_fee=math($this->shipping_fee,0.21,'*',2);
+                $supplyer_money=math($supplyer_money,$shipping_award_fee,'-',2);
+                $supplyer_remark.="，运费奖励支出：{$shipping_award_fee}元";
+            }
+            $supplyer_award_fee=math($supplyer_money,0.21,'*',2);
+            $supplyer_remark.="，积分奖励支出：{$supplyer_award_fee}元";
             $supply_log=array(
                 'openid'=>$supplyer->openid,
                 'type'=>'order_success_supply',
-                'remark'=>$remark,
-                'funds_available' =>math($supplyer_money,$_money,'-',2),
-                'funds_available_now'=>$supplyerAccount->funds_available
+                'remark'=>$supplyer_remark,
+                'funds_available' =>math($supplyer_money,$supplyer_award_fee,'-',2),
+                'funds_available_now'=>$center->getUserFunc($supplyer->openid)->funds_available
             );
             array_push($params['data'],$supply_log);
         }
         //买家推荐人奖励
-        $buyer=(new User())->find($this->buyer_id);
         if($buyer->invite_userid!=0){
             $buyer_parent_money=math($this->order_money,'0.001','*',2);
             $buyer_parent_integral=math($buyer_parent_money,$convert_rate,'*',2);
             if($buyer_parent_integral>0){
                 $buyer_parent=(new User())->find($buyer->invite_userid);
                 if($buyer_parent->is_shop==1){//店铺是店铺才有奖励
-                    $buyerParentAccount=$center->getUserFunc($buyer_parent->openid);
                     $buyer_parent_log=array(
                         'openid'=>$buyer_parent->openid,
                         'type'=>'invite_award',
                         'remark'=>"您推荐的用户:{$this->buyer_name} 购买商品，您获取奖励。",
                         'integral_available' =>$buyer_parent_integral,
-                        'integral_available_now'=>$buyerParentAccount->integral_available_now
+                        'integral_available_now'=>$center->getUserFunc($buyer_parent->openid)->integral_available_now
                     );
                     array_push($params['data'],$buyer_parent_log);
                 }
@@ -160,17 +171,34 @@ class Order extends Model
                 array_push($params['data'],$supplyer_parent_log);
             }
         }
-
-            $return=$center->receivables($params);
+        $return=$center->receivables($params);
         if($return===true){
             $this->status=5;
             $this->finished_at=time();
             $this->save();
+            //运费积分奖励给消费者,发货发提供费用
+            if($this->shipping_fee>0){
+                $rebate_buyer=new RebateList();
+                $rebate_buyer->user_id=$buyer->id;
+                $rebate_buyer->money=$this->shipping_fee;
+                $rebate_buyer->typeid=1;
+                $rebate_buyer->label=$params['label'];
+                $rebate_buyer->status=0;
+                $rebate_buyer->save();
+            }
+            //商家积分奖励
+            $rebate_sell=new RebateList();
+            $rebate_sell->user_id=$seller->id;
+            $rebate_sell->money=$seller_money;
             $rebate_sell->typeid=1;
             $rebate_sell->label=$params['label'];
             $rebate_sell->status=0;
             $rebate_sell->save();
             if($this->supply_user_id!=0){
+                //积分奖励
+                $rebate_supply=new RebateList();
+                $rebate_supply->user_id=$supplyer->id;
+                $rebate_supply->money=$supplyer_money;
                 $rebate_supply->typeid=1;
                 $rebate_supply->label=$params['label'];
                 $rebate_supply->status=0;
