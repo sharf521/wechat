@@ -135,7 +135,8 @@ class PurchaseController extends HomeController
                         $spec->goods_id=$goods->id;
                         $spec->spec_1=$v->spec_1;
                         $spec->spec_2=$v->spec_2;
-                        $spec->price=(float)$request->post("retail_price{$v->id}");
+                        //$spec->price=(float)$request->post("retail_price{$v->id}");
+                        $spec->price=math($v->price,1.31,'*',2);
                         $spec->supply_goods_id=$v->goods_id;
                         $spec->supply_spec_id=$v->id;
                         $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
@@ -147,7 +148,8 @@ class PurchaseController extends HomeController
                         $spec->save();
                     }
                 }else{
-                    $goods->price=$retail_price;
+                    //$goods->price=$retail_price;
+                    $goods->price=math($supplyGoods->price,1.31,'*',2);
                     $goods->retail_float_money=math($goods->price,$supplyGoods->price,'-',2);
                 }
                 $goods->save();

@@ -86,6 +86,7 @@ class OrderController extends SellController
         if($_POST){
             $goods_money=(float)$request->post('goods_money');
             if($order->supply_user_id!=0){
+                redirect()->back()->with('error','禁止修改');
                 //供货
                 if($goods_money < $order->supply_goods_money){
                     redirect()->back()->with('error','商品价格不能小于供货价');

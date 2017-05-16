@@ -184,7 +184,7 @@ class GoodsController extends SellController
                 redirect()->back()->with('error','商品名称不能为空！');
             }
             $goods->name=$name;
-            if($supplyGoods->is_have_spec==0){
+            /*if($supplyGoods->is_have_spec==0){
                 $retail_price=(float)$request->post('retail_price');
                 if($retail_price<$supplyGoods->price){
                     redirect()->back()->with('error','零售价不能小于供货价');
@@ -203,7 +203,7 @@ class GoodsController extends SellController
                         $goods->retail_float_money=$spec->retail_float_money;
                     }
                 }
-            }
+            }*/
             
             $shop_cateid=(int)$request->post('shop_category');
             if($shop_cateid!=0){

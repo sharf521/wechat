@@ -116,7 +116,8 @@ class GoodsController extends SupplyController
                 $goods->image_url='';
                 $goods->name=$name;
                 $goods->price=$g_price;
-                $goods->retail_price=$g_retail_price;
+                //$goods->retail_price=$g_retail_price;
+                $goods->retail_price=math($g_price,1.31,'*',2);
                 $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
                 if($goods->is_have_spec){
@@ -144,7 +145,8 @@ class GoodsController extends SupplyController
                         $spec->spec_1=$spec_1[$i];
                         $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
-                        $spec->retail_price=(float)$retail_price[$i];
+                        //$spec->retail_price=(float)$retail_price[$i];
+                        $spec->retail_price=math($spec->price,1.31,'*',2);
                         $spec->stock_count=(int)$stock_count[$i];
                         $spec->save();
                         if($i==0){
@@ -210,7 +212,8 @@ class GoodsController extends SupplyController
                 $goods->image_url='';
                 $goods->name=$name;
                 $goods->price=$g_price;
-                $goods->retail_price=$g_retail_price;
+                //$goods->retail_price=$g_retail_price;
+                $goods->retail_price=math($g_price,1.31,'*',2);
                 $goods->stock_count=$g_stock_count;
                 $goods->is_have_spec=$is_have_spec;
                 if($goods->is_have_spec){
@@ -236,7 +239,8 @@ class GoodsController extends SupplyController
                         $spec->spec_1=$spec_1[$i];
                         $spec->spec_2=$spec_2[$i];
                         $spec->price=(float)$price[$i];
-                        $spec->retail_price=(float)$retail_price[$i];
+                        //$spec->retail_price=(float)$retail_price[$i];
+                        $spec->retail_price=math($spec->price,1.31,'*',2);
                         $spec->stock_count=(int)$stock_count[$i];
                         if($spec->is_exist){
                             $spec->save();

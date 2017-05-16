@@ -16,9 +16,11 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">商品价格</label>
                 <div class="layui-input-inline">
+                <? if($order->supply_user_id==0) : ?>
                     <input class="layui-input" required type="text" name="goods_money" onkeyup="value=value.replace(/[^0-9.]/g,'')" value="<?=$order->goods_money?>"  placeholder="¥"/></div>
-                <? if($order->supply_user_id!=0) : ?>
-                    <div class="layui-form-mid layui-word-aux">供货价：<?=$order->supply_goods_money?>元</div>
+                <? else : ?>
+                    <?=$order->goods_money?>
+                    <div class="layui-form-mid layui-word-aux">禁止修改，供货价：<?=$order->supply_goods_money?>元</div>
                 <? endif;?>
             </div>
             <div class="layui-form-item">
@@ -33,7 +35,9 @@
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"></label>
-                <input class="layui-btn" type="submit" value="保存">
+                <? if($order->supply_user_id==0) : ?>
+                    <input class="layui-btn" type="submit" value="保存">
+                <? endif;?>
                 <input class="layui-btn" type="button" value="取消" onclick="close1()">
             </div>
         </div>

@@ -44,7 +44,9 @@
                                     <td><?=$spec->stock_count?></td>
                                     <td><?=$spec->price?></td>
                                     <td>
-                                        <input type="text" class="layui-input" placeholder="￥" style="width: 100px; display: inline-block" name="retail_price<?=$spec->id?>" value="<?=$spec->retail_price?>" data_price="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"> 建议￥<?=$spec->retail_price?>
+                                        <?=$spec->retail_price?>
+                                        <!--<input type="text" class="layui-input" placeholder="￥" style="width: 100px; display: inline-block" name="retail_price<?/*=$spec->id*/?>" value="<?/*=$spec->retail_price*/?>" data_price="<?/*=$spec->price*/?>" onkeyup="value=value.replace(/[^0-9.]/g,'')">
+                                        建议￥--><?/*=$spec->retail_price*/?>
                                     </td>
                                 </tr>
                             <? endforeach;?>
@@ -56,9 +58,10 @@
                             <div class="layui-input-inline"><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span></div>
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">建议零售价</label>
+                            <label class="layui-form-label">零售价</label>
                             <div class="layui-input-inline">
-                                <input type="text" class="layui-input" name="retail_price" value="<?=$goods->retail_price?>" data_price="<?=$goods->price?>"onkeyup="value=value.replace(/[^0-9.]/g,'')">
+                                <?=$goods->retail_price?>
+                                <!--<input type="text" class="layui-input" name="retail_price" value="<?/*=$goods->retail_price*/?>" data_price="<?/*=$goods->price*/?>" onkeyup="value=value.replace(/[^0-9.]/g,'')">-->
                             </div>
                             <div class="layui-form-mid layui-word-aux">元</div>
                         </div>

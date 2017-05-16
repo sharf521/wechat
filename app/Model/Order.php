@@ -73,12 +73,15 @@ class Order extends Model
             $seller_float=0;//差价
         }else {
             //采购的商品
-            $seller_money=math($this->order_money,$this->shipping_fee,'-',2);
+            /*$seller_money=math($this->order_money,$this->shipping_fee,'-',2);
             if($this->fulldown_money>0){
                 //满减由供货商出，订单价己经减过了，要加上。
                 $seller_money=math($seller_money,$this->fulldown_money,'+',2);
                 $seller_remark.="，供应商减满补贴：{$this->fulldown_money}元";
             }
+            $supplyer_goods_money=math($this->supply_goods_money,1.31,'*',2);
+            $seller_float = math($seller_money, $supplyer_goods_money, '-', 2);*/
+            $seller_money=$this->goods_money;
             $supplyer_goods_money=math($this->supply_goods_money,1.31,'*',2);
             $seller_float = math($seller_money, $supplyer_goods_money, '-', 2);
         }

@@ -54,7 +54,8 @@
                                                 <td><?=$spec->stock_count?></td>
                                                 <td><?=$spec->price?></td>
                                                 <td>
-                                                    <input type="text" class="layui-input" placeholder="￥" style="width: 100px; display: inline-block" name="retail_price<?=$spec->id?>" value="<?=$retail_price?>" data_price="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"> 建议￥<?=$spec->retail_price?>
+                                                    <?=$spec->retail_price?>
+                                                    <!--<input type="text" class="layui-input" placeholder="￥" style="width: 100px; display: inline-block" name="retail_price<?/*=$spec->id*/?>" value="<?/*=$retail_price*/?>" data_price="<?/*=$spec->price*/?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"> 建议￥--><?/*=$spec->retail_price*/?>
                                                 </td>
                                             </tr>
                                         <? endforeach;?>
@@ -67,9 +68,10 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">零售价</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="retail_price" value="<?=$goods->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="￥" class="layui-input" value="" autocomplete="off"/>
+                                    <?=$goods->price?>
+                                    <!--<input type="text" name="retail_price" value="<?/*=$goods->price*/?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="￥" class="layui-input" value="" autocomplete="off"/>-->
                                 </div>
-                                <div class="layui-form-mid layui-word-aux">供货价:<?=$supplyGoods->price?>元，建议零售价：<?=$supplyGoods->retail_price?>元</div>
+                                <div class="layui-form-mid layui-word-aux">供货价:<?=$supplyGoods->price?>元<!--，建议零售价：<?=$supplyGoods->retail_price?>元--></div>
                             </div>
                         <? endif;?>
                         <div class="layui-form-item">
