@@ -3,8 +3,6 @@ namespace App\Controller\Member;
 
 use App\Model\AppUser;
 use App\Model\User;
-use System\Lib\DB;
-use System\Lib\Request;
 
 class IndexController extends MemberController
 {
