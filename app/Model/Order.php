@@ -62,40 +62,32 @@ class Order extends Model
         }
         //开始处理卖家资金
         $seller_remark=$remark;
+        $seller_money=$this->order_money;
         if($this->supply_user_id==0){
             //自卖商品
-            $seller_money=$this->order_money;
             if($this->shipping_fee>0){
                 $shipping_award_fee=math($this->shipping_fee,0.21,'*',2);
                 $seller_money=math($seller_money,$shipping_award_fee,'-',2);
                 $seller_remark.="，运费奖励支出：{$shipping_award_fee}元";
             }
-            $seller_float=0;//差价
+            $seller_award_fee=math($seller_money,0.21,'*',2);
+            $seller_remark.="，积分奖励支出：{$seller_award_fee}元";
+            $seller_order_money=math($seller_money,$seller_award_fee,'-',2);
         }else {
             //采购的商品
-            /*$seller_money=math($this->order_money,$this->shipping_fee,'-',2);
-            if($this->fulldown_money>0){
-                //满减由供货商出，订单价己经减过了，要加上。
-                $seller_money=math($seller_money,$this->fulldown_money,'+',2);
-                $seller_remark.="，供应商减满补贴：{$this->fulldown_money}元";
-            }
             $supplyer_goods_money=math($this->supply_goods_money,1.31,'*',2);
-            $seller_float = math($seller_money, $supplyer_goods_money, '-', 2);*/
-            $seller_money=$this->goods_money;
-            $supplyer_goods_money=math($this->supply_goods_money,1.31,'*',2);
-            $seller_float = math($seller_money, $supplyer_goods_money, '-', 2);
+            $seller_order_money = math($seller_money, $supplyer_goods_money, '-', 2);
         }
-        $seller_money=math($seller_money,$seller_float,'+',2);
-        $seller_award_fee=math($seller_money,0.21,'*',2);
-        $seller_remark.="，积分奖励支出：{$seller_award_fee}元";
-        $sell_log=array(
-            'openid'=>$seller->openid,
-            'type'=>'order_success',
-            'remark'=>$seller_remark,
-            'funds_available' =>math($seller_money,$seller_award_fee,'-',2),
-            'funds_available_now'=>$center->getUserFunc($seller->openid)->funds_available
-        );
-        array_push($params['data'],$sell_log);
+        if($seller_order_money>0){
+            $sell_log=array(
+                'openid'=>$seller->openid,
+                'type'=>'order_success',
+                'remark'=>$seller_remark,
+                'funds_available' =>$seller_order_money,
+                'funds_available_now'=>$center->getUserFunc($seller->openid)->funds_available
+            );
+            array_push($params['data'],$sell_log);
+        }
 
         //开始处理供货商资金
         if($this->supply_user_id>0){
