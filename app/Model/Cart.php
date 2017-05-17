@@ -165,7 +165,12 @@ class Cart extends Model
             $_total=math($return[$seller_id]['goodsPrice'],$return[$seller_id]['shippingFee'],'+',2);
             $return[$seller_id]['total']=math($return[$seller_id]['total'],$_total,'+',2);
             if($return[$seller_id]['total']>=100){
-                $is_fullDown=(new Shop())->find($seller_id)->is_fulldown;
+                $t=explode('_',$seller_id);
+                if($t[1]==0){
+                    $is_fullDown=(new Shop())->find($t[0])->is_fulldown;
+                }else{
+                    $is_fullDown=(new Shop())->find($t[1])->is_fulldown;
+                }
                 if($is_fullDown){
                     $return[$seller_id]['fullDownMoney']=10;
                     $return[$seller_id]['total']=math($return[$seller_id]['total'],10,'-',2);
