@@ -47,11 +47,11 @@ class PurchaseController extends HomeController
         }
         if($minPrice!=''){
             $minPrice=(float)$minPrice;
-            $where.=" and price>={$minPrice}";
+            $where.=" and retail_price>={$minPrice}";
         }
         if($maxPrice!=''){
             $maxPrice=(float)$maxPrice;
-            $where.=" and price<={$maxPrice}";
+            $where.=" and retail_price<={$maxPrice}";
         }
         if(in_array($orderBy,array('id','sale_count'))){
             $orderBy="{$orderBy} desc";

@@ -29,7 +29,7 @@
                                 <?php  if($goods->spec_name2!=''): ?>
                                     <th><?=$goods->spec_name2?></th>
                                 <?php endif;?>
-                                <th>库存</th><th>供货价</th><th>零售价</th>
+                                <th>库存</th><!--<th>供货价</th>--><th>零售价</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,7 @@
                                         <td><?=$spec->spec_2?></td>
                                     <?php endif;?>
                                     <td><?=$spec->stock_count?></td>
-                                    <td><?=$spec->price?></td>
+                                    <!-- <td><?/*=$spec->price*/?></td>-->
                                     <td>
                                         <?=$spec->retail_price?>
                                         <!--<input type="text" class="layui-input" placeholder="￥" style="width: 100px; display: inline-block" name="retail_price<?/*=$spec->id*/?>" value="<?/*=$spec->retail_price*/?>" data_price="<?/*=$spec->price*/?>" onkeyup="value=value.replace(/[^0-9.]/g,'')">
@@ -55,12 +55,12 @@
                     <? else:?>
                         <div class="layui-form-item">
                             <label class="layui-form-label">供货价</label>
-                            <div class="layui-input-inline"><span class="money">￥<i id="goods_price"><?=$goods->price?></i></span></div>
+                            <!--<div class="layui-input-inline"><span class="money">￥<i id="goods_price"><?/*=$goods->price*/?></i></span></div>-->
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">零售价</label>
                             <div class="layui-input-inline">
-                                <?=$goods->retail_price?>
+                                <span class="money"><?=$goods->retail_price?></span>
                                 <!--<input type="text" class="layui-input" name="retail_price" value="<?/*=$goods->retail_price*/?>" data_price="<?/*=$goods->price*/?>" onkeyup="value=value.replace(/[^0-9.]/g,'')">-->
                             </div>
                             <div class="layui-form-mid layui-word-aux">元</div>
