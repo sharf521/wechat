@@ -29,7 +29,7 @@
                     <a href="<?=url('')?>">个人中心</a>
                 </li>
                 <li>
-                    <a href="<?=$this->site->center_url?>" target="_blank">支付中心</a>
+                    <a href="<?=$this->site->center_url?>" target="_blank">帐户中心</a>
                 </li>
                 <li>
                     <a href="<?=url('logout')?>">退出</a>
