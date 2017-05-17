@@ -96,12 +96,12 @@ class PurchaseController extends HomeController
             if($data['isPurchase']==true){
                 redirect()->back()->with('error','请不要重复采购');
             }
-            if($supplyGoods->is_have_spec==0){
+/*            if($supplyGoods->is_have_spec==0){
                 $retail_price=(float)$request->post('retail_price');
                 if($retail_price<$supplyGoods->price){
                     redirect()->back()->with('error','零售价不能小于供货价');
                 }
-            }
+            }*/
             try{
                 DB::beginTransaction();
                 $goods=new Goods();
