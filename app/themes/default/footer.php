@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="footbot">
-            Copyright 2012-2020 Inc.,All rights reserved. 豫ICP备110xxxx2号-1
+            <?=\App\Helper::getSystemParam('icp');?>
         </div>
 </div>
 <div class="floating_ck">
