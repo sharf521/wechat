@@ -25,7 +25,7 @@ $domain_arr=explode('.',$domain);
     $domain=$domain_arr[count($domain_arr)-2].'.'.$domain_arr[count($domain_arr)-1];
 }*/
 //session_start();之前设置  php.ini 里 session.auto_start=0
-ini_set('session.cookie_domain', $domain);//域名不需要端口
+//ini_set('session.cookie_domain', $domain);//域名不需要端口
 //ini_set("session.save_handler", "redis");
 //ini_set("session.save_path", "tcp://127.0.0.1:6379");
 session_cache_limiter('private,must-revalidate');
