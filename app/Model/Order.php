@@ -71,7 +71,7 @@ class Order extends Model
                 $seller_remark.="，运费奖励支出：{$shipping_award_fee}元";
             }
             $seller_award_fee=math($seller_money,0.21,'*',2);
-            $seller_remark.="，参加积分奖励计划：{$seller_money}积分";
+            $seller_remark.="，计划奖励：{$seller_money}积分";
             $seller_order_money=math($seller_money,$seller_award_fee,'-',2);
         }else {
             //采购的商品
@@ -104,7 +104,7 @@ class Order extends Model
                 $supplyer_remark.="，运费奖励支出：{$shipping_award_fee}元";
             }
             $supplyer_award_fee=math($supplyer_money,0.21,'*',2);
-            $supplyer_remark.="，参加积分奖励计划：{$supplyer_money}积分";
+            $supplyer_remark.="，计划奖励：{$supplyer_money}积分";
             $supply_log=array(
                 'openid'=>$supplyer->openid,
                 'type'=>'order_success_supply',
