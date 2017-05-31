@@ -20,6 +20,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
         <table class="layui-table">
             <thead>
             <tr>
+                <th>分站id</th>
                 <th>用户</th>
                 <th>Label</th>
                 <th>奖励金额</th>
@@ -38,9 +39,9 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 $user=$rebate->User();
                 ?>
                 <tr>
+                    <td><?=$rebate->site_id?></td>
                     <td><?= $user->username ?>(<?=$user->id?>)<?=\App\Helper::getQqLink($user->qq)?></td>
                     <td><?= $rebate->label ?></td>
-
                     <td>￥<?=$rebate->money?></td>
                     <td><?= $rebate->created_at ?></td>
                     <td><?=$rebate->remark?></td>

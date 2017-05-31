@@ -174,6 +174,7 @@ class Order extends Model
             //运费积分奖励给消费者,发货发提供费用
             if($this->shipping_fee>0){
                 $rebate_buyer=new RebateList();
+                $rebate_buyer->site_id=$this->site_id;
                 $rebate_buyer->user_id=$buyer->id;
                 $rebate_buyer->money=$this->shipping_fee;
                 $rebate_buyer->typeid=1;
@@ -184,6 +185,7 @@ class Order extends Model
             }
             //商家积分奖励
             $rebate_sell=new RebateList();
+            $rebate_sell->site_id=$this->site_id;
             $rebate_sell->user_id=$seller->id;
             $rebate_sell->money=$seller_money;
             $rebate_sell->typeid=1;
@@ -194,6 +196,7 @@ class Order extends Model
             if($this->supply_user_id!=0){
                 //积分奖励
                 $rebate_supply=new RebateList();
+                $rebate_supply->site_id=$this->site_id;
                 $rebate_supply->user_id=$supplyer->id;
                 $rebate_supply->money=$supplyer_money;
                 $rebate_supply->typeid=1;

@@ -60,7 +60,7 @@ class RebateListController extends AdminController
                 $rebate->save();
                 $user=$rebate->User();
                 $integral=math($rebate->money,2.52,'*',5);
-                $return=(new Center())->rebateAdd($user->openid,1,$integral,$rebate->remark);
+                $return=(new Center())->rebateAdd($user->openid,$rebate->typeid,$integral,$rebate->remark,$rebate->site_id);
                 if($return===true){
                     DB::commit();
                     redirect("rebateList")->with('msg','操作完成');
