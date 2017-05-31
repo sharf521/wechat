@@ -107,14 +107,15 @@ class Center
     }
     
     
-    public function rebateAdd($openid,$typeid=1,$integral=0)
+    public function rebateAdd($openid,$typeid=1,$integral=0,$remark='')
     {
         $params=array(
             'appid'=>$this->appid,
             'openid'=>$openid,
             'typeid'=>(int)$typeid,
             'money'=>$integral,
-            'time'=>time()
+            'time'=>time(),
+            'remark'=>$remark
         );
         $params['sign']=$this->getSign($params);
         $data['data']=json_encode($params);

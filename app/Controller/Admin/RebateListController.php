@@ -27,6 +27,7 @@ class RebateListController extends AdminController
         $user_id=(int)$request->get('user_id');
         $starttime=$request->get('starttime');
         $endtime=$request->get('endtime');
+        $remark=$request->get('remark');
         if($label!=''){
             $where.=" and label='{$label}'";
         }
@@ -38,6 +39,9 @@ class RebateListController extends AdminController
         }
         if(!empty($endtime)){
             $where.=" and created_at<".strtotime($endtime);
+        }
+        if(!empty($remark)){
+            $where.=" and remark like '%{$remark}%'";
         }
         $data['result']=$rebateList->where($where)->orderBy('id desc')->pager($_GET['page'],10);
         $this->view('rebateList',$data);
@@ -56,7 +60,7 @@ class RebateListController extends AdminController
                 $rebate->save();
                 $user=$rebate->User();
                 $integral=math($rebate->money,2.52,'*',5);
-                $return=(new Center())->rebateAdd($user->openid,1,$integral);
+                $return=(new Center())->rebateAdd($user->openid,1,$integral,$rebate->remark);
                 if($return===true){
                     DB::commit();
                     redirect("rebateList")->with('msg','操作完成');

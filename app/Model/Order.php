@@ -179,6 +179,7 @@ class Order extends Model
                 $rebate_buyer->typeid=1;
                 $rebate_buyer->label=$params['label'];
                 $rebate_buyer->status=0;
+                $rebate_buyer->remark=$remark;
                 $rebate_buyer->save();
             }
             //商家积分奖励
@@ -188,6 +189,7 @@ class Order extends Model
             $rebate_sell->typeid=1;
             $rebate_sell->label=$params['label'];
             $rebate_sell->status=0;
+            $rebate_sell->remark=$remark;
             $rebate_sell->save();
             if($this->supply_user_id!=0){
                 //积分奖励
@@ -197,6 +199,7 @@ class Order extends Model
                 $rebate_supply->typeid=1;
                 $rebate_supply->label=$params['label'];
                 $rebate_supply->status=0;
+                $rebate_supply->remark=$remark;
                 $rebate_supply->save();
             }
         }else{

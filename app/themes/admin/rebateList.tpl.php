@@ -10,6 +10,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
         <div class="search">
             Label：<input type="text" name="label" value="<?=$_GET['label']?>" size="15" placeholder="label"/>
             用户ID：<input type="text" name="user_id" value="<?=$_GET['user_id']?>" size="15" placeholder="用户id"/>
+            关键字：<input type="text" name="remark" value="<?=$_GET['remark']?>">
             下单时间：<input type="text" name="starttime" value="<?=$_GET['starttime']?>" class="Wdate" onclick="javascript:WdatePicker();" size="10"/>
             到<input type="text" name="endtime" value="<?=$_GET['endtime']?>" class="Wdate" onclick="javascript:WdatePicker();" size="10"/>
             <input type="submit" class="but2" value="查询" />
@@ -23,6 +24,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 <th>Label</th>
                 <th>奖励金额</th>
                 <th>添加时间</th>
+                <th>备注</th>
                 <th>开始时间</th>
                 <th>开始操作人</th>
                 <th>状态</th>
@@ -41,6 +43,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
 
                     <td>￥<?=$rebate->money?></td>
                     <td><?= $rebate->created_at ?></td>
+                    <td><?=$rebate->remark?></td>
                     <td><?=$rebate->start_at?></td>
                     <td><?=$rebate->start_uid?></td>
                     <td><?=$arr_status[$rebate->status]?></td>
