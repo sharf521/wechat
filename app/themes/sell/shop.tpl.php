@@ -43,7 +43,7 @@
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select name="city" lay-filter="city" required>
+                            <select name="city" lay-filter="city" id="city" required>
                                 <option></option>
                             </select>
                         </div>
@@ -56,7 +56,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label"></label>
                         <div class="layui-input-block">
-                            <input type="text" name="address" placeholder="小区或街道地址" required class="layui-input" value="<?=$shop->address?>" autocomplete="off"/>
+                            <input type="text" name="address" id="address" placeholder="小区或街道地址" required class="layui-input" value="<?=$shop->address?>" autocomplete="off"/>
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -72,6 +72,20 @@
                             <? ueditor(array('value' => $shop->remark)); ?>
                         </div>
                     </div>
+
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">所在位置</label>
+                        <div class="layui-input-block">
+                            （先点击地图，然后拖动图标到你的位置上）
+                            <input type="hidden" name="gps" id="gps" value="<?=$shop->gps?>">
+                            <div id="map" style="width: 100%; height: 500px;"></div>
+                            <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FD277acba8a70dc3bd90b1790787d332"></script>
+                            <script type="text/javascript">
+                                map('map',$('#gps').val());
+                            </script>
+                        </div>
+                    </div>
+
                     <div class="layui-form-item">
                         <label class="layui-form-label"></label>
                         <div class="layui-input-block">

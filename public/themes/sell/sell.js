@@ -346,3 +346,48 @@ function supply_apply() {
     });
 }
 
+function map(container,gps) {
+    var map = new BMap.Map(container);
+    map.addControl(new BMap.NavigationControl());//左上角，添加默认缩放平移控件
+    var point = new BMap.Point(116.400244,39.92556);
+    if(gps!=''){
+        var _gps=gps.split(',');
+        point = new BMap.Point(_gps[0],_gps[1]);
+    }/*else if($('#address').val()!=''){
+     //创建地址解析器实例
+     var myGeo = new BMap.Geocoder();
+     //将地址解析结果显示在地图上，并调整地图视野。此过程为异步，所以要重设标注
+     myGeo.getPoint($('#address').val(), function(poi){
+     map.centerAndZoom(poi, 12);
+     marker.setPosition(poi); //重调标注位置
+     }, $('#city').val());
+     }*/
+    map.centerAndZoom(point, 16);
+    var marker = new BMap.Marker(point);// 创建标注
+    map.addOverlay(marker);             // 将标注添加到地图中
+    marker.enableDragging();           // 可拖拽
+
+    if(gps==''){
+        map.setZoom(12);
+        var myCity = new BMap.LocalCity();
+        myCity.get(function (result) {
+            var cityName = result.name;
+            map.setCenter(cityName);
+        });
+    }
+    //显示文本标题
+    var label = new BMap.Label('拖拽到您的位置',{offset:new BMap.Size(20,-15)});
+    label.setStyle({ backgroundColor:"red", color:"white", fontSize : "12px" });
+    marker.setLabel(label);
+
+    //拖拽设置位置
+    marker.addEventListener("dragend", function(e){
+        try{document.getElementById('gps').value = e.point.lng + "," + e.point.lat;}catch (ex) {}
+    });
+    //点击设置位置
+    map.addEventListener("click", function(e){
+        marker.setPosition(e.point); //重调标注位置
+        try{document.getElementById('gps').value = e.point.lng + "," + e.point.lat;}catch (ex) {}
+    });
+}
+
