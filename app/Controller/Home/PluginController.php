@@ -143,6 +143,7 @@ class PluginController extends Controller
     }
 
     //百度地图坐标 转换为腾讯地图坐标
+    ///plugin/getQQMapGPS/?gps=113.620474,34.760755
     public function getQQMapGPS(Request $request)
     {
         $gps=$request->get('gps');
