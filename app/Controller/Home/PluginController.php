@@ -2,6 +2,7 @@
 namespace App\Controller\Home;
 
 use App\Controller\Controller;
+use App\Helper;
 use System\Lib\Request;
 
 class PluginController extends Controller
@@ -139,5 +140,21 @@ class PluginController extends Controller
         $result=json_decode($result,true);
         echo $result['formatted_address'];
         //$result['recommended_location_description'];
+    }
+
+    //百度地图坐标 转换为腾讯地图坐标
+    public function getQQMapGPS(Request $request)
+    {
+        $gps=$request->get('gps');
+        $_arr=explode(',',$gps);
+        $location=(float)$_arr[1].','.(float)$_arr[0];//34.760755,113.620474
+        $url="http://apis.map.qq.com/ws/coord/v1/translate?locations={$location}&type=3&key=6EEBZ-YJRA5-MFTIZ-QJN5O-6A36V-CAFDO";
+        $html=curl_url($url);
+        $result=json_decode($html,true);
+        $gps=array(
+            'lat'=>(float)$result['locations'][0]['lat'],
+            'lng'=>(float)$result['locations'][0]['lng']
+        );
+        echo json_encode($gps);
     }
 }
