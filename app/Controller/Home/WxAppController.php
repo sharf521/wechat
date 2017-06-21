@@ -51,7 +51,7 @@ class WxAppController extends Controller
         $shop=$this->shop;
         $array=array();
         $array['companyName']=$shop->name;
-        $array['address']=$shop->region_name.$shop->address;
+        $array['address']=$shop->region_name.'-'.$shop->address;
         $array['tel']=$shop->tel;
         $array['imgList']=array(
             'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871483885622.jpg',
