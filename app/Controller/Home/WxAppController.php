@@ -58,7 +58,8 @@ class WxAppController extends Controller
             'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871484021778.jpg'
         );
 
-        $url="http://apis.map.qq.com/ws/coord/v1/translate?locations={$shop->gps}&type=3&key=6EEBZ-YJRA5-MFTIZ-QJN5O-6A36V-CAFDO";
+        $_arr=explode(',',$shop->gps);
+        $url="http://apis.map.qq.com/ws/coord/v1/translate?locations={$_arr[1]},{$_arr[0]}&type=3&key=6EEBZ-YJRA5-MFTIZ-QJN5O-6A36V-CAFDO";
         $html=curl_url($url);
         $result=json_decode($html,true);
         $array['location']=array(
