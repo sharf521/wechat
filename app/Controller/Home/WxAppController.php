@@ -35,7 +35,7 @@ class WxAppController extends Controller
         $array['desc']='坤通金融：特邀大家上门喝茶免费开机，我们已经准备好了上好的茶等候阁下光临，您只需带着你的信用卡，银行卡，身份证，就可到我公司来喝茶，并免费开启闪电宝一台。';
 
         //分享
-        $array['share']=array(
+        $array['shareInfo']=array(
             'title'=>'share_title',
             'desc'=>'share_desc'
         );
