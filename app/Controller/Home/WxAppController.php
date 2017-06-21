@@ -3,6 +3,8 @@
 namespace App\Controller\Home;
 
 use App\Controller\Controller;
+use App\Model\Shop;
+use App\Model\User;
 use System\Lib\Request;
 
 class WxAppController extends Controller
@@ -10,6 +12,33 @@ class WxAppController extends Controller
     public function __construct()
     {
         parent::__construct();
+        $userName=(new Request())->get('user_name');
+        $this->user=(new User())->where('username=?')->bindValues($userName)->first();
+        if($this->user->is_exist){
+            $this->shop=(new Shop())->where('user_id=?')->bindValues($this->user->id)->first();
+            if(!$this->shop->is_exist){
+                $this->returnError('No permission');
+                exit;
+            }
+        }else{
+            $this->returnError('Not find user');
+            exit;
+        }        
+    }
+
+    private function returnSuccess($data = array())
+    {
+        $data['return_code'] = 'success';
+        echo json_encode($data);
+    }
+
+    private function returnError($msg)
+    {
+        $data = array(
+            'return_code' => 'fail',
+            'return_msg' => $msg
+        );
+        echo json_encode($data);
     }
 
     public function index()
@@ -39,15 +68,6 @@ class WxAppController extends Controller
             'title'=>'share_title',
             'desc'=>'share_desc'
         );
-        echo json_encode($array);
-    }
-    public function getShareInfo(Request $request)
-    {
-        $module=$request->get('module');
-        $arr=array(
-            'title'=>'title',
-            'desc'=>'desc'
-        );
-        echo json_encode($arr);
+        $this->returnSuccess($array);
     }
 }
