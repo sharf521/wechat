@@ -38,6 +38,7 @@ class ShopController extends SellController
             $shop->qq=$qq;
             $shop->is_fulldown=(int)$request->post('is_fulldown');
             $shop->remark=$remark;
+            $shop->service=str_replace('，',',',$request->post('service'));
             $shop->gps=$request->post('gps');
             $shop->save();
             redirect('shop')->with('msg','修改成功！');

@@ -74,6 +74,14 @@
                     </div>
 
                     <div class="layui-form-item">
+                        <label class="layui-form-label">服务项目</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="service" placeholder="服务项目" required class="layui-input" value="<?=$shop->service?>" autocomplete="off"/>
+                            <div class="layui-form-mid layui-word-aux">多个之间用逗号分隔</div>
+                        </div>
+
+                    </div>
+                    <div class="layui-form-item">
                         <label class="layui-form-label">所在位置</label>
                         <div class="layui-input-block">
                             （先点击地图，然后拖动图标到你的位置上）
