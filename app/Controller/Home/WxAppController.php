@@ -15,7 +15,9 @@ class WxAppController extends Controller
     {
         parent::__construct();
         $userName=$_REQUEST['user_name'];
+        echo $userName;
         $this->user=(new User())->where('username=?')->bindValues($userName)->first();
+        var_dump($this->user);
         if($this->user->is_exist){
             $this->shop=(new Shop())->where('user_id=?')->bindValues($this->user->id)->first();
             if(!$this->shop->is_exist){
