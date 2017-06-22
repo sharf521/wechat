@@ -50,7 +50,7 @@ class WxAppController extends Controller
 
     public function login(Request $request)
     {
-        $this->returnSuccess($_REQUEST);
+        $this->returnSuccess($_GET);
     }
 
     public function dianye()
