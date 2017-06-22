@@ -17,6 +17,7 @@ class WxAppController extends Controller
         $userName=$_REQUEST['user_name'];
         var_dump($_REQUEST);
         var_dump($_POST);
+        var_dump($_GET);
         $this->user=(new User())->where('username=?')->bindValues($userName)->first();
         var_dump($this->user);
         if($this->user->is_exist){
