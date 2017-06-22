@@ -40,6 +40,13 @@ class ShopController extends SellController
             $shop->remark=$remark;
             $shop->service=str_replace('，',',',$request->post('service'));
             $shop->gps=$request->post('gps');
+            if($shop->gps!=''){
+                $_arr=explode(',',$shop->gps);
+                $url="http://apis.map.qq.com/ws/coord/v1/translate?locations={$_arr[1]},{$_arr[0]}&type=3&key=6EEBZ-YJRA5-MFTIZ-QJN5O-6A36V-CAFDO";
+                $html=curl_url($url);
+                $result=json_decode($html,true);
+                $shop->gps_wx=(float)$result['locations'][0]['lat'].','.(float)$result['locations'][0]['lng'];
+            }
             $shop->save();
             redirect('shop')->with('msg','修改成功！');
         }else{

@@ -28,26 +28,9 @@ class WxAppController extends Controller
         }        
     }
 
-
-
     public function index()
     {
-        require ROOT.'/app/wxapp_aes/wxBizDataCrypt.php';
-        $appid = 'wx204f04f341161ef4';
-        $sessionKey = 'vuq52s0w\/rvT\/+pOP6P1Sg==';
 
-        $encryptedData="b1IdVLL+DcLCWMdvA4SPzfi5gQJVQldweC/zXlaszV6LXUn+Y69GRXSLAPPKk2Wke1GRECw2hobNtLrPqAOZPD9AC7dngrQhIb/b5PYJBcbX+fMv11gD7jxEFBoT9hMU3m1cRk+9FmBUa13EXUe7t+VmjtQQfhXJ3puwAnJRmZI9dWHzjo17tgZERKRkGH8SgMyUBOlwj2HD1RaLJCdTDB2bw8ndrt6fgnavmIIoik1tPWnRddm+lAVGJuDDFq0OSBnW37fhioVP9L1faAl7i67MPnWHzBix6SKDkYpFVVU6iWufLCfsPez60MVH3W0HEBaa0GAgvv0nvL4Y29wAsXuwWTxGTYo4m20G+e0S+tFIWGZ9jeeg0OG7uKy+QZMc87YE2oy0yStlPdWWl4uJHte9/XvyBg24pw3+K2uz5mxeuuHREM+AzaI6LtEZcsPTiPei1fSCTLgsCENDsMWBKndHtqQh8DDo6S8FUtdYYtj2URtSLaq/sgGGYlfyPNVlNZUpJ84K6iHHQ2FUSkMTBA==";
-
-        $iv = "FNKWb7zTaezsO73o2Za8Og==";
-
-        $pc = new \WXBizDataCrypt($appid, $sessionKey);
-        $errCode = $pc->decryptData($encryptedData, $iv, $data );
-
-        if ($errCode == 0) {
-            print($data . "\n");
-        } else {
-            print($errCode . "\n");
-        }
     }
 
     public function login(Request $request)
@@ -85,14 +68,10 @@ class WxAppController extends Controller
             'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871483885622.jpg',
             'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871484021778.jpg'
         );
-
-        $_arr=explode(',',$shop->gps);
-        $url="http://apis.map.qq.com/ws/coord/v1/translate?locations={$_arr[1]},{$_arr[0]}&type=3&key=6EEBZ-YJRA5-MFTIZ-QJN5O-6A36V-CAFDO";
-        $html=curl_url($url);
-        $result=json_decode($html,true);
+        $_arr=explode(',',$shop->gps_wx);
         $array['location']=array(
-            'latitude'=>(float)$result['locations'][0]['lat'],
-            'longitude'=>(float)$result['locations'][0]['lng']
+            'latitude'=>(float)$_arr[0],
+            'longitude'=>(float)$_arr[1]
         );
         $array['service']=explode(',',$shop->service);
         $array['content']=$shop->remark;
