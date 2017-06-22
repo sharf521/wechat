@@ -9,6 +9,8 @@ use System\Lib\Request;
 
 class WxAppController extends Controller
 {
+    private $appid='wx204f04f341161ef4';
+    private $secret='d9be5427135fd5bbc51693b2347a213d';
     public function __construct()
     {
         parent::__construct();
@@ -50,7 +52,12 @@ class WxAppController extends Controller
 
     public function login(Request $request)
     {
-        $this->returnSuccess($_GET);
+        $code=$request->post('code');
+        $url="https://api.weixin.qq.com/sns/jscode2session?appid={$this->appid}&secret={$this->secret}&js_code={$code}&grant_type=authorization_code";
+        $data['url']=$url;
+        $data['html']=curl_url($url);
+        $data['post']=$_POST;
+        $this->returnSuccess($data);
     }
 
     public function dianye()
