@@ -67,6 +67,7 @@ class WxAppController extends Controller
         $pc = new \WXBizDataCrypt($this->appid, $session_key);
         $errCode = $pc->decryptData($encryptedData, $iv, $data );
         if ($errCode == 0) {
+            print_r($data);
             $this->returnSuccess($data);
         } else {
             $this->returnError(json_encode($errCode));
