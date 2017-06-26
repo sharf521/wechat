@@ -33,7 +33,7 @@
     ?>
                 <li>
                     <div class="goods-content">
-                        <div class="goods-pic"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>"></a></div>
+                        <div class="goods-pic"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><img  lay-src ="<?=$goods->image_url?>"></a></div>
                         <div class="goods-info" style="top: 230px;">
                             <div class="goods-name"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><?=$goods->name?></a></div>
                             <div class="goods-price"> <em class="sale-price">¥<?=$goods->price?></em>

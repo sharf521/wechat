@@ -15,6 +15,10 @@ $(function () {
             }
         }
     });*/
+
+    var flow = layui.flow;
+    flow.lazyimg();//lay-src的img元素开启了懒加载
+
     var element = layui.element();
     element.init();
     //右侧
