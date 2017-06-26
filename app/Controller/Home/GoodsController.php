@@ -131,7 +131,7 @@ class GoodsController extends HomeController
             $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
             preg_match_all($pattern, $content, $m);
             foreach ($m[0] as $key => $v) {
-                $content = str_replace($v, "<img data-echo='" . $m[1][$key] . "' src='/themes/images/blank.gif'/>", $content);
+                $content = str_replace($v, "<img lay-src='" . $m[1][$key] . "' />", $content);
             }
             $data['content']=$content;
             $data['shop']=$goods->Shop();

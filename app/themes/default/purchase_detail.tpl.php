@@ -7,12 +7,12 @@
         <div class="goods_info_box clearFix">
             <div class="goods_pics">
                 <div class="pic_big">
-                    <img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>">
+                    <img lay-src="<?=$goods->image_url?>">
                 </div>
                 <ul class="clearFix">
                     <? foreach($images as $img) : ?>
                         <li>
-                            <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($img->image_url)?>">
+                            <img lay-src="<?=\App\Helper::smallPic($img->image_url)?>">
                         </li>
                     <? endforeach;?>
                 </ul>
