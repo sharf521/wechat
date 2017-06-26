@@ -4,7 +4,7 @@
         <div class="swiper-wrapper">
             <? foreach($banners as $ad) : ?>
                 <div class="swiper-slide" style="text-align: center">
-                    <a href="<?=$ad['href']?>"><img lay-src="<?=$ad['picture']?>" style="max-width: 100%;"></a>
+                    <a href="<?=$ad['href']?>"><img src="<?=$ad['picture']?>" style="max-width: 100%;"></a>
                 </div>
             <? endforeach;?>
         </div>
