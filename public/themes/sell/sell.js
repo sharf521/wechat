@@ -24,8 +24,9 @@ $(function () {
                     if(res.code=='0'){
                         var path=res.url;
                         $('#'+id).val(path);
-                        var _str="<a href='"+path+"' target='_blank'><img src='"+path+'?'+Math.random()+"' height='50'/></a>";
-                        $('#upload_span_'+id).html(_str);
+                        //var _str="<a href='"+path+"' target='_blank'><img src='"+path+'?'+Math.random()+"' height='50'/></a>";
+                        $('#upload_span_'+id).find('img').attr('src',path+'?'+Math.random());
+                        $('#upload_span_'+id).show();
                     }else{
                         alert(res.msg);
                     }

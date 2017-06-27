@@ -9,6 +9,7 @@
 namespace App\Controller\SellManage;
 
 use App\Model\Shop;
+use App\Model\ShopAdvert;
 use System\Lib\Request;
 
 class AdvertController extends SellController
@@ -18,36 +19,36 @@ class AdvertController extends SellController
         parent::__construct();
     }
 
-    public function index(Shop $shop,Request $request)
+    public function index(ShopAdvert $advert,Request $request)
     {
         if($this->is_wap){
             redirect()->back()->with('error','请在电脑端操作');
         }
-        $shop=$shop->findOrFail($this->user_id);
+        $advert=$advert->find($this->user_id);
+        if(!$advert->is_exist){
+            $advert->user_id=$this->user_id;
+            $id=$advert->save(true);
+            $advert=$advert->find($id);
+        }
         if($_POST){
-            $name=$request->post('name');
-            $contacts=$request->post('contacts');
-            $tel=$request->post('tel');
-            $qq=$request->post('qq');
-            $remark=$request->post('content',false);
-            $shop->name=$name;
-            $shop->contacts=$contacts;
-            $shop->region_name=$request->post('province').'-'.$request->post('city').'-'.$request->post('county');
-            $shop->address=$request->post('address');
-            $shop->tel=$tel;
-            $shop->qq=$qq;
-            $shop->is_fulldown=(int)$request->post('is_fulldown');
-            $shop->remark=$remark;
-            $shop->gps=$request->post('gps');
-            $shop->save();
-            redirect('shop')->with('msg','修改成功！');
+            $advert->pc_banner=$request->post('pc_banner');
+            $advert->pc_banner_link=$request->post('pc_banner_link');
+
+
+            $advert->wap_banner1=$request->post('wap_banner1');
+            $advert->wap_banner_link1=$request->post('wap_banner_link1');
+
+            $advert->wap_banner2=$request->post('wap_banner2');
+            $advert->wap_banner_link2=$request->post('wap_banner_link2');
+
+            $advert->wap_banner3=$request->post('wap_banner3');
+            $advert->wap_banner_link3=$request->post('wap_banner_link3');
+
+            $advert->save();
+            redirect('advert')->with('msg','保存成功！');
         }else{
-            $region_name=explode('-',$shop->region_name);
-            $shop->province=$region_name[0];
-            $shop->city=$region_name[1];
-            $shop->county=$region_name[2];
-            $data['shop']=$shop;
-            $this->title='店铺设置';
+            $data['row']=$advert;
+            $this->title='店铺广告位设置';
             $this->view('advert',$data);
         }
     }
