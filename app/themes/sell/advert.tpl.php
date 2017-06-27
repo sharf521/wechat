@@ -25,7 +25,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">链接</label>
                         <div class="layui-input-block">
-                            <input type="text" name="pc_banner_link" required placeholder="http://" class="layui-input" value="<?=$row->pc_banner_link?>" autocomplete="off"/>
+                            <input type="text" name="pc_banner_link"  placeholder="http://" class="layui-input" value="<?=$row->pc_banner_link?>" autocomplete="off"/>
                         </div>
                     </div>
 
