@@ -4,6 +4,7 @@ namespace App\Controller\Home;
 
 use App\Controller\Controller;
 use App\Model\Shop;
+use App\Model\ShopAdvert;
 use App\Model\User;
 use System\Lib\Request;
 
@@ -57,17 +58,33 @@ class WxAppController extends Controller
         }
     }
 
-    public function dianye()
+    public function dianye(ShopAdvert $advert)
     {
         $shop=$this->shop;
         $array=array();
         $array['companyName']=$shop->name;
         $array['address']=$shop->region_name.'-'.$shop->address;
         $array['tel']=$shop->tel;
-        $array['imgList']=array(
-            'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871483885622.jpg',
-            'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871484021778.jpg'
-        );
+
+        $advert=$advert->find($this->user->id);
+        if($advert->wap_banner1=='' && $advert->wap_banner2=='' && $advert->wap_banner3==''){
+            $array['imgList']=array(
+                'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871483885622.jpg',
+                'http://mallimg.yuantuwang.com/data/upload/1/2/201702/14871484021778.jpg'
+            );
+        }else{
+            $array['imgList']=array();
+            if($advert->wap_banner1!=''){
+                array_push($array['imgList'],$advert->wap_banner1);
+            }
+            if($advert->wap_banner2!=''){
+                array_push($array['imgList'],$advert->wap_banner2);
+            }
+            if($advert->wap_banner3!=''){
+                array_push($array['imgList'],$advert->wap_banner3);
+            }
+        }
+
         $_arr=explode(',',$shop->gps_wx);
         $array['location']=array(
             'latitude'=>(float)$_arr[0],
