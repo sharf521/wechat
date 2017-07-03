@@ -32,7 +32,7 @@
                             <span>¥</span>
                             <var><?=$goods->price?></var>
                         </p>
-                        <p class="cd_sales">库存：<?=$goods->stock_count?></p>
+                        <p class="cd_sales">库存 <?=$goods->stock_count?></p>
                     </div>
                     <i class="iconfont">&#xe6a7;</i>
                 </a>
