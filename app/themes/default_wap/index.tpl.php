@@ -20,19 +20,14 @@
         });
     </script>
     <div class="mod-tit">推荐店铺<span><a href=""></a></span></div>
-    <div class="shopList">
-        <div class="weui-grids">
+    <div class="br_box clearFix">
+        <ul class="clearFix">
             <? foreach ($shopList as $shop) :
                 $_img=$shop->User()->headimgurl;
                 ?>
-            <a href="<?=$shop->getLink(1)?>" class="weui-grid">
-                <div>
-                    <img src="<?=$_img?>" alt="">
-                </div>
-                <p class="weui-grid__label"><?=$shop->name?></p>
-            </a>
+                <li><a href="<?=$shop->getLink(1)?>"><div><img src="<?=$_img?>" /></div><span><?=$shop->name?></span></a></li>
             <? endforeach;?>
-        </div>
+        </ul>
     </div>
     <div class="mod-tit">推荐商品<span><a href="/goods/lists/">查看更多</a></span></div>
     <ul class="commoditylist_content">

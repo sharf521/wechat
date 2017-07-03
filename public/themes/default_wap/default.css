@@ -4,18 +4,19 @@
 .car_mes .swiper-pagination-bullet{width:30px; height:5px;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0; background:#000;filter:alpha(opacity=40);opacity:0.4; }
 .car_mes .swiper-pagination-bullet-active{background:#e7001b;filter:alpha(opacity=90);opacity:0.9; }
 
-.mod-tit{ line-height:45px; font-size:18px; width: 95%; margin:0 auto; color:#f60;  border-bottom:0px solid #d5d5d5; position:relative;}
+.mod-tit{ line-height:45px; font-size:18px; width: 95%; margin:0 auto; color:#f60;  border-bottom:1px solid #d5d5d5; position:relative;}
 .mod-tit span{ float: right; font-size: 14px; color: #888; display: block}
 .mod-tit span a{ display: inline-block}
 
-.shopList{background-color: #fff;}
-.shopList a>div{
-    text-align: center;
-    vertical-align: middle;
-    display: block;
-    height: 100px;
-}
-.shopList a img{ width: 100px;}
+.br_box{ padding: 10px 0; overflow: hidden; background-color: #fff;}
+.br_box ul{width: 100%;}
+.br_box li{ float: left; width: 33.33%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
+.br_box li:nth-child(3n){ border-right: none;}
+.br_box li:nth-child(1),.br_box li:nth-child(2),.br_box li:nth-child(3){ border-top: 0;}
+.br_box li a{ display: block; text-align: center; width: 100%;}
+.br_box li a>div{text-align: center;    vertical-align: middle; display: block;  height: 80px;}
+.br_box li img{ width: 80px;}
+.br_box li span{ font-size: 14px; line-height: 30px; overflow: hidden;text-overflow: ellipsis;white-space: nowrap;color: #333; display: block; text-align: center}
 
 .my-navbar{display:-webkit-box;display:-webkit-flex;display:flex;z-index:500;top:0;width:100%;background-color:#fafafa}
 .my-navbar:after{content:" ";position:absolute;left:0;bottom:0;right:0;height:1px;border-bottom:1px solid #CCC;color:#CCC;-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transform:scaleY(.5);transform:scaleY(.5)}
