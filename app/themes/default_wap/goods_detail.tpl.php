@@ -1,6 +1,6 @@
 <?php require 'header.php';?>
     <div class="swiper-container">
-        <div class="swiper-wrapper" style="height: 300px;">
+        <div class="swiper-wrapper" style="max-height: 300px;">
             <? foreach($images as $img) : ?>
                 <div class="swiper-slide" style="text-align: center">
                     <img src="<?=$img->image_url?>" style="max-width: 100%;">
