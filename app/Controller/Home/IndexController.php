@@ -5,6 +5,7 @@ use App\Center;
 use App\Model\Advert;
 use App\Model\Goods;
 use App\Model\OrderGoods;
+use App\Model\Shop;
 use App\UserCenter;
 
 class IndexController extends HomeController
@@ -14,10 +15,13 @@ class IndexController extends HomeController
         parent::__construct();
     }
 
-    public function index(Goods $goods,Advert $advert)
+    public function index(Goods $goods,Advert $advert,Shop $shop)
     {
         if($this->is_wap){
-            redirect('car');
+            //redirect('car');
+            $ad_banners=$advert->where("typeid='wap_car_banner' and site_id={$this->site->id}")->get();
+            $data['ads']=$ad_banners;
+            $data['shopList']=$shop->orderBy('id')->limit('0,9')->get();
             $data['goods_result']=$goods->where("status=1 and stock_count>0")->orderBy('id desc')->limit("0,10")->get();
         }else{
             $ad_banners=$advert->where("typeid='pc_index_banner' and site_id={$this->site->id}")->get();

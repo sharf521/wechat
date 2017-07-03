@@ -1,6 +1,40 @@
 <?php require 'header.php';?>
-
-
+    <div class="swiper-container car_mes">
+        <div class="swiper-wrapper">
+            <? foreach ($ads as $ad) : ?>
+                <div class="swiper-slide"><a href="<?=$ad->url?>"><img src="<?=$ad->picture?>" style="max-width: 100%;"></a></div>
+            <? endforeach;?>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <script>
+        //banner Swiper
+        $(function () {
+            var mySwiper = new Swiper('.car_mes', {
+                loop: true,
+                autoplay: 4800,
+                autoplayDisableOnInteraction: false,
+                pagination: '.swiper-pagination',
+                paginationClickable: true,
+            });
+        });
+    </script>
+    <div class="mod-tit">推荐店铺<span><a href=""></a></span></div>
+    <div class="shopList">
+        <div class="weui-grids">
+            <? foreach ($shopList as $shop) :
+                $_img=$shop->User()->headimgurl;
+                ?>
+            <a href="<?=$shop->getLink(1)?>" class="weui-grid">
+                <div>
+                    <img src="<?=$_img?>" alt="">
+                </div>
+                <p class="weui-grid__label"><?=$shop->name?></p>
+            </a>
+            <? endforeach;?>
+        </div>
+    </div>
+    <div class="mod-tit">推荐商品<span><a href="/goods/lists/">查看更多</a></span></div>
     <ul class="commoditylist_content">
         <? foreach ($goods_result as $goods) : ?>
             <li>

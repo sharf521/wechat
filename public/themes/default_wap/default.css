@@ -1,3 +1,21 @@
+.car_mes{}
+.car_mes .swiper-slide{text-align:center;}
+.car_mes .swiper-pagination{bottom:10px;}
+.car_mes .swiper-pagination-bullet{width:30px; height:5px;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0; background:#000;filter:alpha(opacity=40);opacity:0.4; }
+.car_mes .swiper-pagination-bullet-active{background:#e7001b;filter:alpha(opacity=90);opacity:0.9; }
+
+.mod-tit{ line-height:45px; font-size:18px; width: 95%; margin:0 auto; color:#f60;  border-bottom:0px solid #d5d5d5; position:relative;}
+.mod-tit span{ float: right; font-size: 14px; color: #888; display: block}
+.mod-tit span a{ display: inline-block}
+
+.shopList{background-color: #fff;}
+.shopList a>div{
+    text-align: center;
+    vertical-align: middle;
+    display: block;
+    height: 100px;
+}
+.shopList a img{ width: 100px;}
 
 .my-navbar{display:-webkit-box;display:-webkit-flex;display:flex;z-index:500;top:0;width:100%;background-color:#fafafa}
 .my-navbar:after{content:" ";position:absolute;left:0;bottom:0;right:0;height:1px;border-bottom:1px solid #CCC;color:#CCC;-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transform:scaleY(.5);transform:scaleY(.5)}
@@ -6,7 +24,7 @@
 .my-navbar__item a{display:block;color:#000}
 .my-navbar__item.my-navbar__item_on a{color:#1AAD19}
 
-.commoditylist_content{width:100%;margin-top:5px;height:auto;border-top:1px solid #f3f3f3}
+.commoditylist_content{width:100%;height:auto;border-top:1px solid #f3f3f3}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
 .commoditylist_content li{height:auto;background:#fff;position:relative;padding:.5rem 1rem;border-bottom:1px solid #f3f3f3}
 .commoditylist_content li .imgspan{display:inline-block;position:relative}

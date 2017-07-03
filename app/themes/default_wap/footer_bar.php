@@ -1,3 +1,4 @@
+<br><br>
 <div class="weui-tabbar" style="position: fixed">
     <a href="<?=$this->home_url?>" class="weui-tabbar__item <? if($this->control=='index'){echo 'weui-bar__item_on';}?>">
         <i class="iconfont weui-tabbar__icon">&#xe64f;</i>
