@@ -3,7 +3,7 @@
         <div class="swiper-wrapper" style="height: 300px;">
             <? foreach($images as $img) : ?>
                 <div class="swiper-slide" style="text-align: center">
-                    <img src="<?=$img->image_url?>" style="max-width: 100%; height: 100%">
+                    <img src="<?=$img->image_url?>" style="max-width: 100%;">
                 </div>
             <? endforeach;?>
         </div>
