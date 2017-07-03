@@ -36,7 +36,7 @@
                         <div class="goods-pic"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><img  lay-src ="<?=$goods->image_url?>"></a></div>
                         <div class="goods-info" style="top: 230px;">
                             <div class="goods-name"><a href="<?=url("/goods/detail/{$goods->id}")?>" target="_blank"><?=$goods->name?></a></div>
-                            <div class="goods-price"> <em class="sale-price">¥<?=$goods->price?></em>
+                            <div class="goods-price"> <em class="sale-price">¥<?=(float)$goods->price?></em>
                                 <!--<em class="market-price">¥0.00</em>-->  </div>
                             <div class="sell-stat">
                                 <ul>
