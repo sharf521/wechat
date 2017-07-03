@@ -8,9 +8,9 @@
 .mod-tit span{ float: right; font-size: 14px; color: #888; display: block}
 .mod-tit span a{ display: inline-block}
 
-.br_box{ padding: 10px 0; overflow: hidden; background-color: #fff;}
+.br_box{ overflow: hidden; background-color: #fff;}
 .br_box ul{width: 100%;}
-.br_box li{ float: left; width: 33.33%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
+.br_box li{ padding: 10px 0px; float: left; width: 33.33%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; border-right: 1px dashed #ccc; border-top: 1px dashed #ccc;position: relative; text-align: center}
 .br_box li:nth-child(3n){ border-right: none;}
 .br_box li:nth-child(1),.br_box li:nth-child(2),.br_box li:nth-child(3){ border-top: 0;}
 .br_box li a{ display: block; text-align: center; width: 100%;}
