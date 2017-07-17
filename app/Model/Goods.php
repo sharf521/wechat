@@ -12,9 +12,14 @@ class Goods extends Model
     }
 
     //首页商品
-    public function getListByHome($num=10,$cate_id,$site_id)
+    public function getListByHome($num=10,$cate_id=0,$site_id=0)
     {
-        return $this->where("status=1 and stock_count>0 and category_path like '2,{$cate_id}%'")->orderBy('id desc')->limit("0,{$num}")->get();
+        $where='status=1 and stock_count>0';
+        if(!empty($cate_id)){
+            $where.=" and category_path like '2,{$cate_id}%'";
+        }
+        $order="case  when recommend=1 then 1  when site_id={$site_id} then 5 else 10 end ,id desc";
+        return $this->where($where)->orderBy($order)->limit("0,{$num}")->get();
     }
 
     public function addSpec($spec_id=0)
