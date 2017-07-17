@@ -23,6 +23,7 @@ class ShopController extends AdminController
         $user_id=(int)$request->get('user_id');
         $starttime=$request->get('starttime');
         $endtime=$request->get('endtime');
+        $q=$request->get('q');
         if ($user_id!=0) {
             $where .= " and user_id={$user_id}";
         }
@@ -32,6 +33,14 @@ class ShopController extends AdminController
         if(!empty($endtime)){
             $where.=" and created_at<".strtotime($endtime);
         }
+        if(!empty($q)){
+            $where.=" and name like '%{$q}%'";
+        }
+        if($_GET['recommend']!=''){
+            $recommend=(int)$_GET['recommend'];
+            $where.=" and recommend=$recommend";
+        }
+
         $data['result']=$shop->where($where)->orderBy('id desc')->pager($_GET['page'],10);
         $this->view('shop',$data);
     }

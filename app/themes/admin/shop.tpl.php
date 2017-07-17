@@ -5,6 +5,20 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
     <blockquote class="layui-elem-quote">
         <span>店铺管理</span>列表
     </blockquote>
+    <form method="get">
+        <div class="search">
+            用户ID：<input type="text" name="user_id" value="<?=$_GET['user_id']?>" size="15" placeholder="商家用户id"/>
+            推荐：<select name="recommend">
+                <option value="">全部</option>
+                <option value="0" <? if($_GET['recommend']=='0'){echo 'selected';}?>>未推荐</option>
+                <option value="1" <? if($_GET['recommend']=='1'){echo 'selected';}?>>己推荐</option>
+            </select>
+            <input type="text" name="q" value="<?=$_GET['q']?>" placeholder="名称关键字">
+            添加时间：<input type="text" name="starttime" value="<?=$_GET['starttime']?>" class="Wdate" onclick="javascript:WdatePicker();" size="10"/>
+            到<input type="text" name="endtime" value="<?=$_GET['endtime']?>" class="Wdate" onclick="javascript:WdatePicker();" size="10"/>
+            <input type="submit" class="but2" value="查询" />
+        </div>
+    </form>
     <div class="main_content">
         <table class="layui-table" lay-skin="line">
             <thead>
@@ -34,7 +48,9 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
                     <td> <a class="layui-btn layui-btn-mini <? echo $row->recommend == '1'?'layui-btn-normal':'';?>" href="<?= url("shop/recommend/?id={$row->id}&page={$_GET['page']}") ?>"><?= ($row->recommend == '1') ? '取消推荐' : '设为推荐' ?></a></td>
                     <td>
                         <? if($row->status==0) : ?>
-                        <a href="<?= url("shop/checked/?user_id={$row->user_id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">审核</a>
+                            <a href="<?= url("shop/checked/?user_id={$row->user_id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">审核</a>
+                        <? else : ?>
+                            <a href="<?=\App\Helper::getStoreUrl($row->user_id)?>" target="_blank" class="layui-btn layui-btn-mini">查看</a>
                         <? endif;?>
                     </td>
                 </tr>
