@@ -24,8 +24,8 @@ class IndexController extends HomeController
                 $ad_banners=$advert->where("typeid='wap_car_banner'")->limit('0,3')->get();
             }
             $data['ads']=$ad_banners;
-            $data['shopList']=$shop->orderBy('id')->limit('0,6')->get();
-            $data['goods_result']=$goods->where("status=1 and stock_count>0")->orderBy('id desc')->limit("0,10")->get();
+            $data['shopList']=$shop->orderBy("case  when recommend=1 then 1  when site_id={$this->site->id} then 5 else 10 end ,id desc")->limit('0,6')->get();
+            $data['goods_result']=$goods->where("status=1 and stock_count>0")->orderBy("case  when recommend=1 then 1  when site_id={$this->site->id} then 5 else 10 end ,id desc")->limit("0,10")->get();
         }else{
             $ad_banners=$advert->where("typeid='pc_index_banner' and site_id={$this->site->id}")->get();
             if (empty($ad_banners)) {

@@ -40,8 +40,7 @@
                     <div class="info">
                         <p class="cd_title"><?=$goods->name?></p>
                         <p class="cd_money">
-                            <span>￥</span>
-                            <var><?=(float)$goods->price?></var>
+                            <span>￥</span><var><?=(float)$goods->price?></var>
                         </p>
                         <p class="cd_sales">库存 <?=$goods->stock_count?></p>
                     </div>

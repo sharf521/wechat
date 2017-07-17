@@ -1,5 +1,4 @@
 <?php require 'header.php';
-
 $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
 ?>
 <? if ($this->func == 'index') : ?>
@@ -17,6 +16,7 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
             <th>详细地址</th>
             <th>时间</th>
             <th>状态</th>
+            <th>推荐</th>
             <th>操作</th>
             </thead>
             <tbody>
@@ -31,6 +31,7 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
                     <td> <?=$row->region_name?><br><?= $row->address ?></td>
                     <td><?= $row->created_at ?></td>
                     <td><?=$arr_status[$row->status]?></td>
+                    <td> <a class="layui-btn layui-btn-mini <? echo $row->recommend == '1'?'layui-btn-normal':'';?>" href="<?= url("shop/recommend/?id={$row->id}&page={$_GET['page']}") ?>"><?= ($row->recommend == '1') ? '取消推荐' : '设为推荐' ?></a></td>
                     <td>
                         <? if($row->status==0) : ?>
                         <a href="<?= url("shop/checked/?user_id={$row->user_id}&page={$_GET['page']}") ?>" class="layui-btn layui-btn-mini">审核</a>

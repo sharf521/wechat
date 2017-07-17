@@ -10,6 +10,11 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
         <div class="search">
             商家ID：<input type="text" name="user_id" value="<?=$_GET['user_id']?>" size="15" placeholder="商家用户id"/>
             供应商ID：<input type="text" name="supply_user_id" value="<?=$_GET['supply_user_id']?>" size="15" placeholder="供应商用户ID"/>
+            推荐：<select name="recommend">
+                <option value="">全部</option>
+                <option value="0" <? if($_GET['recommend']=='0'){echo 'selected';}?>>未推荐</option>
+                <option value="1" <? if($_GET['recommend']=='1'){echo 'selected';}?>>己推荐</option>
+            </select>
             <input type="text" name="q" value="<?=$_GET['q']?>" placeholder="名称关键字">
             添加时间：<input type="text" name="starttime" value="<?=$_GET['starttime']?>" class="Wdate" onclick="javascript:WdatePicker();" size="10"/>
             到<input type="text" name="endtime" value="<?=$_GET['endtime']?>" class="Wdate" onclick="javascript:WdatePicker();" size="10"/>
@@ -27,6 +32,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 <th>销量</th>
                 <th>添加时间</th>
                 <th>状态</th>
+                <th>推荐</th>
             </tr>
             </thead>
             <tbody>
@@ -50,6 +56,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                     <td><?=$goods->sale_count?></td>
                     <td><?= $goods->created_at ?></td>
                     <td><?=$arr_status[$goods->status]?></td>
+                    <td> <a class="layui-btn layui-btn-mini <? echo $goods->recommend == '1'?'layui-btn-normal':'';?>" href="<?= url("goods/recommend/?id={$goods->id}&page={$_GET['page']}") ?>"><?= ($goods->recommend == '1') ? '取消推荐' : '设为推荐' ?></a></td>
                 </tr>
             <? } ?>
             </tbody>

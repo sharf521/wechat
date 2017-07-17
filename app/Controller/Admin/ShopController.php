@@ -36,6 +36,21 @@ class ShopController extends AdminController
         $this->view('shop',$data);
     }
 
+    //推荐状态切换
+    public function recommend(Shop $shop, Request $request)
+    {
+        $id = (int)$request->get('id');
+        $page = (int)$request->get('page');
+        $shop = $shop->where("id=?")->bindValues($id)->first();
+        if ($shop->recommend == '1') {
+            $shop->recommend = 0;
+        } else {
+            $shop->recommend = 1;
+        }
+        $shop->save();
+        redirect('shop/?page=' . $page)->with('msg', '操作成功！');
+    }
+
     public function checked(Request $request,Shop $shop)
     {
         $shop=$shop->findOrFail($request->get('user_id'));

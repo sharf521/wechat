@@ -40,7 +40,26 @@ class GoodsController extends AdminController
         if(!empty($q)){
             $where.=" and name like '%{$q}%'";
         }
+        if($_GET['recommend']!=''){
+            $recommend=(int)$_GET['recommend'];
+            $where.=" and recommend=$recommend";
+        }
         $data['result']=$goods->where($where)->orderBy('id desc')->pager($_GET['page'],10);
         $this->view('goods',$data);
+    }
+
+    //推荐状态切换
+    public function recommend(Goods $goods, Request $request)
+    {
+        $id = (int)$request->get('id');
+        $page = (int)$request->get('page');
+        $goods = $goods->findOrFail($id);
+        if ($goods->recommend == '1') {
+            $goods->recommend = 0;
+        } else {
+            $goods->recommend = 1;
+        }
+        $goods->save();
+        redirect('goods/?page=' . $page)->with('msg', '操作成功！');
     }
 }
