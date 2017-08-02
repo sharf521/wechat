@@ -126,12 +126,13 @@ class GoodsController extends HomeController
             $data['images']=$goods->GoodsImage();
 
             $content=$goods->GoodsData()->content;
-
-            //图片按需加载处理
-            $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
-            preg_match_all($pattern, $content, $m);
-            foreach ($m[0] as $key => $v) {
-                $content = str_replace($v, "<img lay-src='" . $m[1][$key] . "' />", $content);
+            if(!$this->is_wap){
+                //图片按需加载处理
+                $pattern="/<[img|IMG].*?src=[\'|\"](.*?(?:[\.gif|\.jpg]))[\'|\"].*?[\/]?>/";
+                preg_match_all($pattern, $content, $m);
+                foreach ($m[0] as $key => $v) {
+                    $content = str_replace($v, "<img lay-src='" . $m[1][$key] . "' />", $content);
+                }
             }
             $data['content']=$content;
             $data['shop']=$goods->Shop();
