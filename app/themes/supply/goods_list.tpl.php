@@ -49,6 +49,8 @@
                 </table>
                 <? if($result['total']==0) : ?>
                     <blockquote class="layui-elem-quote">暂无商品</blockquote>
+                <? else : ?>
+                    <?= $result['page']?>
                 <? endif;?>
             </div>
         </div>

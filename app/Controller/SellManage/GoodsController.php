@@ -27,21 +27,24 @@ class GoodsController extends SellController
         parent::__construct();
     }
 
-    public function index(Goods $goods)
+    public function index(Goods $goods,Request $request)
     {
-        $data['result']=$goods->where("user_id=? and status=1 and stock_count>0")->bindValues($this->user_id)->orderBy('id desc')->pager();
+        $page=$request->get('page');
+        $data['result']=$goods->where("user_id=? and status=1 and stock_count>0")->bindValues($this->user_id)->orderBy('id desc')->pager($page);
         $this->view('goods_list',$data);
     }
 
-    public function list_stock0(Goods $goods)
+    public function list_stock0(Goods $goods,Request $request)
     {
-        $data['result']=$goods->where("user_id=? and status=1 and stock_count=0")->bindValues($this->user_id)->orderBy('id desc')->pager();
+        $page=$request->get('page');
+        $data['result']=$goods->where("user_id=? and status=1 and stock_count=0")->bindValues($this->user_id)->orderBy('id desc')->pager($page);
         $this->view('goods_list',$data);
     }
 
-    public function list_status2(Goods $goods)
+    public function list_status2(Goods $goods,Request $request)
     {
-        $data['result']=$goods->where("user_id=? and status=2")->bindValues($this->user_id)->orderBy('id desc')->pager();
+        $page=$request->get('page');
+        $data['result']=$goods->where("user_id=? and status=2")->bindValues($this->user_id)->orderBy('id desc')->pager($page);
         $this->view('goods_list',$data);
     }
 

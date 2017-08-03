@@ -44,6 +44,8 @@
             <p class="weui-msg__desc"></p>
         </div>
     </div>
+    <? else : ?>
+    <?= $result['page']?>
     <? endif;?>
 
 <!--    <div class="weui-btn-area">
