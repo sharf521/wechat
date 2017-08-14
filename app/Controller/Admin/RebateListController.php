@@ -50,6 +50,7 @@ class RebateListController extends AdminController
     public function start(RebateList $rebateList,Request $request)
     {
         $id=$request->get('id');
+        $page=$request->get('page');
         $rebate=$rebateList->findOrFail($id);
         if($rebate->status==0){
             try {
@@ -63,7 +64,7 @@ class RebateListController extends AdminController
                 $return=(new Center())->rebateAdd($user->openid,$rebate->typeid,$integral,$rebate->remark,$rebate->site_id);
                 if($return===true){
                     DB::commit();
-                    redirect("rebateList")->with('msg','操作完成');
+                    redirect("rebateList/?page={$page}")->with('msg','操作完成');
                 }else{
                     throw new \Exception($return);
                 }

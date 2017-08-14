@@ -72,7 +72,7 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 content: '您确定要开始奖励吗？'
                 ,btn: ['确定', '取消']
                 ,yes: function(index){
-                    location.href='<?=url('rebateList/start/?id=')?>'+id;
+                    location.href='<?=url('rebateList/start/?id=')?>'+id+'&page='+'<?=$_GET['page']?>';
                     layer.close(index);
                 }
             });
