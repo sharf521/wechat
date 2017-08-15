@@ -55,7 +55,7 @@ class IndexController extends HomeController
             $floorList=array();
             foreach ($this->site->cates as $i=>$cate){
                 if($i<5){
-                    $goodsList=$goods->getListByHome(9,$cate['id'],$this->site->id);
+                    $goodsList=$goods->getListByHome(11,$cate['id'],$this->site->id);
                     $floorList[$i]['cate']=$cate;
                     $floorList[$i]['goodsList']=$goodsList;
                     //广告位
