@@ -1,6 +1,6 @@
 <div class="footer">
         <div class="foottop">
-            <div class="footlogo"> <a href="/"><img src="<?=$this->site->logo?>" width="250"></a> </div>
+            <div class="footlogo"> <a href="/"><img src="<?=$this->site->logo?>" width="220"></a> </div>
             <div class="foottext">
                 <?
                 $articleModel=(new \App\Model\Article());
