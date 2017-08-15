@@ -27,7 +27,7 @@
                 <div class="md-othertry">
                     <ul>
                         <? foreach ($floor['goodsList'] as $i=>$goods) :
-                        if($i>=8) : ?>
+                        if($i>=9) : ?>
                             <li><a target="_blank" href="/goods/detail/<?=$goods->id?>">
                                     <img lay-src="<?=$goods->image_url?>">
                                     <div class="ot-con"><p><?=$goods->name?></p>
@@ -43,7 +43,7 @@
             <div class="middle-goods-list ">
                 <ul>
                     <? foreach ($floor['goodsList'] as $i=>$goods) :
-                        if($i>=7){
+                        if($i>=8){
                             break;
                         }
                         ?>
