@@ -21,7 +21,7 @@
         <li>
             <a href="<?=url("/goods/detail/{$goods->id}")?>">
               <span class="imgspan">
-                    <img src="/themes/images/blank.gif" data-echo="<?=$goods->image_url?>">
+                    <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($goods->image_url)?>">
                 </span>
                 <div class="info">
                     <p class="cd_title"><?=$goods->name?></p>
