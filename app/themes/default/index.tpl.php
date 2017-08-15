@@ -27,7 +27,7 @@
                 <div class="md-othertry">
                     <ul>
                         <? foreach ($floor['goodsList'] as $i=>$goods) :
-                        if($i>=9) : ?>
+                        if($i>=8) : ?>
                             <li><a target="_blank" href="/goods/detail/<?=$goods->id?>">
                                     <img lay-src="<?=$goods->image_url?>">
                                     <div class="ot-con"><p><?=$goods->name?></p>
