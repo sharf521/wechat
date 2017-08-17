@@ -25,10 +25,13 @@
                     <th width="140">操作</th>
                     </thead>
                     <tbody>
-                    <? foreach ($result['list'] as $goods) : ?>
+                    <?php foreach ($result['list'] as $goods) :
+                        $goods_url="/goods/detail/{$goods->id}";
+                        ?>
                     <tr>
-                        <td><img width="100" style="float: left" src="<?=\App\Helper::smallPic($goods->image_url)?>">
-                            <a href="/goods/detail/<?=$goods->id?>" target="_blank"><?=$goods->name?></a>
+                        <td><a href="<?=$goods_url?>" target="_blank">
+                                <img width="100" style="float: left" src="<?=\App\Helper::smallPic($goods->image_url)?>"></a>
+                            <a href="<?=$goods_url?>" target="_blank"><?=$goods->name?></a>
                             <br>
                             <? if($goods->supply_goods_id!=0):
                                 $goods=$goods->pullSupplyGoods();
