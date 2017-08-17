@@ -17,9 +17,11 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
         </div>
     </form>
     <div class="main_content">
+    <form class="layui-form" method="post">
         <table class="layui-table">
             <thead>
             <tr>
+                <th><input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose"></th>
                 <th>分站id</th>
                 <th>用户</th>
                 <th>Label</th>
@@ -39,6 +41,11 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 $user=$rebate->User();
                 ?>
                 <tr>
+                    <td>
+                        <? if($rebate->status==0) : ?>
+                            <input type="checkbox" name="id[]" value="<?=$rebate->id?>" lay-skin="primary">
+                        <? endif;?>
+                        </td>
                     <td><?=$rebate->site_id?></td>
                     <td><?= $user->username ?>(<?=$user->id?>)<?=\App\Helper::getQqLink($user->qq)?></td>
                     <td><?= $rebate->label ?></td>
@@ -52,12 +59,14 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                         <? if($rebate->status==0) : ?>
                             <a href="javascript:goStart(<?=$rebate->id?>)" class="layui-btn layui-btn-mini">开始奖励</a>
                         <? endif;?>
-                        </td>
+                    </td>
                 </tr>
             <? } ?>
             </tbody>
-
         </table>
+        <button type="submit" class="layui-btn" lay-submit="" lay-filter="*">开始奖励</button>
+    </form>
+
         <? if (empty($result['total'])) {
             echo "无记录！";
         } else {
@@ -78,5 +87,35 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
             });
         }
 
+        $(function () {
+            var form=layui.form();
+            form.render('checkbox');
+            form.on('checkbox(allChoose)', function(data){
+                var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
+                child.each(function(index, item){
+                    item.checked = data.elem.checked;
+                });
+                form.render('checkbox');
+            });
+
+            layui.form().on('submit(*)', function(data){
+                var form=data.form;
+                var fields=data.field;
+                var t=$("tbody input[type=checkbox]:checked").length;
+                if(t==0){
+                    layer.msg('请勾选');
+                    return false;
+                }else{
+                    /*layer.open({
+                        content: '您确定要开始奖励吗？'
+                        ,btn: ['确定', '取消']
+                        ,yes: function(index){
+                            //$(form).submit();
+                            layer.close(index);
+                        }
+                    });*/
+                }
+            });
+        });
     </script>
 <?php require 'footer.php'; ?>
