@@ -75,7 +75,7 @@ class RebateListController extends AdminController
             if(!empty($remark)){
                 $where.=" and remark like '%{$remark}%'";
             }
-            $data['result']=$rebateList->where($where)->orderBy('id desc')->pager($_GET['page'],10);
+            $data['result']=$rebateList->where($where)->orderBy('id desc')->pager($_GET['page'],20);
             $this->view('rebateList',$data);
         }
 
