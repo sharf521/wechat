@@ -78,37 +78,5 @@ class RebateListController extends AdminController
             $data['result']=$rebateList->where($where)->orderBy('id desc')->pager($_GET['page'],20);
             $this->view('rebateList',$data);
         }
-
-    }
-
-    public function start(RebateList $rebateList,Request $request)
-    {
-        $id=$request->get('id');
-        $page=$request->get('page');
-        $rebate=$rebateList->findOrFail($id);
-        if($rebate->status==0){
-            try {
-                DB::beginTransaction();
-                $rebate->status=1;
-                $rebate->start_uid=$this->user_id;
-                $rebate->start_at=time();
-                $rebate->save();
-                $user=$rebate->User();
-                $integral=math($rebate->money,2.52,'*',5);
-                $return=(new Center())->rebateAdd($user->openid,$rebate->typeid,$integral,$rebate->remark,$rebate->site_id);
-                if($return===true){
-                    DB::commit();
-                    redirect("rebateList/?page={$page}")->with('msg','操作完成');
-                }else{
-                    throw new \Exception($return);
-                }
-            } catch (\Exception $e) {
-                DB::rollBack();
-                $error= "Failed: " . $e->getMessage();
-                redirect()->back()->with('error',$error);
-            }
-        }else{
-            redirect()->back()->with('error','状态异常');
-        }
     }
 }

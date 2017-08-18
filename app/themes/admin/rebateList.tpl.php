@@ -31,7 +31,6 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 <th>开始时间</th>
                 <th>开始操作人</th>
                 <th>状态</th>
-                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -55,11 +54,6 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                     <td><?=$rebate->start_at?></td>
                     <td><?=$rebate->start_uid?></td>
                     <td><?=$arr_status[$rebate->status]?></td>
-                    <td>
-                        <? if($rebate->status==0) : ?>
-                            <a href="javascript:goStart(<?=$rebate->id?>)" class="layui-btn layui-btn-mini">开始奖励</a>
-                        <? endif;?>
-                    </td>
                 </tr>
             <? } ?>
             </tbody>
@@ -75,18 +69,6 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
     </div>
 <? endif; ?>
     <script>
-        function goStart(id)
-        {
-            layer.open({
-                content: '您确定要开始奖励吗？'
-                ,btn: ['确定', '取消']
-                ,yes: function(index){
-                    location.href='<?=url('rebateList/start/?id=')?>'+id+'&page='+'<?=$_GET['page']?>';
-                    layer.close(index);
-                }
-            });
-        }
-
         $(function () {
             var form=layui.form();
             form.render('checkbox');
@@ -97,24 +79,19 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
                 });
                 form.render('checkbox');
             });
-
             layui.form().on('submit(*)', function(data){
                 var form=data.form;
-                var fields=data.field;
                 var t=$("tbody input[type=checkbox]:checked").length;
                 if(t==0){
                     layer.msg('请勾选');
-                    return false;
                 }else{
-                    /*layer.open({
-                        content: '您确定要开始奖励吗？'
-                        ,btn: ['确定', '取消']
-                        ,yes: function(index){
-                            //$(form).submit();
-                            layer.close(index);
-                        }
-                    });*/
+                    layer.confirm('您确定要开始奖励吗？', {
+                        btn: ['确定','取消'] //按钮
+                    }, function(){
+                        $(form).submit();
+                    });
                 }
+                return false;
             });
         });
     </script>
