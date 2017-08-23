@@ -14,6 +14,12 @@ class Order extends Model
         parent::__construct();
     }
 
+    public function showStatusName()
+    {
+        $arr=array(1=>'待付款',2=>'己取消',3=>'待发货',4=>'己发货',5=>'己收货','-1'=>'己删除');
+        return $arr[$this->status];
+    }
+
     //退回库存
     private function backStock()
     {

@@ -128,7 +128,8 @@ class Center
             return $json->return_msg;
         }
     }
-    
+
+    //获取用户中心订单NO
     public function getFirstOrNewPayNo($data)
     {
         $params=array(
@@ -143,7 +144,6 @@ class Center
             'typeid'=>$data['typeid'],
             'remark'=>$data['remark'],
             'label'=>$data['label'],
-            'in_out'=>$data['in_out'],//1收，2支
             'other_nickname'=>$data['other_nickname'],
             'other_openid'=>$data['other_openid']
         );
