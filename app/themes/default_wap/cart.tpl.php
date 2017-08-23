@@ -4,22 +4,29 @@
         <a class="m_header_r" href="/member/?st_uid=<?=$this->st_uid?>"><i class="iconfont">&#xe6fc;</i></a>
         <h1>我的购物车</h1>
     </div>
+    <div class="margin_header"></div>
     <?
     if(count($result_carts)==0) : ?>
-    <div class="cart_empty margin_header">
-        购物车内还没有商品！<br>
-        <?
-        if($this->st_uid==0){
-            $goodsList_url=url('goods/lists');
-        }else{
-            $goodsList_url=$this->store_url.'/goods/lists/';
-        }
-        ?>
-        <a href="<?=$goodsList_url?>" class="weui-btn weui-btn_plain-primary weui-btn_mini">去逛逛</a>
-    </div>
+        <div class="cart_empty">
+            <div class="cart-logo">
+                <i class="weui-icon-warn weui-icon_msg-primary"></i>
+            </div>
+            <div class="cart-text">
+                你的购物车内还没有商品
+            </div>
+            <?
+            if($this->st_uid==0){
+                $goodsList_url=url('goods/lists');
+            }else{
+                $goodsList_url=$this->store_url.'/goods/lists/';
+            }
+            ?>
+            <a href="<?=$goodsList_url?>" class="cart-btn">立即逛逛</a>
+        </div>
+
     <?php require 'footer_bar.php';?>
     <? else : ?>
-    <div class="margin_header" style="margin-bottom: 60px">
+    <div style="margin-bottom: 60px">
         <?  foreach ($result_carts as $i=>$carts) :
             $shop=(new \App\Model\Shop())->find($i);
             ?>

@@ -1,4 +1,14 @@
 <?php require 'header.php';?>
+    <!-- 搜索框 -->
+    <div class="searchBox clear">
+        <form action="/goods/lists/">
+            <div class="search-input">
+                <i class="iconfont">&#xe634;</i>
+                <input type="text" name="keyword" value="<?=$_GET['keyword']?>" placeholder="搜索全部商品">
+            </div>
+            <button>搜索</button>
+        </form>
+    </div>
     <div class="swiper-container car_mes">
         <div class="swiper-wrapper">
             <? foreach ($ads as $ad) : ?>
@@ -19,8 +29,11 @@
             });
         });
     </script>
-    <div class="mod-tit">推荐店铺<span><a href=""></a></span></div>
-    <div class="br_box clearFix">
+    <!-- 热门店铺 -->
+    <div class="mod-title">
+        <i></i><span>推荐店铺</span><i></i><a href="" class="more"></a>
+    </div>
+    <div class="br_box clearFix my-remendianpu">
         <ul class="clearFix">
             <? foreach ($shopList as $shop) :
                 $_img=$shop->User()->headimgurl;
@@ -29,22 +42,26 @@
             <? endforeach;?>
         </ul>
     </div>
-    <div class="mod-tit">推荐商品<span><a href="/goods/lists/">查看更多</a></span></div>
-    <ul class="commoditylist_content">
+    <div class="mod-title tuijian">
+        <i></i><span>推荐商品</span><i></i><a href="/goods/lists/" class="more">更多</a>
+    </div>
+    <ul class="commoditylist_content my-commoditylist">
         <? foreach ($goods_result as $goods) : ?>
             <li>
                 <a href="<?=url("/goods/detail/{$goods->id}")?>">
-                <span class="imgspan">
-                    <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($goods->image_url)?>">
-                </span>
-                    <div class="info">
+                    <div class="info ">
+                        <span class="imgspan">
+                            <img src="themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($goods->image_url)?>">
+                        </span>
                         <p class="cd_title"><?=$goods->name?></p>
-                        <p class="cd_money">
-                            <span>￥</span><var><?=(float)$goods->price?></var>
-                        </p>
-                        <p class="cd_sales">库存 <?=$goods->stock_count?></p>
+                        <div class="info-bottom  clearFix">
+                            <p class="cd_money">
+                                <span>￥</span><var><?=(float)$goods->price?></var>
+                            </p>
+                            <p class="cd_sales">库存 <?=$goods->stock_count?></p>
+                            <p class="cd-payment">付款10人</p>
+                        </div>
                     </div>
-                    <i class="iconfont">&#xe6a7;</i>
                 </a>
             </li>
         <? endforeach;?>
