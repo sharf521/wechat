@@ -9,7 +9,7 @@
             <button>搜索</button>
         </form>
     </div>
-    <div class="swiper-container car_mes">
+    <div class="swiper-container car_mes  my-banner">
         <div class="swiper-wrapper">
             <? foreach ($ads as $ad) : ?>
                 <div class="swiper-slide"><a href="<?=$ad->url?>"><img src="<?=$ad->picture?>" style="max-width: 100%;"></a></div>
