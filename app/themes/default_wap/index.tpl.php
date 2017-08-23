@@ -51,7 +51,7 @@
                 <a href="<?=url("/goods/detail/{$goods->id}")?>">
                     <div class="info ">
                         <span class="imgspan">
-                            <img src="themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($goods->image_url)?>">
+                            <img src="/themes/images/blank.gif" data-echo="<?=\App\Helper::smallPic($goods->image_url)?>">
                         </span>
                         <p class="cd_title"><?=$goods->name?></p>
                         <div class="info-bottom  clearFix">
