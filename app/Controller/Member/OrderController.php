@@ -80,7 +80,7 @@ class OrderController extends MemberController
             'openid'=>$this->user->openid,
             'title'=>$orderTitle,
             'money'=>$order->order_money,
-            'typeid'=>'mall',
+            'typeid'=>'order_pay',
             'remark'=>'remark',
             'label'=>$order->order_sn
         );
@@ -94,7 +94,7 @@ class OrderController extends MemberController
         }else{
             $centerUrl=$this->site->center_url;
         }
-        $url=$centerUrl."/member/order/pay/?sn={$pay_no}";
+        $url=$centerUrl."/cashier/?sn={$pay_no}";
         redirect($url);
     }
 

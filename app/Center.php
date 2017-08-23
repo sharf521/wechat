@@ -148,8 +148,8 @@ class Center
             'other_openid'=>$data['other_openid']
         );
         $params['sign']=$this->getSign($params);
-        $data['data']=json_encode($params);
-        $html=$this->curl_url('order/firstOrNew',$data);
+        $data11['data']=json_encode($params);
+        $html=$this->curl_url('order/firstOrNew',$data11);
         $json=json_decode($html);
         if($json->return_code=='success'){
             return $json->pay_no;

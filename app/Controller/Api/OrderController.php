@@ -8,6 +8,7 @@
 
 namespace App\Controller\Api;
 
+use App\Model\Order;
 use System\Lib\DB;
 
 class OrderController extends ApiController
@@ -20,10 +21,25 @@ class OrderController extends ApiController
     public function detail()
     {
         $data=$this->data;
-        if ($data['typeid'] == 'mall') {
+        if ($data['typeid'] == 'order_pay') {
             $row = DB::table('order')->where('order_sn=?')->bindValues($data['sn'])->row();
             if ($row) {
                 return $this->returnSuccess($row);
+            }
+        }
+        return $this->error('error');
+    }
+    
+    public function getPayed(Order $order)
+    {
+        $data=$this->data;
+        if ($data['typeid'] == 'order_pay') {
+            $order = $order->where('order_sn=?')->bindValues($data['sn'])->first();
+            if($order->is_exist){
+                if($order->status==1){
+                    $order->setStatusPayed($data);
+                }
+                return $this->returnSuccess();   
             }
         }
         return $this->error('error');

@@ -41,7 +41,20 @@ class Order extends Model
             }*/
         }
     }
-
+    
+    //支付完成
+    public function setStatusPayed($data=array())
+    {
+        $order=(new Order())->find($this->id);
+        $order->payed_funds=$data['payed_funds'];
+        $order->payed_integral=$data['payed_integral'];
+        $order->payed_at=time();
+        $order->status=3;
+        $order->save();
+        $order->updateOrderGoodsStatus(3);
+        return true;
+    }
+    
     public function success($operatorOpenId='')
     {
         if($this->status==3){
