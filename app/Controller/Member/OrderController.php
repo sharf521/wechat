@@ -84,8 +84,7 @@ class OrderController extends MemberController
                 'title'=>$orderTitle,
                 'money'=>$order->order_money,
                 'typeid'=>'order_pay',
-                'remark'=>'remark',
-                'label'=>$order->order_sn
+                'remark'=>''
             );
             $sell_user=(new User())->find($order->seller_id);
             $params['other_nickname']=$sell_user->username;

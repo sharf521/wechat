@@ -11,7 +11,7 @@ namespace App\Controller\Api;
 use App\Model\Order;
 use System\Lib\DB;
 
-class OrderController extends ApiController
+class CashierController extends ApiController
 {
     public function __construct()
     {
@@ -22,7 +22,7 @@ class OrderController extends ApiController
     {
         $data=$this->data;
         if ($data['typeid'] == 'order_pay') {
-            $row = DB::table('order')->where('order_sn=?')->bindValues($data['sn'])->row();
+            $row = DB::table('order')->where('order_sn=?')->bindValues($data['order_sn'])->row();
             if ($row) {
                 return $this->returnSuccess($row);
             }
@@ -34,7 +34,7 @@ class OrderController extends ApiController
     {
         $data=$this->data;
         if ($data['typeid'] == 'order_pay') {
-            $order = $order->where('order_sn=?')->bindValues($data['sn'])->first();
+            $order = $order->where('order_sn=?')->bindValues($data['order_sn'])->first();
             if($order->is_exist){
                 if($order->status==1){
                     $order->setStatusPayed($data);

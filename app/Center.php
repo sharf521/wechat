@@ -153,7 +153,7 @@ class Center
             'money'=>$data['money'],
             'typeid'=>$data['typeid'],
             'remark'=>$data['remark'],
-            'label'=>$data['label'],
+            'label'=>$data['order_sn'],
             'other_nickname'=>$data['other_nickname'],
             'other_openid'=>$data['other_openid']
         );
