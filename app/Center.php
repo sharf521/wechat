@@ -59,6 +59,16 @@ class Center
         return $url;
     }
 
+    public function cashierUrl($trade_no)
+    {
+        $data=array(
+            'appid'=>$this->appid,
+            'trade_no'=>$trade_no
+        );
+        $url="auth/cashier/?appid={$data['appid']}&trade_no={$data['trade_no']}&sign={$this->getSign($data)}";
+        return $url;
+    }
+
     public function getUserInfo($openid)
     {
         $params=array(
@@ -130,7 +140,7 @@ class Center
     }
 
     //获取用户中心订单NO
-    public function getFirstOrNewPayNo($data)
+    public function getOrNewCashierNo($data)
     {
         $params=array(
             'appid'=>$this->appid,
@@ -149,10 +159,10 @@ class Center
         );
         $params['sign']=$this->getSign($params);
         $data11['data']=json_encode($params);
-        $html=$this->curl_url('order/firstOrNew',$data11);
+        $html=$this->curl_url('cashier/firstOrNew',$data11);
         $json=json_decode($html);
         if($json->return_code=='success'){
-            return $json->pay_no;
+            return $json->trade_no;
         }else{
             $error= $json->return_msg;
             redirect()->back()->with('error',$error);

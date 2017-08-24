@@ -67,34 +67,35 @@ class OrderController extends MemberController
         if($order->status!=1){
             redirect()->back()->with('error','异常，请勿重复支付！');
         }
-        $orderGoods=$order->OrderGoods();
-        if(count($orderGoods)==1){
-            $orderTitle=$orderGoods[0]->goods_name;
-        }else{
-            $orderTitle=$orderGoods[0]->goods_name.' 等多件。';
-        }
-        $params=array(
-            'order_sn'=>$order->order_sn,
-            'order_pc_url'=>$this->site->pc_url,
-            'order_wap_url'=>$this->site->wap_url,
-            'openid'=>$this->user->openid,
-            'title'=>$orderTitle,
-            'money'=>$order->order_money,
-            'typeid'=>'order_pay',
-            'remark'=>'remark',
-            'label'=>$order->order_sn
-        );
-        $sell_user=(new User())->find($order->seller_id);
-        $params['other_nickname']=$sell_user->username;
-        $params['other_openid']=$sell_user->openid;
+        $trade_no=$order->out_trade_no;
         $center=new Center();
-        $pay_no=$center->getFirstOrNewPayNo($params);
-        if($this->is_wap){
-            $centerUrl=$this->site->center_url_wap;
-        }else{
-            $centerUrl=$this->site->center_url;
+        if(empty($trade_no)){
+            $orderGoods=$order->OrderGoods();
+            if(count($orderGoods)==1){
+                $orderTitle=$orderGoods[0]->goods_name;
+            }else{
+                $orderTitle=$orderGoods[0]->goods_name.' 等多件。';
+            }
+            $params=array(
+                'order_sn'=>$order->order_sn,
+                'order_pc_url'=>$this->site->pc_url,
+                'order_wap_url'=>$this->site->wap_url,
+                'openid'=>$this->user->openid,
+                'title'=>$orderTitle,
+                'money'=>$order->order_money,
+                'typeid'=>'order_pay',
+                'remark'=>'remark',
+                'label'=>$order->order_sn
+            );
+            $sell_user=(new User())->find($order->seller_id);
+            $params['other_nickname']=$sell_user->username;
+            $params['other_openid']=$sell_user->openid;
+            $trade_no=$center->getOrNewCashierNo($params);
+            $order->out_trade_no=$trade_no;
+            $order->save();
         }
-        $url=$centerUrl."/cashier/?sn={$pay_no}";
+        $url=($this->is_wap)?$this->site->center_url_wap:$this->site->center_url;
+        $url.="/".$center->cashierUrl($trade_no);
         redirect($url);
     }
 
