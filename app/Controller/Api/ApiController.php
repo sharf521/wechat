@@ -50,7 +50,7 @@ class ApiController extends BaseController
         }
         ksort($data);
         $jsonStr = json_encode($data);
-        $str = strtoupper(md5($jsonStr . Helper::getSystemParam('md5key')));
+        $str = strtoupper(md5($jsonStr . Helper::getSystemParam('center_appsecret')));
         return $str;
     }
 

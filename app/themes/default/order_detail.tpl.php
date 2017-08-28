@@ -6,7 +6,7 @@
                 <a href='/member'>个人中心</a>
                 <a><cite><?=$this->title?></cite></a></span>
         </div>
-        <div class="order_detail">
+        <div class="order_detail clearFix">
             <div class="order-progress">
                 <ul class="progress-list">
                     <li class="step step-first <?=($order->status==1 || $order->status==2)?'step-active':'step-done';?>">

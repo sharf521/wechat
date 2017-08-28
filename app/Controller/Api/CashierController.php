@@ -13,6 +13,7 @@ use System\Lib\DB;
 
 class CashierController extends ApiController
 {
+
     public function __construct()
     {
         parent::__construct();

@@ -86,9 +86,9 @@ class OrderController extends MemberController
                 'typeid'=>'order_pay',
                 'remark'=>''
             );
-            $sell_user=(new User())->find($order->seller_id);
+/*            $sell_user=(new User())->find($order->seller_id);
             $params['other_nickname']=$sell_user->username;
-            $params['other_openid']=$sell_user->openid;
+            $params['other_openid']=$sell_user->openid;*/
             $trade_no=$center->getOrNewCashierNo($params);
             $order->out_trade_no=$trade_no;
             $order->save();

@@ -41,6 +41,12 @@ class Order extends Model
             }*/
         }
     }
+
+    //去支付
+    public function getPayUrl()
+    {
+       return "/member/order/centerPay/?sn={$this->order_sn}";
+    }
     
     //支付完成
     public function setStatusPayed($data=array())

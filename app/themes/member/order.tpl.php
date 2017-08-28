@@ -51,8 +51,8 @@
                                     </td>
                                     <td class="operate">
                                         <? if($order->status==1) : ?>
-                                            <a href="<?=url("order/pay/?id={$order->id}")?>" class="layui-btn layui-btn-small ">立即支付</a><br>
-                                            <a href="<?=url("order/centerPay/?sn={$order->order_sn}")?>" class="layui-btn layui-btn-small ">立即支付new</a><br>
+                                            <!--<a href="<?/*=url("order/pay/?id={$order->id}")*/?>" class="layui-btn layui-btn-small ">立即支付</a><br>-->
+                                            <a href="<?=$order->getPayUrl()?>" class="layui-btn layui-btn-small ">立即支付</a><br>
                                             <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small layui-btn-primary cancel">取消订单</a><br>
                                         <? elseif($order->status==4) : ?>
                                             <a href="<?=url("order/success/?id={$order->id}")?>" class="layui-btn layui-btn-small">确认收货</a><br>
