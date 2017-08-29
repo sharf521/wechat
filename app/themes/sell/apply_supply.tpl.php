@@ -40,7 +40,9 @@
                                         src="<?= $supply->picture1 ?>" align="absmiddle" width="100"/></a>
                             <? } ?>
                         </span>
-                        <input type="file" name="file" class="layui-upload-file" upload_id="picture1" upload_type="company_picture">
+                        <button type="button" class="layui-btn upload_btn" upload_id="picture1" upload_type="company_picture">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -53,7 +55,9 @@
                                         src="<?= $supply->picture2 ?>" align="absmiddle" width="100"/></a>
                             <? } ?>
                         </span>
-                        <input type="file" name="file" class="layui-upload-file" upload_id="picture2" upload_type="company_picture">
+                        <button type="button" class="layui-btn upload_btn" upload_id="picture2" upload_type="company_picture">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -66,7 +70,9 @@
                                         src="<?= $supply->picture3 ?>" align="absmiddle" width="100"/></a>
                             <? } ?>
                         </span>
-                        <input type="file" name="file" class="layui-upload-file" upload_id="picture3" upload_type="company_picture">
+                        <button type="button" class="layui-btn upload_btn" upload_id="picture3" upload_type="company_picture">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
                     </div>
                 </div>
                 <div class="layui-form-item">

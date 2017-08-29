@@ -171,7 +171,7 @@ function goodsAdd_js() {
         }
         var imgids=$(form).find('input[name=imgids]');
         if(imgids.val().length<2){
-            layer.tips('请上传图片！', '.layui-upload-file');
+            layer.tips('请上传图片！', '#uploads');
             return false;
         }
         if(ue.hasContents()==false){

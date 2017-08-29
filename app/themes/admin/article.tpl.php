@@ -122,7 +122,9 @@
                                         src="<?= $row->picture ?>" align="absmiddle" width="100"/></a>
                             <? } ?>
                         </span>
-                        <input type="file" name="file" class="layui-upload-file" upload_id="article" upload_type="article">
+                        <button type="button" class="layui-btn upload_btn" upload_id="article" upload_type="article">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
                     </td>
                 </tr>
 

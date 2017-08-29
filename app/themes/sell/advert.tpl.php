@@ -18,7 +18,9 @@
                                     <a href="<?= $row->pc_banner ?>" target="_blank"><img
                                             src="<?= $row->pc_banner ?>" align="absmiddle" width="400"/></a>
                             </span>
-                            <input type="file" name="file" class="layui-upload-file" upload_id="pc_banner" upload_type="advert">
+                            <button type="button" class="layui-btn upload_btn" upload_id="pc_banner" upload_type="advert">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
                         </div>
                         <div class="layui-form-mid layui-word-aux">1000*150</div>
                     </div>
@@ -37,7 +39,9 @@
                             <span id="upload_span_wap_banner1" class="<? if ($row->wap_banner1 == '') {echo 'hide';} ?>">
                                     <a href="<?= $row->wap_banner1 ?>" target="_blank"><img src="<?= $row->wap_banner1 ?>" align="absmiddle" width="200"/></a>
                             </span>
-                            <input type="file" name="file" class="layui-upload-file" upload_id="wap_banner1" upload_type="advert">
+                            <button type="button" class="layui-btn upload_btn" upload_id="wap_banner1" upload_type="advert">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
                         </div>
                         <div class="layui-form-mid layui-word-aux"></div>
                     </div>
@@ -55,7 +59,9 @@
                             <span id="upload_span_wap_banner2" class="<? if ($row->wap_banner2 == '') {echo 'hide';} ?>">
                                     <a href="<?= $row->wap_banner2 ?>" target="_blank"><img src="<?= $row->wap_banner2 ?>" align="absmiddle" width="200"/></a>
                             </span>
-                            <input type="file" name="file" class="layui-upload-file" upload_id="wap_banner2" upload_type="advert">
+                            <button type="button" class="layui-btn upload_btn" upload_id="wap_banner2" upload_type="advert">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
                         </div>
                         <div class="layui-form-mid layui-word-aux"></div>
                     </div>
@@ -74,7 +80,9 @@
                             <span id="upload_span_wap_banner3" class="<? if ($row->wap_banner3 == '') {echo 'hide';} ?>">
                                     <a href="<?= $row->wap_banner3 ?>" target="_blank"><img src="<?= $row->wap_banner3 ?>" align="absmiddle" width="200"/></a>
                             </span>
-                            <input type="file" name="file" class="layui-upload-file" upload_id="wap_banner3" upload_type="advert">
+                            <button type="button" class="layui-btn upload_btn" upload_id="wap_banner3" upload_type="advert">
+                                <i class="layui-icon">&#xe67c;</i>上传图片
+                            </button>
                         </div>
                         <div class="layui-form-mid layui-word-aux"></div>
                     </div>
@@ -84,10 +92,6 @@
                             <input type="text" name="wap_banner_link3"  placeholder="http://" class="layui-input" value="<?=$row->wap_banner_link3?>" autocomplete="off"/>
                         </div>
                     </div>
-
-
-
-
 
                     <div class="layui-form-item">
                         <label class="layui-form-label"></label>

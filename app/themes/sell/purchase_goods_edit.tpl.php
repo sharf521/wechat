@@ -79,7 +79,9 @@
                             <div class="layui-input-block">
                                 <span id="upload_span_goods"><img src="<?=$goods->image_url?>" height="80"></span>
                                 <input type="hidden" name="image_url" value="<?=$goods->image_url?>" id="goods">
-                                <input type="file" name="file" class="layui-upload-file" accept="image/*" upload_id="goods" upload_type="goods">
+                                <button type="button" class="layui-btn upload_btn" upload_id="goods" upload_type="goods">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
                             </div>
                         </div>
                         <div class="layui-form-item">

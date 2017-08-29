@@ -65,8 +65,9 @@
                                         src="<?= $row->logo ?>" align="absmiddle" width="100"/></a>
                             <? } ?>
                         </span>
-                        <input type="file" name="file" class="layui-upload-file" upload_id="logo" upload_type="logo">
-
+                        <button type="button" class="layui-btn upload_btn" upload_id="logo" upload_type="logo">
+                            <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
                     </td>
                 </tr>
                 <tr>
