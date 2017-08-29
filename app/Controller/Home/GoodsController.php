@@ -50,11 +50,14 @@ class GoodsController extends HomeController
         }else{
             $orderBy='id desc';
         }
+        if($cid!=0){
+            $cate=$category->findOrFail($cid);
+            $data['cate']=$cate;
+            $where.=" and category_path like '{$cate->path}%'";
+        }
         if(!$this->is_wap){
             $topnav_str='<a href="/">首页</a>';
             if($cid!=0){
-                $cate=$category->findOrFail($request->get(2));
-                $data['cate']=$cate;
                 //当前位置分类
                 $path=trim($cate->path,',');
                 $paths=explode(',',$path);
@@ -65,8 +68,6 @@ class GoodsController extends HomeController
                     $topnav_str.="<a href='/goods/lists/{$c->id}'>{$c->name}</a>";
                 }
                 $topnav_str.="<a><cite>{$cate->name}</cite></a>";
-
-                $where.=" and category_path like '{$cate->path}%'";
             }else{
                 $topnav_str.="<a><cite>列表</cite></a>";
             }
