@@ -1,4 +1,44 @@
-
+$(function () {
+    var layer = layui.layer
+        ,util = layui.util
+        ,form=layui.form
+        ,element=layui.element;
+    util.fixbar();
+    form.render();
+    layui.laydate.render({
+        elem: '#starttime'
+    });
+    layui.laydate.render({
+        elem: '#endtime'
+    });
+    if ($('.upload_btn').length > 0) {
+        var index;
+        $('.upload_btn').each(function (index, obj) {
+            var id = obj.getAttribute('upload_id');
+            var type = obj.getAttribute('upload_type');
+            layui.upload.render({
+                url: '/index.php/upload/save?type=' + type
+                , elem: obj
+                , before: function (input) {
+                    index = layer.load();
+                }
+                , done: function (res) {
+                    layer.close(index);
+                    if (res.code == '0') {
+                        var path = res.url;
+                        $('#' + id).val(path);
+                        var _str = "<a href='" + path + "' target='_blank'><img src='" + path + '?' + Math.random() + "' height='50'/></a>";
+                        $('#upload_span_' + id).html(_str);
+                    } else {
+                        alert(res.msg);
+                    }
+                }, error: function (index, upload) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
+});
 function _initWH() {
     var $content = $("#main-tab .layui-tab-content");
     //$content.width($(window).width() - 220);
@@ -8,79 +48,6 @@ function _initWH() {
         //$(this).width($content.width())
     });
 }
-$(function () {
-    var layer = layui.layer
-        ,util = layui.util
-        ,laydate = layui.laydate;
-    var form = layui.form();
-    util.fixbar();
-    var element = layui.element();
-    element.init();
-    //上传文件
-    if ($('.layui-upload-file').length>0){
-        layui.use(['upload'], function(){
-            var index;
-            $('.layui-upload-file').each(function(index,obj){
-                var id=obj.getAttribute('upload_id');
-                var type=obj.getAttribute('upload_type');
-                layui.upload({
-                    url: '/index.php/upload/save?type='+type
-                    ,elem:obj
-                    ,before: function(input){
-                        index=layer.msg('上传中', {icon: 16,time:1000000});
-                    }
-                    ,success: function(res){
-                        layer.close(index);
-                        if(res.code=='0'){
-                            var path=res.url;
-                            $('#'+id).val(path);
-                            var _str="<a href='"+path+"' target='_blank'><img src='"+path+'?'+Math.random()+"' height='50'/></a>";
-                            $('#upload_span_'+id).html(_str);
-                        }else{
-                            alert(res.msg);
-                        }
-                    }
-                });
-            });
-        });
-    }
-
-    $('.li_item').on('click',function () {
-        var title = $(this).find('a').text();
-        var url = $(this).find('a').attr('url');
-        var data_id = $(this).find('a').attr('data_id');
-        for (var i = 0; i <$('.x-iframe').length; i++) {
-            if($('.x-iframe').eq(i).attr('src')==url){
-                element.tabChange('x-tab', data_id);
-                $('.x-iframe').eq(i).attr('src',url);
-                return;
-            }
-        }
-        /*        var isExist=false;
-         $('.x-iframe').each(function (index,obj) {
-         if($(obj).attr('src')==url){
-         element.tabChange('x-tab', index);
-         isExist=true;
-         $(obj).attr('src',url);
-         return;
-         }
-         });
-         if(isExist==false){
-
-         //$('.layui-tab-title li').eq(0).find('i').remove();
-         }*/
-
-        element.tabAdd('x-tab', {
-            'id':data_id
-            ,title: title
-            ,content: '<iframe frameborder="0" src="'+url+'" class="x-iframe" width="100%"></iframe>'
-        });
-        element.tabChange('x-tab',data_id);
-        _initWH();
-    });
-
-
-});
 
 //防止重复提交
 function setdisabled() {

@@ -3,9 +3,8 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script language="javascript" src="/plugin/js/jquery.js"></script>
-    <script charset="utf-8" src="/plugin/js/My97DatePicker/WdatePicker.js"></script>
-    <link rel="stylesheet" href="/plugin/layui/css/layui.css" />
-    <script src="/plugin/layui/lay/dest/layui.all.js"></script>
+    <link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
+    <script src="/plugin/layui.v2/layui.all.js"></script>
     <link href="/themes/admin/css/admin.css" rel="stylesheet">
     <script src="/themes/admin/js/base.js"></script>
     <title>管理中心</title>
@@ -113,6 +112,28 @@
         init_menu();
         _initWH();
     }).resize();
+    $(function () {
+        var element = layui.element;
+        $('.li_item').on('click',function () {
+            var title = $(this).find('a').text();
+            var url = $(this).find('a').attr('url');
+            var data_id = $(this).find('a').attr('data_id');
+            for (var i = 0; i <$('.x-iframe').length; i++) {
+                if($('.x-iframe').eq(i).attr('src')==url){
+                    element.tabChange('x-tab', data_id);
+                    $('.x-iframe').eq(i).attr('src',url);
+                    return;
+                }
+            }
+            element.tabAdd('x-tab', {
+                'id':data_id
+                ,title: title
+                ,content: '<iframe frameborder="0" src="'+url+'" class="x-iframe" width="100%"></iframe>'
+            });
+            element.tabChange('x-tab',data_id);
+            _initWH();
+        });
+    });
 </script>
 </body>
 </html>

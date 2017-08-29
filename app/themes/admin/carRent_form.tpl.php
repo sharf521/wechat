@@ -134,8 +134,8 @@ if($this->func=='add' || $this->func=='edit') :    ?>
         ?>
         $(function () {
             pca.init('select[name=province]', 'select[name=city]', 'select[name=county]', '<?=$arr[0]?>', '<?=$arr[1]?>', '<?=$arr[2]?>');
-            layui.form('select').render();
-            layui.form().on('submit(*)', function(data){
+            layui.form.render();
+            layui.form.on('submit(*)', function(data){
                 var form=data.form;
                 var fields=data.field;
                 var contacts=$(form).find('input[name=contacts]');

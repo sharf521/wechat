@@ -1,35 +1,39 @@
 $(function () {
     var layer = layui.layer
         ,util = layui.util
-        ,laydate = layui.laydate;
+        ,form=layui.form
+        ,element=layui.element;
     util.fixbar();
-    layui.element().init();
-    //上传文件
-    if ($('.layui-upload-file').length>0){
+    form.render();
+    layui.laydate.render({
+        elem: '#starttime'
+    });
+    layui.laydate.render({
+        elem: '#endtime'
+    });
+    if ($('.upload_btn').length > 0) {
         var index;
-        $('.layui-upload-file').each(function(index,obj){
-            var id=obj.getAttribute('upload_id');
-            var type=obj.getAttribute('upload_type');
-            if(id==null){
-                return;
-            }
-            layui.upload({
-                url: '/index.php/upload/save?type='+type
-                ,elem:obj
-                ,before: function(input){
-                    index=layer.msg('上传中', {icon: 16,time:1000000});
+        $('.upload_btn').each(function (index, obj) {
+            var id = obj.getAttribute('upload_id');
+            var type = obj.getAttribute('upload_type');
+            layui.upload.render({
+                url: '/index.php/upload/save?type=' + type
+                , elem: obj
+                , before: function (input) {
+                    index = layer.load();
                 }
-                ,success: function(res){
+                , done: function (res) {
                     layer.close(index);
-                    if(res.code=='0'){
-                        var path=res.url;
-                        $('#'+id).val(path);
-                        //var _str="<a href='"+path+"' target='_blank'><img src='"+path+'?'+Math.random()+"' height='50'/></a>";
-                        $('#upload_span_'+id).find('img').attr('src',path+'?'+Math.random());
-                        $('#upload_span_'+id).show();
-                    }else{
+                    if (res.code == '0') {
+                        var path = res.url;
+                        $('#' + id).val(path);
+                        var _str = "<a href='" + path + "' target='_blank'><img src='" + path + '?' + Math.random() + "' height='50'/></a>";
+                        $('#upload_span_' + id).html(_str);
+                    } else {
                         alert(res.msg);
                     }
+                }, error: function (index, upload) {
+                    layer.close(index);
                 }
             });
         });
@@ -39,12 +43,13 @@ $(function () {
 //goods start
 function goodsAdd_js() {
     var index;
-    layui.upload({
-        url: '/index.php/upload/save?type=goods'
+    layui.upload.render({
+        elem: '#uploads'
+        ,url: '/index.php/upload/save?type=goods'
         ,before: function(input){
             index=layer.msg('上传中', {icon: 16,time:1000000});
         }
-        ,success: function(res){
+        ,done: function(res){
             layer.close(index);
             if(res.code=='0'){
                 var imgId=res.id;
@@ -117,8 +122,8 @@ function goodsAdd_js() {
         $('#imgids').val(ids.replace(','+id+',',','));
         $(o).parents('li').remove();
     }
-    layui.form('select').render();
-    layui.form().on('submit(*)', function(data){
+    layui.form.render();
+    layui.form.on('submit(*)', function(data){
         var form=data.form;
         var fields=data.field;
         var name=$(form).find('input[name=name]');
@@ -181,8 +186,8 @@ function goodsAdd_js() {
 //goods end
 
 function purchaseGoodsEdit_js() {
-    layui.form('select').render();
-    layui.form().on('submit(*)', function (data) {
+    layui.form.render();
+    layui.form.on('submit(*)', function (data) {
         var form = data.form;
         var fields = data.field;
         var name = $(form).find('input[name=name]');
@@ -227,7 +232,7 @@ function purchaseGoodsEdit_js() {
 
 function category_js() {
     $(function () {
-        layui.form().on('submit(*)', function(data){
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             var name=$(form).find('input[name=name]');
@@ -242,8 +247,8 @@ function category_js() {
 
 function shipping_js() {
     $(function () {
-        layui.form('radio').render();
-        layui.form().on('submit(*)', function(data){
+        layui.form.render();
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             var name=$(form).find('input[name=name]');
@@ -284,8 +289,7 @@ function upload_image(id,type)
 
 function shop_js() {
     $(function () {
-        layui.form('select').render();
-        layui.form().on('submit(*)', function(data){
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             var name=$(form).find('input[name=name]');
@@ -324,7 +328,7 @@ function shop_js() {
 
 function supply_apply() {
     $(function () {
-        layui.form().on('submit(*)', function(data){
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             var company_name=$(form).find('input[name=company_name]');

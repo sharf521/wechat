@@ -70,16 +70,14 @@ $arr_status=array('-1'=>'己删除','0'=>'','1'=>'正常','2'=>'己下架');
 <? endif; ?>
     <script>
         $(function () {
-            var form=layui.form();
-            form.render('checkbox');
-            form.on('checkbox(allChoose)', function(data){
+            layui.form.on('checkbox(allChoose)', function(data){
                 var child = $(data.elem).parents('table').find('tbody input[type="checkbox"]');
                 child.each(function(index, item){
                     item.checked = data.elem.checked;
                 });
                 form.render('checkbox');
             });
-            layui.form().on('submit(*)', function(data){
+            layui.form.on('submit(*)', function(data){
                 var form=data.form;
                 var t=$("tbody input[type=checkbox]:checked").length;
                 if(t==0){

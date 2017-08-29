@@ -70,15 +70,14 @@
         </div>
     </div>
     <script>
-        layui.use('element', function(){
-            var element = layui.element();
-            element.on('tab(tab)', function(data){
-                if(data.index==0){
-                    location.href='<?=url("goods")?>';
-                }else if(data.index==1){
-                    location.href='<?=url("goods/list_stock0")?>';
-                }else if(data.index==2){
-                    location.href='<?=url("goods/list_status2")?>';
+        layui.use('element', function () {
+            layui.element.on('tab(tab)', function (data) {
+                if (data.index == 0) {
+                    location.href = '<?=url("goods")?>';
+                } else if (data.index == 1) {
+                    location.href = '<?=url("goods/list_stock0")?>';
+                } else if (data.index == 2) {
+                    location.href = '<?=url("goods/list_status2")?>';
                 }
             });
         });

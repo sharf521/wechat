@@ -88,7 +88,9 @@
                                     <? endforeach;?>
                                 </ul>
                                 <input type="hidden" name="imgids" id="imgids" value="<?=$imgids?>">
-                                <input type="file" name="file" class="layui-upload-file" accept="image/*" />
+                                <button type="button" class="layui-btn" id="uploads" accept="images">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
                             </div>
                         </div>
                         <div class="layui-form-item">

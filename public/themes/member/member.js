@@ -1,35 +1,40 @@
 $(function () {
     var layer = layui.layer
         ,util = layui.util
-        ,laydate = layui.laydate;
+        ,form=layui.form
+        ,element=layui.element;
     util.fixbar();
-    var element = layui.element();
-    element.init();
-    //上传文件
-    if ($('.layui-upload-file').length>0){
-        layui.use(['upload'], function(){
-            var index;
-            $('.layui-upload-file').each(function(index,obj){
-                var id=obj.getAttribute('upload_id');
-                var type=obj.getAttribute('upload_type');
-                layui.upload({
-                    url: '/index.php/upload/save?type='+type
-                    ,elem:obj
-                    ,before: function(input){
-                        index=layer.msg('上传中', {icon: 16,time:1000000});
+    form.render();
+    layui.laydate.render({
+        elem: '#starttime'
+    });
+    layui.laydate.render({
+        elem: '#endtime'
+    });
+    if ($('.upload_btn').length > 0) {
+        var index;
+        $('.upload_btn').each(function (index, obj) {
+            var id = obj.getAttribute('upload_id');
+            var type = obj.getAttribute('upload_type');
+            layui.upload.render({
+                url: '/index.php/upload/save?type=' + type
+                , elem: obj
+                , before: function (input) {
+                    index = layer.load();
+                }
+                , done: function (res) {
+                    layer.close(index);
+                    if (res.code == '0') {
+                        var path = res.url;
+                        $('#' + id).val(path);
+                        var _str = "<a href='" + path + "' target='_blank'><img src='" + path + '?' + Math.random() + "' height='50'/></a>";
+                        $('#upload_span_' + id).html(_str);
+                    } else {
+                        alert(res.msg);
                     }
-                    ,success: function(res){
-                        layer.close(index);
-                        if(res.code=='0'){
-                            var path=res.url;
-                            $('#'+id).val(path);
-                            var _str="<a href='"+path+"' target='_blank'><img src='"+path+'?'+Math.random()+"' height='50'/></a>";
-                            $('#upload_span_'+id).html(_str);
-                        }else{
-                            alert(res.msg);
-                        }
-                    }
-                });
+                }, error: function (index, upload) {
+                    layer.close(index);
+                }
             });
         });
     }
@@ -38,8 +43,8 @@ $(function () {
 function address_js() {
     $(function () {
         pca.init('select[name=province]', 'select[name=city]', 'select[name=county]', '', '', '');
-        layui.form('select').render();
-        layui.form().on('submit(*)', function(data){
+        layui.form.render();
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             var name=$(form).find('input[name=name]');

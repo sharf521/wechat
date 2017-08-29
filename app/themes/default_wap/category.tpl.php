@@ -31,7 +31,7 @@
                     <ul>
                         <? if(isset($cate['son']) && is_array($cate['son'])) : ?>
                             <? foreach ($cate['son'] as $sun) :
-                                $pic=$row['picture'];
+                                $pic=$sun['picture'];
                                 if(empty($pic)){
                                     $pic='/themes/images/nopic.gif';
                                 }

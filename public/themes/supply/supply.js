@@ -1,20 +1,55 @@
 $(function () {
     var layer = layui.layer
         ,util = layui.util
-        ,laydate = layui.laydate;
+        ,form=layui.form
+        ,element=layui.element;
     util.fixbar();
-    layui.element().init();
+    form.render();
+    layui.laydate.render({
+        elem: '#starttime'
+    });
+    layui.laydate.render({
+        elem: '#endtime'
+    });
+    if ($('.upload_btn').length > 0) {
+        var index;
+        $('.upload_btn').each(function (index, obj) {
+            var id = obj.getAttribute('upload_id');
+            var type = obj.getAttribute('upload_type');
+            layui.upload.render({
+                url: '/index.php/upload/save?type=' + type
+                , elem: obj
+                , before: function (input) {
+                    index = layer.load();
+                }
+                , done: function (res) {
+                    layer.close(index);
+                    if (res.code == '0') {
+                        var path = res.url;
+                        $('#' + id).val(path);
+                        var _str = "<a href='" + path + "' target='_blank'><img src='" + path + '?' + Math.random() + "' height='50'/></a>";
+                        $('#upload_span_' + id).html(_str);
+                    } else {
+                        alert(res.msg);
+                    }
+                }, error: function (index, upload) {
+                    layer.close(index);
+                }
+            });
+        });
+    }
 });
 
 //goods start
 function goodsAdd_js() {
     var index;
-    layui.upload({
-        url: '/index.php/upload/save?type=supply'
+    layui.upload.render({
+        elem: '#uploads'
+        ,url: '/index.php/upload/save?type=supply'
         ,before: function(input){
             index=layer.msg('上传中', {icon: 16,time:1000000});
         }
-        ,success: function(res){
+        ,done: function(res){
             layer.close(index);
             if(res.code=='0'){
                 var imgId=res.id;
@@ -87,8 +122,7 @@ function goodsAdd_js() {
         $('#imgids').val(ids.replace(','+id+',',','));
         $(o).parents('li').remove();
     }
-    layui.form('select').render();
-    layui.form().on('submit(*)', function(data){
+    layui.form.on('submit(*)', function(data){
         var form=data.form;
         var fields=data.field;
         var name=$(form).find('input[name=name]');
@@ -164,8 +198,7 @@ function goodsAdd_js() {
 
 function shop_js() {
     $(function () {
-        layui.form('select').render();
-        layui.form().on('submit(*)', function(data){
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             var name=$(form).find('input[name=name]');
@@ -204,7 +237,7 @@ function shop_js() {
 //奖励承诺
 function commitment() {
     $(function () {
-        layui.form().on('submit(*)', function(data){
+        layui.form.on('submit(*)', function(data){
             var form=data.form;
             var fields=data.field;
             if(ue.hasContents()==false){

@@ -18,11 +18,11 @@
 			$(province).append('<option>'+citys[i].name+'</option>');
 			pca.keys[citys[i].name] = citys[i];
 		}
-		layui.form('select').render();
+		layui.form.render();
 		if(initprovince) $(province).next().find('[lay-value="'+initprovince+'"]').click();
 		if(!city || !$(city).length) return;
 		pca.formRender(city);
-		layui.form().on('select(province)', function(data){
+		layui.form.on('select(province)', function(data){
 		  	var cs = pca.keys[data.value];
 			console.log(data);
 			$(city).html('');
@@ -35,7 +35,7 @@
 				}
 				$(city).find('option:eq(1)').attr('selected', true);
 		  	}
-			layui.form('select').render();
+			layui.form.render();
 			$(city).next().find('.layui-this').removeClass('layui-this').click();
 			pca.formHidden('province', data.value);
 		}); 
@@ -43,7 +43,7 @@
 		if(initcity) $(city).next().find('[lay-value="'+initcity+'"]').click();
 		if(!area || !$(area).length) return;
 		pca.formRender(area);
-		layui.form().on('select(city)', function(data){
+		layui.form.on('select(city)', function(data){
 		  	var cs = pca.ckeys[data.value];
 		  	$(area).html('');
 		  	$(area).append('<option >请选择</option>');
@@ -54,11 +54,11 @@
 				}
 				$(area).find('option:eq(1)').attr('selected', true);
 		  	}
-			layui.form('select').render();
+			layui.form.render();
 			$(area).next().find('.layui-this').removeClass('layui-this').click();
 			pca.formHidden('city', data.value);
 		}); 
-		layui.form().on('select(area)', function(data){
+		layui.form.on('select(area)', function(data){
 			pca.formHidden('area', data.value);
 		}); 
 		if(initprovince) $(province).next().find('[lay-value="'+initprovince+'"]').click();
@@ -69,7 +69,7 @@
 	pca.formRender = function(obj){
 		$(obj).html('');
 		$(obj).append('<option >请选择</option>');
-		layui.form('select').render();
+		layui.form.render();
 	}
 	
 	pca.formHidden = function(obj, val){

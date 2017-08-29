@@ -186,8 +186,7 @@
 <? endif; ?>
     <script>
         $(function () {
-            layui.form('select').render();
-            layui.form().on('submit(*)', function(data){
+            layui.form.on('submit(*)', function(data){
                 var form=data.form;
                 var fields=data.field;
                 var picture=$(form).find('input[name=picture]');

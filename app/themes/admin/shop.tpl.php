@@ -101,8 +101,7 @@ $arr_status=array('0'=>'待审核','1'=>'己通过','2'=>'未通过');
         </form>
         <script>
             $(function () {
-                layui.form('radio').render();
-                layui.form().on('submit(*)', function(data){
+                layui.form.on('submit(*)', function(data){
                     var form=data.form;
                     var fields=data.field;
                     var verify_remark=$(form).find('textarea[name=verify_remark]');

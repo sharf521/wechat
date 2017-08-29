@@ -57,8 +57,7 @@
     </div>
     <script>
         layui.use('element', function(){
-            var element = layui.element();
-            element.on('tab(tab)', function(data){
+            layui.element.on('tab(tab)', function(data){
                 if(data.index==0){
                     location.href='<?=url("goods")?>';
                 }else if(data.index==1){

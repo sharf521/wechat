@@ -1,26 +1,11 @@
 $(function () {
     var layer = layui.layer
         ,util = layui.util
-        ,laydate = layui.laydate;
-    /*util.fixbar({
-        bar1: '<i class="iconfont" style="font-size: 24px;">&#xe698;</i>'
-        ,bar2: false
-        ,css: {right: 100, bottom: 100}
-        ,bgcolor: '#c00'
-        ,click: function(type){
-            if(type === 'bar1'){
-                window.location='/cart/';
-            } else if(type === 'bar2') {
-                layer.msg('两个bar都可以设定是否开启')
-            }
-        }
-    });*/
-
-    var flow = layui.flow;
-    flow.lazyimg();//lay-src的img元素开启了懒加载
-
-    var element = layui.element();
-    element.init();
+        ,form=layui.form
+        ,element=layui.element;
+    util.fixbar();
+    form.render();
+    layui.flow.lazyimg();//lay-src的img元素开启了懒加载
     //右侧
     $.get("/cart/getGoodsCount/",{},function(data) {
         $('#cart_num').html(data);
@@ -385,8 +370,7 @@ function goods_detail_js()
         });*/
 
         //购买记录
-        var element = layui.element();
-        element.on('tab(demo)', function(data){
+        layui.element.on('tab(demo)', function(data){
             if(data.index==1){
                 $.get('/goods/getOrderRecord/?id='+goods_id,function (data) {
                     var json = eval('(' + data + ')');
