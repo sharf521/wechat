@@ -85,12 +85,18 @@
             layui.form.on('submit(*)', function(data){
                 var form=data.form;
                 var fields=data.field;
-                var picture=$(form).find('input[name=picture]');
-                if(picture.val()==''){
-                    layer.tips('不能为空！', $('.layui-box'));
-                    picture.focus();
+                var name=$(form).find('input[name=name]');
+                if(name.val()==''){
+                    layer.tips('不能为空！', name);
+                    name.focus();
                     return false;
                 }
+                var picture=$(form).find('input[name=picture]');
+                if(picture.val()==''){
+                    layer.tips('不能为空！', $('.upload_btn'));
+                    return false;
+                }
+                return false;
             });
         });
         function goDel(id)

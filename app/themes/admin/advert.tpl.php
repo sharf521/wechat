@@ -142,7 +142,7 @@
                 var fields=data.field;
                 var picture=$(form).find('input[name=picture]');
                 if(picture.val()==''){
-                    layer.tips('不能为空！', $('.layui-box'));
+                    layer.tips('不能为空！', $('.upload_btn'));
                     picture.focus();
                     return false;
                 }

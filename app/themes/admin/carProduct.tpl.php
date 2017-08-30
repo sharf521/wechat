@@ -191,10 +191,10 @@
             layui.form.on('submit(*)', function(data){
                 var form=data.form;
                 var fields=data.field;
-                var picture=$(form).find('input[name=picture]');
-                if(picture.val()==''){
-                    layer.tips('不能为空！', $('.layui-box'));
-                    picture.focus();
+                var name=$(form).find('input[name=name]');
+                if(name.val()==''){
+                    layer.tips('不能为空！', name);
+                    name.focus();
                     return false;
                 }
                 var brand_name=$(form).find('select[name=brand_name]');
@@ -205,6 +205,12 @@
                 var plan_id=$(form).find('select[name=plan_id]');
                 if(plan_id.val()==''){
                     layer.tips('不能为空！', $(plan_id).next('.layui-form-select'));
+                    return false;
+                }
+                var picture=$(form).find('input[name=picture]');
+                if(picture.val()==''){
+                    layer.tips('不能为空！', $('.upload_btn'));
+                    picture.focus();
                     return false;
                 }
             });
