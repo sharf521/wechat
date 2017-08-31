@@ -223,7 +223,6 @@ class OrderController extends MemberController
             try{
                 DB::beginTransaction();
                 $order->cancel($this->user);
-                $order->updateOrderGoodsStatus(2);
                 DB::commit();
                 redirect()->back()->with('msg','订单取消成功！');
             }catch (\Exception $e){

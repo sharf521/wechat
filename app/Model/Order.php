@@ -245,6 +245,9 @@ class Order extends Model
 
     public function cancel($user)
     {
+        if($this->status!=1 && $this->status!=3){
+            throw new \Exception('订单状态异常');
+        }
         if($this->status==1){    //未支付
             if($user->id==$this->buyer_id){
                 $this->backStock();//添加库存
@@ -291,6 +294,7 @@ class Order extends Model
                 throw new \Exception('异常');
             }
         }
+        $this->updateOrderGoodsStatus(2);
     }
 
     public function OrderGoods()

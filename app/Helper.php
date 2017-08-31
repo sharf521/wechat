@@ -80,4 +80,18 @@ class Helper
     {
         return $image_url.'_100X100.png';
     }
+
+    public static function log($name='error',$data)
+    {
+        $path = ROOT . "/public/data/logs/";
+        if (!file_exists($path)) {
+            mkdir($path,0777,true);
+        }
+        $myfile = fopen($path.$name.'_'.date('Ym').".txt", "a+");
+        if(is_array($data)){
+            $data=json_encode($data);
+        }
+        fwrite($myfile, '【'.date('Y-m-d H:i:s').'】'.$data."\r\n");
+        fclose($myfile);
+    }
 }
