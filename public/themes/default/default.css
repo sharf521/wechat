@@ -168,7 +168,7 @@ i, cite, em { font-style: normal; }
 .goods_info_box .goods_pics  ul li img.ware_pic_hover {border:2px solid #ff665b }
 .goods_info_box .goods_info{width: 530px; float: left;min-height: 430px; padding-left:10px;line-height: 40px;  background-color: #fafafa}
 .goods_info_box .goods_info .name{ padding: 20px 0px;}
-.goods_info_box .goods_info .name h1{ font: 700 16px Tahoma;    color: #333;    text-overflow: ellipsis;    white-space: nowrap; overflow: hidden;}
+.goods_info_box .goods_info .name h1{ font: 700 16px Tahoma;    color: #333; line-height: 200%}
 .goods_info .price{ background-color: #eee; padding: 5px 0px;}
 .goods_info .price .money{    font-size: 20px;    font-weight: 600;    color: #D93600;    vertical-align: middle;}
 .goods_info .shipping_fee{color: #333;}
