@@ -4,9 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <script language="javascript" src="/plugin/js/jquery.js"></script>
     <link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
-    <script src="/plugin/layui.v2/layui.all.js"></script>
     <link href="/themes/admin/css/admin.css" rel="stylesheet">
-    <script src="/themes/admin/js/base.js"></script>
     <title>管理中心</title>
     <style>
         .topbox{height: 55px;}
@@ -107,6 +105,8 @@
         </div>
     </div>
 </div>
+<script src="/plugin/layui.v2/layui.all.js"></script>
+<script src="/themes/admin/js/base.js"></script>
 <script>
     $(window).on("resize", function() {
         init_menu();
