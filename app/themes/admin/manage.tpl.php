@@ -25,6 +25,7 @@
         .leftpanel h4{ font-size: 16px;  line-height: 50px;    background: #2B2E37;color: #ccc;      text-indent: 35px;        }
 
         .layui-layout-admin .layui-header { background-color: #fff;border-bottom: 5px solid #1AA094; }
+        .layui-nav .layui-nav-more { border-color: #c2c2c2 transparent transparent; top: 28px;}
         .layui-tab{ margin: 0px; }
         .layui-tab-content {padding:0px;margin:0px;}
         .larry-tab-box>.layui-tab-title {border-bottom:0px solid #1AA094;}

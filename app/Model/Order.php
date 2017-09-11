@@ -63,7 +63,7 @@ class Order extends Model
     
     public function success($operatorOpenId='')
     {
-        if($this->status==3){
+        if($this->status!=4){
             throw new \Exception("异常，请勿重复确认收货！");
         }
         $convert_rate=(new System())->getCode('convert_rate');

@@ -135,6 +135,7 @@ class UserController extends Controller
             $user->nickname=$uInfo->nickname;
             $user->email=$uInfo->email;
             $user->qq=$uInfo->qq;
+            $user->name=$uInfo->name;
             $user->save();
             $user->login(array('direct'=>1,'openid'=>$openid));
             redirect($target_url);
