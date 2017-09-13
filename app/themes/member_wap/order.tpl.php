@@ -45,7 +45,8 @@
             <p>总价：<em class="co_red">¥<?=$order->order_money?></em></p>
             <? if($order->status==1) : ?>
                 <a href="javascript:;" data-id="<?=$order->id?>" class="cancel weui-btn weui-btn_mini weui-btn_plain-primary">取消订单</a>
-                <a href="<?=url("order/pay/?id={$order->id}&st_uid={$this->st_uid}")?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>
+                <!--<a href="<?/*=url("order/pay/?id={$order->id}&st_uid={$this->st_uid}")*/?>" class="weui-btn weui-btn_mini weui-btn_primary">支付</a>-->
+                <a href="<?=$order->getPayUrl()?>" class="weui-btn weui-btn_mini weui-btn_primary">立即支付</a>
             <? elseif($order->status==4) : ?>
                 <a href="<?=url("order/success/?id={$order->id}&st_uid={$this->st_uid}")?>" class="weui-btn weui-btn_mini weui-btn_primary">确认收货</a><br>
             <? endif;?>

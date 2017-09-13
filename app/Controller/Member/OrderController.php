@@ -226,9 +226,9 @@ class OrderController extends MemberController
                 DB::commit();
                 redirect()->back()->with('msg','订单取消成功！');
             }catch (\Exception $e){
+                DB::rollBack();
                 $error=$e->getMessage();
                 redirect()->back()->with('error',$error);
-                DB::rollBack();
             }
         }
     }
