@@ -6,12 +6,12 @@
     <title>layim - layui</title>
 </head>
 <body>
-<link rel="stylesheet" href="/plugin/layui/css/layui.css">
-<link rel="stylesheet" href="/themes/chat/chat.css">
 <script src="/themes/chat/js/swfobject.js"></script>
 <script src="/themes/chat/js/web_socket.js"></script>
 <script src="/themes/chat/js/jquery.min.js"></script>
-<script src="/plugin/layui/layui.js"></script>
+<link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
+<script src="/plugin/layui.v2/layui.all.js"></script>
+<link rel="stylesheet" href="/themes/chat/chat.css">
 <?php
 $user=new \App\Model\User();
 $user=$user->findOrFail($_GET['id']);

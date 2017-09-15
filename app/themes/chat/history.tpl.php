@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>聊天历史记录</title>
-    <link rel="stylesheet" href="/plugin/layui/css/layui.css">
-    <link rel="stylesheet" href="/themes/chat/chat.css">
     <script src="/themes/chat/js/jquery.min.js"></script>
-    <script src="/plugin/layui/layui.js"></script>
+    <link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
+    <script src="/plugin/layui.v2/layui.all.js"></script>
+    <link rel="stylesheet" href="/themes/chat/chat.css">
     <style>
         body{overflow-x: hidden}
     </style>
