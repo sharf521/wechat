@@ -59,16 +59,22 @@
                         </div>
                         <div class="goods_prompt"></div>
                         <div class="buy_box_opts clearFix">
-                            <a href="javascript:;" class="layui-btn opt1">加入购物车</a>
-                            <a href="javascript:;" class="layui-btn opt2">立即购买</a>
+                            <? if($goods->stock_count>0):?>
+                                <a href="javascript:;" class="layui-btn opt1">加入购物车</a>
+                                <a href="javascript:;" class="layui-btn opt2">立即购买</a>
+                            <? else: ?>
+                                <span class="layui-btn layui-btn-primary">库存己不足</span>
+                            <? endif;?>
                         </div>
                     </form>
                 </div>
 
             </div>
             <div class="about_store">
-                <p><span>店铺名称：</span><br><strong><a href="<?=$shop->getLink()?>" target="_blank"><?=$shop->name?></a></strong></p>
-                <p><span>联系店家：</span><?=\App\Helper::getQqLink($shop->qq)?></p>
+                <p><strong><?=$shop->name?></strong></p>
+                <p><span>联系店家：</span><?=\App\Helper::getQqLink($shop->qq)?><br><br>
+                    <a class="layui-btn layui-btn-mini" href="<?=$shop->getLink()?>" target="_blank"> 进 入 店 铺 </a>
+                </p>
             </div>
         </div>
         <div class="goods_detail_box">

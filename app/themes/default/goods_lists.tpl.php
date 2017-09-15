@@ -40,9 +40,9 @@
                                 <!--<em class="market-price">¥0.00</em>-->  </div>
                             <div class="sell-stat">
                                 <ul>
-                                    <li><span class="status"><?=$goods->sale_count?></span>
+        <!--                            <li><span class="status"><?/*=$goods->sale_count*/?></span>
                                         <p>商品销量</p>
-                                    </li>
+                                    </li>-->
                                     <li><span><?=$goods->stock_count?></span>
                                         <p>商品库存</p>
                                     </li>

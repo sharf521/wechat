@@ -31,7 +31,7 @@
                             <li><a target="_blank" href="/goods/detail/<?=$goods->id?>">
                                     <img lay-src="<?=$goods->image_url?>">
                                     <div class="ot-con"><p><?=$goods->name?></p>
-                                        <p><span class="ot-tag">查看详情</span>￥<strong><?=$goods->price?></strong></p></div>
+                                        <p><span class="ot-tag">立即购买</span>￥<strong><?=$goods->price?></strong></p></div>
                                 </a></li>
                         <?
                             endif;
@@ -55,7 +55,7 @@
                                 <div class="goods-name"><?=$goods->name?></div>
                                 <div class="goods-price">
                                     <em>￥<?=$goods->price?></em>
-                                    <strong>查看详情</strong>
+                                    <strong>立即购买</strong>
                                 </div>
                             </a>
                         </li>

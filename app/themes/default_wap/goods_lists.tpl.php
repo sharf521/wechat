@@ -28,7 +28,7 @@
                                 <span>￥</span><var><?=(float)$goods->price?></var>
                             </p>
                             <p class="cd_sales">库存 <?=$goods->stock_count?></p>
-                            <p class="cd-payment">付款<?=$goods->sale_count?>人</p>
+                            <p class="cd-payment"></p>
                         </div>
                     </div>
                 </a>
