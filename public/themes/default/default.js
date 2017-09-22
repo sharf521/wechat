@@ -369,6 +369,9 @@ function goods_detail_js()
             }
         });*/
 
+        $('.selectLimit li').on('click',function () {
+            $(this).addClass('active').siblings().removeClass('active');
+        });
         //购买记录
         layui.element.on('tab(demo)', function(data){
             if(data.index==1){

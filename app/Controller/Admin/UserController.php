@@ -109,28 +109,28 @@ class UserController extends AdminController
             $this->view('user', $data);
         }
     }
-
+    
     //修改用户类型
-    function edittype()
+    function edittype(Request $request)
     {
+        $page=$request->get('page');
+        $id=$request->get('id');
+        $invite_userid=(int)$request->post('invite_userid');
+        $user=(new User())->findOrFail($id);
         if ($_POST) {
-//            if(!empty($_POST['invite_userid']))
-//            {
-//                $invite_userid = DB::table('user')->where('id=?')->bindValues($_POST['invite_userid'])->value('id', 'int');
-//                if ($invite_userid == 0) {
-//                    show_msg(array('邀请人ID不正确'));exit;
-//                }
-//            }
-            $arr = array(
-                'type_id' => (int)$_POST['type_id']
-            );
-            DB::table('user')->where('id=?')->bindValues($_GET['id'])->limit(1)->update($arr);
-            show_msg(array('修改成功', '', $this->base_url('user')));
-            //$this->redirect('usertype');
+            $user->invite_userid=$invite_userid;
+            if($invite_userid!=0){
+                $invite=(new User())->find($invite_userid);
+                if(!$invite->is_exist){
+                    redirect()->back()->with('error','邀请人ID不正确');
+                }
+            }
+            $user->type_id=(int)$request->post('type_id');
+            $user->save();
+            redirect("user/?page={$page}")->with('msg','修改成功');
         } else {
-            $UserType = new UserType();
-            $data['usertype'] = $UserType->getList();
-            $data['row'] = DB::table('user')->where('id=?')->bindValues($_GET['id'])->row();
+            $data['user'] = $user;
+            $data['usertype'] = (new UserType())->getList();
             $this->view('user', $data);
         }
     }

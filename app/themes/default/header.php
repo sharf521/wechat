@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/plugin/Swiper/css/swiper.min.css"/>
     <script src="/plugin/Swiper/js/swiper.min.js"></script>
     <link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
-    <script src="/plugin/layui.v2/layui.all.js"></script>
     <link rel="stylesheet" href="/themes/base.css"/>
     <link href="/themes/default/default.css" rel="stylesheet" type="text/css" />
     <script src="/themes/default/default.js"></script>
@@ -104,9 +103,29 @@
         <!--所有分类 End-->
         <div class="nav-list clearFix">
             <ul>
-                <li <? if($_SERVER['PHP_SELF']=='/index.php'){echo 'class="hover"';}?>><a href="/">首页</a></li>
-                <li <? if(strpos($_SERVER['PHP_SELF'],'/goods/')!==false){echo 'class="hover"';}?>><a href="/goods/lists">商品列表</a></li>
-                    <li <? if(strpos($_SERVER['PHP_SELF'],'/purchase/')!==false){echo 'class="hover"';}?>><a href="/purchase/lists">我要采购</a></li>
+                <?
+                $headerHoverIndex='';
+                if($_SERVER['PHP_SELF']=='/index.php'){
+                    $headerHoverIndex=1;
+                }
+                if(strpos($_SERVER['PHP_SELF'],'/goods/')!==false){
+                    $headerHoverIndex=2;
+                }
+                if(strpos($_SERVER['PHP_SELF'],'/purchase/')!==false){
+                    $headerHoverIndex=3;
+                }
+                if(strpos($_SERVER['PHP_SELF'],'/goods/lists/13')!==false){
+                    $headerHoverIndex=4;
+                }
+                if(strpos($_SERVER['PHP_SELF'],'/goods/lists/206')!==false){
+                    $headerHoverIndex=5;
+                }
+                ?>
+                <li <? if($headerHoverIndex==1){echo 'class="hover"';}?>><a href="/">首页</a></li>
+                <li <? if($headerHoverIndex==2){echo 'class="hover"';}?>><a href="/goods/lists">商品列表</a></li>
+                <li <? if($headerHoverIndex==3){echo 'class="hover"';}?>><a href="/purchase/lists">我要采购</a></li>
+                <li <? if($headerHoverIndex==4){echo 'class="hover"';}?>><a href="/goods/lists/13">汽车专区</a></li>
+                <li <? if($headerHoverIndex==5){echo 'class="hover"';}?>><a href="/goods/lists/206">苹果专区</a></li>
             </ul>
         </div>
     </div>

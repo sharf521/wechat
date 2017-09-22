@@ -26,7 +26,7 @@
                     <span class="label">运费: </span><span class="shipping_fee">¥<?=$goods->shipping_fee?></span>
                 </div>
                 <div class="bottom_buy_box">
-                    <form method="post" name="form_order">
+                    <form method="post" name="form_order" class="layui-form">
                         <? if($goods->is_have_spec) : ?>
                             <? $specs=$goods->GoodsSpec();?>
                             <script>
@@ -58,10 +58,35 @@
                             <div class="stock_count">当前库存<span id="goods_stock_count" class="goods_stock_count"><?=$goods->stock_count?></span>件</div>
                         </div>
                         <div class="goods_prompt"></div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">首付比例</label>
+                            <div class="layui-input-inline">
+                                <select name="shop_category" class="layui-select">
+                                    <option value="0">零首付</option>
+                                    <option value="0.1">10%</option>
+                                    <option value="0.2">20%</option>
+                                    <option value="0.3">30%</option>
+                                    <option value="0.5">50%</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">分期月数</label>
+                            <div class="layui-input-block">
+                                <ul class="selectLimit">
+                                    <li class="active">不分期</li>
+                                    <li>3个月</li>
+                                    <li>6个月</li>
+                                    <li>9个月</li>
+                                    <li>12个月</li>
+                                </ul>
+                            </div>
+                        </div>
+
                         <div class="buy_box_opts clearFix">
                             <? if($goods->stock_count>0):?>
                                 <a href="javascript:;" class="layui-btn opt1">加入购物车</a>
-                                <a href="javascript:;" class="layui-btn opt2">立即购买</a>
+                                <a href="javascript:;" class="layui-btn opt2">分期购买</a>
                             <? else: ?>
                                 <span class="layui-btn layui-btn-primary">库存己不足</span>
                             <? endif;?>

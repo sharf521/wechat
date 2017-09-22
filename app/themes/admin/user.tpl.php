@@ -125,27 +125,6 @@ elseif($this->func=='edit'){?>
     </form>
 <?
 }
-elseif($this->func=='updatepwd'){?>
-    <div class="main_title">
-        <span>用户管理</span>修改密码
-        <?=$this->anchor('user','列表','class="but1"');?>
-    </div>
-    <form method="post">
-        <div class="form1">
-            <ul>
-                <li><label>用户编号：</label><?=$row['id']?></li>
-                <li><label>用户名：</label><?=$row['username']?></li>
-                <li><label>新密码：</label><input type="text" name="password" /></li>
-                <li><label>确认新密码：</label><input type="text" name="sure_password" /></li>
-            </ul>
-            <input type="hidden" name="id" value="<?=$row['id']?>"/>
-            <input type="hidden" name="username" value="<?=$row['username']?>"/>
-            <input type="submit" class="but3" value="保存" />
-            <input type="button" class="but3" value="返回" onclick="window.history.go(-1)"/>
-        </div>
-    </form>
-<?
-}
 elseif($this->func=='edittype')
 {
 ?>
@@ -154,22 +133,26 @@ elseif($this->func=='edittype')
 		<?=$this->anchor('user','列表','class="but1"');?>
     </div>
     <form method="post">
-    	<input type="hidden" name="id" value="<?=$row['id']?>"/>
-    	<div class="form1">
+        <input type="hidden" name="id" value="<?=$row['id']?>"/>
+        <div class="form1">
             <ul>
-                <li><label>用户名：</label><?=$row['username']?></li>
+                <li><label>用户名：</label><?=$user->username?></li>
+                <li><label>邀请人ID</label>
+                    <input type="text" value="<?=$user->invite_userid?>" name="invite_userid">
+                </li>
                 <li><label>用户类型：</label>
-                <select name="type_id" id="type_id">
-                	<option value="">请选择</option>
-                	<?
-                    	foreach($usertype as $utype)
-						{
-							?>
-                            <option value="<?=$utype['id']?>" <? if($utype['id']==$row['type_id']){echo ' selected';}?>><?=$utype['name']?></option>  
+                    <select name="type_id" id="type_id">
+                        <option value="">请选择</option>
+                        <?
+                        foreach ($usertype as $utype) {
+                            ?>
+                            <option value="<?= $utype['id'] ?>" <? if ($utype['id'] == $user->type_id) {
+                                echo ' selected';
+                            } ?>><?= $utype['name'] ?></option>
                             <?
-						}
-					?>   
-                </select>   
+                        }
+                        ?>
+                    </select>
                 </li>
             </ul>
             <input type="submit" class="but3" value="保存" />
