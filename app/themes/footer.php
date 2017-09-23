@@ -1,3 +1,4 @@
+<script src="/plugin/layui.v2/layui.all.js"></script>
 <script src="/plugin/js/echo.min.js"></script>
 <script>
     window.onload=function(){

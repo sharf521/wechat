@@ -55,7 +55,7 @@
                                 <input class="text" value="1"  maxlength="5" type="text" id="buy_quantity" name="quantity" onkeyup="value=value.replace(/[^0-9]/g,'')">
                                 <span class="btn-add">+</span>
                             </div>
-                            <div class="stock_count">当前库存<span id="goods_stock_count" class="goods_stock_count"><?=$goods->stock_count?></span>件</div>
+                            <div class="stock_count">库存 <span id="goods_stock_count" class="goods_stock_count"><?=$goods->stock_count?></span> 件</div>
                         </div>
                         <div class="goods_prompt"></div>
                         <div class="layui-form-item">
@@ -85,8 +85,12 @@
 
                         <div class="buy_box_opts clearFix">
                             <? if($goods->stock_count>0):?>
-                                <a href="javascript:;" class="layui-btn opt1">加入购物车</a>
-                                <a href="javascript:;" class="layui-btn opt2">分期购买</a>
+                                <? if($goods->is_presale==1): ?>
+                                    <a href="javascript:;" class="layui-btn btn-presale">申请预订</a>
+                                <? else : ?>
+                                    <a href="javascript:;" class="layui-btn opt1">加入购物车</a>
+                                    <a href="javascript:;" class="layui-btn opt2">分期购买</a>
+                                <? endif;?>
                             <? else: ?>
                                 <span class="layui-btn layui-btn-primary">库存己不足</span>
                             <? endif;?>

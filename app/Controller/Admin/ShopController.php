@@ -59,14 +59,37 @@ class ShopController extends AdminController
         $shop->save();
         redirect('shop/?page=' . $page)->with('msg', '操作成功！');
     }
+    
+    public function edit(Request $request,Shop $shop)
+    {
+        $shop=$shop->findOrFail($request->get('user_id'));
+        $page=$request->get('page');
+        if($shop->status!=1){
+            redirect()->back()->with('error','状态异常');
+        }
+        if($_POST){
+            $shop->name=$request->post('name');
+            $shop->contacts=$request->post('contacts');
+            $shop->tel=$request->post('tel');
+            $shop->qq=$request->post('qq');
+            $shop->is_presale=$request->post('is_presale');
+            $shop->save();
+            redirect("shop/?page={$page}")->with('msg','操作成功！');
+        }else{
+            $this->title='编辑';
+            $data['shop']=$shop;
+            $this->view('shopEdit',$data);
+        }
+    }
 
     public function checked(Request $request,Shop $shop)
     {
         $shop=$shop->findOrFail($request->get('user_id'));
+        $page=$request->get('page');
+        if($shop->status==1){
+            redirect()->back()->with('error','状态异常,勿要重复操作！');
+        }
         if($_POST){
-            if($shop->status==1){
-                redirect()->back()->with('error','状态异常,勿要重复操作！');
-            }
             $checked=$request->post('checked');
             if(! in_array($checked,array(1,2))){
                 redirect()->back()->with('error','数据异常！');
@@ -81,14 +104,9 @@ class ShopController extends AdminController
                 $user->is_shop=1;
                 $user->save();
             }
-            redirect('shop')->with('msg','操作成功！');
+            redirect("shop/?page={$page}")->with('msg','操作成功！');
         }else{
             $this->title='审核';
-/*            $center=new Center();
-            $user=(new User())->find($shop->user_id);
-            $account=$center->getUserFunc($user->openid);
-            $data['user']=$user;
-            $data['account']=$account;*/
             $data['shop']=$shop;
             $this->view('shop',$data);
         }

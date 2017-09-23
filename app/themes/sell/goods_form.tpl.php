@@ -16,6 +16,16 @@
                                 <input type="text" name="name" value="<?=$goods->name?>"  placeholder="请填写名称" class="layui-input" value="" autocomplete="off"/>
                             </div>
                         </div>
+                        <? if($shop->is_presale==1) :?>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">开启预售</label>
+                                <div class="layui-input-block">
+                                    <input type="checkbox" value="1" name="is_presale" lay-skin="switch" <? if($goods->is_presale==1){echo 'checked';}?>>
+                                </div>
+                                <div class="layui-form-mid layui-word-aux">开启预售后价格为定金价格</div>
+                            </div>
+                        <? endif;?>
+
                         <input type="hidden" name="is_have_spec" id="is_have_spec" value="<?=(int)$goods->is_have_spec?>">
                         <div id="specBox_no" <? if((int)$goods->is_have_spec==1){echo 'class="hide"';}?>>
                             <div class="layui-form-item">
@@ -53,19 +63,19 @@
                                         </thead>
                                         <tbody>
                                         <? foreach ($specs as $spec) : ?>
-                                        <tr>
-                                            <td>
-                                                <input type="hidden" name="spec_id[]" value="<?=$spec->id?>">
-                                                <input name="spec_1[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_1?>"></td>
-                                            <td><input name="spec_2[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_2?>"></td>
-                                            <td><input name="price[]" type="text" size="6"  placeholder="￥" class="layui-input" value="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"></td>
-                                            <td><input name="stock_count[]" type="text" size="6"  placeholder="库存数量" value="<?=$spec->stock_count?>" class="layui-input" onkeyup="value=value.replace(/[^0-9]/g,'')"></td>
-                                            <td>
-                                                <span class="up_btn layui-btn layui-btn-mini">上移</span>
-                                                <span class="down_btn layui-btn layui-btn-mini">下移</span>
-                                                <span class="delete_btn layui-btn layui-btn-mini">删除</span>
-                                            </td>
-                                        </tr>
+                                            <tr>
+                                                <td>
+                                                    <input type="hidden" name="spec_id[]" value="<?=$spec->id?>">
+                                                    <input name="spec_1[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_1?>"></td>
+                                                <td><input name="spec_2[]" type="text" size="6" class="layui-input" placeholder="具体规格" value="<?=$spec->spec_2?>"></td>
+                                                <td><input name="price[]" type="text" size="6"  placeholder="￥" class="layui-input" value="<?=$spec->price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')"></td>
+                                                <td><input name="stock_count[]" type="text" size="6"  placeholder="库存数量" value="<?=$spec->stock_count?>" class="layui-input" onkeyup="value=value.replace(/[^0-9]/g,'')"></td>
+                                                <td>
+                                                    <span class="up_btn layui-btn layui-btn-mini">上移</span>
+                                                    <span class="down_btn layui-btn layui-btn-mini">下移</span>
+                                                    <span class="delete_btn layui-btn layui-btn-mini">删除</span>
+                                                </td>
+                                            </tr>
                                         <? endforeach;?>
                                         </tbody>
                                     </table>
@@ -134,6 +144,8 @@
         </div>
     </div>
     <script>
-        goodsAdd_js();
+        $(function () {
+            goodsAdd_js();
+        });
     </script>
 <?php require 'footer.php';?>

@@ -5,11 +5,11 @@ $(function () {
         ,element=layui.element;
     util.fixbar();
     form.render();
-    layui.laydate.render({
-        elem: '#starttime'
-    });
-    layui.laydate.render({
-        elem: '#endtime'
+    lay('.layui-date').each(function(){
+        layui.laydate.render({
+            elem: this
+            ,trigger: 'click'
+        });
     });
     if ($('.upload_btn').length > 0) {
         var index;

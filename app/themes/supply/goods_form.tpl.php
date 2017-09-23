@@ -143,6 +143,8 @@
         </div>
     </div>
     <script>
-        goodsAdd_js();
+        $(function () {
+            goodsAdd_js();
+        })
     </script>
 <?php require 'footer.php';?>

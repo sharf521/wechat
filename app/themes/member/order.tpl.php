@@ -34,7 +34,7 @@
                                         $goods=$order->OrderGoods();
                                         foreach ($goods as $g) : ?>
                                             <div class="clearFix" style="border-bottom: 1px solid #efefef;">
-                                                <img class="goodsImg" src="<?=\App\Helper::smallPic($g->goods_image)?>" width="100">
+                                                <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><img class="goodsImg" src="<?=\App\Helper::smallPic($g->goods_image)?>" width="100"></a>
                                                 <div class="goodsDetail">
                                                     <div class="name">
                                                         <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>

@@ -18,11 +18,13 @@
                 </div>
                 <table class="layui-table"  lay-even lay-skin="row">
                     <thead>
-                    <th>名称</th>
-                    <th>价格</th>
-                    <th>库存</th>
-                    <th>添加时间</th>
-                    <th width="140">操作</th>
+                    <tr>
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>库存</th>
+                        <th>添加时间</th>
+                        <th width="140">操作</th>
+                    </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($result['list'] as $goods) :

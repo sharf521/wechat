@@ -5,11 +5,11 @@ $(function () {
         ,element=layui.element;
     util.fixbar();
     form.render();
-    layui.laydate.render({
-        elem: '#starttime'
-    });
-    layui.laydate.render({
-        elem: '#endtime'
+    lay('.layui-date').each(function(){
+        layui.laydate.render({
+            elem: this
+            ,trigger: 'click'
+        });
     });
     if ($('.upload_btn').length > 0) {
         var index;
@@ -186,7 +186,6 @@ function goodsAdd_js() {
 //goods end
 
 function purchaseGoodsEdit_js() {
-    layui.form.render();
     layui.form.on('submit(*)', function (data) {
         var form = data.form;
         var fields = data.field;

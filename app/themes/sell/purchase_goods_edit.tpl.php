@@ -108,6 +108,8 @@
         </div>
     </div>
     <script>
-        purchaseGoodsEdit_js();
+        $(function () {
+            purchaseGoodsEdit_js();
+        });
     </script>
 <?php require 'footer.php';?>

@@ -127,6 +127,7 @@ class GoodsController extends SellController
                     $goods->spec_name1=$spec_name1;
                     $goods->spec_name2=$spec_name2;
                 }
+                $goods->is_presale=(int)$request->post('is_presale');
                 $goods->shipping_fee=(float)$shipping_fee;
                 $goods->shipping_id=$shipping_id;
                 $goods->sale_count=0;
@@ -164,65 +165,12 @@ class GoodsController extends SellController
                 redirect()->back()->with('error', $error);
             }
         }else{
+            $data['shop']=(new Shop())->find($this->user_id);
             $data['images']=$goodsImage->where("user_id=? and goods_id=0 and status=1")->bindValues($this->user_id)->get();
             $data['cates']=$this->getCates();
             $data['shippings']=$this->getShippings();
             $data['specs']=array('','');
             $this->view('goods_form',$data);
-        }
-    }
-
-    //编辑采购商品
-    public function purchaseGoodsEdit(Goods $goods,SupplyGoods $supplyGoods,Request $request)
-    {
-        $goods=$goods->findOrFail($request->get('id'));
-        $supplyGoods=$supplyGoods->findOrFail($goods->supply_goods_id);
-        if($goods->supply_goods_id==0){
-            redirect()->back()->with('error','不是采购的商品！');
-        }
-        $goods->GoodsSpec();//同步供货规格
-        if($_POST){
-            $name=$request->post('name');
-            if(empty($name)){
-                redirect()->back()->with('error','商品名称不能为空！');
-            }
-            $goods->name=$name;
-            /*if($supplyGoods->is_have_spec==0){
-                $retail_price=(float)$request->post('retail_price');
-                if($retail_price<$supplyGoods->price){
-                    redirect()->back()->with('error','零售价不能小于供货价');
-                }
-                $goods->price=$retail_price;
-                $goods->retail_float_money=abs(math($retail_price,$supplyGoods->price,'-',2));
-            }else{
-                $specs=$supplyGoods->GoodsSpec();
-                foreach($specs as $i=>$v){
-                    $spec=(new GoodsSpec())->where("goods_id={$goods->id} && supply_spec_id={$v->id}")->first();
-                    $spec->price=(float)$request->post("retail_price{$v->id}");
-                    $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
-                    $spec->save();
-                    if($i==0){
-                        $goods->price=$spec->price;
-                        $goods->retail_float_money=$spec->retail_float_money;
-                    }
-                }
-            }*/
-            
-            $shop_cateid=(int)$request->post('shop_category');
-            if($shop_cateid!=0){
-                $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
-            }
-            $goods->shop_cateid=$shop_cateid;
-            $goods->shop_catepath=$shop_catepath;
-            $goods->save();
-            redirect('goods')->with('msg', '修改成功！');
-        }else{
-            $data['cates']=$this->getCates();
-            $data['goods']=$goods->pullSupplyGoods();
-            $data['supplyGoods']=$supplyGoods;
-            $data['goodsSpecs']=(new GoodsSpec())->where('goods_id=?')->bindValues($goods->id)->get();
-            $this->title='编辑采购商品';
-            $this->view('purchase_goods_edit',$data);
         }
     }
 
@@ -273,6 +221,7 @@ class GoodsController extends SellController
                     $goods->spec_name1=$spec_name1;
                     $goods->spec_name2=$spec_name2;
                 }
+                $goods->is_presale=(int)$request->post('is_presale');
                 $goods->shipping_fee=$shipping_fee;
                 $goods->shipping_id=$shipping_id;
                 $goods->save();
@@ -323,6 +272,7 @@ class GoodsController extends SellController
                 redirect()->back()->with('error', $error);
             }
         }else{
+            $data['shop']=(new Shop())->find($this->user_id);
             $data['goods']=$goods;
             if($goods->is_have_spec){
                 $data['specs']=$goods->GoodsSpec();
@@ -334,6 +284,60 @@ class GoodsController extends SellController
             $data['cates']=$this->getCates();
             $data['shippings']=$this->getShippings();
             $this->view('goods_form',$data);
+        }
+    }
+
+    //编辑采购商品
+    public function purchaseGoodsEdit(Goods $goods,SupplyGoods $supplyGoods,Request $request)
+    {
+        $goods=$goods->findOrFail($request->get('id'));
+        $supplyGoods=$supplyGoods->findOrFail($goods->supply_goods_id);
+        if($goods->supply_goods_id==0){
+            redirect()->back()->with('error','不是采购的商品！');
+        }
+        $goods->GoodsSpec();//同步供货规格
+        if($_POST){
+            $name=$request->post('name');
+            if(empty($name)){
+                redirect()->back()->with('error','商品名称不能为空！');
+            }
+            $goods->name=$name;
+            /*if($supplyGoods->is_have_spec==0){
+                $retail_price=(float)$request->post('retail_price');
+                if($retail_price<$supplyGoods->price){
+                    redirect()->back()->with('error','零售价不能小于供货价');
+                }
+                $goods->price=$retail_price;
+                $goods->retail_float_money=abs(math($retail_price,$supplyGoods->price,'-',2));
+            }else{
+                $specs=$supplyGoods->GoodsSpec();
+                foreach($specs as $i=>$v){
+                    $spec=(new GoodsSpec())->where("goods_id={$goods->id} && supply_spec_id={$v->id}")->first();
+                    $spec->price=(float)$request->post("retail_price{$v->id}");
+                    $spec->retail_float_money=abs(math($spec->price,$v->price,'-',2));
+                    $spec->save();
+                    if($i==0){
+                        $goods->price=$spec->price;
+                        $goods->retail_float_money=$spec->retail_float_money;
+                    }
+                }
+            }*/
+
+            $shop_cateid=(int)$request->post('shop_category');
+            if($shop_cateid!=0){
+                $shop_catepath=(new ShopCategory())->find($shop_cateid)->path;
+            }
+            $goods->shop_cateid=$shop_cateid;
+            $goods->shop_catepath=$shop_catepath;
+            $goods->save();
+            redirect('goods')->with('msg', '修改成功！');
+        }else{
+            $data['cates']=$this->getCates();
+            $data['goods']=$goods->pullSupplyGoods();
+            $data['supplyGoods']=$supplyGoods;
+            $data['goodsSpecs']=(new GoodsSpec())->where('goods_id=?')->bindValues($goods->id)->get();
+            $this->title='编辑采购商品';
+            $this->view('purchase_goods_edit',$data);
         }
     }
 
