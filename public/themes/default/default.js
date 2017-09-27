@@ -323,75 +323,73 @@ function purchase_detail_js() {
 }
 function goods_detail_js()
 {
-    $(function(){
-        // 图片替换效果
-        $('.goods_pics li img').mouseover(function(){
-            $('.goods_pics li img').removeClass();
-            $(this).addClass('ware_pic_hover');
-            var src=$(this).attr('src').split('_');
-            $('.pic_big img').attr('src', src[0]);
-        });
+    // 图片替换效果
+    $('.goods_pics li img').mouseover(function(){
+        $('.goods_pics li img').removeClass();
+        $(this).addClass('ware_pic_hover');
+        var src=$(this).attr('src').split('_');
+        $('.pic_big img').attr('src', src[0]);
+    });
 
-        $('.wrap-input .btn-reduce').on('click',function(){
-            var input=$(this).parent().find('input');
-            var num=Number(input.val());
-            if(num>1){
-                input.val(num-1);
-            }
-        });
-        $('.wrap-input .btn-add').on('click', function () {
-            var input=$(this).parent().find('input');
-            var num=Number(input.val());
+    $('.wrap-input .btn-reduce').on('click',function(){
+        var input=$(this).parent().find('input');
+        var num=Number(input.val());
+        if(num>1){
+            input.val(num-1);
+        }
+    });
+    $('.wrap-input .btn-add').on('click', function () {
+        var input=$(this).parent().find('input');
+        var num=Number(input.val());
+        var max=Number($('#goods_stock_count').html());
+        if(num < max){
+            input.val(num+1);
+        }
+    });
+    $("#buy_quantity").bind('input propertychange',function(){
+        var num=Number($(this).val());
+        if(Number.isInteger(num)){
             var max=Number($('#goods_stock_count').html());
-            if(num < max){
-                input.val(num+1);
+            if(num > max){
+                $(this).val(max);
             }
-        });
-        $("#buy_quantity").bind('input propertychange',function(){
-            var num=Number($(this).val());
-            if(Number.isInteger(num)){
-                var max=Number($('#goods_stock_count').html());
-                if(num > max){
-                    $(this).val(max);
-                }
-            }else{
-                $(this).val(1);
-            }
-        });
-        $('#specBox_1 span:first').click();
-        //alert(goodsSpec.spec1_name);
-        //alert(goodsSpec.spec2_name);
-        //遍历图片
-/*        $('.goods_detail_txt img').each(function (i) {
-            console.log($(this).width());
-            if($(this).width()>=700){
-                $(this).attr('width','100%');
-            }
-        });*/
+        }else{
+            $(this).val(1);
+        }
+    });
+    $('#specBox_1 span:first').click();
+    //alert(goodsSpec.spec1_name);
+    //alert(goodsSpec.spec2_name);
+    //遍历图片
+    /*        $('.goods_detail_txt img').each(function (i) {
+     console.log($(this).width());
+     if($(this).width()>=700){
+     $(this).attr('width','100%');
+     }
+     });*/
 
-        $('.selectLimit li').on('click',function () {
-            $(this).addClass('active').siblings().removeClass('active');
-        });
-        //购买记录
-        layui.element.on('tab(demo)', function(data){
-            if(data.index==1){
-                $.get('/goods/getOrderRecord/?id='+goods_id,function (data) {
-                    var json = eval('(' + data + ')');
-                    if(json.code==1){
-                        var list=json.list;
-                        html='<table class="layui-table" lay-skin="line"><thead><tr><td>买家</td><td></td><td width="150">购买数量</td><td>购买时间</td></thead>';
-                        for(index in list){
-                            var obj=list[index];
-                            html+="<tr><td>"+obj.username+"</td><td>"+obj.spec_1+obj.spec_2+"</td><td>"+obj.quantity+"</td><td width='200'>"+obj.created_at+"</td></tr>";
-                        }
-                        html+='</table>';
-                    }else{
-                        html='暂无记录';
+    $('.selectLimit li').on('click',function () {
+        $(this).addClass('active').siblings().removeClass('active');
+    });
+    //购买记录
+    layui.element.on('tab(demo)', function(data){
+        if(data.index==1){
+            $.get('/goods/getOrderRecord/?id='+goods_id,function (data) {
+                var json = eval('(' + data + ')');
+                if(json.code==1){
+                    var list=json.list;
+                    html='<table class="layui-table" lay-skin="line"><thead><tr><td>买家</td><td></td><td width="150">购买数量</td><td>购买时间</td></thead>';
+                    for(index in list){
+                        var obj=list[index];
+                        html+="<tr><td>"+obj.username+"</td><td>"+obj.spec_1+obj.spec_2+"</td><td>"+obj.quantity+"</td><td width='200'>"+obj.created_at+"</td></tr>";
                     }
-                    $('#orderRecord').html(html);
-                })
-            }
-        });
+                    html+='</table>';
+                }else{
+                    html='暂无记录';
+                }
+                $('#orderRecord').html(html);
+            })
+        }
     });
     //加入购物车
     $('.buy_box_opts .opt1').on('click',function (event) {
@@ -426,6 +424,7 @@ function goods_detail_js()
             }
         });
     });
+    
     //立刻购买
     $('.buy_box_opts .opt2').on('click',function(){
         var form=document.forms['form_order'];
@@ -443,7 +442,41 @@ function goods_detail_js()
         if(tag){
             form.submit();
         }
-    })
+    });
+    //预定
+    $('.buy_box_opts .btn-presale').on('click',function(){
+        var quantity=document.forms['form_order'].quantity.value;
+        var spec_id=$('#spec_id').val();
+        $.post("/index.php/goods/preSale/",{goods_id:goods_id,spec_id:spec_id,quantity:quantity},function(data){
+            var json=eval("("+data+")");
+            if(json.code=='noLogin'){
+                layer.open({
+                    content: '您还没有登陆，登陆后预订？'
+                    ,btn: ['确定', '取消']
+                    ,yes: function(){
+                        window.location='/user/login';
+                    }
+                });
+            }else{
+                var form=document.forms['form_order'];
+                var quantity=form.quantity;
+                var tag=true;
+                if(Number(quantity.value)==0){
+                    $(quantity).focus();
+                    layer.msg('请正确选择数量');
+                    tag=false;
+                }
+                if(Number($('#goods_stock_count').html()) < Number(quantity.value)){
+                    layer.msg('库存不足');
+                    tag=false;
+                }
+                if(tag){
+                    var url='/preSaleOrder/confirm/?goods_id='+goods_id+'&quantity='+quantity.value+'&spec_id='+spec_id;
+                    window.location=url;
+                }
+            }
+        });
+    });
 }
 function spec(id, spec1, spec2, price, stock) {
     this.id = id;
@@ -480,7 +513,7 @@ function GoodsSpec(specs)
     };
     for (var x in this.spec1){
         $("#specBox_1").append("<span onclick='selectSpec(1,this)'>" + this.spec1[x] + "</span>");
-    };
+    }
     this.getSpec=function(){
         for (var x in specs){
             var spec=specs[x];

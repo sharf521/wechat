@@ -153,8 +153,11 @@ class Center
             'money'=>$data['money'],
             'typeid'=>$data['typeid'],
             'remark'=>$data['remark'],
-            'label'=>$data['order_sn']
+            'label'=>$data['label']
         );
+        if(empty($params['label'])){
+            $params['label']=$params['order_sn'];
+        }
         $params['sign']=$this->getSign($params);
         $data11['data']=json_encode($params);
         $html=$this->curl_url('cashier/firstOrNew',$data11);

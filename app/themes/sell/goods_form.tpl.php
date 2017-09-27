@@ -22,7 +22,13 @@
                                 <div class="layui-input-block">
                                     <input type="checkbox" value="1" name="is_presale" lay-skin="switch" <? if($goods->is_presale==1){echo 'checked';}?>>
                                 </div>
-                                <div class="layui-form-mid layui-word-aux">开启预售后价格为定金价格</div>
+                                <div class="layui-form-mid layui-word-aux">预售全部包邮</div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">代理预付价</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="pre_price" value="<?=$goods->pre_price?>" onkeyup="value=value.replace(/[^0-9.]/g,'')" placeholder="￥" class="layui-input" value="" autocomplete="off"/>
+                                </div>
                             </div>
                         <? endif;?>
 

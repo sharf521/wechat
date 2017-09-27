@@ -4,6 +4,7 @@
         <li><a href="<?=url('/member/address')?>"  <? if($this->control=='address'){echo 'class="whover"';}?>>地址管理</a></li>
         <li><a href="<?=url('/member/invite')?>"  <? if($this->control=='invite'){echo 'class="whover"';}?>>邀请链接</a></li>
         <li><a href="<?=url('/member/order')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/member/order')!==false){echo 'class="whover"';}?>>我的订单</a></li>
+        <li><a href="<?=url('/member/preSaleOrder')?>"  <? if(strpos($_SERVER['PHP_SELF'],'/member/preSaleOrder')!==false){echo 'class="whover"';}?>>我的预订</a></li>
         <li><a href="<?=url('/member/notice')?>"  <? if($this->control=='notice'){echo 'class="whover"';}?>>我的消息</a></li>
     </ul>
     <? if($this->user->is_shop==0) : ?>

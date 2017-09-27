@@ -16,6 +16,8 @@ use App\Model\Goods;
 use App\Model\GoodsSpec;
 use App\Model\Order;
 use App\Model\OrderGoods;
+use App\Model\PreSale;
+use App\Model\User;
 use System\Lib\DB;
 use System\Lib\Request;
 
@@ -141,6 +143,7 @@ class GoodsController extends HomeController
             $wap_url='http://'.$domain[1]."/goods/detail/{$id}/?st_uid={$goods->user_id}";
             $data['QRcode_url']=Helper::QRcode($wap_url,'goods',$id);
             $this->title=$goods->name;
+
             //库存0 显示 看看店铺其它商品
             $this->view('goods_detail',$data);
         }
@@ -192,5 +195,16 @@ class GoodsController extends HomeController
         echo json_encode($return_arr);
     }
 
+    //预定
+    public function preSale()
+    {
+        $user_id=$this->user_id;
+        if(empty($user_id)){
+            $return_arr=array('code'=>'noLogin');
+        }else{
+            $return_arr=array('code'=>0);
+        }
+        echo json_encode($return_arr);
+    }
 
 }

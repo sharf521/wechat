@@ -86,7 +86,7 @@
                         <div class="buy_box_opts clearFix">
                             <? if($goods->stock_count>0):?>
                                 <? if($goods->is_presale==1): ?>
-                                    <a href="javascript:;" class="layui-btn btn-presale">申请预订</a>
+                                        <a href="javascript:;" class="layui-btn btn-presale">申请预订</a>
                                 <? else : ?>
                                     <a href="javascript:;" class="layui-btn opt1">加入购物车</a>
                                     <a href="javascript:;" class="layui-btn opt2">分期购买</a>
@@ -132,6 +132,8 @@
     <script src="/plugin/js/fly.min.js"></script>
     <script>
         var goods_id='<?=(int)$goods->id?>';
-        goods_detail_js();
+        $(function(){
+            goods_detail_js();
+        });
     </script>
 <?php require 'footer.php';?>

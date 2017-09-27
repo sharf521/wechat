@@ -128,6 +128,7 @@ class GoodsController extends SellController
                     $goods->spec_name2=$spec_name2;
                 }
                 $goods->is_presale=(int)$request->post('is_presale');
+                $goods->pre_price=(float)$request->post('pre_price');
                 $goods->shipping_fee=(float)$shipping_fee;
                 $goods->shipping_id=$shipping_id;
                 $goods->sale_count=0;
@@ -222,6 +223,7 @@ class GoodsController extends SellController
                     $goods->spec_name2=$spec_name2;
                 }
                 $goods->is_presale=(int)$request->post('is_presale');
+                $goods->pre_price=(float)$request->post('pre_price');
                 $goods->shipping_fee=$shipping_fee;
                 $goods->shipping_id=$shipping_id;
                 $goods->save();

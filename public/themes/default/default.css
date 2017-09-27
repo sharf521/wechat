@@ -201,7 +201,7 @@ i, cite, em { font-style: normal; }
 
 .bottom_buy_box{font-size: 14px;}
 .bottom_buy_box .buy_box_opts{padding-left: 20px;}
-.bottom_buy_box .buy_box_opts a{width: 150px;}
+.bottom_buy_box .buy_box_opts a,.bottom_buy_box .buy_box_opts span{width: 150px;}
 .bottom_buy_box .buy_box_opts .opt1{background-color: #f85;}
 .bottom_buy_box .buy_box_opts .opt2{background-color: #f44;}
 .bottom_buy_box .buy_box_opts .btn-presale{margin-left: 70px;background-color: #f85;}

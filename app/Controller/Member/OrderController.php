@@ -10,6 +10,7 @@ namespace App\Controller\Member;
 
 
 use App\Center;
+use App\Model\CashierLog;
 use App\Model\Order;
 use App\Model\OrderGoods;
 use App\Model\System;
@@ -67,34 +68,40 @@ class OrderController extends MemberController
         if($order->status!=1){
             redirect()->back()->with('error','异常，请勿重复支付！');
         }
-        $trade_no=$order->out_trade_no;
+
         $center=new Center();
-        if(empty($trade_no)){
+        $cashierLog=(new CashierLog())->where("typeid='order_pay' and order_id='{$order->id}'")->first();
+        if(!$cashierLog->is_exist){
             $orderGoods=$order->OrderGoods();
             if(count($orderGoods)==1){
                 $orderTitle=$orderGoods[0]->goods_name;
             }else{
                 $orderTitle=$orderGoods[0]->goods_name.' 等多件。';
             }
+            
+            $cashier_no='CH'.time().rand(10000,99999);
+            $cashierLog->cashier_no=$cashier_no;
+            $cashierLog->order_id=$order->id;
+            $cashierLog->typeid='order_pay';
+            $cashierLog->user_id=$order->buyer_id;
+            $cashierLog->title=$orderTitle;
             $params=array(
-                'order_sn'=>$order->order_sn,
+                'order_sn'=>$cashier_no,
                 'order_pc_url'=>$this->site->pc_url,
                 'order_wap_url'=>$this->site->wap_url,
                 'openid'=>$this->user->openid,
-                'title'=>$orderTitle,
-                'money'=>$order->order_money,
+                'title'=>$cashierLog->title,
+                'money'=>$order->pre_money,
                 'typeid'=>'order_pay',
+                'label'=>"preSaleOrder:{$order->id}",
                 'remark'=>''
             );
-/*            $sell_user=(new User())->find($order->seller_id);
-            $params['other_nickname']=$sell_user->username;
-            $params['other_openid']=$sell_user->openid;*/
             $trade_no=$center->getOrNewCashierNo($params);
-            $order->out_trade_no=$trade_no;
-            $order->save();
+            $cashierLog->out_trade_no=$trade_no;
+            $cashierLog->save();
         }
         $url=($this->is_wap)?$this->site->center_url_wap:$this->site->center_url;
-        $url.="/".$center->cashierUrl($trade_no);
+        $url.="/".$center->cashierUrl($cashierLog->out_trade_no);
         redirect($url);
     }
 
