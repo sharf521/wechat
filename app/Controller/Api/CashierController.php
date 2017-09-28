@@ -54,7 +54,7 @@ class CashierController extends ApiController
     }
 
     //用户中心支付完成后调用
-    public function getPayed()
+    public function setPayed()
     {
         $data=$this->data;
         $cashierLog=(new CashierLog())->find($data['order_sn']);
