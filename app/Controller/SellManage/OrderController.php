@@ -10,7 +10,6 @@ namespace App\Controller\SellManage;
 
 
 use App\Model\Order;
-use App\Model\SupplyGoods;
 use System\Lib\DB;
 use System\Lib\Request;
 use System\Lib\Session;

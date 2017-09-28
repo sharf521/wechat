@@ -9,10 +9,7 @@
 namespace App\Controller\Home;
 
 
-use App\Model\Cart;
 use App\Model\Goods;
-use App\Model\Order;
-use App\Model\OrderGoods;
 use App\Model\OrderShipping;
 use App\Model\PreSaleOrder;
 use App\Model\UserAddress;
@@ -27,7 +24,7 @@ class PreSaleOrderController extends HomeController
         $this->check_login();
     }
 
-    public function detail(Order $order,Request $request)
+    public function detail(PreSaleOrder $order,Request $request)
     {
         $sn=$request->get('sn');
         $user_id=$this->user_id;
@@ -36,18 +33,16 @@ class PreSaleOrderController extends HomeController
             redirect()->back()->with('error','订单不存在！');
         }
         if($this->user->type_id==1){
-            if($order->buyer_id!=$user_id && $order->seller_id!=$user_id && $order->supply_user_id!=$user_id){
+            if($order->buyer_id!=$user_id && $order->seller_id!=$user_id){
                 redirect()->back()->with('error','异常');
             }
         }
-        $this->title='订单详情';
+        $this->title='预订单详情';
         $data['order']=$order;
         $data['shipping']=$order->OrderShipping();
-        $data['goods']=$order->OrderGoods();
         $data['shop']=$order->Shop();
         $data['buyer']=$order->Buyer();
-        $data['supplyer']=$order->Supply();
-        $this->view('order_detail',$data);
+        $this->view('preSale_detail',$data);
     }
 
     //确认订单
@@ -87,8 +82,10 @@ class PreSaleOrderController extends HomeController
         $order->order_money=math($order->price,$order->quantity,'*',2);
         if($this->user->is_shop){
             $order->pre_money=math($goods->pre_price,$order->quantity,'*',2);
+            $order->status=1;
         }else{
             $order->pre_money=0;
+            $order->status=2;
         }
         if($_POST){
             if(!$address->is_exist){
@@ -105,9 +102,6 @@ class PreSaleOrderController extends HomeController
                 }
                 //减少库存
                 $goods->setStockCount(-$quantity,$spec_id);
-
-
-                $order->status=1;
                 $order->save();
                 //收货人
                 $shipping=new OrderShipping();

@@ -8,14 +8,14 @@
                     <legend>我的预订单</legend>
                 </fieldset>
                 <? foreach($orders['list'] as $order) :
-                    $shop=$order->Shop();
+                    $buyer=$order->Buyer();
                     ?>
                     <dl class="orderbox">
                         <dt>
                             <span class="time"><?=substr($order->created_at,0,10)?></span> 订单号：<?= $order->order_sn ?>
-                            <span class="status"><?=$order->showStatusName()?></span>
-                            <span class="shop">
-                                <i class="iconfont">&#xe854;</i> <?=$shop->name?> <?=\App\Helper::getQqLink($shop->qq)?>
+                            <span class="status"><?=$order->getLinkPageName('order_status',$order->status)?></span>
+                             <span class="buyer">
+                                买家：<?=$buyer->username?> <?=\App\Helper::getQqLink($buyer->qq)?>
                             </span>
                         </dt>
                         <dd>
@@ -40,12 +40,10 @@
                                         <a href="<?=url("/preSaleOrder/detail/?sn={$order->order_sn}")?>" target="_blank">订单详情</a>
                                     </td>
                                     <td class="operate">
-                                        <? if($order->status==1) : ?>
-                                            <a href="/member/preSaleOrder/prePay/?sn=<?=$order->order_sn?>" class="layui-btn layui-btn-small ">支付定金</a><br>
-                                        <? elseif($order->status==3) : ?>
-                                            <a href="/member/preSaleOrder/endPay/?sn=<?=$order->order_sn?>" class="layui-btn layui-btn-small ">支付尾款</a><br>
-                                        <? elseif($order->status==5) : ?>
-                                            <a href="<?=url("preSaleOrder/success/?id={$order->id}")?>" class="layui-btn layui-btn-small">确认收货</a><br>
+                                        <? if($order->status==2) : ?>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small setPreTrue">设为预订成功</a><br>
+                                        <? elseif($order->status==4) : ?>
+                                            <a href="javascript:;" data-id="<?=$order->id?>" class="layui-btn layui-btn-small editShipping">发货</a><br>
                                         <? elseif($order->status==6) : ?>
                                             <span>己完成</span>
                                         <? endif;?>
@@ -56,8 +54,6 @@
                         </dd>
                     </dl>
                 <? endforeach;?>
-
-
                 <? if($orders['total']==0) : ?>
                     <blockquote class="layui-elem-quote">没有匹配到任何记录！ &nbsp;<a href="<?=url('/goods/lists')?>" class="layui-btn layui-btn-small">去逛逛</a></blockquote>
                 <? else: ?>
@@ -65,17 +61,30 @@
                 <? endif;?>
                 <script type="text/javascript">
                     $(function () {
-                        $('.cancel').on('click',function () {
+                        $('.setPreTrue').on('click',function () {
                             var id=$(this).attr('data-id');
                             layer.open({
-                                content: '确定要取消该订单吗？'
+                                content: '设为预订成功，确定要用户支付尾款吗？'
                                 ,btn: ['是', '否']
                                 ,yes: function(index){
-                                    location.href='<?=url("order/cancel/?id=")?>'+id;
+                                    location.href='<?=url("preSaleOrder/setPreTrue/?id=")?>'+id;
                                     layer.close(index);
                                 }
                             });
                         });
+
+                        $('.editShipping').on('click',function () {
+                            var id=$(this).attr('data-id');
+                            layer.open({
+                                type: 2,
+                                title: '发货',
+                                shadeClose: true,
+                                shade: 0.8,
+                                area: ['460px', '290px'],
+                                content: '/sellManage/preSaleOrder/editShipping/?id='+id
+                            });
+                        });
+
                     });
                 </script>
             </div>

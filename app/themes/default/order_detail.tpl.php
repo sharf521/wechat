@@ -70,7 +70,7 @@
                 <?php foreach ($goods as $g) : ?>
                     <tr>
                         <td class="goods_info">
-                            <img src="<?=\App\Helper::smallPic($g->goods_image)?>">
+                            <a href="<?=url("/goods/detail/{$order->goods_id}")?>" target="_blank"><img src="<?=\App\Helper::smallPic($g->goods_image)?>"></a>
                             <div style="float: left">
                                 <a href="<?=url("/goods/detail/{$g->goods_id}")?>" target="_blank"><?=$g->goods_name?></a><br>
                                 <?=$g->spec_1?> <?=$g->spec_2?>

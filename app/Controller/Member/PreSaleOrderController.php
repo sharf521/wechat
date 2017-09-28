@@ -15,7 +15,7 @@ class PreSaleOrderController extends MemberController
     public function __construct()
     {
         parent::__construct();
-        $this->title='我的订单';
+        $this->title='我的预订';
     }
 
     public function index(PreSaleOrder $order,Request $request)
@@ -54,7 +54,7 @@ class PreSaleOrderController extends MemberController
                 'title'=>$cashierLog->title,
                 'money'=>$order->pre_money,
                 'typeid'=>'preSaleOrder_pre',
-                'label'=>"preSaleOrder:{$order->id}",
+                'label'=>"order_sn:{$order->order_sn}",
                 'remark'=>''
             );
             $cashierLog->out_trade_no=$center->getOrNewCashierNo($params);
@@ -95,7 +95,7 @@ class PreSaleOrderController extends MemberController
                 'title'=>$cashierLog->title,
                 'money'=>math($order->order_money,$order->pre_money,'-',2),
                 'typeid'=>'preSaleOrder_end',
-                'label'=>"preSaleOrder:{$order->id}",
+                'label'=>"order_sn:{$order->order_sn}",
                 'remark'=>''
             );
             $cashierLog->out_trade_no=$center->getOrNewCashierNo($params);;
@@ -106,7 +106,7 @@ class PreSaleOrderController extends MemberController
         redirect($url);
     }
     
-    public function success(Order $order,Request $request)
+    public function success(PreSaleOrder $order,Request $request)
     {
         $id=$request->get('id');
         $user_id=$this->user_id;
@@ -114,7 +114,7 @@ class PreSaleOrderController extends MemberController
         if($order->buyer_id!=$user_id){
             redirect()->back()->with('error','异常');
         }
-        if($order->status!=4){
+        if($order->status!=5){
             redirect()->back()->with('error','异常，请勿重复确认收货！');
         }
         if($_POST){
@@ -126,9 +126,8 @@ class PreSaleOrderController extends MemberController
             try {
                 DB::beginTransaction();
                 $order->success($this->user->openid);
-                $order->updateOrderGoodsStatus(5);
                 DB::commit();
-                redirect("order")->with('msg','操作完成');
+                redirect('preSaleOrder')->with('msg','操作完成');
             } catch (\Exception $e) {
                 DB::rollBack();
                 $error= "Failed: " . $e->getMessage();
@@ -137,10 +136,9 @@ class PreSaleOrderController extends MemberController
         }else{
             $data['order']=$order;
             $data['shipping']=$order->OrderShipping();
-            $data['goods']=$order->OrderGoods();
             $data['shop']=$order->Shop();
             $this->title='确认收货';
-            $this->view('order_success',$data);
+            $this->view('preSaleOrder_success',$data);
         }
     }
 }

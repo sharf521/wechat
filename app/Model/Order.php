@@ -66,10 +66,7 @@ class Order extends Model
         if($this->status!=4){
             throw new \Exception("异常，请勿重复确认收货！");
         }
-        $convert_rate=(new System())->getCode('convert_rate');
-        if(empty($convert_rate)){
-            $convert_rate=2.52;
-        }
+        $convert_rate=Helper::getSystemParam('convert_rate');
         $remark="订单号：{$this->order_sn}";
         $params=array(
             'openid'=>$operatorOpenId,
