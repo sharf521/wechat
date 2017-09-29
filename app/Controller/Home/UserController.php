@@ -25,7 +25,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         $center=new Center();
-        $url=$center->loginUrl($request->get('url'));
+        $url=$center->loginUrl($request->get('url'),$request->get('r'));
         if($this->is_wap){
             $url=$this->site->center_url_wap.'/'.$url;
         }else{

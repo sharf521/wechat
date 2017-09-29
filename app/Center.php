@@ -25,7 +25,7 @@ class Center
         $this->appsecret=$system->getCode('center_appsecret');
     }
 
-    public function loginUrl($redirect_uri='')
+    public function loginUrl($redirect_uri='',$r='')
     {
         ///?appid=shop&redirect_uri=http://www.yuantuwang.com/ation/autho&sign=F5A720117F1A50D1281147ADF8BAF48E
         if(empty($redirect_uri)){
@@ -38,7 +38,13 @@ class Center
             'appid'=>$this->appid,
             'redirect_uri'=>'http://'.$_SERVER['HTTP_HOST'].'/user/auth'
         );
+        if($r!=''){
+            $data['r']=$r;
+        }
         $url="auth/login/?appid={$data['appid']}&redirect_uri={$data['redirect_uri']}&sign={$this->getSign($data)}";
+        if($r!=''){
+            $url.="&r={$data['r']}";
+        }
         return $url;
     }
 

@@ -8,6 +8,7 @@ use App\Helper;
 use App\Model\SubSite;
 use App\Model\User;
 use System\Lib\Controller as BaseController;
+use System\Lib\Request;
 
 class Controller extends BaseController
 {
@@ -69,10 +70,11 @@ class Controller extends BaseController
         if($this->control !='login' && $this->control !='logout'){
             if(empty($this->user_id)){
                 $url=urlencode($_SERVER['PHP_SELF'].'?'.$_SERVER['QUERY_STRING']);
+                $r=(new Request())->get('r');
                 if($this->is_inWeChat && $this->is_wap && false){
-                    redirect("/wxOpen/oauth/?url={$url}");
+                    redirect("/wxOpen/oauth/?url={$url}&r={$r}");
                 }else{
-                    redirect("/user/login/?url={$url}");
+                    redirect("/user/login/?url={$url}&r={$r}");
                 }
             }
             $this->user=(new User())->findOrFail($this->user_id);
