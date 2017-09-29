@@ -80,13 +80,13 @@ class PreSaleOrderController extends HomeController
         $order->spec_1=$goods->spec_1;
         $order->spec_2=$goods->spec_2;
         $order->order_money=math($order->price,$order->quantity,'*',2);
-        if($this->user->is_shop){
+        //if($this->user->is_shop){
             $order->pre_money=math($goods->pre_price,$order->quantity,'*',2);
             $order->status=1;
-        }else{
-            $order->pre_money=0;
-            $order->status=2;
-        }
+        //}else{
+         //   $order->pre_money=0;
+         //   $order->status=2;
+       // }
         if($_POST){
             if(!$address->is_exist){
                 redirect()->back()->with('error','请填写收货地址！');
