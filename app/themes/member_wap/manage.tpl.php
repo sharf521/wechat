@@ -14,6 +14,12 @@
             </div>
             <div class="weui-cell__ft"></div>
         </a>
+        <a class="weui-cell weui-cell_access" href="<?=url("preSaleOrder/?st_uid={$this->st_uid}")?>">
+            <div class="weui-cell__bd">
+                <p>我的预订</p>
+            </div>
+            <div class="weui-cell__ft"></div>
+        </a>
         <a class="weui-cell weui-cell_access" href="<?=url("address/?st_uid={$this->st_uid}")?>">
             <div class="weui-cell__bd">
                 <p>地址管理</p>

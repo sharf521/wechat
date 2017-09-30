@@ -295,6 +295,41 @@ function goods_detail_js()
             form.submit();
         }
     })
+
+    //预定
+    $('.bottom_opts .btn-presale').on('click',function(){
+        var quantity=document.forms['form_order'].quantity.value;
+        var spec_id=$('#spec_id').val();
+        $.post("/index.php/goods/preSale/",{goods_id:goods_id,spec_id:spec_id,quantity:quantity},function(data){
+            var json=eval("("+data+")");
+            if(json.code=='noLogin'){
+                layer.open({
+                    content: '您还没有登陆，登陆后预订？'
+                    ,btn: ['确定', '取消']
+                    ,yes: function(){
+                        window.location='/user/login/?r='+invite_user;
+                    }
+                });
+            }else{
+                var form=document.forms['form_order'];
+                var quantity=form.quantity;
+                var tag=true;
+                if(Number(quantity.value)==0){
+                    $(quantity).focus();
+                    layer.msg('请正确选择数量');
+                    tag=false;
+                }
+                if(Number($('#goods_stock_count').html()) < Number(quantity.value)){
+                    layer.msg('库存不足');
+                    tag=false;
+                }
+                if(tag){
+                    var url='/preSaleOrder/confirm/?goods_id='+goods_id+'&quantity='+quantity.value+'&spec_id='+spec_id+'&r='+invite_user;
+                    window.location=url;
+                }
+            }
+        });
+    });
 }
 function spec(id, spec1, spec2, price, stock) {
     this.id = id;

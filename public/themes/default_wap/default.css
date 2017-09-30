@@ -56,6 +56,9 @@
 .bottom_opts .opt_add{float: left; width: 35%;background-color: #f85;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 .bottom_opts .opt_buy{float: left; width: 35%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
+.bottom_opts .btn-presale{float: right; width: 35%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
+.bottom_opts .opt_empty{float: right; width: 50%;background-color: #f85; text-align:center;color: #fff; display: block;line-height: 50px; font-size: 16px;}
+
 .wrap-input{float: right; padding-top: 5px;}
 .wrap-input span{width: 25px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
     color: #666; border: 1px solid #ccc;float: left;display: block}

@@ -38,16 +38,22 @@
             <i class="iconfont">&#xe64f;</i>
             <p>首页</p>
         </a>
-        <a href="/cart/?st_uid=<?=$this->st_uid?>" class="opt_cart">
-            <i class="iconfont" style="position: relative">&#xe698;
-                <span class="weui-badge" id="cart_num"></span></i>
-            <p>购物车</p>
-        </a>
-        <a href="javascript:;" class="opt_add">加入购物车</a>
-        <a href="javascript:;" class="opt_buy">立即购买</a>
+        <? if($goods->stock_count>0):?>
+            <? if($goods->is_presale==1): ?>
+                <a href="javascript:;" class="btn-presale">申请预订</a>
+            <? else : ?>
+                <a href="/cart/?st_uid=<?=$this->st_uid?>" class="opt_cart">
+                    <i class="iconfont" style="position: relative">&#xe698;
+                        <span class="weui-badge" id="cart_num"></span></i>
+                    <p>购物车</p>
+                </a>
+                <a href="javascript:;" class="opt_add">加入购物车</a>
+                <a href="javascript:;" class="opt_buy">立即购买</a>
+            <? endif;?>
+        <? else: ?>
+            <span class="opt_empty">库存己不足</span>
+        <? endif;?>
     </div>
-
-
     <div class="weui-mask hide"></div>
     <div class="bottom_buy_box" id="bottom_buy_box">
         <form method="post" name="form_order">
@@ -96,6 +102,7 @@
     </div>
     <script>
         var goods_id='<?=$goods->id?>';
+        var invite_user='<?=(new \System\Lib\Request())->get('r')?>';
         goods_detail_js();
     </script>
 <?php require 'footer.php';?>

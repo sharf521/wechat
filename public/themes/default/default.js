@@ -454,7 +454,7 @@ function goods_detail_js()
                     content: '您还没有登陆，登陆后预订？'
                     ,btn: ['确定', '取消']
                     ,yes: function(){
-                        window.location='/user/login';
+                        window.location='/user/login/?r='+invite_user;
                     }
                 });
             }else{
@@ -471,7 +471,7 @@ function goods_detail_js()
                     tag=false;
                 }
                 if(tag){
-                    var url='/preSaleOrder/confirm/?goods_id='+goods_id+'&quantity='+quantity.value+'&spec_id='+spec_id;
+                    var url='/preSaleOrder/confirm/?goods_id='+goods_id+'&quantity='+quantity.value+'&spec_id='+spec_id+'&r='+invite_user;
                     window.location=url;
                 }
             }

@@ -132,6 +132,7 @@
     <script src="/plugin/js/fly.min.js"></script>
     <script>
         var goods_id='<?=(int)$goods->id?>';
+        var invite_user='<?=(new \System\Lib\Request())->get('r')?>';
         $(function(){
             goods_detail_js();
         });
