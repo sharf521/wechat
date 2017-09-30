@@ -40,7 +40,7 @@
         </a>
         <? if($goods->stock_count>0):?>
             <? if($goods->is_presale==1): ?>
-                <a href="javascript:;" class="btn-presale">申请预订</a>
+                <a href="javascript:;" class="opt_presale">申请预订</a>
             <? else : ?>
                 <a href="/cart/?st_uid=<?=$this->st_uid?>" class="opt_cart">
                     <i class="iconfont" style="position: relative">&#xe698;
@@ -95,8 +95,12 @@
                 </dd>
             </dl>
             <div class="buy_box_opts">
+                <? if($goods->is_presale==1): ?>
+                    <a href="javascript:;" class="opt0">立即预订</a>
+                <? else:?>
                 <a href="javascript:;" class="opt1">加入购物车</a>
                 <a href="javascript:;" class="opt2">立即购买</a>
+                <? endif;?>
             </div>
         </form>
     </div>

@@ -211,6 +211,9 @@ function goods_detail_js()
         $('.bottom_opts .opt_buy').on('click',function () {
             showBuyBox();
         });
+        $('.bottom_opts .opt_presale').on('click',function () {
+            showBuyBox();
+        });
 
         $('.weui-mask').on('click',function(){
             hideBuyBox();
@@ -297,7 +300,7 @@ function goods_detail_js()
     })
 
     //预定
-    $('.bottom_opts .btn-presale').on('click',function(){
+    $('.buy_box_opts .opt0').on('click',function(){
         var quantity=document.forms['form_order'].quantity.value;
         var spec_id=$('#spec_id').val();
         $.post("/index.php/goods/preSale/",{goods_id:goods_id,spec_id:spec_id,quantity:quantity},function(data){

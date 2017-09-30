@@ -56,7 +56,7 @@
 .bottom_opts .opt_add{float: left; width: 35%;background-color: #f85;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 .bottom_opts .opt_buy{float: left; width: 35%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
-.bottom_opts .btn-presale{float: right; width: 35%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
+.bottom_opts .opt_presale{float: right; width: 50%;background-color: #f44;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 .bottom_opts .opt_empty{float: right; width: 50%;background-color: #f85; text-align:center;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
 .wrap-input{float: right; padding-top: 5px;}
@@ -99,6 +99,7 @@
 .bottom_buy_box dt span{color: #f60;font-size: 18px;}
 .bottom_buy_box .buy_box_opts{line-height: 48px; height: 48px;}
 .bottom_buy_box .buy_box_opts a{float: left; width: 50%; text-align: center;color: #fff; display: block; font-size: 16px;}
+.bottom_buy_box .buy_box_opts .opt0{background-color: #f44; float: none; width: 100%;}
 .bottom_buy_box .buy_box_opts .opt1{background-color: #f85;}
 .bottom_buy_box .buy_box_opts .opt2{background-color: #f44;}
 .bottom_buy_box .choose{padding: 10px 20px; line-height: 30px;}
