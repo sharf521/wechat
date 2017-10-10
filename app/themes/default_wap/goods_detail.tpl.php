@@ -48,7 +48,7 @@
                     <p>购物车</p>
                 </a>
                 <a href="javascript:;" class="opt_add">加入购物车</a>
-                <a href="javascript:;" class="opt_buy">立即购买</a>
+                <a href="javascript:;" class="opt_buy">分期购买</a>
             <? endif;?>
         <? else: ?>
             <span class="opt_empty">库存己不足</span>
@@ -99,7 +99,7 @@
                     <a href="javascript:;" class="opt0">立即预订</a>
                 <? else:?>
                 <a href="javascript:;" class="opt1">加入购物车</a>
-                <a href="javascript:;" class="opt2">立即购买</a>
+                <a href="javascript:;" class="opt2">分期购买</a>
                 <? endif;?>
             </div>
         </form>
