@@ -61,6 +61,10 @@ class UserController extends Controller
     //去充值
     public function goWeChatPay(Request $request)
     {
+
+        $url="{$this->site->center_url_wap}/member/account/recharge";
+        redirect($url);
+        return;
         $money=(float)$request->get('money');
         $url=urlencode($request->get('url'));
         if(! $this->is_inWeChat){
