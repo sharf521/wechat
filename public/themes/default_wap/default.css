@@ -224,19 +224,25 @@ body { background: #fff; }
 
 .Menu_box{ margin:0 auto; margin-bottom:50px;overflow:hidden;}
 
-.left_Menu{ background-color:#efefef; width: 25%; float:left;position:relative; height: 400px; overflow: hidden;}
+/*.left_Menu{ background-color:#efefef; width: 25%; float:left;position:relative; height: 400px; overflow: hidden;}
 .left_Menu li {height: 32px;line-height: 32px;overflow: hidden;}
 .left_Menu a{ display:block; text-align:left;text-indent: 1em; border-bottom:#d1d1d1 1px solid; font-size: 14px;color: #333;}
 .left_Menu span{ display:block; font-size:1em;}
-.left_Menu .cur-nav{ background: #fff;border-right: 1px solid #fff;border-bottom:#d1d1d1 1px solid;}
+.left_Menu .cur-nav{ background: #fff;border-right: 1px solid #fff;border-bottom:#d1d1d1 1px solid;}*/
 
-.right_Menu{ width: 75%; float:left;position:relative;  height: 400px; overflow: hidden;box-sizing: border-box;border-left: 1px solid #ccc;background-color: #f8f8f8}
-.right_Menu p{ line-height:3em; padding-left:2em; font-size:12px;}
+.left_Menu { float: left;height:400px;width:25%;background-color: #efefef; }
+.left_Menu ul { height:100%;border-right:1px solid #ccc;box-sizing: border-box;  }
+.left_Menu ul li{ list-style: none;height: 32px;line-height:32px;border-bottom: 1px solid #ccc;overflow: hidden;}
+.left_Menu ul li.cur-nav { background-color: #fff;width:100%;border-right: 1px solid #fff;  }
+.left_Menu ul li a { display: inline-block;width: 100%;height:100%;color: #333;font-size: 14px;text-indent: 1em;  }
+
+.right_Menu{ width: 75%; float:left; height: 400px; overflow: hidden;box-sizing: border-box;background-color: #f8f8f8}
+.right_Menu p{ padding:15px 0 15px 24px; font-size:12px;}
 .right_Menu p a {color: #333;}
-.right_Menu ul{ overflow:hidden; width:100%; background-color:#fff; border-top:1px solid #e4e4e4;}
-.right_Menu ul li{ float:left; width:33%; text-align:center; font-size:1.1em; padding:1em 0;}
+.right_Menu ul{ overflow:hidden; width:100%; background-color:#fff;}
+.right_Menu ul li{ float:left; width:33%; text-align:center;}
 .right_Menu ul li img{ width: 70px;height: 70px;}
-.right_Menu ul li span{ display:block; line-height:2em;font-size: 12px;color: #666;overflow: hidden;text-overflow:ellipsis;white-space: normal;}
+.right_Menu ul li span{ display:block; padding:6px 0;font-size: 12px;color: #666;overflow: hidden;text-overflow:ellipsis;white-space: normal;}
 
 /* 分类页面样式END 2017-8-28 */
 

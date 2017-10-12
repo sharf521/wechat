@@ -119,7 +119,9 @@ class PreSaleOrderController extends HomeController
                 redirect()->back()->with('error',$error);
                 DB::rollBack();
             }
-            redirect("/member/preSaleOrder/?st_uid={$this->st_uid}")->with('msg','提交成功，请支付！');
+            $url="/member/preSaleOrder/prePay/?sn={$order->order_sn}";
+            redirect($url);
+            //redirect("/member/preSaleOrder/?st_uid={$this->st_uid}")->with('msg','提交成功，请支付！');
         }else{
             $data['goods']=$goods;
             $data['order']=$order;
