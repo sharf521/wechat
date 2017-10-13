@@ -21,7 +21,7 @@ class IndexController extends HomeController
             //redirect('car');
             $ad_banners=$advert->where("typeid='wap_car_banner' and status=1 and site_id={$this->site->id}")->get();
             if(empty($ad_banners)){
-                $ad_banners=$advert->where("typeid='wap_car_banner'")->limit('0,3')->get();
+                $ad_banners=$advert->where("typeid='wap_car_banner' and status=1")->limit('0,3')->get();
             }
             $data['ads']=$ad_banners;
             $data['shopList']=$shop->orderBy("case  when recommend=1 then 1  when site_id={$this->site->id} then 5 else 10 end ,id desc")->limit('0,3')->get();
