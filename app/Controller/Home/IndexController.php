@@ -19,7 +19,7 @@ class IndexController extends HomeController
     {
         if($this->is_wap){
             //redirect('car');
-            $ad_banners=$advert->where("typeid='wap_car_banner' and site_id={$this->site->id}")->get();
+            $ad_banners=$advert->where("typeid='wap_car_banner' and status=1 and site_id={$this->site->id}")->get();
             if(empty($ad_banners)){
                 $ad_banners=$advert->where("typeid='wap_car_banner'")->limit('0,3')->get();
             }
@@ -27,7 +27,7 @@ class IndexController extends HomeController
             $data['shopList']=$shop->orderBy("case  when recommend=1 then 1  when site_id={$this->site->id} then 5 else 10 end ,id desc")->limit('0,3')->get();
             $data['goods_result']=$goods->getListByHome(10,0,$this->site->id);
         }else{
-            $ad_banners=$advert->where("typeid='pc_index_banner' and site_id={$this->site->id}")->get();
+            $ad_banners=$advert->where("typeid='pc_index_banner' and status=1 and site_id={$this->site->id}")->get();
             if (empty($ad_banners)) {
                 $banners = array(
                     array(
@@ -51,7 +51,7 @@ class IndexController extends HomeController
             }
             $data['banners']=$banners;
 
-            $ad_sides=$advert->where("typeid='pc_index_side' and site_id={$this->site->id}")->get();
+            $ad_sides=$advert->where("typeid='pc_index_side' and status=1 and site_id={$this->site->id}")->get();
             $floorList=array();
             foreach ($this->site->cates as $i=>$cate){
                 if($i<5){
