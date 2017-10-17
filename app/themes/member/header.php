@@ -8,6 +8,7 @@
     <script src="/plugin/layui.v2/layui.all.js"></script>
     <script src="/themes/member/member.js"></script>
     <link rel="stylesheet" href="/themes/base.css"/>
+    <link rel="stylesheet" href="/themes/member_base.css"/>
     <link href="/themes/member/member.css" rel="stylesheet" type="text/css" />
 </head>
 <body>

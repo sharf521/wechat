@@ -5,8 +5,8 @@
     <title><?php if($this->title!=''){echo $this->title.'-';}?><?=$this->site->name;?></title>
     <script language="javascript" src="/plugin/js/jquery.js"></script>
     <link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
-
     <link rel="stylesheet" href="/themes/base.css"/>
+    <link rel="stylesheet" href="/themes/member_base.css"/>
     <link href="/themes/sell/sell.css" rel="stylesheet" type="text/css" />
     <script src="/themes/sell/sell.js"></script>
 </head>
