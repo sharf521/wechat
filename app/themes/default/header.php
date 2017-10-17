@@ -2,7 +2,13 @@
 <html lang="zh-cmn-Hans">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title><?php if($this->title!=''){echo $this->title.'-';}?><?=$this->site->name;?></title>
+    <? if( $this->control=='index' && $this->func=='index') :  ?>
+        <title><?=$this->site->title;?></title>
+        <meta name="Keywords" content="<?=$this->site->keywords?>" />
+        <meta name="Description" content="<?=$this->site->description?>" />
+    <? else : ?>
+        <title><?php if($this->title!=''){echo $this->title.'-';}?><?=$this->site->name;?></title>
+    <? endif;?>
     <script language="javascript" src="/plugin/js/jquery.js"></script>
     <link rel="stylesheet" href="/plugin/Swiper/css/swiper.min.css"/>
     <script src="/plugin/Swiper/js/swiper.min.js"></script>
