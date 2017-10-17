@@ -1,5 +1,4 @@
 <script src="/plugin/layui.v2/layui.all.js"></script>
-<script src="/plugin/js/echo.min.js"></script>
 <script>
     window.onload=function(){
         <?php if (session('msg')){?>
@@ -16,7 +15,6 @@
             time: 5000
         });
         <?php } ?>
-        echo.init();
     }
 </script>
 <?=app('system')->getCode('tongji');?>
