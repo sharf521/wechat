@@ -56,5 +56,82 @@ i, cite, em { font-style: normal; }
 .goods_list .goods_id,.goods_list .goods_price,.goods_list .goods_num{text-align: center; vertical-align: middle}
 .goods_list .goods_info img{float: left; margin-right: 10px; width: 50px;}
 
+/*个人中心*/
+.clearfix::after {
+    content: '';
+    overflow: hidden;
+    height:0;
+    display: block;
+    clear: both;
+}
+.marginLine { height:5px;background-color: #efefef;margin:0 -10px;  }
+.user {
+    padding: 20px;
+}
+.userImg {
+    float: left;
+    margin-right: 20px;
+}
+.userImg img {
+    width: 100px;
+    height: 100px;
+    border: 2px solid #eee;
+    border-radius: 50%;
+}
+.userName {
+    float: left;
+    margin-top: 15px;
+}
+.userName .name {
+    font-size: 14px;
+    color: #666;
+}
+.userName p {
+    font-size: 16px;
+    line-height: 20px;
+}
+.userName span {
+    color: #737373;
+    font-size: 12px;
+    margin-top: 15px;
+    display: block;
+}
+.userEmail {
+    float: left;
+    margin-top: 15px;
+    margin-left: 100px;
+    font-size: 14px;
+    color: #999;
+}
+.userEmail span {
+    color: #666;
+}
+/*买家*/
+.buyer { margin:0 40px; }
+.buyer .buyer_box { float: left; width: 410px; margin: 20px 20px 0 0; }
+.buyer .buyer_box .buyer_icon { margin-right: 20px; float: left; width:80px; height: 80px; }
+.buyer .buyer_box  .buyer_text { margin-top: 15px; }
+.buyer .buyer_box  .buyer_text p {font-size: 18px;color: #666;}
+.buyer .buyer_box .buyer_text a {font-size: 14px;color: #999;cursor: pointer;}
+.buyer  .buyer_box .buyer_text a:hover { color: #f56313; }
+.buyer .buyer_box .num { color: #f56313; }
+.tips {font-size: 14px;color: #999;}
+.tips i {color: #f60;padding: 0 5px;display: inline-block}
+.tips p a {color: #f60;padding: 0 5px;}
+/*卖家*/
+.seller { margin: 0 40px;}
+.seller .seller_til{ height: 1px;width: 100%;background-color: #ccc;margin: 30px 0;}
+.seller .seller_box{ margin: 20px 20px 20px 0;}
+.seller .seller_box .seller_icon { margin-right: 20px;float: left;width:80px;height: 80px;}
+.seller .seller_box .seller_text { margin-left: 100px;}
+.seller .seller_box .seller_text .btn{background-color: #f56313;border: none;color: #fff;font-size: 14px;padding:2px 10px;margin-bottom: 10px;margin-right: 10px;}
+/*供应商*/
+.supplier {margin: 0 40px;}
+.supplier .supplier_til{ height: 1px;width: 100%;background-color: #ddd;margin: 30px 0;}
+.supplier .supplier_box { margin: 20px 20px 20px 0;}
+.supplier .supplier_box .supplier_icon{ margin-right: 20px;float: left;width:80px;height: 80px;}
+.supplier .supplier_box .supplier_text{margin-left: 100px;font-size: 18px;}
+.supplier .supplier_box .supplier_text .num { color: #f56313;}
+
 
 
