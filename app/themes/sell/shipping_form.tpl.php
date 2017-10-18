@@ -93,7 +93,9 @@
         </div>
     </div>
     <script>
-        shipping_js();
+        $(function () {
+            shipping_js();
+        });
     </script>
 </div>
         <div class="aqbox" id="divArea">

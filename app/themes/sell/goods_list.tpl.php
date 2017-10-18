@@ -73,28 +73,26 @@
     </div>
     <script>
         $(function () {
-            layui.use('element', function () {
-                layui.element.on('tab(tab)', function (data) {
-                    if (data.index == 0) {
-                        location.href = '<?=url("goods")?>';
-                    } else if (data.index == 1) {
-                        location.href = '<?=url("goods/list_stock0")?>';
-                    } else if (data.index == 2) {
-                        location.href = '<?=url("goods/list_status2")?>';
-                    }
-                });
+            layui.element.on('tab(tab)', function (data) {
+                if (data.index == 0) {
+                    location.href = '<?=url("goods")?>';
+                } else if (data.index == 1) {
+                    location.href = '<?=url("goods/list_stock0")?>';
+                } else if (data.index == 2) {
+                    location.href = '<?=url("goods/list_status2")?>';
+                }
             });
-            function goodsDel(id)
-            {
-                layer.open({
-                    content: '您确定要删除吗？'
-                    ,btn: ['删除', '取消']
-                    ,yes: function(index){
-                        location.href='<?=url("goods/del/?id=")?>'+id;
-                        layer.close(index);
-                    }
-                });
-            }
         });
+        function goodsDel(id)
+        {
+            layer.open({
+                content: '您确定要删除吗？'
+                ,btn: ['删除', '取消']
+                ,yes: function(index){
+                    location.href='<?=url("goods/del/?id=")?>'+id;
+                    layer.close(index);
+                }
+            });
+        }
     </script>
 <?php require 'footer.php';?>

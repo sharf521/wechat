@@ -26,6 +26,8 @@
         </div>
     </div>
     <script>
-        commitment();
+        $(function () {
+            commitment();
+        });
     </script>
 <?php require 'footer.php';?>

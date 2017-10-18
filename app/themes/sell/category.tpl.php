@@ -63,7 +63,9 @@
     </div>
 </div>
     <script>
-        category_js();
+        $(function () {
+            category_js();
+        });
         function cateDel(id)
         {
             layer.open({

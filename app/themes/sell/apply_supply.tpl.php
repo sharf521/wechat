@@ -92,6 +92,8 @@
     </div>
 </div>
 <script>
-    supply_apply();
+    $(function () {
+        supply_apply();
+    });
 </script>
 <?php require 'footer.php';?>
