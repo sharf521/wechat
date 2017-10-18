@@ -18,7 +18,7 @@ body {background-color: #efefef;}
 .top-wrapper .quick-menu dl dd ul li a { font-size: 12px; line-height: 24px; display: block; clear: both; padding: 2px 0 2px 11px;}
 .top-wrapper .quick-menu dl dd ul li a:hover { text-decoration: none; background-color: #F7F7F7;}
 
-.top_header{border-bottom: 2px solid #c00; background-color: #fff;}
+.top_header{ background-color: #fff;margin-bottom: 15px;}
 
 /* 站点logo */
 .public-head-layout{padding-bottom: 5px;}

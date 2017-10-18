@@ -120,7 +120,7 @@ i, cite, em { font-style: normal; }
 .tips p a {color: #f60;padding: 0 5px;}
 /*卖家*/
 .seller { margin: 0 40px;}
-.seller .seller_til{ height: 1px;width: 100%;background-color: #ccc;margin: 30px 0;}
+.seller .seller_til{ height: 1px;width: 100%;background-color: #ddd;margin: 30px 0;}
 .seller .seller_box{ margin: 20px 20px 20px 0;}
 .seller .seller_box .seller_icon { margin-right: 20px;float: left;width:80px;height: 80px;}
 .seller .seller_box .seller_text { margin-left: 100px;}

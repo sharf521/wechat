@@ -10,7 +10,7 @@
     <? if($this->user->is_shop==0) : ?>
         <a class="layui-btn" href="<?=url('/member/shop')?>">申请开店</a>
     <? else: ?>
-        <h3><img src="/themes/member/images/shop.png" alt="">我是卖家</h3>
+        <h3><img src="/themes/member/images/seller.png" alt="">我是卖家</h3>
         <ul>
             <li><a href="<?=url('/sellManage/shop')?>"  <? if($this->control=='shop'){echo 'class="whover"';}?>>店铺设置</a></li>
             <li><a href="<?=url('/sellManage/advert')?>"  <? if($this->control=='advert'){echo 'class="whover"';}?>>广告位设置</a></li>

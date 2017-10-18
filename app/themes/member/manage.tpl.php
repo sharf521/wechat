@@ -2,16 +2,14 @@
 <div class="warpcon">
     <?php require 'left.php'; ?>
     <div class="warpright">
-        <div class="jiben">
-            <div class="jbtx">
-                <div class="touxiang">
-                    <img src="<?= $this->user->headimgurl; ?>">
-                </div>
-                <div class="toutext">
-                    <h2><?= $this->username ?></h2>
-                    <p><?= $this->user->name ?></p>
-                </div>
+        <div class="user clearfix ">
+            <div class="userImg"><img src="<?= $this->user->headimgurl; ?>"></div>
+            <div class="userName">
+                <p><?= $this->username ?></p>
+                <p class="name"><?= $this->user->name ?></p>
+                <span>欢迎您回来！</span>
             </div>
+            <div class="userEmail">绑定邮箱：<span>1327953998@qq.com</span></div>
         </div>
         <div class="marginLine"></div>
         <!--买家-->
@@ -37,17 +35,13 @@
             <div class="seller_box clearfix">
                 <img class="seller_icon" src="themes/member/images/icon3.png" alt="">
                 <div class="seller_text">
-                    <!--<p>待发货订单：<span class="num">0</span></p>-->
                     <button class="btn">查看店铺</button>
                     <button class="btn">添加分类</button>
                     <button class="btn">配送地址</button>
                     <div class="tips">
                         <span>提示：</span>
-                        <p>您有0个订单待处理，请尽快到“已提交订单”中处理</p>
-                        <p>您有0个订单待处理，请尽快到“已提交订单”中处理</p>
-                        <p>您有0个订单待处理，请尽快到“已提交订单”中处理</p>
-                        <p>您有0个订单待处理，请尽快到“已提交订单”中处理</p>
-                        <p>您有0个订单待处理，请尽快到“已提交订单”中处理</p>
+                        <p>您有<i>0</i>个订单待处理，请尽快到“<a href="">已提交订单</a>”中处理</p>
+                        <p>您有<i>0</i>个订单待处理，请尽快到“<a href="">已提交订单</a>”中处理</p>
                     </div>
                 </div>
             </div>
