@@ -108,8 +108,8 @@
             <script>
                 $(function () {
                     pca.init('select[name=province]', 'select[name=city]', 'select[name=county]', '<?=$shop->province?>', '<?=$shop->city?>', '<?=$shop->province?>');
+                    shop_js();
                 });
-                shop_js();
             </script>
         </div>
     </div>
