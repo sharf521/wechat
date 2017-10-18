@@ -66,7 +66,7 @@ i, cite, em { font-style: normal; }
 }
 .marginLine { height:5px;background-color: #efefef;margin:0 -10px;  }
 .user {
-    padding: 20px;
+    padding: 40px 30px;
 }
 .userImg {
     float: left;
@@ -75,8 +75,6 @@ i, cite, em { font-style: normal; }
 .userImg img {
     width: 100px;
     height: 100px;
-    border: 2px solid #eee;
-    border-radius: 50%;
 }
 .userName {
     float: left;
@@ -111,7 +109,7 @@ i, cite, em { font-style: normal; }
 .buyer .buyer_box { float: left; width: 410px; margin: 20px 20px 0 0; }
 .buyer .buyer_box .buyer_icon { margin-right: 20px; float: left; width:80px; height: 80px; }
 .buyer .buyer_box  .buyer_text { margin-top: 15px; }
-.buyer .buyer_box  .buyer_text p {font-size: 18px;color: #666;}
+.buyer .buyer_box  .buyer_text p {font-size: 18px;color: #666;font-family: Microsoft YaHei;}
 .buyer .buyer_box .buyer_text a {font-size: 14px;color: #999;cursor: pointer;}
 .buyer  .buyer_box .buyer_text a:hover { color: #f56313; }
 .buyer .buyer_box .num { color: #f56313; }
@@ -130,7 +128,7 @@ i, cite, em { font-style: normal; }
 .supplier .supplier_til{ height: 1px;width: 100%;background-color: #ddd;margin: 30px 0;}
 .supplier .supplier_box { margin: 20px 20px 20px 0;}
 .supplier .supplier_box .supplier_icon{ margin-right: 20px;float: left;width:80px;height: 80px;}
-.supplier .supplier_box .supplier_text{margin-left: 100px;font-size: 18px;}
+.supplier .supplier_box .supplier_text{margin-left: 100px;font-size: 18px;color: #666;}
 .supplier .supplier_box .supplier_text .num { color: #f56313;}
 
 

@@ -56,53 +56,15 @@ class User extends Model
             }
             session()->set('user_id', $user->id);
             session()->set('username', $user->username);
-            
+
             (new Cart())->refresh($user->id);//更新Cart里未登陆时添加的商品
-            
+
             return true;
         } else {
             return '未知错误!';
         }
     }
 
-    function register($data)
-    {
-        $check = $this->checkUserName($data['username']);
-        if ($check !== true) {
-            return $check;
-        }
-        if (strlen($data['password']) > 15 || strlen($data['password']) < 6) {
-            return "密码长度6位到15位！";
-        }
-        if ($data['password'] != $data['sure_password']) {
-            return "两次输入密码不同！";
-        }
-        $check = $this->checkEmail($data['email']);
-        if ($check !== true) {
-            return $check;
-        }
-        $salt = rand(100000, 999999);
-        $data = array(
-            'type_id' => 1,
-            'username' => $data['username'],
-            'nickname' => $data['nickname'],
-            'password' => md5(md5($data['password']) . $salt),
-            'zf_password' => md5(md5($data['password']) . $salt),
-            'created_at' => time(),
-            'status' => 0,
-            'email' => $data['email'],
-            'salt' => $salt,
-            'invite_userid' => 0
-        );
-        $id = DB::table('user')->insertGetId($data);
-        if (is_numeric($id) && $id > 0) {
-            session()->set('user_id', $id);
-            session()->set('username', $data["username"]);
-            return true;
-        } else {
-            return $id;
-        }
-    }
 
     public function addWeChatUser($openid,$invite_userid=0)
     {
@@ -158,35 +120,8 @@ class User extends Model
         return $user;
     }
 
-    //修改密码
-    public function updatePwd($data)
-    {
-        $user = $this->findOrFail($data['id']);
-        if (strlen($data['password']) > 15 || strlen($data['password']) < 6) {
-            return "密码长度6位到15位！";
-        } elseif (isset($data['old_password'])) {
-            if ($user->password != md5(md5($data['old_password']) . $user->salt)) {
-                return '原密码错误！';
-            }
-        }
-        $user->password = md5(md5($data['password']) . $user->salt);
-        return $user->save();
-    }
 
-    //修改支付密码
-    public function updateZfPwd($data)
-    {
-        $user = $this->findOrFail($data['id']);
-        if (strlen($data['zf_password']) > 15 || strlen($data['zf_password']) < 6) {
-            return "支付密码长度6位到15位！";
-        } elseif (isset($data['old_password'])) {
-            if ($user->zf_password != md5(md5($data['old_password']) . $user->salt)) {
-                return '原密码错误！';
-            }
-        }
-        $user->zf_password = md5(md5($data['zf_password']) . $user->salt);
-        return $user->save();
-    }
+
 
     //用户管理编辑
     function edit($data = array())
