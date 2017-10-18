@@ -89,7 +89,9 @@
                             <div id="map" style="width: 100%; height: 500px;"></div>
                             <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=FD277acba8a70dc3bd90b1790787d332"></script>
                             <script type="text/javascript">
-                                map('map',$('#gps').val());
+                                $(function () {
+                                    map('map',$('#gps').val());
+                                });
                             </script>
                         </div>
                     </div>
