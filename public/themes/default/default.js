@@ -78,14 +78,12 @@ function header_js() {
 }
 
 function index_js() {
-    $(function() {
-        var mySwiper = new Swiper('.swiper-container', {
-            loop: true,
-            autoplay: 4800,
-            autoplayDisableOnInteraction: false,
-            pagination: '.swiper-pagination',
-            paginationClickable: true,
-        });
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true,
+        autoplay: 4800,
+        autoplayDisableOnInteraction: false,
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
     });
 }
 /* 确认订单*/
@@ -268,17 +266,14 @@ function cart_js() {
 
 //采购
 function purchase_detail_js() {
-    $(function(){
-        // 图片替换效果
-        $('.goods_pics li img').mouseover(function(){
-            $('.goods_pics li img').removeClass();
-            $(this).addClass('ware_pic_hover');
-            var src=$(this).attr('src').split('_');
-            $('.pic_big img').attr('src', src[0]);
-        });
+    // 图片替换效果
+    $('.goods_pics li img').mouseover(function(){
+        $('.goods_pics li img').removeClass();
+        $(this).addClass('ware_pic_hover');
+        var src=$(this).attr('src').split('_');
+        $('.pic_big img').attr('src', src[0]);
     });
     //立刻采购
-    layui.form('select').render();
     $('.purchase-btn').on('click',function(){
         var form=document.forms['form_order'];
         if($('#is_have_spec').val()=='0'){

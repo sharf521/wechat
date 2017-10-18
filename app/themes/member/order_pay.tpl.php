@@ -79,7 +79,9 @@
                 <script>
                     var lv='<?=$convert_rate?>';
                     var price_true='<?=$order->order_money?>';
-                    orderPayJs();
+                    $(function () {
+                        orderPayJs();
+                    })
                 </script>
             </div>
         </div>

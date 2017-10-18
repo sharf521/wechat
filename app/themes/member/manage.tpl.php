@@ -1,5 +1,4 @@
 <?php require 'header.php';?>
-<script> window.location='<?=url('order')?>';</script>
 <div class="warpcon">
     <?php require 'left.php'; ?>
     <div class="warpright">

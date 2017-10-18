@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
     <link rel="stylesheet" href="/themes/base.css"/>
     <link href="/themes/default/default.css" rel="stylesheet" type="text/css" />
-    <script src="/themes/default/default.js"></script>
 </head>
 <body>
 <div class="top-wrapper clearFix">

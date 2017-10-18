@@ -121,6 +121,8 @@
 
     <script>
         var goods_id='<?=(int)$goods->id?>';
-        purchase_detail_js();
+        $(function () {
+            purchase_detail_js();
+        });
     </script>
 <?php require 'footer.php';?>

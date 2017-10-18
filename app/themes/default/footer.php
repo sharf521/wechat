@@ -48,5 +48,7 @@
         </dd>
     </dl>
 </div>
+<script src="/plugin/layui.v2/layui.all.js"></script>
+<script src="/themes/default/default.js"></script>
 <?php
 require __DIR__.'/../footer.php';

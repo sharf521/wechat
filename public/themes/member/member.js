@@ -108,25 +108,23 @@ function upload_image(id,type)
 }
 
 function orderPayJs() {
-    $(function () {
-        $("#integral").bind('input propertychange',function(){
-            if(Number($(this).val())>Number($('#span_integral').html())){
-                $(this).val($('#span_integral').html());
-            }
-            var max_jf=Math.mul(price_true,lv);
-            if(Number($(this).val())>max_jf){
-                $("#integral").val(max_jf);
-            }
-            var _m=Math.div(Number($("#integral").val()),lv);
-            var money=Math.sub(price_true,Math.moneyRound(_m,2));
-            $('#money_yes').html(money);
-        });
-        /*$('.recharge').on('click',function () {
-            var center_url=$(this).attr('center_url');
-            var money=$('#money_yes').html();
-            goCenterRecharge(center_url,money);
-        });   */
+    $("#integral").bind('input propertychange',function(){
+        if(Number($(this).val())>Number($('#span_integral').html())){
+            $(this).val($('#span_integral').html());
+        }
+        var max_jf=Math.mul(price_true,lv);
+        if(Number($(this).val())>max_jf){
+            $("#integral").val(max_jf);
+        }
+        var _m=Math.div(Number($("#integral").val()),lv);
+        var money=Math.sub(price_true,Math.moneyRound(_m,2));
+        $('#money_yes').html(money);
     });
+    /*$('.recharge').on('click',function () {
+     var center_url=$(this).attr('center_url');
+     var money=$('#money_yes').html();
+     goCenterRecharge(center_url,money);
+     });   */
 }
 
 /*function goCenterRecharge(center_url,money,return_url) {

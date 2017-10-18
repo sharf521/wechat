@@ -68,7 +68,9 @@
             </form>
             <script src="/plugin/js/layui_citys.js"></script>
             <script>
-                address_js();
+                $(function () {
+                    address_js();
+                });
                 function address_del(id){
                     layer.open({
                         content: '您确定要删除吗？'

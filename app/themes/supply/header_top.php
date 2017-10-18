@@ -8,6 +8,5 @@
     <link rel="stylesheet" href="/themes/base.css"/>
     <link rel="stylesheet" href="/themes/member_base.css"/>
     <link href="/themes/supply/supply.css" rel="stylesheet" type="text/css" />
-    <script src="/themes/supply/supply.js"></script>
 </head>
 <body>

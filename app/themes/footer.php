@@ -1,4 +1,3 @@
-<script src="/plugin/layui.v2/layui.all.js"></script>
 <script>
     window.onload=function(){
         <?php if (session('msg')){?>

@@ -287,41 +287,39 @@ function upload_image(id,type)
 }
 
 function shop_js() {
-    $(function () {
-        layui.form.on('submit(*)', function(data){
-            var form=data.form;
-            var fields=data.field;
-            var name=$(form).find('input[name=name]');
-            if(name.val()==''){
-                layer.tips('不能为空！', name);
-                name.focus();
-                return false;
-            }
-            var phone=$(form).find('input[name=phone]');
-            if(phone.val()==''){
-                layer.tips('不能为空！', phone);
-                phone.focus();
-                return false;
-            }
-            var province=$(form).find('select[name=province]');
-            if(province.val()=='请选择'){
-                layer.tips('不能为空！',$(province).parents('.layui-input-inline'));
-                province.focus();
-                return false;
-            }
-            var city=$(form).find('[name=city]');
-            if(city.val()=='请选择'){
-                layer.tips('不能为空！',$(city).parents('.layui-input-inline'));
-                city.focus();
-                return false;
-            }
-            var county=$(form).find('[name=county]');
-            if(county.val()=='请选择'){
-                layer.tips('不能为空！',$(county).parents('.layui-input-inline'));
-                county.focus();
-                return false;
-            }
-        });
+    layui.form.on('submit(*)', function(data){
+        var form=data.form;
+        var fields=data.field;
+        var name=$(form).find('input[name=name]');
+        if(name.val()==''){
+            layer.tips('不能为空！', name);
+            name.focus();
+            return false;
+        }
+        var phone=$(form).find('input[name=phone]');
+        if(phone.val()==''){
+            layer.tips('不能为空！', phone);
+            phone.focus();
+            return false;
+        }
+        var province=$(form).find('select[name=province]');
+        if(province.val()=='请选择'){
+            layer.tips('不能为空！',$(province).parents('.layui-input-inline'));
+            province.focus();
+            return false;
+        }
+        var city=$(form).find('[name=city]');
+        if(city.val()=='请选择'){
+            layer.tips('不能为空！',$(city).parents('.layui-input-inline'));
+            city.focus();
+            return false;
+        }
+        var county=$(form).find('[name=county]');
+        if(county.val()=='请选择'){
+            layer.tips('不能为空！',$(county).parents('.layui-input-inline'));
+            county.focus();
+            return false;
+        }
     });
 }
 

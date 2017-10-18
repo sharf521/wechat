@@ -67,6 +67,8 @@
     <? endforeach;?>
 </div>
 <script>
-    index_js();
+    $(function () {
+        index_js();
+    });
 </script>
 <?php require 'footer.php';?>
