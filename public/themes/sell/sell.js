@@ -390,3 +390,14 @@ function map(container,gps) {
     });
 }
 
+//奖励承诺
+function commitment() {
+    layui.form.on('submit(*)', function(data){
+        var form=data.form;
+        var fields=data.field;
+        if(ue.hasContents()==false){
+            layer.tips('内容不能为空！', '#container');
+            return false;
+        }
+    });
+}
