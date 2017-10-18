@@ -136,5 +136,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    header_js();
+    $(function () {
+        header_js();
+    });
 </script>
