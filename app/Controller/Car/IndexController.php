@@ -22,7 +22,7 @@ class IndexController extends Controller
     public function index(CarProduct $product,Advert $advert)
     {
         $data['ads']=$advert->getRealList('wap_car_banner');
-        $data['brands']=(new CarBrand())->orderBy('showorder,id')->limit('0,6')->get();
+        $data['brands']=(new CarBrand())->orderBy('showorder,id')->limit('0,10')->get();
         $data['products']=$product->where("status=1 and is_recommend=1")->limit('0,10')->get();
         $this->view('index',$data);
     }
