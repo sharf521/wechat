@@ -35,8 +35,8 @@ a {
 .commoditylist_content{width:95%;margin:5px auto;height:auto;}
 .commoditylist_content a{border:none;text-decoration:none; display: block}
 .commoditylist_content li{height:auto;position:relative;padding:5px 0px;border-bottom:1px solid #ccc}
-/*.commoditylist_content li .imgspan{display:inline-block;}*/
-.commoditylist_content li img{width:135px;height:100px;display:block;background-color: #fff;}
+.commoditylist_content li .imgspan{width:135px;height:100px;display:inline-block;line-height: 100px;}
+.commoditylist_content li img{display:block;background-color: #fff;max-height: 100px;max-width: 100px;margin: 0 auto;}
 /*.commoditylist_content li .info{position:absolute;left:145px;top:.5rem;bottom:.5rem;}*/
 .commoditylist_content li .info{position:absolute;left:145px;top:10px;}
 /*.commoditylist_content li .info .cd_title{color:#000;font-weight:400;font-size:14px;line-height:16px;width:auto;overflow:hidden;text-overflow:ellipsis;word-wrap:normal;word-wrap:break-word;word-break:break-all;max-height:50px}*/
