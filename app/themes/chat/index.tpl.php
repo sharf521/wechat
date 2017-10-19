@@ -9,8 +9,8 @@
 <script src="/themes/chat/js/swfobject.js"></script>
 <script src="/themes/chat/js/web_socket.js"></script>
 <script src="/themes/chat/js/jquery.min.js"></script>
-<link rel="stylesheet" href="/plugin/layui.v2/css/layui.css" />
-<script src="/plugin/layui.v2/layui.all.js"></script>
+<link rel="stylesheet" href="/plugin/layui.layim/css/layui.css" />
+<script src="/plugin/layui.layim/layui.js"></script>
 <link rel="stylesheet" href="/themes/chat/chat.css">
 <?php
 $user=new \App\Model\User();

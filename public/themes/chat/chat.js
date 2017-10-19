@@ -84,6 +84,7 @@ function initim(history_message) {
     }
     inited = true;
     layui.use('layim', function (layim) {
+        console.log(layim);
         //基础配置
         layim.config({
             //初始化接口
@@ -96,7 +97,7 @@ function initim(history_message) {
             }
             // 上传图片
             , uploadImage: {
-                url: '/upload/save/?type=chat'
+                url: 'http://wechatwap.test.cn:8000/upload/save/?type=chat'
             }
             // 上传文件
             , uploadFile: {

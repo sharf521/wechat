@@ -3,7 +3,7 @@
     <div class="swiper-container car_mes">
         <div class="swiper-wrapper">
             <? foreach ($ads as $ad) : ?>
-            <div class="swiper-slide"><a href="<?=$ad->url?>"><img src="<?=$ad->picture?>" style="max-width: 100%;"></a></div>
+            <div class="swiper-slide my_swiper"><a href="<?=$ad->url?>"><img src="<?=$ad->picture?>" style="max-width: 100%;"></a></div>
             <? endforeach;?>
         </div>
         <div class="swiper-pagination"></div>
@@ -17,7 +17,6 @@
             <? endforeach;?>
         </ul>
     </div>
-
     <div class="m_regtilinde" >推荐汽车<span><a href="<?=url('product/lists')?>">查看更多</a></span></div>
     <div class="clearFix">
         <ul class="commoditylist_content">

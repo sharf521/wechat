@@ -20,8 +20,9 @@ class IndexController extends ChatController
         parent::__construct();
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $this->user_id=$request->id;;
         $this->view('index');
     }
 

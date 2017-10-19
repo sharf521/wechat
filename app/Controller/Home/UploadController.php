@@ -22,6 +22,9 @@ class UploadController extends Controller
 
     public function save()
     {
+        header('Access-Control-Allow-Origin:*');
+        header('Access-Control-Allow-Methods:POST');
+        header('Access-Control-Allow-Headers:x-requested-with,content-type');
         if($_FILES['file']['size']<=0){
             return $this->_error('error');
         }
@@ -29,7 +32,7 @@ class UploadController extends Controller
         $about_id=(int)$_GET['about_id'];
         $name = time() . rand(1000, 9000);
         $user_id = $this->user_id;
-        if (empty($user_id)) {
+        if (empty($user_id) && $type!='chat') {
             return $this->_error('超时，请重新登陆');
         }
         $path="/data/upload/".ceil($user_id/2000)."/".$user_id."/".date('Ym').'/';

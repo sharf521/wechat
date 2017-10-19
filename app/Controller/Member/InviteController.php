@@ -24,11 +24,12 @@ class InviteController extends MemberController
     public function index(User $user)
     {
         $data['invite_url']='http://'.$_SERVER['HTTP_HOST']."/user/invite?r={$this->username}";
-        $data['invite_img']=Helper::QRcode($data['invite_url'],'invite_wap',$this->user_id);
+        $invite_img_url=$this->site->wap_url."/user/invite/?r={$this->username}";
+        $data['invite_img']=Helper::QRcode($invite_img_url,'invite_wap1',$this->user_id);
         $result=$user->where("invite_userid=?")->bindValues($this->user_id)->get();
         $data['result']=$result;
         if($this->is_inWeChat){
-            $data['invite_url']=(new WeChat())->shorten($data['invite_url']);
+            $data['invite_url']=(new WeChat())->shorten($invite_img_url);
         }
         $this->view('invite',$data);
     }
