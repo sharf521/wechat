@@ -21,16 +21,17 @@ body {background-color: #efefef;}
 .top_header{ background-color: #fff;margin-bottom: 15px;}
 
 /* 站点logo */
-.public-head-layout{padding-bottom: 5px;}
-.public-head-layout .site-logo {  height: 80px; float: left; margin: 10px 50px auto 0;}
+.public-head-layout{padding: 5px 0;}
+
+/*.public-head-layout{padding-bottom: 5px;}*/
+.public-head-layout .site-logo {  height: 80px; float: left; margin: 14px 50px auto 0;}
 .public-head-layout .site-logo img { max-height: 80px;}
 /* 头部搜索 */
-.head-search-bar {position: relative;}
-.head-search-bar { width: 440px; float: left; padding-top:28px; overflow: hidden;}
-#search ul.tab { width: 200px; height: 23px; display:block; position: absolute; z-index: 99; top: 8px; left: 0px; overflow: hidden;}
+.head-search-bar {position: relative; width: 440px; float: left; padding-top:23px; overflow: hidden;margin-left: 175px;}
+#search ul.tab { width: 200px; height: 23px; display:block; position: absolute; z-index: 99; top: 0px; left: 0px; overflow: hidden;}
 #search ul.tab li { font-weight: bold; line-height: 20px; color: #555; white-space: nowrap; float: left; height: 20px; float: left; padding: 0 14px 3px 14px; margin-right: 8px; cursor: pointer;}
 #search ul.tab li.current:hover {background: #D93600;}
-#search ul.tab li.current { line-height: 22px; color: #FFF; background: #D93600; height: 20px; float: left; padding: 0 14px 3px 14px; margin: 0;}
+#search ul.tab li.current { line-height: 25px; color: #FFF; background: #D93600;}
 .head-search-bar .search-form { background-color: #D93600; height: 36px; padding: 3px;}
 .head-search-bar .input-text { line-height: 24px; color: #555; width: 82%; height: 24px; float: left; padding: 6px 1%; border: none 0;}
 .head-search-bar .input-submit{ font-size: 14px; color: #FFF; font-weight: 600; background-color: transparent; width: 15%; height: 35px; float: right; border: none; cursor: pointer;}
@@ -39,8 +40,8 @@ body {background-color: #efefef;}
 .head-search-bar .keyword ul li { font-size: 12px; vertical-align: top; letter-spacing: normal; word-spacing: normal; display: inline-block; *display:inline/*IE6、7*/; margin-right: 12px;}
 .head-search-bar .keyword ul li a { color: #777;}
 
-.public-head-layout .userCenter {margin: 30px 0px 0px 150px;}
-.public-head-layout .userCenter:hover{border: 1px solid #ccc;}
+.public-head-layout .userCenter {margin: 25px 0px 0px 150px;border: 1px solid #D93500;color: #666}
+.public-head-layout .userCenter:hover{border: 1px solid #D93500;}
 
 .header-wrapper{    background: #f50;    position: relative;    z-index: 10;    width: 100%;}
 .header-wrapper  .nav-list{}
@@ -56,6 +57,7 @@ body {background-color: #efefef;}
 .warpleft ul li a {display: block;color: #666;text-decoration: none;line-height: 34px;margin-left: 25px; }
 .warpleft ul li a:hover { color: #c00;}
 .warpleft ul li a.whover{color: #c00}
+.warpleft .left_btn {margin-top: 10px;padding: 0 10px;height:30px;line-height: 30px;}
 /*右侧内容*/
 .warpright{ float:right; width: 940px; background-color: #fff;padding:0px 10px 20px 10px;}
 

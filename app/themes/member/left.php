@@ -8,7 +8,7 @@
         <li><a href="<?=url('/member/notice')?>"  <? if($this->control=='notice'){echo 'class="whover"';}?>>我的消息</a></li>
     </ul>
     <? if($this->user->is_shop==0) : ?>
-        <a class="layui-btn" href="<?=url('/member/shop')?>">申请开店</a>
+        <a class="layui-btn left_btn" href="<?=url('/member/shop')?>">申请开店</a>
     <? else: ?>
         <h3><img src="/themes/member/images/seller.png" alt="">我是卖家</h3>
         <ul>
@@ -26,7 +26,7 @@
 
     <? if($this->user->is_shop==1) : ?>
         <? if($this->user->is_supply==0) : ?>
-            <a class="layui-btn" href="<?=url('/sellManage/applySupply')?>">申请成为供应商</a>
+            <a class="layui-btn left_btn" href="<?=url('/sellManage/applySupply')?>">申请成为供应商</a>
         <? else: ?>
             <h3><img src="/themes/member/images/gongys.png" alt="">我是供应商</h3>
             <ul>

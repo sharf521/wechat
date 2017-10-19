@@ -13,12 +13,12 @@
     <div class="br_box clearFix">
         <ul class="clearFix">
             <? foreach ($brands as $brand) : ?>
-                <li><a href="<?=url("product/lists/?brand_name={$brand->name}")?>"><div><img src="<?=$brand->picture?>" /></div><span><?=$brand->name?></span></a></li>
+                <li><a href="<?=url("product/lists/?brand_name={$brand->name}")?>"><img src="<?=$brand->picture?>" /><span><?=$brand->name?></span></a></li>
             <? endforeach;?>
         </ul>
     </div>
 
-    <div class="m_regtilinde" style="margin-top: -1px">推荐汽车<span><a href="<?=url('product/lists')?>">查看更多</a></span></div>
+    <div class="m_regtilinde" >推荐汽车<span><a href="<?=url('product/lists')?>">查看更多</a></span></div>
     <div class="clearFix">
         <ul class="commoditylist_content">
             <? foreach ($products as $product) : ?>
@@ -34,7 +34,7 @@
                             </p>
                             <p class="cd_sales"><?=$product->brand_name?></p>
                         </div>
-                        <i class="iconfont"></i>
+                        <!--<i class="iconfont"></i>-->
                     </a>
                 </li>
             <? endforeach;?>
