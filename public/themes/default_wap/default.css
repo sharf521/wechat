@@ -60,26 +60,42 @@
 .bottom_opts .opt_empty{float: right; width: 50%;background-color: #f85; text-align:center;color: #fff; display: block;line-height: 50px; font-size: 16px;}
 
 .wrap-input{float: right; padding-top: 5px;}
-.wrap-input span{width: 25px; text-align: center; height: 25px;line-height: 25px; background: #f1f1f1;
+.wrap-input span{width: 20px; text-align: center; height: 20px;line-height: 20px; background: #f1f1f1;
     color: #666; border: 1px solid #ccc;float: left;display: block}
-.wrap-input input{width: 35px; text-align: center; height: 25px; line-height: 25px; background: #f1f1f1;
+.wrap-input input{width: 20px; text-align: center; height: 20px; line-height: 20px; background: #f1f1f1;
     color: #666; border: 0px; border-top: 1px solid #ccc;border-bottom: 1px solid #ccc;float: left;display: block}
 
 
 /*cart*/
 
 .cart_box{position:relative;margin-top:10px;padding:0 10px;border-top:1px solid #ddd;border-bottom:1px solid #ddd;background:#fff}
-.cart_box .checkbox{ float: left; margin: 15px 5px; width: 20px; height: 20px;}
 .cart_box .shopBar{display:block;height:40px;border-bottom:1px solid #eee;font-size:14px;line-height:40px;color: #333; position: relative}
 .cart_box .shopBar i{font-size: 16px; color: #e4393c; margin-right: 4px;}
 .cart_box .shopBar em:after{content:'\20';display:block;right:15px;position:absolute;top:50%;width:12px;height:12px;border-top:1px solid #7d7d7d;border-left:1px solid #7d7d7d;background:0 0;margin-top:-6px;transform:rotate(135deg);-webkit-transform:rotate(135deg)}
-.cart_box .goods_item{margin-top:10px; font-size: 14px;color: #333; position: relative}
+
+/*.cart_box .checkbox{ float: left; margin: 15px 5px; width: 20px; height: 20px;}*/
+/*.cart_box .goods_item{margin-top:10px; font-size: 14px;color: #333; position: relative}
 .cart_box .goods_item .image{float:left;margin-right:10px;height:80px; width: 80px;}
 .cart_box .goods_item .spec{padding: 3px 10px; margin-right: 10px; background-color: #ddd}
 .cart_box .del{ position: absolute; right: 10px; top: 0px; color: #999999;}
 .cart_box .wrap-input{margin-top: 35px;}
 .cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px;border-top: 1px solid #ddd; margin-top: 5px;}
+.cart_box .cart_foot em{font-weight: 700; color: #e4393c;}*/
+.cart_box .cart_foot{text-align: right; padding-right: 10px; line-height: 40px;border-top: 1px solid #ddd; margin-top: 5px;}
 .cart_box .cart_foot em{font-weight: 700; color: #e4393c;}
+
+.cart_box .goods_item{margin-top:10px;height:90px; font-size: 14px;color: #333; position: relative}
+.cart_box .goods_item .goods_item__left{position: absolute;top:0;left:0;width: 110px;text-align: center;}
+.cart_box .goods_item .goods_item__left .checkbox{ width: 20px;height: 20px;float: left;margin-top: 30px;}
+.cart_box .goods_item .goods_item__left .image{height:80px; width: 80px;float: left;}
+.cart_box .goods_item .oi_content{margin-left: 110px;margin-right: 67px;}
+.cart_box .goods_item .oi_content .oi_content__til { overflow:hidden; text-overflow:ellipsis; -o-text-overflow:ellipsis;display: -webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2; line-height: 18px; }
+.cart_box .goods_item .oi_content .money {font-size: 12px;}
+.cart_box .goods_item .oi_content .count .surplus {font-size: 10px;}
+.cart_box .goods_item .spec{padding: 3px 5px;margin-top: 2px; margin-right: 5px; background-color: #ddd;font-size: 10px;}
+.cart_box .goods_item .wrap-input{position: absolute;right: 0;bottom: 10px;}
+.cart_box .del{ position: absolute; right: 10px; top: 0; color: #999999;}
+
 
 .cart_bottom{position: fixed;  border-top: 1px solid #ddd; bottom: -1px; height: 49px;    width: 100%;   background-color: #F7F7FA;    left:0;}
 .cart_bottom label{width: 50px; text-align: center;display: block; float: left; font-size: 14px; position: relative}

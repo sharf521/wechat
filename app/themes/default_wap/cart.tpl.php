@@ -34,11 +34,13 @@
                 <a class="shopBar"><i class="iconfont">&#xe854;</i><em><?=$shop->name?></em></a>
                 <? foreach($carts as $cart): ?>
                     <div class="goods_item clearFix">
-                        <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">
                         <a href="<?=url("goods/detail/{$cart->goods_id}/?st_uid={$this->st_uid}")?>">
-                            <img class="image" src="<?=\App\Helper::smallPic($cart->goods_image)?>">
-                            <div class="oi_content" style="float: left">
-                                <?=$cart->goods_name?>
+                            <div class="goods_item__left">
+                                <input class="checkbox"  type="checkbox" <?=($cart->is_exist==false)? 'disabled':'checked'?> name="cart_id[]" value="<?=$cart->id?>">
+                                <img class="image" src="<?=\App\Helper::smallPic($cart->goods_image)?>">
+                            </div>
+                            <div class="oi_content">
+                                <p class="oi_content__til"><?=$cart->goods_name?></p>
                                 <p><?
                                     if($cart->spec_1!=''){
                                         echo "<span class='spec'>{$cart->spec_1}</span>";
@@ -49,8 +51,12 @@
                                     ?>
 
                                     <? if($cart->is_exist==true) : ?>
-                                        <span class="count money">¥<?=$cart->price?></span>
-                                        <span class="count">剩余：<?=$cart->stock_count?></span>
+                                        <p class="count">
+                                            <span class="money">¥<?=$cart->price?></span>
+                                            <span class="surplus">剩余：<?=$cart->stock_count?></span>
+                                        </p>
+                                    <!--    <span class="count money">¥<?/*=$cart->price*/?></span>
+                                        <span class="count">剩余：<?/*=$cart->stock_count*/?></span>-->
                                     <? else :?>
                                         <span class="money">己失效,请重新添加</span>
                                     <? endif;?>
