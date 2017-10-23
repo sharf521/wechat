@@ -196,8 +196,8 @@ body { background: #fff; }
 /* 搜索框 */
 .searchBox { margin: 0px auto;width:100%; height: 40px; font-size: 12px; color: #666; border: 1px solid #efefef; box-sizing: border-box; position: relative;}
 .searchBox .search-input {margin:6px 67px 0 14px;height: 28px; border-radius: 14px;/*  border: 1px solid #ccc; box-sizing: border-box; */background: #f3f2f8;}
-.searchBox .search-input i { width: 25px; height: 25px; margin: 0 .6em; }
-.searchBox .search-input input { border: none; outline:none;width: 80%;background: #f3f2f8;}
+.searchBox .search-input i { width: 25px; height: 25px; margin: 0 .6em;font-size: 18px;line-height: 25px; }
+.searchBox .search-input input { border: none; outline:none;width: 80%;background: #f3f2f8;font-size: 12px;}
 .searchBox button {width:40px;background: #ff8a3b; border-radius: 5px; border: none; color: #fff; height: 28px;position: absolute;top: 6px; right: 14px;}
 /* 轮播 */
 .my-banner { height: 175px; }
@@ -219,7 +219,7 @@ body { background: #fff; }
 .my-commoditylist li .info { position: relative; margin-left: 109px; border-bottom: 1px solid #dedede; height: 95px; }
 .info-bottom { width: 100%; position: absolute; bottom: 10px; font-size: 10px; }
 .info-bottom p { float: left; box-sizing: border-box; width: 33%; vertical-align: bottom; }
-.my-commoditylist .cd_title { color: #333; font-size: 14px; }
+.my-commoditylist .cd_title { color: #333; font-size: 14px;padding-top: 5px; }
 .my-commoditylist .cd_money { color: #ff7200; font-size: 12px; text-align: left; }
 .my-commoditylist .cd_money var { font-style: normal; }
 .my-commoditylist .cd_sales { color: #666; font-size: 10px; text-align: center; }
@@ -247,7 +247,7 @@ body { background: #fff; }
 .left_Menu .cur-nav{ background: #fff;border-right: 1px solid #fff;border-bottom:#d1d1d1 1px solid;}*/
 
 .left_Menu { float: left;height:400px;width:25%;background-color: #efefef; }
-.left_Menu ul { height:100%;border-right:1px solid #ccc;box-sizing: border-box;  }
+.left_Menu ul { height:100%;border-right:1px solid #DEDEDE;box-sizing: border-box;background-color: #efefef; }
 .left_Menu ul li{ list-style: none;height: 32px;line-height:32px;border-bottom: 1px solid #ccc;overflow: hidden;}
 .left_Menu ul li.cur-nav { background-color: #fff;width:100%;border-right: 1px solid #fff;  }
 .left_Menu ul li a { display: inline-block;width: 100%;height:100%;color: #333;font-size: 14px;text-indent: 1em;  }
